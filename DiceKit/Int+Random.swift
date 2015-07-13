@@ -17,6 +17,7 @@ func arc4random <T: IntegerLiteralConvertible> (type: T.Type) -> T {
 }
 
 extension UInt64 {
+    /// - Precondition: `lower < upper`
     static func random(lower lower: UInt64 = min, upper: UInt64 = max) -> UInt64 {
         let u = upper - lower
         var r = arc4random(UInt64)
@@ -37,6 +38,7 @@ extension UInt64 {
 }
 
 extension Int64 {
+    /// - Precondition: `lower < upper`
     static func random(lower lower: Int64 = min, upper: Int64 = max) -> Int64 {
         let (s, overflow) = Int64.subtractWithOverflow(upper, lower)
         let u = overflow ? UInt64.max - UInt64(~s) : UInt64(s)
@@ -54,12 +56,14 @@ extension Int64 {
 }
 
 extension UInt32 {
+    /// - Precondition: `lower < upper`
     static func random(lower lower: UInt32 = min, upper: UInt32 = max) -> UInt32 {
         return arc4random_uniform(upper - lower) + lower
     }
 }
 
 extension Int32 {
+    /// - Precondition: `lower < upper`
     static func random(lower lower: Int32 = min, upper: Int32 = max) -> Int32 {
         let r = arc4random_uniform(UInt32(Int64(upper) - Int64(lower)))
         return Int32(Int64(r) + Int64(lower))
@@ -67,6 +71,7 @@ extension Int32 {
 }
 
 extension UInt {
+    /// - Precondition: `lower < upper`
     static func random(lower lower: UInt = min, upper: UInt = max) -> UInt {
         #if arch(i386) || arch(arm) // 32-bit
             return UInt(UInt32.random(lower: UInt32(lower), upper: UInt32(upper)))
@@ -77,6 +82,7 @@ extension UInt {
 }
 
 extension Int {
+    /// - Precondition: `lower < upper`
     static func random(lower lower: Int = min, upper: Int = max) -> Int {
         #if arch(i386) || arch(arm) // 32-bit
             return Int(Int32.random(lower: Int32(lower), upper: Int32(upper)))
