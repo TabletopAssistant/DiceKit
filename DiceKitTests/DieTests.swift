@@ -9,6 +9,7 @@
 import XCTest
 import Nimble
 import SwiftCheck
+
 import DiceKit
 
 /// Tests the `Die` type
