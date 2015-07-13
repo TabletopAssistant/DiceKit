@@ -1,0 +1,3 @@
+github "Quick/Nimble" "dbc5bb3e2bd7e7ce322b128d674983937bbffd57"
+github "brentleyjones/SwiftCheck" "4aac0087ecaeaac875f7453c6c8ee8240a48e896"
+github "mrackwitz/xcconfigs" "2.0"

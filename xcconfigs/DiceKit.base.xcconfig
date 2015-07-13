@@ -1,0 +1,9 @@
+//
+//  Inherit from this xcconfig in the configuration specific ones for the
+//  DiceKit framework.
+//
+//  Created by Brentley Jones on 7/12/15.
+//  Copyright © 2015 Brentley Jones. All rights reserved.
+//
+
+#include "../Carthage/Checkouts/xcconfigs/UniversalFramework_Framework.xcconfig"

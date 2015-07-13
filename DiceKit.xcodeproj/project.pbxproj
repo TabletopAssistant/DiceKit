@@ -1,0 +1,537 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		533F88091B52B988003838C8 /* DiceKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 533F87FE1B52B988003838C8 /* DiceKit.framework */; };
+		533F88191B52BC6F003838C8 /* DiceKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 533F88181B52BC6F003838C8 /* DiceKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		538743871B5316BA00EB15C8 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 530FEDD11B530CAB00960BFD /* Nimble.framework */; };
+		53D05ECE1B532092007CE7FC /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 530FEDD11B530CAB00960BFD /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		53D05EE21B535AD3007CE7FC /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53D05EE11B535AD3007CE7FC /* SwiftCheck.framework */; };
+		53D05EE31B535AF4007CE7FC /* SwiftCheck.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 53D05EE11B535AD3007CE7FC /* SwiftCheck.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		533F880A1B52B988003838C8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 533F87F31B52B8B9003838C8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 533F87FD1B52B988003838C8;
+			remoteInfo = DiceKit;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		53D05ECD1B532057007CE7FC /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				53D05EE31B535AF4007CE7FC /* SwiftCheck.framework in CopyFiles */,
+				53D05ECE1B532092007CE7FC /* Nimble.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		530FEDD11B530CAB00960BFD /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		533F87FE1B52B988003838C8 /* DiceKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DiceKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		533F88031B52B988003838C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		533F88081B52B988003838C8 /* DiceKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiceKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		533F880F1B52B988003838C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		533F88181B52BC6F003838C8 /* DiceKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiceKit.h; sourceTree = "<group>"; };
+		53D05EE11B535AD3007CE7FC /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		53D05EE51B53E5A7007CE7FC /* DiceKit.base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = DiceKit.base.xcconfig; sourceTree = "<group>"; };
+		53D05EE61B53E646007CE7FC /* DiceKit.Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = DiceKit.Debug.xcconfig; sourceTree = "<group>"; };
+		53D05EE71B53E66B007CE7FC /* DiceKit.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = DiceKit.Release.xcconfig; sourceTree = "<group>"; };
+		53D05EE81B53E6A0007CE7FC /* DiceKitTests.base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = DiceKitTests.base.xcconfig; sourceTree = "<group>"; };
+		53D05EE91B53E6D3007CE7FC /* DiceKitTests.Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = DiceKitTests.Debug.xcconfig; sourceTree = "<group>"; };
+		53D05EEA1B53E6E2007CE7FC /* DiceKitTests.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = DiceKitTests.Release.xcconfig; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		533F87FA1B52B988003838C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		533F88051B52B988003838C8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				533F88091B52B988003838C8 /* DiceKit.framework in Frameworks */,
+				538743871B5316BA00EB15C8 /* Nimble.framework in Frameworks */,
+				53D05EE21B535AD3007CE7FC /* SwiftCheck.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		530FEDCF1B530C9100960BFD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				530FEDD01B530C9E00960BFD /* Tests */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		530FEDD01B530C9E00960BFD /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				530FEDD11B530CAB00960BFD /* Nimble.framework */,
+				53D05EE11B535AD3007CE7FC /* SwiftCheck.framework */,
+			);
+			name = Tests;
+			sourceTree = "<group>";
+		};
+		533F87F21B52B8B9003838C8 = {
+			isa = PBXGroup;
+			children = (
+				533F881A1B5308BC003838C8 /* xcconfigs */,
+				533F88001B52B988003838C8 /* DiceKit */,
+				533F880C1B52B988003838C8 /* DiceKitTests */,
+				530FEDCF1B530C9100960BFD /* Frameworks */,
+				533F87FF1B52B988003838C8 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		533F87FF1B52B988003838C8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				533F87FE1B52B988003838C8 /* DiceKit.framework */,
+				533F88081B52B988003838C8 /* DiceKitTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		533F88001B52B988003838C8 /* DiceKit */ = {
+			isa = PBXGroup;
+			children = (
+				5379780C1B531B2A005818EC /* Supporting Files */,
+				533F88181B52BC6F003838C8 /* DiceKit.h */,
+			);
+			path = DiceKit;
+			sourceTree = "<group>";
+		};
+		533F880C1B52B988003838C8 /* DiceKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				53D05ECF1B532208007CE7FC /* Supporting Files */,
+			);
+			path = DiceKitTests;
+			sourceTree = "<group>";
+		};
+		533F881A1B5308BC003838C8 /* xcconfigs */ = {
+			isa = PBXGroup;
+			children = (
+				53D05EE51B53E5A7007CE7FC /* DiceKit.base.xcconfig */,
+				53D05EE61B53E646007CE7FC /* DiceKit.Debug.xcconfig */,
+				53D05EE71B53E66B007CE7FC /* DiceKit.Release.xcconfig */,
+				53D05EE81B53E6A0007CE7FC /* DiceKitTests.base.xcconfig */,
+				53D05EE91B53E6D3007CE7FC /* DiceKitTests.Debug.xcconfig */,
+				53D05EEA1B53E6E2007CE7FC /* DiceKitTests.Release.xcconfig */,
+			);
+			path = xcconfigs;
+			sourceTree = "<group>";
+		};
+		5379780C1B531B2A005818EC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				533F88031B52B988003838C8 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		53D05ECF1B532208007CE7FC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				533F880F1B52B988003838C8 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		533F87FB1B52B988003838C8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				533F88191B52BC6F003838C8 /* DiceKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		533F87FD1B52B988003838C8 /* DiceKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 533F88101B52B988003838C8 /* Build configuration list for PBXNativeTarget "DiceKit" */;
+			buildPhases = (
+				533F87F91B52B988003838C8 /* Sources */,
+				533F87FA1B52B988003838C8 /* Frameworks */,
+				533F87FB1B52B988003838C8 /* Headers */,
+				533F87FC1B52B988003838C8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DiceKit;
+			productName = DiceKit;
+			productReference = 533F87FE1B52B988003838C8 /* DiceKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		533F88071B52B988003838C8 /* DiceKitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 533F88131B52B988003838C8 /* Build configuration list for PBXNativeTarget "DiceKitTests" */;
+			buildPhases = (
+				533F88041B52B988003838C8 /* Sources */,
+				533F88051B52B988003838C8 /* Frameworks */,
+				533F88061B52B988003838C8 /* Resources */,
+				53D05ECD1B532057007CE7FC /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				533F880B1B52B988003838C8 /* PBXTargetDependency */,
+			);
+			name = DiceKitTests;
+			productName = DiceKitTests;
+			productReference = 533F88081B52B988003838C8 /* DiceKitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		533F87F31B52B8B9003838C8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Brentley Jones";
+				TargetAttributes = {
+					533F87FD1B52B988003838C8 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					533F88071B52B988003838C8 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+				};
+			};
+			buildConfigurationList = 533F87F61B52B8B9003838C8 /* Build configuration list for PBXProject "DiceKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 533F87F21B52B8B9003838C8;
+			productRefGroup = 533F87FF1B52B988003838C8 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				533F87FD1B52B988003838C8 /* DiceKit */,
+				533F88071B52B988003838C8 /* DiceKitTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		533F87FC1B52B988003838C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		533F88061B52B988003838C8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		533F87F91B52B988003838C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		533F88041B52B988003838C8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		533F880B1B52B988003838C8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 533F87FD1B52B988003838C8 /* DiceKit */;
+			targetProxy = 533F880A1B52B988003838C8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		533F87F71B52B8B9003838C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Debug;
+		};
+		533F87F81B52B8B9003838C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+			};
+			name = Release;
+		};
+		533F88111B52B988003838C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53D05EE61B53E646007CE7FC /* DiceKit.Debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = DiceKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.tabletopassistant.DiceKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		533F88121B52B988003838C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53D05EE71B53E66B007CE7FC /* DiceKit.Release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				FRAMEWORK_VERSION = A;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = DiceKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = org.tabletopassistant.DiceKit;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		533F88141B52B988003838C8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53D05EE91B53E6D3007CE7FC /* DiceKitTests.Debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = DiceKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = org.tabletopassistant.DiceKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		533F88151B52B988003838C8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53D05EEA1B53E6E2007CE7FC /* DiceKitTests.Release.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = DiceKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = org.tabletopassistant.DiceKitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		533F87F61B52B8B9003838C8 /* Build configuration list for PBXProject "DiceKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				533F87F71B52B8B9003838C8 /* Debug */,
+				533F87F81B52B8B9003838C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		533F88101B52B988003838C8 /* Build configuration list for PBXNativeTarget "DiceKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				533F88111B52B988003838C8 /* Debug */,
+				533F88121B52B988003838C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		533F88131B52B988003838C8 /* Build configuration list for PBXNativeTarget "DiceKitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				533F88141B52B988003838C8 /* Debug */,
+				533F88151B52B988003838C8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 533F87F31B52B8B9003838C8 /* Project object */;
+}
