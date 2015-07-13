@@ -18,10 +18,10 @@ func arc4random <T: IntegerLiteralConvertible> (type: T.Type) -> T {
 
 extension UInt64 {
     static func random(lower lower: UInt64 = min, upper: UInt64 = max) -> UInt64 {
-        var m: UInt64
         let u = upper - lower
         var r = arc4random(UInt64)
         
+        let m: UInt64
         if u > UInt64(Int64.max) {
             m = 1 + ~u
         } else {
@@ -42,11 +42,14 @@ extension Int64 {
         let u = overflow ? UInt64.max - UInt64(~s) : UInt64(s)
         let r = UInt64.random(upper: u)
         
+        let ret: Int64
         if r > UInt64(Int64.max)  {
-            return Int64(r - (UInt64(~lower) + 1))
+            ret = Int64(r - (UInt64(~lower) + 1))
         } else {
-            return Int64(r) + lower
+            ret = Int64(r) + lower
         }
+        
+        return ret
     }
 }
 
