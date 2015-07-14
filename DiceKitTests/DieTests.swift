@@ -14,7 +14,6 @@ import DiceKit
 
 /// Tests the `Die` type
 class Die_Test: XCTestCase {
-    
 }
 
 // MARK: - init() tests
@@ -92,7 +91,6 @@ extension Die_Test {
 }
 
 // MARK: - roll() tests
-
 extension Die_Test {
     
     func test_roll_shouldUseRoller() {
@@ -143,7 +141,6 @@ extension Die_Test {
 }
 
 // MARK: - defaultRoller tests
-
 extension Die_Test {
 
     func test_RollerType_shouldReturn0For0Sides() {
