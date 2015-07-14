@@ -3,7 +3,7 @@
 //  DiceKitTests
 //
 //  Created by Brentley Jones on 7/12/15.
-//
+//  Copyright © 2015 Brentley Jones. All rights reserved.
 //
 
 import XCTest
