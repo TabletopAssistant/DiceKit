@@ -1,0 +1,44 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "4A1EDAC9172E5D048B04861D84E9978FDC0BD7EB",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "95438028B10BBB846574013D29F154A00556A9D1" : 0,
+    "53964F28C4CCA0826677C9F951DD3F64C20326C4" : 0,
+    "2DDF1D4E528EDA8D8E5AF503BA5680A30604BD70" : 0,
+    "4A1EDAC9172E5D048B04861D84E9978FDC0BD7EB" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "18EF2C49-CF85-45B6-ACB6-B56751E37126",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "95438028B10BBB846574013D29F154A00556A9D1" : "DiceKit\/Carthage\/Checkouts\/Nimble\/",
+    "53964F28C4CCA0826677C9F951DD3F64C20326C4" : "DiceKit\/Carthage\/Checkouts\/SwiftCheck\/",
+    "2DDF1D4E528EDA8D8E5AF503BA5680A30604BD70" : "DiceKit\/Carthage\/Checkouts\/xcconfigs\/",
+    "4A1EDAC9172E5D048B04861D84E9978FDC0BD7EB" : "DiceKit\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "DiceKit",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 203,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "DiceKit.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/mrackwitz\/xcconfigs.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "2DDF1D4E528EDA8D8E5AF503BA5680A30604BD70"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "github.com:TabletopAssistant\/DiceKit.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "4A1EDAC9172E5D048B04861D84E9978FDC0BD7EB"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/brentleyjones\/SwiftCheck.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "53964F28C4CCA0826677C9F951DD3F64C20326C4"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Quick\/Nimble.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "95438028B10BBB846574013D29F154A00556A9D1"
+    }
+  ]
+}
