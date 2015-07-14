@@ -125,19 +125,19 @@ extension Die_Test {
     }
     
     func test_roll_shouldCallRollerOnlyOnceForEachCall() {
-        var rollerCalledCount = 0
+        var rollerCalledCount: UInt32 = 0
         Die.roller = { sides in
             ++rollerCalledCount
             return 0
         }
         let die = try! Die(sides: 3)
         
-        die.roll()
-        die.roll()
-        die.roll()
-        die.roll()
+        let timesRolled = arc4random_uniform(UInt32(96)) + 5 // 5 to 100
+        for _ in 0..<timesRolled {
+            die.roll()
+        }
         
-        expect(rollerCalledCount) == 4
+        expect(rollerCalledCount) == timesRolled
     }
     
 }
