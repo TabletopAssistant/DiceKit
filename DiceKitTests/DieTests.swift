@@ -73,7 +73,7 @@ extension Die_Test {
     /// Tests that a die cannot have a negative number of sides.
     ///
     /// We could support this, but it would cover up an error case that the
-    /// client would most likely want to know about/
+    /// client would most likely want to know about.
     func test_init_shouldFailWithNegativeSides() {
         let sides = -1
         
