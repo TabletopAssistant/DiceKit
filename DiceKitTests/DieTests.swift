@@ -53,7 +53,8 @@ extension Die_Test {
     
     /// Tests that a die can have odd number of sides.
     ///
-    /// Needed because real dice don't have an odd number of sides, but we support it.
+    /// Needed because real dice don't have an odd number of sides,
+    /// but we support it.
     func test_init_shouldSucceedWithOddSides() {
         let sides = 3
         
