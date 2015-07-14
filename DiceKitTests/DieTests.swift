@@ -153,7 +153,9 @@ extension Die_Test {
     }
     
     func test_RollerType_shouldReturnWithinRangeForSidesGreaterThan1() {
-        property["RollerType generates values within range of 1...sides"] = forAll { (sides: Int) in
+        property["RollerType generates values within range of 1...sides"] = forAll {
+            (sides: Int) in
+            
             guard sides > 1 else { return true }
             
             let result = Die.defaultRoller(sides: sides)
