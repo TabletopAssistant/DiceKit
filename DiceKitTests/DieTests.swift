@@ -14,6 +14,13 @@ import DiceKit
 
 /// Tests the `Die` type
 class Die_Test: XCTestCase {
+    
+    #if arch(i386) || arch(arm) // 32-bit
+        typealias PositiveSidesType = UInt16
+    #else // 64-bit
+        typealias PositiveSidesType = UInt32
+    #endif
+    
 }
 
 // MARK: - init() tests
@@ -154,9 +161,11 @@ extension Die_Test {
     
     func test_RollerType_shouldReturnWithinRangeForSidesGreaterThan1() {
         property["RollerType generates values within range of 1...sides"] = forAll {
-            (sides: Int) in
+            (i: PositiveSidesType) in
             
-            guard sides > 1 else { return true }
+            guard i > 1 else { return true }
+            
+            let sides = Int(i)
             
             let result = Die.defaultRoller(sides: sides)
             
