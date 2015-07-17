@@ -14,6 +14,13 @@ import DiceKit
 
 /// Tests the `Die` type
 class Die_Test: XCTestCase {
+    
+    #if arch(i386) || arch(arm) // 32-bit
+        typealias PositiveSidesType = UInt16
+    #else // 64-bit
+        typealias PositiveSidesType = UInt32
+    #endif
+    
 }
 
 // MARK: - init() tests
@@ -91,6 +98,63 @@ extension Die_Test {
     
 }
 
+// MARK: - Equatatable
+extension Die_Test {
+    
+    func test_shouldBeReflexive() {
+        property["reflexive"] = forAll {
+            (i: PositiveSidesType) in
+            
+            let sides = Int(i)
+            
+            let x = try! Die(sides: sides)
+            
+            return x == x
+        }
+    }
+    
+    func test_shouldBeSymmetric() {
+        property["symmetric"] = forAll {
+            (i: PositiveSidesType) in
+            
+            let sides = Int(i)
+            
+            let x = try! Die(sides: sides)
+            let y = try! Die(sides: sides)
+            
+            return x == y && y == x
+        }
+    }
+    
+    func test_shouldBeTransitive() {
+        property["transitive"] = forAll {
+            (i: PositiveSidesType) in
+            
+            let sides = Int(i)
+            
+            let x = try! Die(sides: sides)
+            let y = try! Die(sides: sides)
+            let z = try! Die(sides: sides)
+            
+            return x == y && y == z && x == z
+        }
+    }
+    
+    func test_shouldBeAbleToNotEquate() {
+        property["non-equal"] = forAll {
+            (a: PositiveSidesType, b: PositiveSidesType) in
+            
+            guard a != b else { return true }
+            
+            let x = try! Die(sides: Int(a))
+            let y = try! Die(sides: Int(b))
+            
+            return x != y
+        }
+    }
+    
+}
+
 // MARK: - roll() tests
 extension Die_Test {
     
@@ -103,10 +167,10 @@ extension Die_Test {
         }
         let die = try! Die(sides: 6)
         
-        let result = die.roll()
+        let roll = die.roll()
         
         expect(rollerCalledCount) == 1
-        expect(result) == stubResult
+        expect(roll.value) == stubResult
     }
     
     func test_roll_shouldPassInSidesToRoller() {
@@ -139,6 +203,19 @@ extension Die_Test {
         expect(rollerCalledCount) == timesRolled
     }
     
+    func test_roll_shouldCreateRollProperly() {
+        let stubResult = 6
+        Die.roller = { sides in
+            return stubResult
+        }
+        let die = try! Die(sides: 8)
+        let expectedRoll = Die.Roll(die: die, value: stubResult)
+        
+        let roll = die.roll()
+        
+        expect(roll) == expectedRoll
+    }
+    
 }
 
 // MARK: - defaultRoller tests
@@ -154,9 +231,11 @@ extension Die_Test {
     
     func test_RollerType_shouldReturnWithinRangeForSidesGreaterThan1() {
         property["RollerType generates values within range of 1...sides"] = forAll {
-            (sides: Int) in
+            (i: PositiveSidesType) in
             
-            guard sides > 1 else { return true }
+            guard i > 1 else { return true }
+            
+            let sides = Int(i)
             
             let result = Die.defaultRoller(sides: sides)
             
