@@ -98,6 +98,63 @@ extension Die_Test {
     
 }
 
+// MARK: - Equatatable
+extension Die_Test {
+    
+    func test_shouldBeReflexive() {
+        property["reflexive"] = forAll {
+            (i: PositiveSidesType) in
+            
+            let sides = Int(i)
+            
+            let x = try! Die(sides: sides)
+            
+            return x == x
+        }
+    }
+    
+    func test_shouldBeSymmetric() {
+        property["symmetric"] = forAll {
+            (i: PositiveSidesType) in
+            
+            let sides = Int(i)
+            
+            let x = try! Die(sides: sides)
+            let y = try! Die(sides: sides)
+            
+            return x == y && y == x
+        }
+    }
+    
+    func test_shouldBeTransitive() {
+        property["transitive"] = forAll {
+            (i: PositiveSidesType) in
+            
+            let sides = Int(i)
+            
+            let x = try! Die(sides: sides)
+            let y = try! Die(sides: sides)
+            let z = try! Die(sides: sides)
+            
+            return x == y && y == z && x == z
+        }
+    }
+    
+    func test_shouldBeAbleToNotEquate() {
+        property["non-equal"] = forAll {
+            (a: PositiveSidesType, b: PositiveSidesType) in
+            
+            guard a != b else { return true }
+            
+            let x = try! Die(sides: Int(a))
+            let y = try! Die(sides: Int(b))
+            
+            return x != y
+        }
+    }
+    
+}
+
 // MARK: - roll() tests
 extension Die_Test {
     

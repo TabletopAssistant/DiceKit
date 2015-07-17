@@ -19,7 +19,7 @@ public enum DieError: ErrorType {
 /**
 An imaginary die with `0` to `Int.max` sides.
 */
-public struct Die {
+public struct Die: Equatable {
     
     /**
     A type that "rolls" an imaginary die with `sides` number of sides and returns the result.
@@ -54,4 +54,9 @@ public struct Die {
         return Die.roller(sides: sides)
     }
     
+}
+
+// MARK: - Equatable
+public func ==(lhs: Die, rhs: Die) -> Bool {
+    return lhs.sides == rhs.sides
 }
