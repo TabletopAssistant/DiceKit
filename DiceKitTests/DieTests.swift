@@ -167,10 +167,10 @@ extension Die_Test {
         }
         let die = try! Die(sides: 6)
         
-        let result = die.roll()
+        let roll = die.roll()
         
         expect(rollerCalledCount) == 1
-        expect(result) == stubResult
+        expect(roll.value) == stubResult
     }
     
     func test_roll_shouldPassInSidesToRoller() {
@@ -201,6 +201,19 @@ extension Die_Test {
         }
         
         expect(rollerCalledCount) == timesRolled
+    }
+    
+    func test_roll_shouldCreateRollProperly() {
+        let stubResult = 6
+        Die.roller = { sides in
+            return stubResult
+        }
+        let die = try! Die(sides: 8)
+        let expectedRoll = Die.Roll(die: die, value: stubResult)
+        
+        let roll = die.roll()
+        
+        expect(roll) == expectedRoll
     }
     
 }
