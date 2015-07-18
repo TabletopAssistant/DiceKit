@@ -1,5 +1,5 @@
 //
-//  DieTests.swift
+//  Die_Tests.swift
 //  DiceKitTests
 //
 //  Created by Brentley Jones on 7/12/15.
@@ -13,7 +13,7 @@ import SwiftCheck
 import DiceKit
 
 /// Tests the `Die` type
-class Die_Test: XCTestCase {
+class Die_Tests: XCTestCase {
     
     #if arch(i386) || arch(arm) // 32-bit
         typealias PositiveSidesType = UInt16
@@ -24,7 +24,7 @@ class Die_Test: XCTestCase {
 }
 
 // MARK: - init() tests
-extension Die_Test {
+extension Die_Tests {
     
     /// Tests that a die can have no sides.
     ///
@@ -107,7 +107,7 @@ extension Die_Test {
 }
 
 // MARK: - Equatatable
-extension Die_Test {
+extension Die_Tests {
     
     func test_shouldBeReflexive() {
         property["reflexive"] = forAll {
@@ -163,7 +163,7 @@ extension Die_Test {
 }
 
 // MARK: - roll() tests
-extension Die_Test {
+extension Die_Tests {
     
     func test_roll_shouldUseRoller() {
         var rollerCalledCount = 0
@@ -226,7 +226,7 @@ extension Die_Test {
 }
 
 // MARK: - defaultRoller tests
-extension Die_Test {
+extension Die_Tests {
 
     func test_RollerType_shouldReturn0For0Sides() {
         expect(Die.defaultRoller(sides: 0)) == 0

@@ -1,5 +1,5 @@
 //
-//  Int+RandomTests.swift
+//  Int+Random_Tests.swift
 //  DiceKit
 //
 //  Created by Brentley Jones on 7/13/15.
@@ -13,7 +13,7 @@ import SwiftCheck
 @testable import DiceKit
 
 // TODO: Use generics to consolidate the tests
-class Int_RandomTests: XCTestCase {
+class Int_Random_Tests: XCTestCase {
     
     func test_UInt64_randomExtremes() {
         _ = UInt64.random(lower: UInt64.min, upper: UInt64.max)
