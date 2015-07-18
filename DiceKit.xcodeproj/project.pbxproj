@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		531084C31B5B0761008DD696 /* Die.Roll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531084C11B5B0102008DD696 /* Die.Roll.swift */; };
 		533F88091B52B988003838C8 /* DiceKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 533F87FE1B52B988003838C8 /* DiceKit.framework */; };
 		533F880E1B52B988003838C8 /* DieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533F880D1B52B988003838C8 /* DieTests.swift */; };
 		533F88191B52BC6F003838C8 /* DiceKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 533F88181B52BC6F003838C8 /* DiceKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -45,6 +46,7 @@
 
 /* Begin PBXFileReference section */
 		530FEDD11B530CAB00960BFD /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		531084C11B5B0102008DD696 /* Die.Roll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Die.Roll.swift; sourceTree = "<group>"; };
 		533F87FE1B52B988003838C8 /* DiceKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DiceKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		533F88031B52B988003838C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		533F88081B52B988003838C8 /* DiceKitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiceKitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +129,7 @@
 				5379780C1B531B2A005818EC /* Supporting Files */,
 				533F88181B52BC6F003838C8 /* DiceKit.h */,
 				5379780A1B531B21005818EC /* Die.swift */,
+				531084C11B5B0102008DD696 /* Die.Roll.swift */,
 				53D05ED01B53417D007CE7FC /* Int+Random.swift */,
 			);
 			path = DiceKit;
@@ -280,6 +283,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				531084C31B5B0761008DD696 /* Die.Roll.swift in Sources */,
 				5379780B1B531B21005818EC /* Die.swift in Sources */,
 				53D05ED11B53417D007CE7FC /* Int+Random.swift in Sources */,
 			);
