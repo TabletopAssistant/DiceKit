@@ -22,20 +22,6 @@ An imaginary die with `0` to `Int.max` sides. Default of 6 sides.
 public struct Die: Equatable {
     
     /**
-    The result of rolling a `Die`.
-    */
-    public struct Roll: Equatable {
-        
-        public let die: Die
-        public let value: Int
-        
-        public init(die: Die, value: Int) {
-            self.die = die
-            self.value = value
-        }
-    }
-    
-    /**
     A type that "rolls" an imaginary die with `sides` number of sides and returns the result.
     
     Passing a value less than `0` for `sides` is undefined.
@@ -74,8 +60,4 @@ public struct Die: Equatable {
 // MARK: - Equatable
 public func ==(lhs: Die, rhs: Die) -> Bool {
     return lhs.sides == rhs.sides
-}
-
-public func ==(lhs: Die.Roll, rhs: Die.Roll) -> Bool {
-    return lhs.die == rhs.die && lhs.value == rhs.value
 }
