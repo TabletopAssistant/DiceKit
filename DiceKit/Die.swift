@@ -52,7 +52,7 @@ public struct Die: Equatable {
     
     public let sides: Int
     
-    public init(sides: Int) throws {
+    public init(sides: Int = 6) throws {
         guard sides >= 0 else { throw DieError.NegativeSides }
         
         self.sides = sides

@@ -153,6 +153,11 @@ extension Die_Test {
         }
     }
     
+    func test_init_shouldDefaultTo6Sides() {
+        let die = try! Die()
+        
+        expect(die.sides) == 6
+    }
 }
 
 // MARK: - roll() tests
