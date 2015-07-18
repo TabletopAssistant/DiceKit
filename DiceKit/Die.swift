@@ -17,7 +17,7 @@ public enum DieError: ErrorType {
 }
 
 /**
-An imaginary die with `0` to `Int.max` sides.
+An imaginary die with `0` to `Int.max` sides. Default of 6 sides. 
 */
 public struct Die: Equatable {
     

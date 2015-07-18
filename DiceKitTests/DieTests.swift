@@ -96,6 +96,14 @@ extension Die_Test {
         }
     }
     
+    /// Tests that a die will have 6 sides by default
+    ///
+    /// We decided on 6 because it is the most commonly used die.
+    func test_init_shouldDefaultTo6Sides() {
+        let die = try! Die()
+        
+        expect(die.sides) == 6
+    }
 }
 
 // MARK: - Equatatable
@@ -151,12 +159,6 @@ extension Die_Test {
             
             return x != y
         }
-    }
-    
-    func test_init_shouldDefaultTo6Sides() {
-        let die = try! Die()
-        
-        expect(die.sides) == 6
     }
 }
 
