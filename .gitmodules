@@ -5,7 +5,8 @@
 [submodule "Carthage/Checkouts/Nimble"]
 	path = Carthage/Checkouts/Nimble
 	url = https://github.com/Quick/Nimble.git
-	ignore = untracked
+	ignore = all
 [submodule "Carthage/Checkouts/SwiftCheck"]
 	path = Carthage/Checkouts/SwiftCheck
 	url = https://github.com/brentleyjones/SwiftCheck.git
+	ignore = all
