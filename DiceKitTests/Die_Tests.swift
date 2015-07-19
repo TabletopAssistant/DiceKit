@@ -21,6 +21,14 @@ class Die_Tests: XCTestCase {
         typealias PositiveSidesType = UInt32
     #endif
     
+    override func setUp() {
+        Die.roller = Die.defaultRoller
+    }
+    
+    override func tearDown() {
+        Die.roller = Die.defaultRoller
+    }
+    
 }
 
 // MARK: - init() tests
