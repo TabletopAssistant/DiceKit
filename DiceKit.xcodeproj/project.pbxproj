@@ -15,7 +15,11 @@
 		533F88191B52BC6F003838C8 /* DiceKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 533F88181B52BC6F003838C8 /* DiceKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5379780B1B531B21005818EC /* Die.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5379780A1B531B21005818EC /* Die.swift */; };
 		538743871B5316BA00EB15C8 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 530FEDD11B530CAB00960BFD /* Nimble.framework */; };
+		539D567E1B5B66CF00AC6A37 /* AdditionExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539D567D1B5B66CF00AC6A37 /* AdditionExpression.swift */; };
+		539D56801B5B689600AC6A37 /* AdditionExpressionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539D567F1B5B689600AC6A37 /* AdditionExpressionResult.swift */; };
 		539D56821B5B69D700AC6A37 /* ExpressionResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531084BD1B5AF859008DD696 /* ExpressionResultType.swift */; };
+		539D56881B5B6D4A00AC6A37 /* AdditionExpression_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539D56871B5B6D4A00AC6A37 /* AdditionExpression_Tests.swift */; };
+		539D568A1B5B6D6A00AC6A37 /* AdditionExpressionResult_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539D56891B5B6D6A00AC6A37 /* AdditionExpressionResult_Tests.swift */; };
 		53CFC30D1B5AD3BF009C6C8F /* ExpressionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CFC30C1B5AD3BF009C6C8F /* ExpressionType.swift */; };
 		53CFC30F1B5AD674009C6C8F /* MultiplicationExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CFC30E1B5AD674009C6C8F /* MultiplicationExpression.swift */; };
 		53CFC3111B5AE4A0009C6C8F /* MultiplicationExpression_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CFC3101B5AE4A0009C6C8F /* MultiplicationExpression_Tests.swift */; };
@@ -63,6 +67,10 @@
 		533F880F1B52B988003838C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		533F88181B52BC6F003838C8 /* DiceKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiceKit.h; sourceTree = "<group>"; };
 		5379780A1B531B21005818EC /* Die.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Die.swift; sourceTree = "<group>"; };
+		539D567D1B5B66CF00AC6A37 /* AdditionExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionExpression.swift; sourceTree = "<group>"; };
+		539D567F1B5B689600AC6A37 /* AdditionExpressionResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionExpressionResult.swift; sourceTree = "<group>"; };
+		539D56871B5B6D4A00AC6A37 /* AdditionExpression_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionExpression_Tests.swift; sourceTree = "<group>"; };
+		539D56891B5B6D6A00AC6A37 /* AdditionExpressionResult_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionExpressionResult_Tests.swift; sourceTree = "<group>"; };
 		53CFC30C1B5AD3BF009C6C8F /* ExpressionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpressionType.swift; sourceTree = "<group>"; };
 		53CFC30E1B5AD674009C6C8F /* MultiplicationExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplicationExpression.swift; sourceTree = "<group>"; };
 		53CFC3101B5AE4A0009C6C8F /* MultiplicationExpression_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplicationExpression_Tests.swift; sourceTree = "<group>"; };
@@ -140,6 +148,8 @@
 			children = (
 				5379780C1B531B2A005818EC /* Supporting Files */,
 				533F88181B52BC6F003838C8 /* DiceKit.h */,
+				539D567D1B5B66CF00AC6A37 /* AdditionExpression.swift */,
+				539D567F1B5B689600AC6A37 /* AdditionExpressionResult.swift */,
 				5379780A1B531B21005818EC /* Die.swift */,
 				531084C11B5B0102008DD696 /* Die.Roll.swift */,
 				53CFC30C1B5AD3BF009C6C8F /* ExpressionType.swift */,
@@ -155,6 +165,8 @@
 			isa = PBXGroup;
 			children = (
 				53D05ECF1B532208007CE7FC /* Supporting Files */,
+				539D56871B5B6D4A00AC6A37 /* AdditionExpression_Tests.swift */,
+				539D56891B5B6D6A00AC6A37 /* AdditionExpressionResult_Tests.swift */,
 				533F880D1B52B988003838C8 /* Die_Tests.swift */,
 				53D05EEB1B546C73007CE7FC /* Int+Random_Tests.swift */,
 				53CFC3101B5AE4A0009C6C8F /* MultiplicationExpression_Tests.swift */,
@@ -302,10 +314,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				539D56821B5B69D700AC6A37 /* ExpressionResultType.swift in Sources */,
+				539D567E1B5B66CF00AC6A37 /* AdditionExpression.swift in Sources */,
 				531084C01B5AF993008DD696 /* MultiplicationExpressionResult.swift in Sources */,
 				531084C31B5B0761008DD696 /* Die.Roll.swift in Sources */,
 				5379780B1B531B21005818EC /* Die.swift in Sources */,
 				53D05ED11B53417D007CE7FC /* Int+Random.swift in Sources */,
+				539D56801B5B689600AC6A37 /* AdditionExpressionResult.swift in Sources */,
 				53CFC30D1B5AD3BF009C6C8F /* ExpressionType.swift in Sources */,
 				53CFC30F1B5AD674009C6C8F /* MultiplicationExpression.swift in Sources */,
 			);
@@ -318,7 +332,9 @@
 				533EB1EE1B5B293000B3F8A1 /* MultiplicationExpressionResult_Tests.swift in Sources */,
 				53CFC3111B5AE4A0009C6C8F /* MultiplicationExpression_Tests.swift in Sources */,
 				53D05EEC1B546C73007CE7FC /* Int+Random_Tests.swift in Sources */,
+				539D568A1B5B6D6A00AC6A37 /* AdditionExpressionResult_Tests.swift in Sources */,
 				533F880E1B52B988003838C8 /* Die_Tests.swift in Sources */,
+				539D56881B5B6D4A00AC6A37 /* AdditionExpression_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
