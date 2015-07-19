@@ -33,7 +33,7 @@ extension Die_Tests {
     func test_init_shouldSucceedWith0Sides() {
         let sides = 0
         
-        let die = try! Die(sides: sides)
+        let die = Die(sides: sides)
         
         expect(die.sides) == sides
     }
@@ -45,7 +45,7 @@ extension Die_Tests {
     func test_init_shouldSucceedWith1Side() {
         let sides = 1
         
-        let die = try! Die(sides: sides)
+        let die = Die(sides: sides)
         
         expect(die.sides) == sides
     }
@@ -53,7 +53,7 @@ extension Die_Tests {
     func test_init_shouldSucceedWithFewSides() {
         let sides = 6
         
-        let die = try! Die(sides: sides)
+        let die = Die(sides: sides)
         
         expect(die.sides) == sides
     }
@@ -65,7 +65,7 @@ extension Die_Tests {
     func test_init_shouldSucceedWithOddSides() {
         let sides = 3
         
-        let die = try! Die(sides: sides)
+        let die = Die(sides: sides)
         
         expect(die.sides) == sides
     }
@@ -73,34 +73,28 @@ extension Die_Tests {
     func test_init_shouldSucceedWithManySides() {
         let sides = Int.max
         
-        let die = try! Die(sides: sides)
+        let die = Die(sides: sides)
         
         expect(die.sides) == sides
     }
     
-    /// Tests that a die cannot have a negative number of sides.
+    /// Tests that a die can have a negative number of sides.
     ///
-    /// We could support this, but it would cover up an error case that the
-    /// client would most likely want to know about.
-    func test_init_shouldFailWithNegativeSides() {
+    /// Needed because real dice don't have a negative number of sides,
+    /// but we support it.
+    func test_init_shouldSucceedWithNegativeSides() {
         let sides = -1
         
-        do {
-            let _ = try Die(sides: sides)
-            
-            fail("Initialization succeeded")
-        } catch DieError.NegativeSides {
-            // pass
-        } catch {
-            fail("Unknown error \(error)")
-        }
+        let die = Die(sides: sides)
+        
+        expect(die.sides) == sides
     }
     
     /// Tests that a die will have 6 sides by default
     ///
     /// We decided on 6 because it is the most commonly used die.
     func test_init_shouldDefaultTo6Sides() {
-        let die = try! Die()
+        let die = Die()
         
         expect(die.sides) == 6
     }
@@ -115,7 +109,7 @@ extension Die_Tests {
             
             let sides = Int(i)
             
-            let x = try! Die(sides: sides)
+            let x = Die(sides: sides)
             
             return x == x
         }
@@ -127,8 +121,8 @@ extension Die_Tests {
             
             let sides = Int(i)
             
-            let x = try! Die(sides: sides)
-            let y = try! Die(sides: sides)
+            let x = Die(sides: sides)
+            let y = Die(sides: sides)
             
             return x == y && y == x
         }
@@ -140,9 +134,9 @@ extension Die_Tests {
             
             let sides = Int(i)
             
-            let x = try! Die(sides: sides)
-            let y = try! Die(sides: sides)
-            let z = try! Die(sides: sides)
+            let x = Die(sides: sides)
+            let y = Die(sides: sides)
+            let z = Die(sides: sides)
             
             return x == y && y == z && x == z
         }
@@ -154,8 +148,8 @@ extension Die_Tests {
             
             guard a != b else { return true }
             
-            let x = try! Die(sides: Int(a))
-            let y = try! Die(sides: Int(b))
+            let x = Die(sides: Int(a))
+            let y = Die(sides: Int(b))
             
             return x != y
         }
@@ -172,7 +166,7 @@ extension Die_Tests {
             ++rollerCalledCount
             return stubResult
         }
-        let die = try! Die(sides: 6)
+        let die = Die(sides: 6)
         
         let roll = die.roll()
         
@@ -187,7 +181,7 @@ extension Die_Tests {
             return 0
         }
         let sides = 7
-        let die = try! Die(sides: sides)
+        let die = Die(sides: sides)
         
         die.roll()
         
@@ -200,7 +194,7 @@ extension Die_Tests {
             ++rollerCalledCount
             return 0
         }
-        let die = try! Die(sides: 3)
+        let die = Die(sides: 3)
         
         let timesRolled = arc4random_uniform(UInt32(96)) + 5 // 5 to 100
         for _ in 0..<timesRolled {
@@ -215,7 +209,7 @@ extension Die_Tests {
         Die.roller = { sides in
             return stubResult
         }
-        let die = try! Die(sides: 8)
+        let die = Die(sides: 8)
         let expectedRoll = Die.Roll(die: die, value: stubResult)
         
         let roll = die.roll()
@@ -310,12 +304,16 @@ extension Die_Tests {
         common_RollerType_shouldReturn1For1Side(Die.defaultRoller)
     }
     
+    func test_RollerType_defaultRoller_shouldReturnNeg1ForNeg1Side() {
+        common_RollerType_shouldReturnNeg1ForNeg1Side(Die.defaultRoller)
+    }
+    
     func test_RollerType_defaultRoller_shouldReturnWithinPositiveRangeForSidesGreaterThan1() {
         common_RollerType_shouldReturnWithinPositiveRangeForSidesGreaterThan1(Die.defaultRoller)
     }
     
-    func test_RollerType_defaultRoller_shouldReturn0ForSidesLessThan0() {
-        common_RollerType_shouldReturn0ForSidesLessThan0(Die.defaultRoller)
+    func test_RollerType_defaultRoller_shouldReturnWithinNegativeRangeForSidesLessThan0() {
+        common_RollerType_shouldReturnWithinNegativeRangeForSidesLessThan0(Die.defaultRoller)
     }
     
     func test_RollerType_defaultRoller_shouldWorkForManySides() {

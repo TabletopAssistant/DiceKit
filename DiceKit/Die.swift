@@ -8,14 +8,6 @@
 
 import Foundation
 
-/// Errors that `Die` can produce.
-public enum DieError: ErrorType {
-    
-    /// A negative number of sides was provided.
-    case NegativeSides
-    
-}
-
 /**
 An imaginary die with `0` to `Int.max` sides. Default of 6 sides. 
 */
@@ -27,9 +19,7 @@ public struct Die: Equatable {
     
     public let sides: Int
     
-    public init(sides: Int = 6) throws {
-        guard sides >= 0 else { throw DieError.NegativeSides }
-        
+    public init(sides: Int = 6) {
         self.sides = sides
     }
     
@@ -54,7 +44,7 @@ extension Die {
     public typealias RollerType = (sides: Int) -> Int
     
     /// The default `RollerType` that is used by `Die`.
-    public static let defaultRoller: RollerType = Die.unsignedRoller
+    public static let defaultRoller: RollerType = Die.signedClosedRoller
     
     /// Rolls and returns a random number in `1...sides`, or `0` when `sides <= 0`.
     ///
