@@ -89,6 +89,17 @@ extension Die {
     
 }
 
+// MARK: - ExpressionType
+extension Die: ExpressionType {
+    
+    typealias Result = Roll
+    
+    public func evaluate() -> Roll {
+        return roll()
+    }
+    
+}
+
 // MARK: - Equatable
 public func ==(lhs: Die, rhs: Die) -> Bool {
     return lhs.sides == rhs.sides

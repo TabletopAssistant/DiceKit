@@ -384,3 +384,24 @@ extension Die_Tests {
     }
     
 }
+
+// MARK: - ExpressionType
+extension Die_Tests {
+    
+    /// Tests that `Die` uses `roll()` to evaluate itself.
+    func test_evaluate_shouldRollToDetermineResult() {
+        let stubbedRoll = 4
+        var rollerCalledCount = 0
+        Die.roller = { sides in
+            ++rollerCalledCount
+            return stubbedRoll
+        }
+        let die = Die()
+        
+        let result = die.evaluate()
+        
+        expect(rollerCalledCount) == 1
+        expect(result.value) == stubbedRoll
+    }
+    
+}
