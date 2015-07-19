@@ -13,6 +13,8 @@
 		533F88191B52BC6F003838C8 /* DiceKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 533F88181B52BC6F003838C8 /* DiceKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		5379780B1B531B21005818EC /* Die.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5379780A1B531B21005818EC /* Die.swift */; };
 		538743871B5316BA00EB15C8 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 530FEDD11B530CAB00960BFD /* Nimble.framework */; };
+		539D56821B5B69D700AC6A37 /* ExpressionResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531084BD1B5AF859008DD696 /* ExpressionResultType.swift */; };
+		53CFC30D1B5AD3BF009C6C8F /* ExpressionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53CFC30C1B5AD3BF009C6C8F /* ExpressionType.swift */; };
 		53D05ECE1B532092007CE7FC /* Nimble.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 530FEDD11B530CAB00960BFD /* Nimble.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		53D05ED11B53417D007CE7FC /* Int+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D05ED01B53417D007CE7FC /* Int+Random.swift */; };
 		53D05EE21B535AD3007CE7FC /* SwiftCheck.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53D05EE11B535AD3007CE7FC /* SwiftCheck.framework */; };
@@ -46,6 +48,7 @@
 
 /* Begin PBXFileReference section */
 		530FEDD11B530CAB00960BFD /* Nimble.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Nimble.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		531084BD1B5AF859008DD696 /* ExpressionResultType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpressionResultType.swift; sourceTree = "<group>"; };
 		531084C11B5B0102008DD696 /* Die.Roll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Die.Roll.swift; sourceTree = "<group>"; };
 		533F87FE1B52B988003838C8 /* DiceKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DiceKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		533F88031B52B988003838C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -54,6 +57,7 @@
 		533F880F1B52B988003838C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		533F88181B52BC6F003838C8 /* DiceKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiceKit.h; sourceTree = "<group>"; };
 		5379780A1B531B21005818EC /* Die.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Die.swift; sourceTree = "<group>"; };
+		53CFC30C1B5AD3BF009C6C8F /* ExpressionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpressionType.swift; sourceTree = "<group>"; };
 		53D05ED01B53417D007CE7FC /* Int+Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Random.swift"; sourceTree = "<group>"; };
 		53D05EE11B535AD3007CE7FC /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		53D05EE51B53E5A7007CE7FC /* DiceKit.base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = DiceKit.base.xcconfig; sourceTree = "<group>"; };
@@ -130,6 +134,8 @@
 				533F88181B52BC6F003838C8 /* DiceKit.h */,
 				5379780A1B531B21005818EC /* Die.swift */,
 				531084C11B5B0102008DD696 /* Die.Roll.swift */,
+				53CFC30C1B5AD3BF009C6C8F /* ExpressionType.swift */,
+				531084BD1B5AF859008DD696 /* ExpressionResultType.swift */,
 				53D05ED01B53417D007CE7FC /* Int+Random.swift */,
 			);
 			path = DiceKit;
@@ -283,9 +289,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				539D56821B5B69D700AC6A37 /* ExpressionResultType.swift in Sources */,
 				531084C31B5B0761008DD696 /* Die.Roll.swift in Sources */,
 				5379780B1B531B21005818EC /* Die.swift in Sources */,
 				53D05ED11B53417D007CE7FC /* Int+Random.swift in Sources */,
+				53CFC30D1B5AD3BF009C6C8F /* ExpressionType.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
