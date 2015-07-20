@@ -33,7 +33,7 @@ extension Die_Tests {
     func test_init_shouldSucceedWith0Sides() {
         let sides = 0
         
-        let die = try! Die(sides: sides)
+        let die = Die(sides: sides)
         
         expect(die.sides) == sides
     }
@@ -45,7 +45,7 @@ extension Die_Tests {
     func test_init_shouldSucceedWith1Side() {
         let sides = 1
         
-        let die = try! Die(sides: sides)
+        let die = Die(sides: sides)
         
         expect(die.sides) == sides
     }
@@ -53,7 +53,7 @@ extension Die_Tests {
     func test_init_shouldSucceedWithFewSides() {
         let sides = 6
         
-        let die = try! Die(sides: sides)
+        let die = Die(sides: sides)
         
         expect(die.sides) == sides
     }
@@ -65,7 +65,7 @@ extension Die_Tests {
     func test_init_shouldSucceedWithOddSides() {
         let sides = 3
         
-        let die = try! Die(sides: sides)
+        let die = Die(sides: sides)
         
         expect(die.sides) == sides
     }
@@ -73,34 +73,28 @@ extension Die_Tests {
     func test_init_shouldSucceedWithManySides() {
         let sides = Int.max
         
-        let die = try! Die(sides: sides)
+        let die = Die(sides: sides)
         
         expect(die.sides) == sides
     }
     
-    /// Tests that a die cannot have a negative number of sides.
+    /// Tests that a die can have a negative number of sides.
     ///
-    /// We could support this, but it would cover up an error case that the
-    /// client would most likely want to know about.
-    func test_init_shouldFailWithNegativeSides() {
+    /// Needed because real dice don't have a negative number of sides,
+    /// but we support it.
+    func test_init_shouldSucceedWithNegativeSides() {
         let sides = -1
         
-        do {
-            let _ = try Die(sides: sides)
-            
-            fail("Initialization succeeded")
-        } catch DieError.NegativeSides {
-            // pass
-        } catch {
-            fail("Unknown error \(error)")
-        }
+        let die = Die(sides: sides)
+        
+        expect(die.sides) == sides
     }
     
     /// Tests that a die will have 6 sides by default
     ///
     /// We decided on 6 because it is the most commonly used die.
     func test_init_shouldDefaultTo6Sides() {
-        let die = try! Die()
+        let die = Die()
         
         expect(die.sides) == 6
     }
@@ -115,7 +109,7 @@ extension Die_Tests {
             
             let sides = Int(i)
             
-            let x = try! Die(sides: sides)
+            let x = Die(sides: sides)
             
             return x == x
         }
@@ -127,8 +121,8 @@ extension Die_Tests {
             
             let sides = Int(i)
             
-            let x = try! Die(sides: sides)
-            let y = try! Die(sides: sides)
+            let x = Die(sides: sides)
+            let y = Die(sides: sides)
             
             return x == y && y == x
         }
@@ -140,9 +134,9 @@ extension Die_Tests {
             
             let sides = Int(i)
             
-            let x = try! Die(sides: sides)
-            let y = try! Die(sides: sides)
-            let z = try! Die(sides: sides)
+            let x = Die(sides: sides)
+            let y = Die(sides: sides)
+            let z = Die(sides: sides)
             
             return x == y && y == z && x == z
         }
@@ -154,8 +148,8 @@ extension Die_Tests {
             
             guard a != b else { return true }
             
-            let x = try! Die(sides: Int(a))
-            let y = try! Die(sides: Int(b))
+            let x = Die(sides: Int(a))
+            let y = Die(sides: Int(b))
             
             return x != y
         }
@@ -172,7 +166,7 @@ extension Die_Tests {
             ++rollerCalledCount
             return stubResult
         }
-        let die = try! Die(sides: 6)
+        let die = Die(sides: 6)
         
         let roll = die.roll()
         
@@ -187,7 +181,7 @@ extension Die_Tests {
             return 0
         }
         let sides = 7
-        let die = try! Die(sides: sides)
+        let die = Die(sides: sides)
         
         die.roll()
         
@@ -200,7 +194,7 @@ extension Die_Tests {
             ++rollerCalledCount
             return 0
         }
-        let die = try! Die(sides: 3)
+        let die = Die(sides: 3)
         
         let timesRolled = arc4random_uniform(UInt32(96)) + 5 // 5 to 100
         for _ in 0..<timesRolled {
@@ -215,7 +209,7 @@ extension Die_Tests {
         Die.roller = { sides in
             return stubResult
         }
-        let die = try! Die(sides: 8)
+        let die = Die(sides: 8)
         let expectedRoll = Die.Roll(die: die, value: stubResult)
         
         let roll = die.roll()
@@ -225,33 +219,160 @@ extension Die_Tests {
     
 }
 
-// MARK: - defaultRoller tests
+// MARK: - RollerType tests
 extension Die_Tests {
-
-    func test_RollerType_shouldReturn0For0Sides() {
-        expect(Die.defaultRoller(sides: 0)) == 0
+    
+    // MARK: - Utility test methods
+    
+    func common_RollerType_shouldReturn0For0Sides(rollerType: Die.RollerType) {
+        expect(rollerType(sides: 0)) == 0
     }
     
-    func test_RollerType_shouldReturn1For1Side() {
-        expect(Die.defaultRoller(sides: 1)) == 1
+    func common_RollerType_shouldReturn1For1Side(rollerType: Die.RollerType) {
+        expect(rollerType(sides: 1)) == 1
     }
     
-    func test_RollerType_shouldReturnWithinRangeForSidesGreaterThan1() {
-        property["RollerType generates values within range of 1...sides"] = forAll {
+    func common_RollerType_shouldReturnNeg1ForNeg1Side(rollerType: Die.RollerType) {
+        expect(rollerType(sides: -1)) == -1
+    }
+    
+    func common_RollerType_shouldReturnWithinPositiveRangeForSidesGreaterThan1(rollerType: Die.RollerType) {
+        property["generates values within range of 1...sides"] = forAll {
             (i: PositiveSidesType) in
             
             guard i > 1 else { return true }
             
             let sides = Int(i)
             
-            let result = Die.defaultRoller(sides: sides)
+            let result = rollerType(sides: sides)
             
             return result > 0 && result <= sides
         }
     }
     
-    func test_RollerType_shouldWorkForManySides() {
-        expect(Die.defaultRoller(sides: Int.max)).toNot(raiseException())
+    func common_RollerType_shouldReturnWithinNegativeRangeForSidesLessThan0(rollerType: Die.RollerType) {
+        property["generates values within range of sides..<0"] = forAll {
+            (i: PositiveSidesType) in
+            
+            guard i > 1 else { return true }
+            
+            let sides = -Int(i)
+            
+            let result = rollerType(sides: sides)
+            
+            return result < 0 && result >= sides
+        }
+    }
+    
+    func common_RollerType_shouldReturnWithinRangeForSides(rollerType: Die.RollerType) {
+        property["generates values within range of -sides...sides"] = forAll {
+            (i: PositiveSidesType) in
+            
+            let sides = Int(i)
+            
+            let result = rollerType(sides: sides)
+            
+            return (-sides...sides).contains(result)
+        }
+    }
+    
+    func common_RollerType_shouldReturn0ForSidesLessThan0(rollerType: Die.RollerType) {
+        property["generates 0 for -sides"] = forAll {
+            (i: PositiveSidesType) in
+            
+            guard i > 0 else { return true }
+            
+            let sides = -Int(i)
+            
+            let result = rollerType(sides: sides)
+            
+            return result == 0
+        }
+    }
+    
+    func common_RollerType_shouldWorkForManySides(rollerType: Die.RollerType) {
+        expect(rollerType(sides: Int.max)).toNot(raiseException())
+        expect(rollerType(sides: Int.min)).toNot(raiseException())
+    }
+
+    // MARK: - defaultRoller
+    func test_RollerType_defaultRoller_shouldReturn0For0Sides() {
+        common_RollerType_shouldReturn0For0Sides(Die.defaultRoller)
+    }
+    
+    func test_RollerType_defaultRoller_shouldReturn1For1Side() {
+        common_RollerType_shouldReturn1For1Side(Die.defaultRoller)
+    }
+    
+    func test_RollerType_defaultRoller_shouldReturnNeg1ForNeg1Side() {
+        common_RollerType_shouldReturnNeg1ForNeg1Side(Die.defaultRoller)
+    }
+    
+    func test_RollerType_defaultRoller_shouldReturnWithinPositiveRangeForSidesGreaterThan1() {
+        common_RollerType_shouldReturnWithinPositiveRangeForSidesGreaterThan1(Die.defaultRoller)
+    }
+    
+    func test_RollerType_defaultRoller_shouldReturnWithinNegativeRangeForSidesLessThan0() {
+        common_RollerType_shouldReturnWithinNegativeRangeForSidesLessThan0(Die.defaultRoller)
+    }
+    
+    func test_RollerType_defaultRoller_shouldWorkForManySides() {
+        common_RollerType_shouldWorkForManySides(Die.defaultRoller)
+    }
+    
+    // MARK: - unsignedRoller
+    func test_RollerType_unsignedRoller_shouldReturn0For0Sides() {
+        common_RollerType_shouldReturn0For0Sides(Die.unsignedRoller)
+    }
+    
+    func test_RollerType_unsignedRoller_shouldReturn1For1Side() {
+        common_RollerType_shouldReturn1For1Side(Die.unsignedRoller)
+    }
+    
+    func test_RollerType_unsignedRoller_shouldReturnWithinPositiveRangeForSidesGreaterThan1() {
+        common_RollerType_shouldReturnWithinPositiveRangeForSidesGreaterThan1(Die.unsignedRoller)
+    }
+    
+    func test_RollerType_unsignedRoller_shouldReturn0ForSidesLessThan0() {
+        common_RollerType_shouldReturn0ForSidesLessThan0(Die.unsignedRoller)
+    }
+    
+    func test_RollerType_unsignedRoller_shouldWorkForManySides() {
+        common_RollerType_shouldWorkForManySides(Die.unsignedRoller)
+    }
+    
+    // MARK: - signedClosedRoller
+    func test_RollerType_signedClosedRoller_shouldReturn0For0Sides() {
+        common_RollerType_shouldReturn0For0Sides(Die.signedClosedRoller)
+    }
+    
+    func test_RollerType_signedClosedRoller_shouldReturn1For1Side() {
+        common_RollerType_shouldReturn1For1Side(Die.signedClosedRoller)
+    }
+    
+    func test_RollerType_signedClosedRoller_shouldReturnNeg1ForNeg1Side() {
+        common_RollerType_shouldReturnNeg1ForNeg1Side(Die.signedClosedRoller)
+    }
+    
+    func test_RollerType_signedClosedRoller_shouldReturnWithinPositiveRangeForSidesGreaterThan1() {
+        common_RollerType_shouldReturnWithinPositiveRangeForSidesGreaterThan1(Die.signedClosedRoller)
+    }
+    
+    func test_RollerType_signedClosedRoller_shouldReturnWithinNegativeRangeForSidesLessThan0() {
+        common_RollerType_shouldReturnWithinNegativeRangeForSidesLessThan0(Die.signedClosedRoller)
+    }
+    
+    func test_RollerType_signedClosedRoller_shouldWorkForManySides() {
+        common_RollerType_shouldWorkForManySides(Die.signedClosedRoller)
+    }
+    
+    // MARK: - signedOpenRoller
+    func test_RollerType_signedOpenRoller_shouldReturnWithinOpenRangeForSides() {
+        common_RollerType_shouldReturnWithinPositiveRangeForSidesGreaterThan1(Die.signedClosedRoller)
+    }
+    
+    func test_RollerType_signedOpenRoller_shouldWorkForManySides() {
+        common_RollerType_shouldWorkForManySides(Die.signedOpenRoller)
     }
     
 }
