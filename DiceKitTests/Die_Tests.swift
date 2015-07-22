@@ -21,6 +21,14 @@ class Die_Tests: XCTestCase {
         typealias PositiveSidesType = UInt32
     #endif
     
+    override func setUp() {
+        Die.roller = Die.defaultRoller
+    }
+    
+    override func tearDown() {
+        Die.roller = Die.defaultRoller
+    }
+    
 }
 
 // MARK: - init() tests
@@ -373,6 +381,27 @@ extension Die_Tests {
     
     func test_RollerType_signedOpenRoller_shouldWorkForManySides() {
         common_RollerType_shouldWorkForManySides(Die.signedOpenRoller)
+    }
+    
+}
+
+// MARK: - ExpressionType
+extension Die_Tests {
+    
+    /// Tests that `Die` uses `roll()` to evaluate itself.
+    func test_evaluate_shouldRollToDetermineResult() {
+        let stubbedRoll = 4
+        var rollerCalledCount = 0
+        Die.roller = { sides in
+            ++rollerCalledCount
+            return stubbedRoll
+        }
+        let die = Die()
+        
+        let result = die.evaluate()
+        
+        expect(rollerCalledCount) == 1
+        expect(result.value) == stubbedRoll
     }
     
 }
