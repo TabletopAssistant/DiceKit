@@ -14,10 +14,10 @@ DiceKit is a Swift framework for expressing and evaluating [dice notation][Dice 
 
 ## Features
 
-- [x] Roll dies with arbitrary number of sides (e.g., `d2`, `d7`, `d6538`)
-- [ ] Roll multiple of the same die (e.g., `3d6`) – [#3](https://github.com/TabletopAssistant/DiceKit/issues/3)
-- [ ] Add dice rolls (e.g., `1d8 + 3d4`) – [#7](https://github.com/TabletopAssistant/DiceKit/issues/7)
-- [ ] Add constants to rolls (e.g., `2d6 + 3`, `1d12 + 1d6 per level`) – [#6](https://github.com/TabletopAssistant/DiceKit/issues/6)
+- [x] Roll dice with arbitrary number of sides (e.g., `d2`, `d7`, `d6538`)
+- [x] Evaluate simple dice expressions, including addition, multiplication, and negation operations (e.g. `2d20 + 6(1d5 + 8)`)
+- [ ] Evaluate complicated dice expressions, including division, dropping dice, and exploding dice – [#27](https://github.com/TabletopAssistant/DiceKit/issues/27), [#28](https://github.com/TabletopAssistant/DiceKit/issues/28), [#33](https://github.com/TabletopAssistant/DiceKit/issues/33)
+- [ ] Determine the probability distribution of an expression and the chance of meeting a goal (e.g. chance of rolling higher than 16 on `1d20 + 8`)  – [#4](https://github.com/TabletopAssistant/DiceKit/issues/4)
 - [ ] Parse expressions from strings – [#8](https://github.com/TabletopAssistant/DiceKit/issues/8)
 - [ ] Detect expressions in strings – [#9](https://github.com/TabletopAssistant/DiceKit/issues/9)
 - [x] Comprehensive unit test coverage
