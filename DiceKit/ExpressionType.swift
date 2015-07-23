@@ -24,7 +24,7 @@ public protocol ExpressionType {
 
 extension Int: ExpressionType {
     
-    typealias Result = Int
+    public typealias Result = Int
     
     public func evaluate() -> Int {
         return self

@@ -92,7 +92,7 @@ extension Die {
 // MARK: - ExpressionType
 extension Die: ExpressionType {
     
-    typealias Result = Roll
+    public typealias Result = Roll
     
     public func evaluate() -> Roll {
         return roll()

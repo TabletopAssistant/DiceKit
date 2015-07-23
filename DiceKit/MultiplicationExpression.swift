@@ -23,7 +23,7 @@ public struct MultiplicationExpression<LeftExpression: ExpressionType, RightExpr
 // MARK: - Expression
 extension MultiplicationExpression: ExpressionType {
     
-    typealias Result = MultiplicationExpressionResult<LeftExpression.Result, RightExpression.Result>
+    public typealias Result = MultiplicationExpressionResult<LeftExpression.Result, RightExpression.Result>
     
     public func evaluate() -> Result {
         let muliplierResult = multiplier.evaluate()
