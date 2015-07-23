@@ -21,7 +21,7 @@ public struct NegationExpression<BaseExpression: ExpressionType where BaseExpres
 // MARK: - Expression
 extension NegationExpression: ExpressionType {
     
-    typealias Result = NegationExpressionResult<BaseExpression.Result>
+    public typealias Result = NegationExpressionResult<BaseExpression.Result>
     
     public func evaluate() -> Result {
         return NegationExpressionResult(base.evaluate())

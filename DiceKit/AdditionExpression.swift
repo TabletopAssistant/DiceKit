@@ -23,7 +23,7 @@ public struct AdditionExpression<LeftExpression: ExpressionType, RightExpression
 // MARK: - Expression
 extension AdditionExpression: ExpressionType {
     
-    typealias Result = AdditionExpressionResult<LeftExpression.Result, RightExpression.Result>
+    public typealias Result = AdditionExpressionResult<LeftExpression.Result, RightExpression.Result>
     
     public func evaluate() -> Result {
         let leftResult = leftAddend.evaluate()
