@@ -7,3 +7,8 @@
 //
 
 #include "../Carthage/Checkouts/xcconfigs/UniversalFramework_Framework.xcconfig"
+
+// Deployment versions
+MACOSX_DEPLOYMENT_TARGET = 10.9
+IPHONEOS_DEPLOYMENT_TARGET = 7.0
+WATCHOS_DEPLOYMENT_TARGET = 2.0
