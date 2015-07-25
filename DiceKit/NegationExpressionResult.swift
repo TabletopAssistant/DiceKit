@@ -23,6 +23,7 @@ public struct NegationExpressionResult<BaseResult: ExpressionResultType where Ba
 }
 
 // MARK: - Equatable
-public func ==<B>(lhs: NegationExpressionResult<B>, rhs: NegationExpressionResult<B>) -> Bool {
+
+public func == <B>(lhs: NegationExpressionResult<B>, rhs: NegationExpressionResult<B>) -> Bool {
     return lhs.baseResult == rhs.baseResult
 }
