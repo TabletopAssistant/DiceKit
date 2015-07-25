@@ -52,6 +52,10 @@ extension Constant: ExpressionType {
         return self
     }
     
+    public var probabilityMass: ProbabilityMass {
+        return ProbabilityMass(value)
+    }
+    
 }
 
 // MARK: - ExpressionResultType

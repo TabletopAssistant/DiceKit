@@ -107,11 +107,16 @@ extension MultiplicationExpression_Tests {
         
         var evaluateCalled = 0
         var stubResulter: () -> Result = { 0 }
+        var stubProbabilityMass = ProbabilityMass(0)
         
         func evaluate() -> Result {
             let result = stubResulter()
             ++evaluateCalled
             return result
+        }
+        
+        var probabilityMass: ProbabilityMass {
+            return stubProbabilityMass
         }
     }
     
@@ -164,6 +169,22 @@ extension MultiplicationExpression_Tests {
             let expression = leftDie * rightDie
         
             return expression == expectedExpression
+        }
+    }
+    
+    func test_probabilityMass_shouldReturnCorrect() {
+        property("probability mass") <- forAll {
+            (a: Int, b: Int) in
+            
+            let a = c(a)
+            let b = c(b)
+            
+            let expectedProbMass = a.probabilityMass.product(b.probabilityMass)
+            let expression = MultiplicationExpression(a, b)
+            
+            let probMass = expression.probabilityMass
+            
+            return probMass == expectedProbMass
         }
     }
     

@@ -118,7 +118,8 @@ extension FrequencyDistribution {
         
         for (value, outcome) in outcomesPerValue {
             let otherOutcome = x.outcomesPerValue[value]!
-            if abs(outcome - otherOutcome) > delta {
+            let diff = abs(outcome - otherOutcome)
+            if diff > delta {
                 return false
             }
         }
