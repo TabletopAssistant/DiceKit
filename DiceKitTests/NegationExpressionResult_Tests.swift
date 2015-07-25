@@ -21,7 +21,7 @@ class NegationExpressionResult_Tests: XCTestCase {
 extension NegationExpressionResult_Tests {
     
     func test_shouldBeReflexive() {
-        property["reflexive"] = forAll {
+        property("reflexive") <- forAll {
             (a: Int) in
             
             let x = NegationExpressionResult(a)
@@ -31,7 +31,7 @@ extension NegationExpressionResult_Tests {
     }
     
     func test_shouldBeSymmetric() {
-        property["symmetric"] = forAll {
+        property("symmetric") <- forAll {
             (a: Int) in
             
             let x = NegationExpressionResult(a)
@@ -42,7 +42,7 @@ extension NegationExpressionResult_Tests {
     }
     
     func test_shouldBeTransitive() {
-        property["transitive"] = forAll {
+        property("transitive") <- forAll {
             (a: Int) in
             
             let x = NegationExpressionResult(a)
@@ -54,7 +54,7 @@ extension NegationExpressionResult_Tests {
     }
     
     func test_shouldBeAbleToNotEquate() {
-        property["non-equal"] = forAll {
+        property("non-equal") <- forAll {
             (a: Int, b: Int) in
             
             guard a != b else { return true }
@@ -72,7 +72,7 @@ extension NegationExpressionResult_Tests {
 extension NegationExpressionResult_Tests {
     
     func test_value_shouldNegateTheBaseResult() {
-        property["negate the base result"] = forAll {
+        property("negate the base result") <- forAll {
             (a: Int) in
             
             let expectedValue = -a

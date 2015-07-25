@@ -21,7 +21,7 @@ class AdditionExpressionResult_Tests: XCTestCase {
 extension AdditionExpressionResult_Tests {
     
     func test_shouldBeReflexive() {
-        property["reflexive"] = forAll {
+        property("reflexive") <- forAll {
             (a: Int16, b: Int16) in
             
             let a = Int(a)
@@ -34,7 +34,7 @@ extension AdditionExpressionResult_Tests {
     }
     
     func test_shouldBeSymmetric() {
-        property["symmetric"] = forAll {
+        property("symmetric") <- forAll {
             (a: Int16, b: Int16) in
             
             let a = Int(a)
@@ -48,7 +48,7 @@ extension AdditionExpressionResult_Tests {
     }
     
     func test_shouldBeTransitive() {
-        property["transitive"] = forAll {
+        property("transitive") <- forAll {
             (a: Int16, b: Int16) in
             
             let a = Int(a)
@@ -63,7 +63,7 @@ extension AdditionExpressionResult_Tests {
     }
     
     func test_shouldBeAbleToNotEquate() {
-        property["non-equal"] = forAll {
+        property("non-equal") <- forAll {
             (a: Int16, b: Int16, c: Int16, d: Int16) in
             
             guard !(a == c && b == d) && !(a == d && b == c) else { return true }
@@ -86,7 +86,7 @@ extension AdditionExpressionResult_Tests {
 extension AdditionExpressionResult_Tests {
     
     func test_value_shouldAddTheAddends() {
-        property["add the addends"] = forAll {
+        property("add the addends") <- forAll {
             (a: Int16, b: Int16) in
             
             let a = Int(a)

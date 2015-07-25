@@ -29,7 +29,7 @@ extension MultiplicationExpressionResult_Tests {
     }
     
     func test_shouldBeReflexive() {
-        property["reflexive"] = forAll {
+        property("reflexive") <- forAll {
             (a: UInt, b: UInt) in
             
             let fixture = self.equatableFixture(a, b)
@@ -41,7 +41,7 @@ extension MultiplicationExpressionResult_Tests {
     }
     
     func test_shouldBeSymmetric() {
-        property["symmetric"] = forAll {
+        property("symmetric") <- forAll {
             (a: UInt, b: UInt) in
             
             let fixture = self.equatableFixture(a, b)
@@ -54,7 +54,7 @@ extension MultiplicationExpressionResult_Tests {
     }
     
     func test_shouldBeTransitive() {
-        property["transitive"] = forAll {
+        property("transitive") <- forAll {
             (a: UInt, b: UInt) in
             
             let fixture = self.equatableFixture(a, b)
@@ -68,7 +68,7 @@ extension MultiplicationExpressionResult_Tests {
     }
     
     func test_shouldBeAbleToNotEquate() {
-        property["non-equal"] = forAll {
+        property("non-equal") <- forAll {
             (a: UInt, b: UInt, c: UInt, d: UInt) in
             
             guard a != c else { return true }
