@@ -8,7 +8,7 @@
 
 import Foundation
 
-/// An imaginary die with `0` to `Int.max` sides. Default of 6 sides.
+/// An imaginary die with `0` to `Int.max` sides. Default value is `defaultSides`.
 public struct Die: Equatable {
     
     // TODO: Determine if there is a better way to do this.
@@ -16,8 +16,9 @@ public struct Die: Equatable {
     public static var roller = defaultRoller
     
     public let sides: Int
+    public static let defaultSides = 6
     
-    public init(sides: Int = 6) {
+    public init(sides: Int = defaultSides) {
         self.sides = sides
     }
     
