@@ -13,13 +13,3 @@ public protocol ExpressionResultType {
     var value: Int { get }
     
 }
-
-// MARK: - Standard Library extensions
-
-extension Int: ExpressionResultType {
-    
-    public var value: Int {
-        return self
-    }
-    
-}

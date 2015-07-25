@@ -20,12 +20,12 @@ class MultiplicationExpressionResult_Tests: XCTestCase {
 // MARK: - Equatable
 extension MultiplicationExpressionResult_Tests {
     
-    func equatableFixture(a: UInt, _ b: UInt) -> (multiplierResult: Int, multiplicandResults: [Int]) {
+    func equatableFixture(a: UInt, _ b: UInt) -> (multiplierResult: Constant, multiplicandResults: [Constant]) {
         let multiplierResult = Int(a % 101)
         let multiplicandRange = UInt32(b % 101)
-        let multiplicandResults = (0..<multiplierResult).map { _ in Int(arc4random_uniform(multiplicandRange)) }
+        let multiplicandResults = (0..<multiplierResult).map { _ in c(Int(arc4random_uniform(multiplicandRange))) }
         
-        return (multiplierResult, multiplicandResults)
+        return (c(multiplierResult), multiplicandResults)
     }
     
     func test_shouldBeReflexive() {
@@ -92,9 +92,9 @@ extension MultiplicationExpressionResult_Tests {
     func test_value_shouldSumTheMultiplicandResultsForPositiveMultiplier() {
         let multiplierResult = Int(arc4random_uniform(11)) // 0...10
         let multiplicandCount = abs(multiplierResult)
-        let multiplicandResults = (0..<multiplicandCount).map { _ in Int(arc4random_uniform(100)) + 1 }
-        let expectedValue = multiplicandResults.reduce(0, combine: +)
-        let result = MultiplicationExpressionResult(multiplierResult: multiplierResult, multiplicandResults: multiplicandResults)
+        let multiplicandResults = (0..<multiplicandCount).map { _ in c(Int(arc4random_uniform(100)) + 1) }
+        let expectedValue = multiplicandResults.reduce(0) { $0 + $1.value }
+        let result = MultiplicationExpressionResult(multiplierResult: c(multiplierResult), multiplicandResults: multiplicandResults)
         
         let value = result.value
         
@@ -105,9 +105,9 @@ extension MultiplicationExpressionResult_Tests {
     func test_value_shouldNegateTheMultiplicandResultsForNegativeMultiplier() {
         let multiplierResult = -Int(arc4random_uniform(10)) - 1 // -1...10
         let multiplicandCount = abs(multiplierResult)
-        let multiplicandResults = (0..<multiplicandCount).map { _ in Int(arc4random_uniform(100)) + 1 }
-        let expectedValue = multiplicandResults.reduce(0, combine: -)
-        let result = MultiplicationExpressionResult(multiplierResult: multiplierResult, multiplicandResults: multiplicandResults)
+        let multiplicandResults = (0..<multiplicandCount).map { _ in c(Int(arc4random_uniform(100)) + 1) }
+        let expectedValue = multiplicandResults.reduce(0) { $0 - $1.value }
+        let result = MultiplicationExpressionResult(multiplierResult: c(multiplierResult), multiplicandResults: multiplicandResults)
         
         let value = result.value
         

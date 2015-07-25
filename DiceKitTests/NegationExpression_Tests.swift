@@ -24,6 +24,8 @@ extension NegationExpression_Tests {
         property("reflexive") <- forAll {
             (a: Int) in
             
+            let a = c(a)
+            
             let x = NegationExpression(a)
             
             return x == x
@@ -33,6 +35,8 @@ extension NegationExpression_Tests {
     func test_shouldBeSymmetric() {
         property("symmetric") <- forAll {
             (a: Int) in
+            
+            let a = c(a)
             
             let x = NegationExpression(a)
             let y = NegationExpression(a)
@@ -44,6 +48,8 @@ extension NegationExpression_Tests {
     func test_shouldBeTransitive() {
         property("transitive") <- forAll {
             (a: Int) in
+            
+            let a = c(a)
             
             let x = NegationExpression(a)
             let y = NegationExpression(a)
@@ -58,6 +64,9 @@ extension NegationExpression_Tests {
             (a: Int, b: Int) in
             
             guard a != b else { return true }
+            
+            let a = c(a)
+            let b = c(b)
             
             let x = NegationExpression(a)
             let y = NegationExpression(b)
@@ -74,6 +83,8 @@ extension NegationExpression_Tests {
     func test_evaluate_shouldCreateResultCorrectly() {
         property("create results") <- forAll {
             (a: Int) in
+            
+            let a = c(a)
             
             let expression = NegationExpression(a)
             
