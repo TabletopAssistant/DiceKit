@@ -1,12 +1,12 @@
 [submodule "Carthage/Checkouts/xcconfigs"]
 	path = Carthage/Checkouts/xcconfigs
 	url = https://github.com/mrackwitz/xcconfigs.git
-	ignore = untracked
+	ignore = dirty
 [submodule "Carthage/Checkouts/Nimble"]
 	path = Carthage/Checkouts/Nimble
 	url = https://github.com/TabletopAssistant/Nimble.git
-	ignore = all
+	ignore = dirty
 [submodule "Carthage/Checkouts/SwiftCheck"]
 	path = Carthage/Checkouts/SwiftCheck
 	url = https://github.com/typelift/SwiftCheck.git
-	ignore = all
+	ignore = dirty
