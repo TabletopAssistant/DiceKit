@@ -3,5 +3,6 @@
     <pages>
         <page name='Dice'/>
         <page name='Expressions'/>
+        <page name='Probability'/>
     </pages>
 </playground>
