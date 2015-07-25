@@ -28,6 +28,10 @@ extension NegationExpression: ExpressionType {
         return Result(base.evaluate())
     }
     
+    public var probabilityMass: ProbabilityMass {
+        return -base.probabilityMass
+    }
+    
 }
 
 // MARK: - Equatable

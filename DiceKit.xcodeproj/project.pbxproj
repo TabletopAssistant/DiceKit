@@ -42,6 +42,8 @@
 		53D1EC801B63DF0C00433D2C /* Dictionary+Functions_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53D1EC7F1B63DF0C00433D2C /* Dictionary+Functions_Tests.swift */; };
 		53ECD0E21B5B498A002D859F /* NegationExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ECD0E11B5B498A002D859F /* NegationExpression.swift */; };
 		53ECD0E41B5B5185002D859F /* NegationExpressionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53ECD0E31B5B5185002D859F /* NegationExpressionResult.swift */; };
+		53FA0EAC1B6579F300C8D3B5 /* ProbabilisticExpressionType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA0EAB1B6579F300C8D3B5 /* ProbabilisticExpressionType.swift */; };
+		53FA0EAE1B657A3600C8D3B5 /* ProbabilisticExpressionType_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53FA0EAD1B657A3600C8D3B5 /* ProbabilisticExpressionType_Tests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +113,8 @@
 		53D1EC7F1B63DF0C00433D2C /* Dictionary+Functions_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Dictionary+Functions_Tests.swift"; sourceTree = "<group>"; };
 		53ECD0E11B5B498A002D859F /* NegationExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NegationExpression.swift; sourceTree = "<group>"; };
 		53ECD0E31B5B5185002D859F /* NegationExpressionResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NegationExpressionResult.swift; sourceTree = "<group>"; };
+		53FA0EAB1B6579F300C8D3B5 /* ProbabilisticExpressionType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProbabilisticExpressionType.swift; sourceTree = "<group>"; };
+		53FA0EAD1B657A3600C8D3B5 /* ProbabilisticExpressionType_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProbabilisticExpressionType_Tests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +196,7 @@
 				531084BF1B5AF993008DD696 /* MultiplicationExpressionResult.swift */,
 				53ECD0E11B5B498A002D859F /* NegationExpression.swift */,
 				53ECD0E31B5B5185002D859F /* NegationExpressionResult.swift */,
+				53FA0EAB1B6579F300C8D3B5 /* ProbabilisticExpressionType.swift */,
 				539D568D1B5C7BDA00AC6A37 /* ProbabilityMass.swift */,
 			);
 			path = DiceKit;
@@ -212,6 +217,7 @@
 				533EB1ED1B5B293000B3F8A1 /* MultiplicationExpressionResult_Tests.swift */,
 				539D56831B5B6D1A00AC6A37 /* NegationExpression_Tests.swift */,
 				539D56851B5B6D2B00AC6A37 /* NegationExpressionResult_Tests.swift */,
+				53FA0EAD1B657A3600C8D3B5 /* ProbabilisticExpressionType_Tests.swift */,
 				533D0C7A1B6423FA003A7D32 /* ProbabilityMass_Tests.swift */,
 			);
 			path = DiceKitTests;
@@ -358,6 +364,7 @@
 				539D56821B5B69D700AC6A37 /* ExpressionResultType.swift in Sources */,
 				539D567E1B5B66CF00AC6A37 /* AdditionExpression.swift in Sources */,
 				53D1EC7C1B6312E100433D2C /* FrequencyDistribution.swift in Sources */,
+				53FA0EAC1B6579F300C8D3B5 /* ProbabilisticExpressionType.swift in Sources */,
 				531084C01B5AF993008DD696 /* MultiplicationExpressionResult.swift in Sources */,
 				539D568C1B5C7B7700AC6A37 /* Dictionary+Functions.swift in Sources */,
 				53D1EC7E1B63133E00433D2C /* ApproximatelyEquatable.swift in Sources */,
@@ -380,6 +387,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				539D56841B5B6D1A00AC6A37 /* NegationExpression_Tests.swift in Sources */,
+				53FA0EAE1B657A3600C8D3B5 /* ProbabilisticExpressionType_Tests.swift in Sources */,
 				533EB1EE1B5B293000B3F8A1 /* MultiplicationExpressionResult_Tests.swift in Sources */,
 				53CFC3111B5AE4A0009C6C8F /* MultiplicationExpression_Tests.swift in Sources */,
 				53D05EEC1B546C73007CE7FC /* Int+Random_Tests.swift in Sources */,

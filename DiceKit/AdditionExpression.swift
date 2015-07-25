@@ -33,6 +33,10 @@ extension AdditionExpression: ExpressionType {
         return Result(leftResult, rightResult)
     }
     
+    public var probabilityMass: ProbabilityMass {
+        return leftAddend.probabilityMass && rightAddend.probabilityMass
+    }
+    
 }
 
 // MARK: - Equatable

@@ -109,6 +109,22 @@ extension Die: ExpressionType {
         return roll()
     }
     
+    public var probabilityMass: ProbabilityMass {
+        guard sides != 0 else {
+            return ProbabilityMass.zero
+        }
+        
+        var frequenciesPerOutcome = FrequencyDistribution.FrequenciesPerOutcome()
+        let outcomePerValue = 1.0/ProbabilityMass.Probability(abs(sides))
+        let range = sides < 0 ? sides...1 : 1...sides
+        
+        for value in range {
+            frequenciesPerOutcome[value] = outcomePerValue
+        }
+        
+        return ProbabilityMass(FrequencyDistribution(frequenciesPerOutcome), normalize: false)
+    }
+    
 }
 
 // MARK: - Equatable
