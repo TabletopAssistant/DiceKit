@@ -9,9 +9,8 @@
 import Foundation
 
 extension Die {
-    /**
-    The result of rolling a `Die`.
-    */
+
+    /// The result of rolling a `Die`.
     public struct Roll: Equatable {
         
         public let die: Die
@@ -22,6 +21,7 @@ extension Die {
             self.value = value
         }
     }
+    
 }
 
 // MARK: - ExpressionResultType
