@@ -4,7 +4,7 @@
 	ignore = untracked
 [submodule "Carthage/Checkouts/Nimble"]
 	path = Carthage/Checkouts/Nimble
-	url = https://github.com/Quick/Nimble.git
+	url = https://github.com/TabletopAssistant/Nimble.git
 	ignore = all
 [submodule "Carthage/Checkouts/SwiftCheck"]
 	path = Carthage/Checkouts/SwiftCheck
