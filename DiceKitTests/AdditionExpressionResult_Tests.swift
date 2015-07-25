@@ -24,8 +24,8 @@ extension AdditionExpressionResult_Tests {
         property("reflexive") <- forAll {
             (a: Int16, b: Int16) in
             
-            let a = Int(a)
-            let b = Int(b)
+            let a = c(Int(a))
+            let b = c(Int(b))
             
             let x = AdditionExpressionResult(a, b)
             
@@ -37,8 +37,8 @@ extension AdditionExpressionResult_Tests {
         property("symmetric") <- forAll {
             (a: Int16, b: Int16) in
             
-            let a = Int(a)
-            let b = Int(b)
+            let a = c(Int(a))
+            let b = c(Int(b))
             
             let x = AdditionExpressionResult(a, b)
             let y = AdditionExpressionResult(a, b)
@@ -51,8 +51,8 @@ extension AdditionExpressionResult_Tests {
         property("transitive") <- forAll {
             (a: Int16, b: Int16) in
             
-            let a = Int(a)
-            let b = Int(b)
+            let a = c(Int(a))
+            let b = c(Int(b))
             
             let x = AdditionExpressionResult(a, b)
             let y = AdditionExpressionResult(a, b)
@@ -64,17 +64,17 @@ extension AdditionExpressionResult_Tests {
     
     func test_shouldBeAbleToNotEquate() {
         property("non-equal") <- forAll {
-            (a: Int16, b: Int16, c: Int16, d: Int16) in
+            (a: Int16, b: Int16, m: Int16, n: Int16) in
             
-            guard !(a == c && b == d) && !(a == d && b == c) else { return true }
+            guard !(a == m && b == n) && !(a == n && b == m) else { return true }
             
-            let a = Int(a)
-            let b = Int(b)
-            let c = Int(c)
-            let d = Int(d)
+            let a = c(Int(a))
+            let b = c(Int(b))
+            let m = c(Int(m))
+            let n = c(Int(n))
             
             let x = AdditionExpressionResult(a, b)
-            let y = AdditionExpressionResult(c, d)
+            let y = AdditionExpressionResult(m, n)
             
             return x != y
         }
@@ -93,7 +93,8 @@ extension AdditionExpressionResult_Tests {
             let b = Int(b)
             
             let expectedValue = a + b
-            let result = AdditionExpressionResult(a, b)
+            
+            let result = AdditionExpressionResult(c(a), c(b))
             
             let value = result.value
             

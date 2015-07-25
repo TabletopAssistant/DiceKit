@@ -52,7 +52,7 @@ let rollWasFromD11 = roll.die == Die(sides: 11) // true
 
 ```swift
 // 2d20 + 8
-let expression = AdditionExpression(MultiplicationExpression(2, Die(sides: 20)), 8)
+let expression = AdditionExpression(MultiplicationExpression(c(2), Die(sides: 20)), c(8))
 
 // Result
 let result = expression.evaluate()

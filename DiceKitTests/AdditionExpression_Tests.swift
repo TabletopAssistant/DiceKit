@@ -24,6 +24,9 @@ extension AdditionExpression_Tests {
         property("reflexive") <- forAll {
             (a: Int, b: Int) in
             
+            let a = c(a)
+            let b = c(b)
+            
             let x = AdditionExpression(a, b)
             
             return x == x
@@ -33,6 +36,9 @@ extension AdditionExpression_Tests {
     func test_shouldBeSymmetric() {
         property("symmetric") <- forAll {
             (a: Int, b: Int) in
+            
+            let a = c(a)
+            let b = c(b)
             
             let x = AdditionExpression(a, b)
             let y = AdditionExpression(a, b)
@@ -45,6 +51,9 @@ extension AdditionExpression_Tests {
         property("transitive") <- forAll {
             (a: Int, b: Int) in
             
+            let a = c(a)
+            let b = c(b)
+            
             let x = AdditionExpression(a, b)
             let y = AdditionExpression(a, b)
             let z = AdditionExpression(a, b)
@@ -55,13 +64,18 @@ extension AdditionExpression_Tests {
     
     func test_shouldBeAbleToNotEquate() {
         property("non-equal") <- forAll {
-            (a: Int, b: Int, c: Int, d: Int) in
+            (a: Int, b: Int, m: Int, n: Int) in
             
             // Check both cases since it's commutative
-            guard !(a == c && b == d || a == d && b == c) else { return true }
+            guard !(a == m && b == n || a == n && b == m) else { return true }
+            
+            let a = c(a)
+            let b = c(b)
+            let m = c(m)
+            let n = c(n)
             
             let x = AdditionExpression(a, b)
-            let y = AdditionExpression(c, d)
+            let y = AdditionExpression(m, n)
             
             return x != y
         }
@@ -72,6 +86,9 @@ extension AdditionExpression_Tests {
             (a: Int, b: Int) in
             
             guard a != b else { return true }
+            
+            let a = c(a)
+            let b = c(b)
             
             let x = AdditionExpression(a, b)
             let y = AdditionExpression(b, a)
@@ -88,6 +105,9 @@ extension AdditionExpression_Tests {
     func test_evaluate_shouldCreateResultCorrectly() {
         property("create results") <- forAll {
             (a: Int, b: Int) in
+            
+            let a = c(a)
+            let b = c(b)
             
             let expression = AdditionExpression(a, b)
             

@@ -19,15 +19,3 @@ public protocol ExpressionType {
 //    func equals(that: ExpressionType) -> Bool
     
 }
-
-// MARK: - Standard Library extensions
-
-extension Int: ExpressionType {
-    
-    public typealias Result = Int
-    
-    public func evaluate() -> Int {
-        return self
-    }
-    
-}

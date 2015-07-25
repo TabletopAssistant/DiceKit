@@ -24,6 +24,9 @@ extension MultiplicationExpression_Tests {
         property("reflexive") <- forAll {
             (a: Int, b: Int) in
             
+            let a = c(a)
+            let b = c(b)
+            
             let x = MultiplicationExpression(a, b)
             
             return x == x
@@ -33,6 +36,9 @@ extension MultiplicationExpression_Tests {
     func test_shouldBeSymmetric() {
         property("symmetric") <- forAll {
             (a: Int, b: Int) in
+            
+            let a = c(a)
+            let b = c(b)
             
             let x = MultiplicationExpression(a, b)
             let y = MultiplicationExpression(a, b)
@@ -45,6 +51,9 @@ extension MultiplicationExpression_Tests {
         property("transitive") <- forAll {
             (a: Int, b: Int) in
             
+            let a = c(a)
+            let b = c(b)
+            
             let x = MultiplicationExpression(a, b)
             let y = MultiplicationExpression(a, b)
             let z = MultiplicationExpression(a, b)
@@ -55,13 +64,18 @@ extension MultiplicationExpression_Tests {
     
     func test_shouldBeAbleToNotEquate() {
         property("non-equal") <- forAll {
-            (a: Int, b: Int, c: Int, d: Int) in
+            (a: Int, b: Int, m: Int, n: Int) in
             
             // Check only this case since it's not commutative
-            guard !(a == c && b == d) else { return true }
+            guard !(a == m && b == n) else { return true }
+            
+            let a = c(a)
+            let b = c(b)
+            let m = c(m)
+            let n = c(n)
             
             let x = MultiplicationExpression(a, b)
-            let y = MultiplicationExpression(c, d)
+            let y = MultiplicationExpression(m, n)
             
             return x != y
         }
@@ -72,6 +86,9 @@ extension MultiplicationExpression_Tests {
             (a: Int, b: Int) in
             
             guard a != b else { return true }
+            
+            let a = c(a)
+            let b = c(b)
             
             let x = MultiplicationExpression(a, b)
             let y = MultiplicationExpression(b, a)
@@ -86,12 +103,12 @@ extension MultiplicationExpression_Tests {
 extension MultiplicationExpression_Tests {
     
     class MockExpression: ExpressionType, Equatable {
-        typealias Result = Int
+        typealias Result = Constant
         
         var evaluateCalled = 0
-        var stubResulter: () -> Int = { 0 }
+        var stubResulter: () -> Result = { 0 }
         
-        func evaluate() -> Int {
+        func evaluate() -> Result {
             let result = stubResulter()
             ++evaluateCalled
             return result
@@ -100,9 +117,9 @@ extension MultiplicationExpression_Tests {
     
     // TODO: Make a SwiftCheck
     func test_evaluate_shouldCreateResultCorrectly() {
-        let multiplicandResults = [8, 4, 2, -7, 1, 9, 3, 3, -3, 4, 5]
+        let multiplicandResults: [Constant] = [8, 4, 2, -7, 1, 9, 3, 3, -3, 4, 5]
         let expectedMultiplicandResults = multiplicandResults
-        let leftExpression = expectedMultiplicandResults.count
+        let leftExpression = c(expectedMultiplicandResults.count)
         let expectedMultiplierResult = leftExpression
         let mockRightExpression = MockExpression()
         mockRightExpression.stubResulter = { multiplicandResults[mockRightExpression.evaluateCalled] }

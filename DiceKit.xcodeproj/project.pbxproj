@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		531084C01B5AF993008DD696 /* MultiplicationExpressionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531084BF1B5AF993008DD696 /* MultiplicationExpressionResult.swift */; };
 		531084C31B5B0761008DD696 /* Die.Roll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531084C11B5B0102008DD696 /* Die.Roll.swift */; };
+		533D0C7D1B643F6C003A7D32 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533D0C7C1B643F6C003A7D32 /* Constant.swift */; };
 		533EB1EE1B5B293000B3F8A1 /* MultiplicationExpressionResult_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533EB1ED1B5B293000B3F8A1 /* MultiplicationExpressionResult_Tests.swift */; };
 		533F88091B52B988003838C8 /* DiceKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 533F87FE1B52B988003838C8 /* DiceKit.framework */; };
 		533F880E1B52B988003838C8 /* Die_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533F880D1B52B988003838C8 /* Die_Tests.swift */; };
@@ -63,6 +64,7 @@
 		531084BD1B5AF859008DD696 /* ExpressionResultType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpressionResultType.swift; sourceTree = "<group>"; };
 		531084BF1B5AF993008DD696 /* MultiplicationExpressionResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplicationExpressionResult.swift; sourceTree = "<group>"; };
 		531084C11B5B0102008DD696 /* Die.Roll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Die.Roll.swift; sourceTree = "<group>"; };
+		533D0C7C1B643F6C003A7D32 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
 		533EB1ED1B5B293000B3F8A1 /* MultiplicationExpressionResult_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplicationExpressionResult_Tests.swift; sourceTree = "<group>"; };
 		533F87FE1B52B988003838C8 /* DiceKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DiceKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		533F88031B52B988003838C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 				533F88181B52BC6F003838C8 /* DiceKit.h */,
 				539D567D1B5B66CF00AC6A37 /* AdditionExpression.swift */,
 				539D567F1B5B689600AC6A37 /* AdditionExpressionResult.swift */,
+				533D0C7C1B643F6C003A7D32 /* Constant.swift */,
 				5379780A1B531B21005818EC /* Die.swift */,
 				531084C11B5B0102008DD696 /* Die.Roll.swift */,
 				53CFC30C1B5AD3BF009C6C8F /* ExpressionType.swift */,
@@ -336,6 +339,7 @@
 				53CFC30D1B5AD3BF009C6C8F /* ExpressionType.swift in Sources */,
 				53CFC30F1B5AD674009C6C8F /* MultiplicationExpression.swift in Sources */,
 				53ECD0E41B5B5185002D859F /* NegationExpressionResult.swift in Sources */,
+				533D0C7D1B643F6C003A7D32 /* Constant.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
