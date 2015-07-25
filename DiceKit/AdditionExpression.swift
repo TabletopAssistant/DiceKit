@@ -20,7 +20,8 @@ public struct AdditionExpression<LeftExpression: ExpressionType, RightExpression
     
 }
 
-// MARK: - Expression
+// MARK: - ExpressionType
+
 extension AdditionExpression: ExpressionType {
     
     public typealias Result = AdditionExpressionResult<LeftExpression.Result, RightExpression.Result>
@@ -35,11 +36,13 @@ extension AdditionExpression: ExpressionType {
 }
 
 // MARK: - Equatable
+
 private func equate<L, R>(lhs: AdditionExpression<L, R>, _ rhs: AdditionExpression<L, R>) -> Bool {
     return lhs.leftAddend == rhs.leftAddend && lhs.rightAddend == rhs.rightAddend
 }
 
-public func ==<E>(lhs: AdditionExpression<E, E>, rhs: AdditionExpression<E, E>) -> Bool {
+// When the same types check for commutative
+public func == <E>(lhs: AdditionExpression<E, E>, rhs: AdditionExpression<E, E>) -> Bool {
     if equate(lhs, rhs) {
         return true
     }
@@ -48,6 +51,6 @@ public func ==<E>(lhs: AdditionExpression<E, E>, rhs: AdditionExpression<E, E>) 
     return lhs.leftAddend == rhs.rightAddend && lhs.rightAddend == rhs.leftAddend
 }
 
-public func ==<L, R>(lhs: AdditionExpression<L, R>, rhs: AdditionExpression<L, R>) -> Bool {
+public func == < L, R>(lhs: AdditionExpression<L, R>, rhs: AdditionExpression<L, R>) -> Bool {
     return equate(lhs, rhs)
 }

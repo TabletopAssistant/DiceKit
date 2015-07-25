@@ -37,6 +37,7 @@ public struct Die: Equatable {
 }
 
 // MARK: - RollerType
+
 extension Die {
     
     /// A type that "rolls" an imaginary die with `sides` number of sides
@@ -90,6 +91,7 @@ extension Die {
 }
 
 // MARK: - ExpressionType
+
 extension Die: ExpressionType {
     
     public typealias Result = Roll
@@ -101,6 +103,7 @@ extension Die: ExpressionType {
 }
 
 // MARK: - Equatable
-public func ==(lhs: Die, rhs: Die) -> Bool {
+
+public func == (lhs: Die, rhs: Die) -> Bool {
     return lhs.sides == rhs.sides
 }

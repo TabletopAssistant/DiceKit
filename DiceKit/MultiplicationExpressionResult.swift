@@ -35,6 +35,7 @@ public struct MultiplicationExpressionResult<MultiplierResult: ExpressionResultT
 }
 
 // MARK: - Equatable
-public func ==<M, R>(lhs: MultiplicationExpressionResult<M,R>, rhs: MultiplicationExpressionResult<M,R>) -> Bool {
+
+public func == <M, R>(lhs: MultiplicationExpressionResult<M,R>, rhs: MultiplicationExpressionResult<M,R>) -> Bool {
     return lhs.multiplierResult == rhs.multiplierResult && lhs.multiplicandResults == rhs.multiplicandResults
 }

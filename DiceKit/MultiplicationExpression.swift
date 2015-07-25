@@ -20,7 +20,8 @@ public struct MultiplicationExpression<LeftExpression: ExpressionType, RightExpr
     
 }
 
-// MARK: - Expression
+// MARK: - ExpressionType
+
 extension MultiplicationExpression: ExpressionType {
     
     public typealias Result = MultiplicationExpressionResult<LeftExpression.Result, RightExpression.Result>
@@ -39,6 +40,7 @@ extension MultiplicationExpression: ExpressionType {
 }
 
 // MARK: - Equatable
-public func ==<L, R>(lhs: MultiplicationExpression<L, R>, rhs: MultiplicationExpression<L, R>) -> Bool {
+
+public func == <L, R>(lhs: MultiplicationExpression<L, R>, rhs: MultiplicationExpression<L, R>) -> Bool {
     return lhs.multiplier == rhs.multiplier && lhs.multiplicand == rhs.multiplicand
 }

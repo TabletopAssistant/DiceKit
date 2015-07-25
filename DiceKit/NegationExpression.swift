@@ -18,7 +18,8 @@ public struct NegationExpression<BaseExpression: ExpressionType where BaseExpres
     
 }
 
-// MARK: - Expression
+// MARK: - ExpressionType
+
 extension NegationExpression: ExpressionType {
     
     public typealias Result = NegationExpressionResult<BaseExpression.Result>

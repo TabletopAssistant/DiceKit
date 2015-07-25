@@ -25,6 +25,7 @@ public struct AdditionExpressionResult<LeftAddendResult: ExpressionResultType, R
 }
 
 // MARK: - Equatable
-public func ==<L, R>(lhs: AdditionExpressionResult<L,R>, rhs: AdditionExpressionResult<L,R>) -> Bool {
+
+public func == <L, R>(lhs: AdditionExpressionResult<L,R>, rhs: AdditionExpressionResult<L,R>) -> Bool {
     return lhs.leftAddendResult == rhs.leftAddendResult && lhs.rightAddendResult == rhs.rightAddendResult
 }

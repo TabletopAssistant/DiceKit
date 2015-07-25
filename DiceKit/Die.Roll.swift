@@ -25,11 +25,13 @@ extension Die {
 }
 
 // MARK: - ExpressionResultType
+
 extension Die.Roll: ExpressionResultType {
     // Already conforms because of `value`
 }
 
 // MARK: - Equatable
-public func ==(lhs: Die.Roll, rhs: Die.Roll) -> Bool {
+
+public func == (lhs: Die.Roll, rhs: Die.Roll) -> Bool {
     return lhs.die == rhs.die && lhs.value == rhs.value
 }
