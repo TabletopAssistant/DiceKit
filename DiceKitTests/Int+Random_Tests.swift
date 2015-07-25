@@ -29,7 +29,7 @@ class Int_Random_Tests: XCTestCase {
     }
     
     func test_UInt64_random() {
-        property["random(lower:upper:) generates values for all valid inputs"] = forAll {
+        property("random(lower:upper:) generates values for all valid inputs") <- forAll {
             (a: UInt64, b: UInt64) in
             
             guard a != b else { return true }
@@ -47,7 +47,7 @@ class Int_Random_Tests: XCTestCase {
     }
     
     func test_Int64_random() {
-        property["random(lower:upper:) generates values for all valid inputs"] = forAll {
+        property("random(lower:upper:) generates values for all valid inputs") <- forAll {
             (a: Int64, b: Int64) in
             
             guard a != b else { return true }
@@ -65,7 +65,7 @@ class Int_Random_Tests: XCTestCase {
     }
     
     func test_UInt32_random() {
-        property["random(lower:upper:) generates values for all valid inputs"] = forAll {
+        property("random(lower:upper:) generates values for all valid inputs") <- forAll {
             (a: UInt32, b: UInt32) in
             
             guard a != b else { return true }
@@ -83,7 +83,7 @@ class Int_Random_Tests: XCTestCase {
     }
     
     func test_Int32_random() {
-        property["random(lower:upper:) generates values for all valid inputs"] = forAll {
+        property("random(lower:upper:) generates values for all valid inputs") <- forAll {
             (a: Int32, b: Int32) in
             
             guard a != b else { return true }
@@ -101,7 +101,7 @@ class Int_Random_Tests: XCTestCase {
     }
     
     func test_UInt_random() {
-        property["random(lower:upper:) generates values for all valid inputs"] = forAll {
+        property("random(lower:upper:) generates values for all valid inputs") <- forAll {
             (a: UInt, b: UInt) in
             
             guard a != b else { return true }
@@ -119,7 +119,7 @@ class Int_Random_Tests: XCTestCase {
     }
     
     func test_Int_random() {
-        property["random(lower:upper:) generates values for all valid inputs"] = forAll {
+        property("random(lower:upper:) generates values for all valid inputs") <- forAll {
             (a: Int, b: Int) in
             
             guard a != b else { return true }

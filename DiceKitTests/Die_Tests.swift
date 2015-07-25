@@ -112,7 +112,7 @@ extension Die_Tests {
 extension Die_Tests {
     
     func test_shouldBeReflexive() {
-        property["reflexive"] = forAll {
+        property("reflexive") <- forAll {
             (i: PositiveSidesType) in
             
             let sides = Int(i)
@@ -124,7 +124,7 @@ extension Die_Tests {
     }
     
     func test_shouldBeSymmetric() {
-        property["symmetric"] = forAll {
+        property("symmetric") <- forAll {
             (i: PositiveSidesType) in
             
             let sides = Int(i)
@@ -137,7 +137,7 @@ extension Die_Tests {
     }
     
     func test_shouldBeTransitive() {
-        property["transitive"] = forAll {
+        property("transitive") <- forAll {
             (i: PositiveSidesType) in
             
             let sides = Int(i)
@@ -151,7 +151,7 @@ extension Die_Tests {
     }
     
     func test_shouldBeAbleToNotEquate() {
-        property["non-equal"] = forAll {
+        property("non-equal") <- forAll {
             (a: PositiveSidesType, b: PositiveSidesType) in
             
             guard a != b else { return true }
@@ -245,7 +245,7 @@ extension Die_Tests {
     }
     
     func common_RollerType_shouldReturnWithinPositiveRangeForSidesGreaterThan1(rollerType: Die.RollerType) {
-        property["generates values within range of 1...sides"] = forAll {
+        property("generates values within range of 1...sides") <- forAll {
             (i: PositiveSidesType) in
             
             guard i > 1 else { return true }
@@ -259,7 +259,7 @@ extension Die_Tests {
     }
     
     func common_RollerType_shouldReturnWithinNegativeRangeForSidesLessThan0(rollerType: Die.RollerType) {
-        property["generates values within range of sides..<0"] = forAll {
+        property("generates values within range of sides..<0") <- forAll {
             (i: PositiveSidesType) in
             
             guard i > 1 else { return true }
@@ -273,7 +273,7 @@ extension Die_Tests {
     }
     
     func common_RollerType_shouldReturnWithinRangeForSides(rollerType: Die.RollerType) {
-        property["generates values within range of -sides...sides"] = forAll {
+        property("generates values within range of -sides...sides") <- forAll {
             (i: PositiveSidesType) in
             
             let sides = Int(i)
@@ -285,7 +285,7 @@ extension Die_Tests {
     }
     
     func common_RollerType_shouldReturn0ForSidesLessThan0(rollerType: Die.RollerType) {
-        property["generates 0 for -sides"] = forAll {
+        property("generates 0 for -sides") <- forAll {
             (i: PositiveSidesType) in
             
             guard i > 0 else { return true }

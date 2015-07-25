@@ -8,5 +8,5 @@
 	ignore = all
 [submodule "Carthage/Checkouts/SwiftCheck"]
 	path = Carthage/Checkouts/SwiftCheck
-	url = https://github.com/brentleyjones/SwiftCheck.git
+	url = https://github.com/typelift/SwiftCheck.git
 	ignore = all

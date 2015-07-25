@@ -21,7 +21,7 @@ class MultiplicationExpression_Tests: XCTestCase {
 extension MultiplicationExpression_Tests {
     
     func test_shouldBeReflexive() {
-        property["reflexive"] = forAll {
+        property("reflexive") <- forAll {
             (a: Int, b: Int) in
             
             let x = MultiplicationExpression(a, b)
@@ -31,7 +31,7 @@ extension MultiplicationExpression_Tests {
     }
     
     func test_shouldBeSymmetric() {
-        property["symmetric"] = forAll {
+        property("symmetric") <- forAll {
             (a: Int, b: Int) in
             
             let x = MultiplicationExpression(a, b)
@@ -42,7 +42,7 @@ extension MultiplicationExpression_Tests {
     }
     
     func test_shouldBeTransitive() {
-        property["transitive"] = forAll {
+        property("transitive") <- forAll {
             (a: Int, b: Int) in
             
             let x = MultiplicationExpression(a, b)
@@ -54,7 +54,7 @@ extension MultiplicationExpression_Tests {
     }
     
     func test_shouldBeAbleToNotEquate() {
-        property["non-equal"] = forAll {
+        property("non-equal") <- forAll {
             (a: Int, b: Int, c: Int, d: Int) in
             
             // Check only this case since it's not commutative
@@ -68,7 +68,7 @@ extension MultiplicationExpression_Tests {
     }
     
     func test_shouldBeAnticommutative() {
-        property["anticommutative"] = forAll {
+        property("anticommutative") <- forAll {
             (a: Int, b: Int) in
             
             guard a != b else { return true }
