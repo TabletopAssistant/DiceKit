@@ -8,9 +8,7 @@
 
 import Foundation
 
-/**
-An imaginary die with `0` to `Int.max` sides. Default of 6 sides. 
-*/
+/// An imaginary die with `0` to `Int.max` sides. Default value is `defaultSides`.
 public struct Die: Equatable {
     
     // TODO: Determine if there is a better way to do this.
@@ -18,17 +16,16 @@ public struct Die: Equatable {
     public static var roller = defaultRoller
     
     public let sides: Int
+    public static let defaultSides = 6
     
-    public init(sides: Int = 6) {
+    public init(sides: Int = defaultSides) {
         self.sides = sides
     }
     
-    /**
-    Rolls the die and returns the result as a `Die.Roll`.
-    
-    - returns: A `Die.Roll` initiated with `self` and the value determined by
-        `Die.roller` by passing in `self.sides` for `sides`.
-    */
+    /// Rolls the die and returns the result as a `Die.Roll`.
+    ///
+    /// - returns: A `Die.Roll` initiated with `self` and the value determined by
+    ///     `Die.roller` by passing in `self.sides` for `sides`.
     public func roll() -> Roll {
         let result = Die.roller(sides: sides)
         return Roll(die: self, value: result)
