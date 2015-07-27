@@ -17,6 +17,9 @@ import DiceKit
 let d6 = Die()
 let d4 = Die(sides: 4)
 
+//: There is also a convenience function for making `Die` more naturally. 
+let d8 = d(8)
+
 //: Rolling a die will produce a `Die.Roll`, which represents the result of the roll.
 let d6Result = d6.roll()
 let d4Result = d4.roll()
