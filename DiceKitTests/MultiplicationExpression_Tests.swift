@@ -130,9 +130,46 @@ extension MultiplicationExpression_Tests {
         expect(result.multiplierResult) == expectedMultiplierResult
         expect(result.multiplicandResults) == expectedMultiplicandResults
     }
+
+}
+
+// MARK: - Operators
+extension MultiplicationExpression_Tests {
+    
+    func test_operator_shouldWorkWithIntAndDie() {
+        property("Int * Die returns correct MultiplicationExpression") <- forAll {
+            (a: Int, b: Int) in
+            
+            let constant = c(a)
+            let die = d(b)
+            let expectedExpression1 = MultiplicationExpression(constant, die)
+            let expectedExpression2 = MultiplicationExpression(die, constant)
+            
+            let expression1 = constant * die
+            let expression2 = die * constant
+        
+            let test1 = (expression1 == expectedExpression1)
+            let test2 = (expression2 == expectedExpression2)
+            return test1 && test2
+        }
+    }
+    
+    func test_operator_shouldWorkWithDieAndDie() {
+        property("Die * Die returns correct MultiplicationExpression") <- forAll {
+            (a: Int, b: Int) in
+            
+            let leftDie = d(a)
+            let rightDie = d(b)
+            let expectedExpression = MultiplicationExpression(leftDie, rightDie)
+            
+            let expression = leftDie * rightDie
+        
+            return expression == expectedExpression
+        }
+    }
     
 }
 
-func ==(lhs: MultiplicationExpression_Tests.MockExpression, rhs: MultiplicationExpression_Tests.MockExpression) -> Bool {
+func == (lhs: MultiplicationExpression_Tests.MockExpression, rhs: MultiplicationExpression_Tests.MockExpression) -> Bool {
     return lhs === rhs
 }
