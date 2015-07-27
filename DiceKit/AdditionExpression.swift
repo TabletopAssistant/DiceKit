@@ -51,6 +51,12 @@ public func == <E>(lhs: AdditionExpression<E, E>, rhs: AdditionExpression<E, E>)
     return lhs.leftAddend == rhs.rightAddend && lhs.rightAddend == rhs.leftAddend
 }
 
-public func == < L, R>(lhs: AdditionExpression<L, R>, rhs: AdditionExpression<L, R>) -> Bool {
+public func == <L, R>(lhs: AdditionExpression<L, R>, rhs: AdditionExpression<L, R>) -> Bool {
     return equate(lhs, rhs)
+}
+
+// MARK: - Operators
+
+public func + <L: ExpressionType, R: ExpressionType where L: Equatable, R: Equatable>(lhs: L, rhs: R) -> AdditionExpression<L, R> {
+    return AdditionExpression(lhs,rhs)
 }
