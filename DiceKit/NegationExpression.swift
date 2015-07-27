@@ -31,6 +31,13 @@ extension NegationExpression: ExpressionType {
 }
 
 // MARK: - Equatable
-public func ==<E>(lhs: NegationExpression<E>, rhs: NegationExpression<E>) -> Bool {
+
+public func == <E>(lhs: NegationExpression<E>, rhs: NegationExpression<E>) -> Bool {
     return lhs.base == rhs.base
+}
+
+// MARK: - Operators
+
+public prefix func - <E: ExpressionType where E: Equatable>(base: E) -> NegationExpression<E> {
+    return NegationExpression(base)
 }
