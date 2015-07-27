@@ -16,6 +16,8 @@ public struct Die: Equatable {
     public static var roller = defaultRoller
     
     public let sides: Int
+    
+    /// Returns default number of sides for `Die`
     public static let defaultSides = 6
     
     public init(sides: Int = defaultSides) {
@@ -31,6 +33,16 @@ public struct Die: Equatable {
         return Roll(die: self, value: result)
     }
     
+}
+
+// MARK: - Convenience Initialization Functions
+
+public func d(sides: Int) -> Die {
+    return Die(sides: sides)
+}
+
+public func d() -> Die {
+    return Die()
 }
 
 // MARK: - RollerType

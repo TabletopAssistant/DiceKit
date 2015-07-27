@@ -33,8 +33,8 @@ DiceKit is a Swift framework for expressing and evaluating [dice notation][Dice 
 
 ```swift
 // Create dice with an arbitrary number of sides
-let d6 = Die()
-let d11 = Die(sides: 11)
+let d6 = d()
+let d11 = d(11)
 
 // Roll them to get results
 let result = d11.roll()
@@ -42,7 +42,7 @@ let value = result.value
 
 // The rolls are `Die.Roll` instead of just a value
 // They store which die the value is associated with
-let rollWasFromD11 = roll.die == Die(sides: 11) // true
+let rollWasFromD11 = roll.die == d(11) // true
 ```
 
 ### Expressions
@@ -52,7 +52,7 @@ let rollWasFromD11 = roll.die == Die(sides: 11) // true
 
 ```swift
 // 2d20 + 8
-let expression = AdditionExpression(MultiplicationExpression(c(2), Die(sides: 20)), c(8))
+let expression = c(2) * d(20) + c(8)
 
 // Result
 let result = expression.evaluate()

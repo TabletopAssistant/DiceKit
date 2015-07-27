@@ -98,14 +98,35 @@ extension Die_Tests {
         expect(die.sides) == sides
     }
     
-    /// Tests that a die will have 6 sides by default
+    /// Tests that a die will have a default number of sides
     ///
-    /// We decided on 6 because it is the most commonly used die.
-    func test_init_shouldDefaultTo6Sides() {
+    /// This can be set via a static property.
+    func test_init_shouldHaveDefaultNumberOfSides() {
         let die = Die()
         
-        expect(die.sides) == 6
+        expect(die.sides) == Die.defaultSides
     }
+    
+    /// Tests the convenience function d(sides)
+    func test_d_shouldReturnDie() {
+        property("Returns correct die") <- forAll {
+            (a: Int) in
+            
+            let dieFunction = d(a)
+            let dieInit = Die(sides: a)
+            
+            return dieFunction == dieInit
+        }
+    }
+    
+    /// Tests that d() returns a Die with the default number of sides
+    func test_d_shoulDefaultToCorrectNumberOfSides() {
+        let defaultD = d()
+        let defaultDie = Die()
+        
+        expect(defaultD) == defaultDie
+    }
+    
 }
 
 // MARK: - Equatatable
@@ -162,6 +183,7 @@ extension Die_Tests {
             return x != y
         }
     }
+    
 }
 
 // MARK: - roll() tests

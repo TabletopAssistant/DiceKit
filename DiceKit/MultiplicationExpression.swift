@@ -44,3 +44,9 @@ extension MultiplicationExpression: ExpressionType {
 public func == <L, R>(lhs: MultiplicationExpression<L, R>, rhs: MultiplicationExpression<L, R>) -> Bool {
     return lhs.multiplier == rhs.multiplier && lhs.multiplicand == rhs.multiplicand
 }
+
+// MARK: - Operators
+
+public func * <L: ExpressionType, R: ExpressionType where L: Equatable, R: Equatable>(lhs: L, rhs: R)-> MultiplicationExpression<L, R> {
+    return MultiplicationExpression(lhs, rhs)
+}
