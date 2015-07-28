@@ -47,9 +47,6 @@ let rollWasFromD11 = roll.die == d(11) // true
 
 ### Expressions
 
-> **Note**:
-> Expressions are still in a rough initial state. They are the main focus of the 0.2 release though. Please excuse the dust.
-
 ```swift
 // 2d20 + 8
 let expression = c(2) * d(20) + c(8)
