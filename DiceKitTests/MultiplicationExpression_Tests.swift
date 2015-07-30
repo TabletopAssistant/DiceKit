@@ -136,17 +136,16 @@ extension MultiplicationExpression_Tests {
 // MARK: - Operators
 extension MultiplicationExpression_Tests {
     
-    func test_operator_shouldWorkWithIntAndDie() {
-        property("Int * Die returns correct MultiplicationExpression") <- forAll {
+    func test_operator_shouldWorkWithIntAndExpression() {
+        property("Int * Expression and Expression * Int returns correct MultiplicationExpression") <- forAll {
             (a: Int, b: Int) in
             
-            let constant = c(a)
             let die = d(b)
-            let expectedExpression1 = MultiplicationExpression(constant, die)
-            let expectedExpression2 = MultiplicationExpression(die, constant)
+            let expectedExpression1 = MultiplicationExpression(c(a), die)
+            let expectedExpression2 = MultiplicationExpression(die, c(a))
             
-            let expression1 = constant * die
-            let expression2 = die * constant
+            let expression1 = a * die
+            let expression2 = die * a
         
             let test1 = (expression1 == expectedExpression1)
             let test2 = (expression2 == expectedExpression2)
@@ -154,8 +153,8 @@ extension MultiplicationExpression_Tests {
         }
     }
     
-    func test_operator_shouldWorkWithDieAndDie() {
-        property("Die * Die returns correct MultiplicationExpression") <- forAll {
+    func test_operator_shouldWorkWithExpressionAndExpression() {
+        property("Expression * Expression returns correct MultiplicationExpression") <- forAll {
             (a: Int, b: Int) in
             
             let leftDie = d(a)

@@ -122,17 +122,16 @@ extension AdditionExpression_Tests {
 // MARK: - Operators
 extension AdditionExpression_Tests {
     
-    func test_operator_shouldWorkWithIntAndDie() {
-        property("Constant + Die returns correct AdditionExpression") <- forAll {
+    func test_operator_shouldWorkWithIntAndExpression() {
+        property("Int + Expression and Expression + Int returns correct AdditionExpression") <- forAll {
             (a: Int, b: Int) in
             
-            let constant = c(a)
             let die = d(b)
-            let expectedExpression1 = AdditionExpression(constant, die)
-            let expectedExpression2 = AdditionExpression(die, constant)
+            let expectedExpression1 = AdditionExpression(c(a), die)
+            let expectedExpression2 = AdditionExpression(die, c(a))
             
-            let expression1 = constant + die
-            let expression2 = die + constant
+            let expression1 = a + die
+            let expression2 = die + a
             
             let test1 = (expression1 == expectedExpression1)
             let test2 = (expression2 == expectedExpression2)
@@ -141,8 +140,8 @@ extension AdditionExpression_Tests {
         }
     }
     
-    func test_operator_shouldWorkWithDieAndDie() {
-        property("Die + Die returns correct AdditionExpresson") <- forAll {
+    func test_operator_shouldWorkWithExpressionAndExpression() {
+        property("Expression + Expression returns correct AdditionExpresson") <- forAll {
             (a: Int, b: Int) in
             
             let leftDie = d(a)
@@ -150,20 +149,6 @@ extension AdditionExpression_Tests {
             let expectedExpression = AdditionExpression(leftDie, rightDie)
             
             let expression = leftDie + rightDie
-        
-            return expression == expectedExpression
-        }
-    }
-    
-    func test_operator_shouldWorkWithMultiplicationExpressions() {
-        property("MultiplicationExpression + Constant returns correct AdditionExpression") <- forAll {
-            (m: Int, n: Int, o: Int) in
-            
-            let leftExpression = c(m) * d(n)
-            let rightExpression = c(o)
-            let expectedExpression = AdditionExpression(leftExpression, rightExpression)
-            
-            let expression = leftExpression + rightExpression
         
             return expression == expectedExpression
         }

@@ -98,32 +98,6 @@ extension NegationExpression_Tests {
 // MARK: - Operators
 extension NegationExpression_Tests {
     
-    func test_operator_shouldWorkOnConstant() {
-        property("-Constant should make correct NegationExpression") <- forAll {
-            (a: Int) in
-            
-            let constant = c(a)
-            let expectedExpression = NegationExpression(constant)
-            
-            let expression = -constant
-            
-            return expression == expectedExpression
-        }
-    }
-    
-    func test_operator_shouldWorkOnDie() {
-        property("-Die should make correct NegationExpression") <- forAll {
-            (a: Int) in
-            
-            let die = d(a)
-            let expectedExpression = NegationExpression(die)
-            
-            let expression = -die
-            
-            return expression == expectedExpression
-        }
-    }
-    
     func test_operator_shouldWorkOnExpression() {
         property("-Expression should make correct NegationExpression") <- forAll {
             (m: Int, n: Int, o: Int) in

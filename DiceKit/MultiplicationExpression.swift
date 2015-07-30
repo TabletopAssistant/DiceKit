@@ -50,3 +50,11 @@ public func == <L, R>(lhs: MultiplicationExpression<L, R>, rhs: MultiplicationEx
 public func * <L: ExpressionType, R: ExpressionType where L: Equatable, R: Equatable>(lhs: L, rhs: R)-> MultiplicationExpression<L, R> {
     return MultiplicationExpression(lhs, rhs)
 }
+
+public func * <R: ExpressionType where R: Equatable>(lhs: Int, rhs: R)-> MultiplicationExpression<Constant, R> {
+    return MultiplicationExpression(Constant(lhs), rhs)
+}
+
+public func * <L: ExpressionType where L: Equatable>(lhs: L, rhs: Int)-> MultiplicationExpression<L, Constant> {
+    return MultiplicationExpression(lhs, Constant(rhs))
+}

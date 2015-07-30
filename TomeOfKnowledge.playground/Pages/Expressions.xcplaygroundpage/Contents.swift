@@ -10,7 +10,7 @@ import DiceKit
 let expression = AdditionExpression(MultiplicationExpression(c(2), Die(sides: 20)), c(8))
 
 //: Wow! That's a little verbose. Luckily there are several operators for convenience. Here is an equivalent expression:
-let expression2 = c(2) * d(20) + c(8)
+let expression2 = 2 * d(20) + 8
 expression == expression2
 
 //: Unlike in programming, an expression isn't evaluated by automatically. An expression holds the blueprint for how to determine a result. To evaluate the expression and get a result call `evaluate()` on it. The returned type will conform to `ExpressionResultType`, the exact type being the associated `ExpressionType.Result` type of the expression.

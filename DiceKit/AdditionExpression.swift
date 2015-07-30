@@ -58,5 +58,13 @@ public func == <L, R>(lhs: AdditionExpression<L, R>, rhs: AdditionExpression<L, 
 // MARK: - Operators
 
 public func + <L: ExpressionType, R: ExpressionType where L: Equatable, R: Equatable>(lhs: L, rhs: R) -> AdditionExpression<L, R> {
-    return AdditionExpression(lhs,rhs)
+    return AdditionExpression(lhs, rhs)
+}
+
+public func + <R: ExpressionType where R: Equatable>(lhs: Int, rhs: R) -> AdditionExpression<Constant, R> {
+    return AdditionExpression(Constant(lhs), rhs)
+}
+
+public func + <L: ExpressionType where L: Equatable>(lhs: L, rhs: Int) -> AdditionExpression<L, Constant> {
+    return AdditionExpression(lhs, Constant(rhs))
 }
