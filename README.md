@@ -49,7 +49,7 @@ let rollWasFromD11 = roll.die == d(11) // true
 
 ```swift
 // 2d20 + 8
-let expression = c(2) * d(20) + c(8)
+let expression = 2 * d(20) + 8
 
 // Result
 let result = expression.evaluate()
