@@ -430,14 +430,17 @@ extension Die_Tests {
         property("probability mass") <- forAll {
             (sides: Int) in
             
+            // Arrange
             let inverseSides = -sides
             
             let die = Die(sides: sides)
             let inverseDie = Die(sides: inverseSides)
             
+            // Act
             let probMass = die.probabilityMass
             let inverseProbMass = inverseDie.probabilityMass
             
+            // Assert
             guard sides != 0 else {
                 return probMass == ProbabilityMass.zero
             }

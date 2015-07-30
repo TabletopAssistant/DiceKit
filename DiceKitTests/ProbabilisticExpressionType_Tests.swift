@@ -25,8 +25,7 @@ extension ProbabilisticExpressionType_Tests {
         
     }
     
-    func test_equivalent_shouldUseApproximatelyEqualForProbabilityMass()
-    {
+    func test_equivalent_shouldUseApproximatelyEqualForProbabilityMass() {
         let probability = 0.5
         let delta = ProbabilityMass.defaultProbabilityEqualityDelta
         let insideDeltaProbability = probability + delta/10

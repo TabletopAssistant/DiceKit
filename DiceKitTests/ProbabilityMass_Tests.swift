@@ -53,7 +53,6 @@ extension ProbabilityMass_Tests {
 extension ProbabilityMass_Tests {
     
     func test_approximatelyEqualOperator_shouldUseDelta() {
-        
         let delta = ProbabilityMass.defaultProbabilityEqualityDelta
         let probability = 0.5
         let insideDeltaProbability = probability + delta/10
