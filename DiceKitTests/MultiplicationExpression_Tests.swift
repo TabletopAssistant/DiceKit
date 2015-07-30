@@ -103,6 +103,7 @@ extension MultiplicationExpression_Tests {
 extension MultiplicationExpression_Tests {
     
     class MockExpression: ExpressionType, Equatable {
+        
         typealias Result = Constant
         
         var evaluateCalled = 0
@@ -118,6 +119,7 @@ extension MultiplicationExpression_Tests {
         var probabilityMass: ProbabilityMass {
             return stubProbabilityMass
         }
+        
     }
     
     // TODO: Make a SwiftCheck
