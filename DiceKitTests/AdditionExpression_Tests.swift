@@ -139,3 +139,31 @@ extension AdditionExpression_Tests {
     }
     
 }
+
+// MARK: - CustomDebugStringConvertible
+extension AdditionExpression_Tests {
+    
+    func test_CustomDebugStringConvertible() {
+        let expression = d(8) + 2
+        let expected = "Die(8) + Constant(2)"
+        
+        let result = String(reflecting: expression)
+        
+        expect(result) == expected
+    }
+    
+}
+
+// MARK: - CustomStringConvertible
+extension AdditionExpression_Tests {
+    
+    func test_CustomStringConvertible() {
+        let expression = d(20) + d(4)
+        let expected = "d20 + d4"
+        
+        let result = String(expression)
+        
+        expect(result) == expected
+    }
+    
+}

@@ -128,6 +128,30 @@ extension Die: ExpressionType {
     
 }
 
+// MARK: - CustomStringConvertible
+
+extension Die: CustomStringConvertible {
+    
+    public var description: String {
+        if sides < 0 {
+            return "d(\(sides))"
+        } else {
+            return "d\(sides)"
+        }
+    }
+    
+}
+
+// MARK: - CustomDebugStringConvertible
+
+extension Die: CustomDebugStringConvertible {
+    
+    public var debugDescription: String {
+        return "Die(\(sides))"
+    }
+    
+}
+
 // MARK: - Equatable
 
 public func == (lhs: Die, rhs: Die) -> Bool {

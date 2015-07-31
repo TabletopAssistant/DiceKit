@@ -18,6 +18,26 @@ public struct NegationExpressionResult<BaseResult: protocol<ExpressionResultType
     
 }
 
+// MARK: - CustomStringConvertible
+
+extension NegationExpressionResult: CustomStringConvertible {
+    
+    public var description: String {
+        return "-\(base)"
+    }
+    
+}
+
+// MARK: - CustomDebugStringConvertible
+
+extension NegationExpressionResult: CustomDebugStringConvertible {
+    
+    public var debugDescription: String {
+        return "-\(String(reflecting: base))"
+    }
+    
+}
+
 // MARK: - Equatable
 
 public func == <B>(lhs: NegationExpressionResult<B>, rhs: NegationExpressionResult<B>) -> Bool {

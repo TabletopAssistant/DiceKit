@@ -80,3 +80,33 @@ extension AdditionExpressionResult_Tests {
     }
     
 }
+
+// MARK: - CustomDebugStringConvertible
+extension AdditionExpressionResult_Tests {
+    
+    func test_CustomDebuStringConvertible() {
+        let expression = d(10) + 5
+        let evaluation = expression.evaluate()
+        let expected = "Die(10).Roll(\(evaluation.leftAddendResult.value)) + Constant(5)"
+        
+        let result = String(reflecting: evaluation)
+        
+        expect(result) == expected
+    }
+    
+}
+
+// Mark: - CustomStringConvertible
+extension AdditionExpressionResult_Tests {
+    
+    func test_CustomStringConvertible() {
+        let expression = d(10) + 5
+        let evaluation = expression.evaluate()
+        let expected = "\(evaluation.leftAddendResult.value)|10 + 5"
+        
+        let result = String(evaluation)
+        
+        expect(result) == expected
+    }
+    
+}

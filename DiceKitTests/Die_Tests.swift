@@ -431,3 +431,52 @@ extension Die_Tests {
     }
     
 }
+
+// MARK: - CustomDebugStringConvertible
+extension Die_Tests {
+    
+    func test_die_customDebugStringConvertible() {
+        let die = d(6)
+        let expected = "Die(6)"
+        
+        let result = String(reflecting: die)
+        
+        expect(result) == expected
+    }
+    
+    func test_roll_customDebugStringConvertible() {
+        let die = d(4)
+        let roll = die.roll()
+        let expectedResult = "Die(4).Roll(\(roll.value))"
+        
+        let result = String(reflecting: roll)
+        
+        expect(result) == expectedResult
+    }
+    
+}
+
+//MARK: - CustomString Convertible
+extension Die_Tests {
+    
+    func test_die_customStringConvertible() {
+        let die = d(6)
+        let expected = "d6"
+        
+        let result = String(die)
+        
+        expect(result) == expected
+    }
+    
+    func test_roll_customStringConvertible() {
+        let die = d(6)
+        let roll = die.roll()
+        let val = roll.value
+        let expected = "\(val)|6"
+        
+        let result = String(roll)
+        
+        expect(result) == expected
+    }
+    
+}

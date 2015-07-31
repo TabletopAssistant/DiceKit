@@ -24,6 +24,26 @@ public func c(value: Int) -> Constant {
     return Constant(value)
 }
 
+// MARK: CustomStringConvertible
+
+extension Constant: CustomStringConvertible {
+    
+    public var description: String {
+        return "\(value)"
+    }
+    
+}
+
+// MARK: - CustomDebugStringConvertible
+
+extension Constant: CustomDebugStringConvertible {
+    
+    public var debugDescription: String {
+        return "Constant(\(value))"
+    }
+    
+}
+
 // MARK: - Equatable
 
 public func == (lhs: Constant, rhs: Constant) -> Bool {

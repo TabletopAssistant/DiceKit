@@ -39,6 +39,26 @@ extension AdditionExpression: ExpressionType {
     
 }
 
+// MARK: - CustomStringConvertible
+
+extension AdditionExpression: CustomStringConvertible {
+    
+    public var description: String {
+        return "\(leftAddend) + \(rightAddend)"
+    }
+    
+}
+
+// MARK: - CustomDebugStringConvertible
+
+extension AdditionExpression: CustomDebugStringConvertible {
+    
+    public var debugDescription: String {
+        return "\(String(reflecting: leftAddend)) + \(String(reflecting: rightAddend))"
+    }
+    
+}
+
 // MARK: - Equatable
 
 private func equate<L, R>(lhs: AdditionExpression<L, R>, _ rhs: AdditionExpression<L, R>) -> Bool {

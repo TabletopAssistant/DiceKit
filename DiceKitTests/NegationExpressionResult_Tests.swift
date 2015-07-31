@@ -76,3 +76,33 @@ extension NegationExpressionResult_Tests {
     }
     
 }
+
+// MARK: - CustomDebugStringConvertible
+extension NegationExpressionResult_Tests {
+    
+    func test_customDebugStringConvertible() {
+        let expression = -(d(8))
+        let evaluation = expression.evaluate()
+        let expected = "-Die(8).Roll(\(evaluation.base.value))"
+        
+        let result = String(reflecting: evaluation)
+        
+        expect(result) == expected
+    }
+    
+}
+
+// MARK: - CustomStringConvertible
+extension NegationExpressionResult_Tests {
+    
+    func test_customStringConvertible() {
+        let expression = -(d(8))
+        let evaluation = expression.evaluate()
+        let expected = "-\(evaluation.base)"
+        
+        let result = String(evaluation)
+        
+        expect(result) == expected
+    }
+    
+}
