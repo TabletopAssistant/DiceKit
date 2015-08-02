@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct NegationExpressionResult<BaseResult: ExpressionResultType where BaseResult: Equatable>: ExpressionResultType, Equatable {
+public struct NegationExpressionResult<BaseResult: protocol<ExpressionResultType, Equatable>>: ExpressionResultType, Equatable {
     
     public let baseResult: BaseResult
     

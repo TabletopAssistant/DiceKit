@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct MultiplicationExpressionResult<MultiplierResult: ExpressionResultType, MultiplicandResult: ExpressionResultType where MultiplierResult: Equatable, MultiplicandResult: Equatable>: ExpressionResultType, Equatable {
+public struct MultiplicationExpressionResult<MultiplierResult: protocol<ExpressionResultType, Equatable>, MultiplicandResult: protocol<ExpressionResultType, Equatable>>: ExpressionResultType, Equatable {
     
     public let multiplierResult: MultiplierResult
     public let multiplicandResults: [MultiplicandResult]

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct AdditionExpression<LeftExpression: ExpressionType, RightExpression: ExpressionType where LeftExpression: Equatable, RightExpression: Equatable>: Equatable {
+public struct AdditionExpression<LeftExpression: protocol<ExpressionType, Equatable>, RightExpression: protocol<ExpressionType, Equatable>>: Equatable {
     
     public let leftAddend: LeftExpression
     public let rightAddend: RightExpression
@@ -57,14 +57,14 @@ public func == <L, R>(lhs: AdditionExpression<L, R>, rhs: AdditionExpression<L, 
 
 // MARK: - Operators
 
-public func + <L: ExpressionType, R: ExpressionType where L: Equatable, R: Equatable>(lhs: L, rhs: R) -> AdditionExpression<L, R> {
+public func + <L: protocol<ExpressionType, Equatable>, R: protocol<ExpressionType, Equatable>>(lhs: L, rhs: R) -> AdditionExpression<L, R> {
     return AdditionExpression(lhs, rhs)
 }
 
-public func + <R: ExpressionType where R: Equatable>(lhs: Int, rhs: R) -> AdditionExpression<Constant, R> {
+public func + <R: protocol<ExpressionType, Equatable>>(lhs: Int, rhs: R) -> AdditionExpression<Constant, R> {
     return AdditionExpression(Constant(lhs), rhs)
 }
 
-public func + <L: ExpressionType where L: Equatable>(lhs: L, rhs: Int) -> AdditionExpression<L, Constant> {
+public func + <L: protocol<ExpressionType, Equatable>>(lhs: L, rhs: Int) -> AdditionExpression<L, Constant> {
     return AdditionExpression(lhs, Constant(rhs))
 }
