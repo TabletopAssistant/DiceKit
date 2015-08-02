@@ -111,6 +111,61 @@ extension FrequencyDistribution {
         }
     }
     
+    public subscript(rangeOfValues: Range<Value>) -> Slice<FrequencyDistribution> {
+        get {
+            let desiredStartValue = rangeOfValues.startIndex
+            let desiredEndValue = rangeOfValues.endIndex
+            
+            guard desiredStartValue < desiredEndValue else {
+                let emptyRange = Range<Index>(start: endIndex, end: endIndex)
+                return Slice<FrequencyDistribution>(base: self, bounds: emptyRange)
+            }
+            
+            // Find matching index for start and end values
+            var startValueIndex: Int?
+            var endValueIndex: Int?
+            var endValueIndexLock: Bool = false
+            for (index, value) in orderedValues.enumerate() {
+                // For start we take the first value that is >= desiredStateValue
+                if startValueIndex == nil && value >= desiredStartValue {
+                    startValueIndex = index
+                }
+                // For end we take any that are lower than it
+                if value <= desiredEndValue {
+                    endValueIndex = index
+                }
+                // Though we lock if we start to go past it
+                if value >= desiredEndValue {
+                    endValueIndexLock = true
+                    break
+                }
+            }
+            
+            // Without a lock we will convert the end index to nil to represent all the way to the end
+            if !endValueIndexLock {
+                endValueIndex = nil
+            }
+            
+            let rangeStartIndex: FrequencyDistributionIndex
+            let rangeEndIndex: FrequencyDistributionIndex
+            if let startValueIndex = startValueIndex {
+                rangeStartIndex = FrequencyDistributionIndex(index: startValueIndex, orderedValues: orderedValues)
+                
+                if let endValueIndex = endValueIndex {
+                    rangeEndIndex = FrequencyDistributionIndex(index: endValueIndex, orderedValues: orderedValues)
+                } else {
+                    rangeEndIndex = endIndex
+                }
+            } else {
+                rangeStartIndex = endIndex
+                rangeEndIndex = endIndex
+            }
+            
+            let indexRange = Range<Index>(start: rangeStartIndex, end: rangeEndIndex)
+            return Slice<FrequencyDistribution>(base: self, bounds: indexRange)
+        }
+    }
+    
     public func approximatelyEqual(x: FrequencyDistribution, delta: Outcome) -> Bool {
         guard outcomesPerValue.count == x.outcomesPerValue.count else {
             return false

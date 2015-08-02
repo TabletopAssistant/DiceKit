@@ -32,5 +32,18 @@ for (value, probability) in awesomeExpressionProbailityMass {
     probability
 }
 
+//: ### Ranges
+//:
+//: <Something about ranges>
+for (value, probability) in awesomeExpressionProbailityMass[Int.min...8] {
+    value
+    probability
+}
+
+for (value, probability) in threeD6ProbabilityMass[7..<Int.max] {
+    value
+    probability
+}
+
 
 //: [Previous](@previous)

@@ -99,6 +99,17 @@ extension ProbabilityMass {
         }
     }
     
+    public subscript(rangeOfValues: Range<Value>) -> Slice<ProbabilityMass> {
+        get {
+            let freqDistSlice = frequencyDistribution[rangeOfValues]
+            let startIndex = freqDistSlice.startIndex
+            let endIndex = freqDistSlice.endIndex
+            let range = Range<Index>(start: startIndex, end: endIndex)
+            
+            return Slice<ProbabilityMass>(base: self, bounds: range)
+        }
+    }
+    
     public func negate() -> ProbabilityMass {
         let freqDist = frequencyDistribution.negateValues()
         
