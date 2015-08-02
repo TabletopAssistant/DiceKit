@@ -4,7 +4,7 @@
 	ignore = dirty
 [submodule "Carthage/Checkouts/Nimble"]
 	path = Carthage/Checkouts/Nimble
-	url = https://github.com/TabletopAssistant/Nimble.git
+	url = https://github.com/Quick/Nimble.git
 	ignore = dirty
 [submodule "Carthage/Checkouts/SwiftCheck"]
 	path = Carthage/Checkouts/SwiftCheck

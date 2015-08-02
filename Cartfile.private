@@ -1,4 +1,4 @@
 github "mrackwitz/xcconfigs" ~> 2.0
 #github "Quick/Quick" ~> 0.5.0
-github "TabletopAssistant/Nimble" "swift-2.0"
+github "Quick/Nimble" "v2.0.0-rc.2"
 github "typelift/SwiftCheck" "swift-develop"
