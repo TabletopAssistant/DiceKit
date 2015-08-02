@@ -25,7 +25,7 @@ extension NegationExpression: ExpressionType {
     public typealias Result = NegationExpressionResult<BaseExpression.Result>
     
     public func evaluate() -> Result {
-        return NegationExpressionResult(base.evaluate())
+        return Result(base.evaluate())
     }
     
 }
