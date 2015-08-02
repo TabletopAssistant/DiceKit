@@ -15,7 +15,7 @@ import DiceKit
 /// Tests the `FrequencyDistribution` type
 class FrequencyDistribution_Tests: XCTestCase {
     
-    typealias SwiftCheckFrequenciesPerOutcome = DictionaryOf<FrequencyDistribution.Outcome, FrequencyDistribution.Frequency>
+    typealias SwiftCheckFrequenciesPerOutcome = DictionaryOf<FrequencyDistribution<Int>.Outcome, FrequencyDistribution<Int>.Frequency>
 
 }
 
@@ -93,10 +93,10 @@ extension FrequencyDistribution_Tests {
     func test_indexable_forIn() {
         // TODO: SwiftCheck
         let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [1:1, 2:1, 3:4, 6:1]
-        let expectedElements: [FrequencyDistribution._Element] = [(1, 1), (2, 1), (3, 4), (6, 1)]
+        let expectedElements: [FrequencyDistribution<Int>._Element] = [(1, 1), (2, 1), (3, 4), (6, 1)]
         let freqDist = FrequencyDistribution(frequenciesPerOutcome)
         
-        var elements: [FrequencyDistribution._Element] = []
+        var elements: [FrequencyDistribution<Int>._Element] = []
         for element in freqDist {
             elements.append(element)
         }
@@ -286,7 +286,7 @@ extension FrequencyDistribution_Tests {
     
     func test_power_shouldReturnMultiplicativeIdentityFor0() {
         let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [2:2.0, 3:2.0, 6:1.0]
-        let expected = FrequencyDistribution.multiplicativeIdentity
+        let expected = FrequencyDistribution<Int>.multiplicativeIdentity
         let x = FrequencyDistribution(frequenciesPerOutcome)
         
         let freqDist = x.power(0)
@@ -327,7 +327,7 @@ extension FrequencyDistribution_Tests {
         let yFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [2:2.0, 3:2.0, 7:1.0]
         let x = FrequencyDistribution(xFrequenciesPerOutcome)
         let y = FrequencyDistribution(yFrequenciesPerOutcome)
-        let expected = xFrequenciesPerOutcome.reduce(FrequencyDistribution.additiveIdentity) {
+        let expected = xFrequenciesPerOutcome.reduce(FrequencyDistribution<Int>.additiveIdentity) {
             let (outcome, frequency) = $1
             let addend = y.power(outcome).normalizeFrequencies().scaleFrequencies(frequency)
             return $0.add(addend)

@@ -33,7 +33,7 @@ extension AdditionExpression: ExpressionType {
         return Result(leftResult, rightResult)
     }
     
-    public var probabilityMass: ProbabilityMass {
+    public var probabilityMass: ExpressionProbabilityMass {
         return leftAddend.probabilityMass && rightAddend.probabilityMass
     }
     

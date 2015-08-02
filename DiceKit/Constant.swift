@@ -52,8 +52,9 @@ extension Constant: ExpressionType {
         return self
     }
     
-    public var probabilityMass: ProbabilityMass {
-        return ProbabilityMass(value)
+    public var probabilityMass: ExpressionProbabilityMass {
+        let probMassValue = ExpressionProbabilityMass.Outcome(value)
+        return ProbabilityMass(probMassValue)
     }
     
 }

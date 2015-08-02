@@ -82,7 +82,7 @@ extension MultiplicationExpression_Tests {
         
         var evaluateCalled = 0
         var stubResulter: () -> Result = { 0 }
-        var stubProbabilityMass = ProbabilityMass(0)
+        var stubProbabilityMass = ExpressionProbabilityMass(0)
         
         func evaluate() -> Result {
             let result = stubResulter()
@@ -90,7 +90,7 @@ extension MultiplicationExpression_Tests {
             return result
         }
         
-        var probabilityMass: ProbabilityMass {
+        var probabilityMass: ExpressionProbabilityMass {
             return stubProbabilityMass
         }
         

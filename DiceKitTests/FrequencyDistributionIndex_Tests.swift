@@ -15,7 +15,7 @@ import SwiftCheck
 /// Tests the `FrequencyDistributionIndex` type
 class FrequencyDistributionIndex_Tests: XCTestCase {
     
-    typealias SwiftCheckOrderedOutcome = SetOf<FrequencyDistribution.Outcome>
+    typealias SwiftCheckOrderedOutcome = SetOf<FrequencyDistribution<Int>.Outcome>
     
 }
 
@@ -129,7 +129,7 @@ extension FrequencyDistributionIndex_Tests {
     
     func test_startIndex_shouldBeSetupCorrectly() {
         property("startIndex") <- forAll {
-            (a: SetOf<FrequencyDistribution.Outcome>) in
+            (a: SwiftCheckOrderedOutcome) in
             
             let a = a.getSet
             
@@ -147,7 +147,7 @@ extension FrequencyDistributionIndex_Tests {
     
     func test_endIndex_shouldBeSetupCorrectly() {
         property("endIndex") <- forAll {
-            (a: SetOf<FrequencyDistribution.Outcome>) in
+            (a: SwiftCheckOrderedOutcome) in
             
             let a = a.getSet
             
@@ -165,7 +165,7 @@ extension FrequencyDistributionIndex_Tests {
     
     func test_value_shouldReturnValueForValidIndex() {
         property("value with valid index") <- forAll {
-            (a: SetOf<FrequencyDistribution.Outcome>) in
+            (a: SwiftCheckOrderedOutcome) in
             
             let a = a.getSet
             
@@ -187,7 +187,7 @@ extension FrequencyDistributionIndex_Tests {
     
     func test_value_shouldReturnNilForInvalidIndex() {
         property("value with invalid index") <- forAll {
-            (a: SetOf<FrequencyDistribution.Outcome>) in
+            (a: SwiftCheckOrderedOutcome) in
             
             let a = a.getSet
             

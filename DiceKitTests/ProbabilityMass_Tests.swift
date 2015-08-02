@@ -15,6 +15,8 @@ import DiceKit
 /// Tests the `ProbabilityMass` type
 class ProbabilityMass_Tests: XCTestCase {
     
+    typealias SwiftCheckFrequencyDistribution = FrequencyDistributionOf<Int>
+    
     let operationFixture1 = ProbabilityMass(FrequencyDistribution([1: 2.0, 4: 3.0, 11: 1.0]))
     let operationFixture2 = ProbabilityMass(FrequencyDistribution([1: 1.5, 2: 7.0]))
 
@@ -25,7 +27,9 @@ extension ProbabilityMass_Tests {
     
     func test_init_shouldNormalizeFrequencyDistribution() {
         property("init with frequency distribution") <- forAll {
-            (a: FrequencyDistribution) in
+            (a: SwiftCheckFrequencyDistribution) in
+            
+            let a = a.getFrequencyDistribution
             
             let expectedFreqDist = a.normalizeFrequencies()
             
@@ -54,7 +58,9 @@ extension ProbabilityMass_Tests {
     
     func test_shouldBeReflexive() {
         property("reflexive") <- forAll {
-            (a: FrequencyDistribution) in
+            (a: SwiftCheckFrequencyDistribution) in
+            
+            let a = a.getFrequencyDistribution
             
             return EquatableTestUtilities.checkReflexive { ProbabilityMass(a) }
         }
@@ -62,7 +68,9 @@ extension ProbabilityMass_Tests {
     
     func test_shouldBeSymmetric() {
         property("symmetric") <- forAll {
-            (a: FrequencyDistribution) in
+            (a: SwiftCheckFrequencyDistribution) in
+            
+            let a = a.getFrequencyDistribution
             
             return EquatableTestUtilities.checkSymmetric { ProbabilityMass(a) }
         }
@@ -70,7 +78,9 @@ extension ProbabilityMass_Tests {
     
     func test_shouldBeTransitive() {
         property("transitive") <- forAll {
-            (a: FrequencyDistribution) in
+            (a: SwiftCheckFrequencyDistribution) in
+            
+            let a = a.getFrequencyDistribution
             
             return EquatableTestUtilities.checkTransitive { ProbabilityMass(a) }
         }
@@ -78,9 +88,12 @@ extension ProbabilityMass_Tests {
     
     func test_shouldBeAbleToNotEquate() {
         property("non-equal") <- forAll {
-            (a: FrequencyDistribution, b: FrequencyDistribution) in
+            (a: SwiftCheckFrequencyDistribution, b: SwiftCheckFrequencyDistribution) in
             
-            return !(a.normalizeFrequencies().approximatelyEqual(b.normalizeFrequencies(), delta: ProbabilityMass.defaultProbabilityEqualityDelta) ) ==> {
+            let a = a.getFrequencyDistribution
+            let b = b.getFrequencyDistribution
+            
+            return !(a.normalizeFrequencies().approximatelyEqual(b.normalizeFrequencies(), delta: ProbabilityMassConfig.defaultProbabilityEqualityDelta) ) ==> {
                 return EquatableTestUtilities.checkNotEquate(
                     { ProbabilityMass(a) },
                     { ProbabilityMass(b) }
@@ -98,10 +111,10 @@ extension ProbabilityMass_Tests {
     func test_indexable_forIn() {
         // TODO: SwiftCheck
         let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [1:1, 2:1, 3:4, 6:1]
-        let expectedElements: [ProbabilityMass._Element] = [(1, 1/7), (2, 1/7), (3, 4/7), (6, 1/7)]
+        let expectedElements: [ProbabilityMass<Int>._Element] = [(1, 1/7), (2, 1/7), (3, 4/7), (6, 1/7)]
         let probMass = ProbabilityMass(FrequencyDistribution(frequenciesPerOutcome))
         
-        var elements: [ProbabilityMass._Element] = []
+        var elements: [ProbabilityMass<Int>._Element] = []
         for element in probMass {
             elements.append(element)
         }
@@ -141,7 +154,7 @@ extension ProbabilityMass_Tests {
 extension ProbabilityMass_Tests {
     
     func test_approximatelyEqualOperator_shouldUseDelta() {
-        let delta = ProbabilityMass.defaultProbabilityEqualityDelta
+        let delta = ProbabilityMassConfig.defaultProbabilityEqualityDelta
         let probability = 0.5
         let insideDeltaProbability = probability + delta/10
         let outsideDeltaProbability = probability + delta

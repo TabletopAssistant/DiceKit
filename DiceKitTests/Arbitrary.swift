@@ -31,16 +31,12 @@ extension Constant: Arbitrary {
 
 extension Die: Arbitrary {
     
-    public static func create(x : Int) -> Die {
-        return Die(sides: x)
-    }
-    
     public static var arbitrary : Gen<Die> {
-        return Die.create <^> Int.arbitrary
+        return Die.init <^> Int.arbitrary
     }
 }
 
-extension FrequencyDistribution: Arbitrary {
+extension FrequencyDistribution where OutcomeType: Arbitrary {
     
     public static func create(x : FrequenciesPerOutcome) -> FrequencyDistribution {
         return FrequencyDistribution(x)
@@ -50,4 +46,30 @@ extension FrequencyDistribution: Arbitrary {
         return FrequencyDistribution.create <^> Dictionary<Outcome, Frequency>.arbitrary
     }
     
+    public static func shrink(f : FrequencyDistribution) -> [FrequencyDistribution] {
+        let shrunkFrequenciesPerOutcome = FrequenciesPerOutcome.shrink(f.frequenciesPerOutcome)
+        
+        return shrunkFrequenciesPerOutcome.map { FrequencyDistribution($0) }
+    }
+    
+}
+
+public struct FrequencyDistributionOf<Outcome : protocol<FrequencyDistributionValueType, Arbitrary>> : Arbitrary, CustomStringConvertible {
+    public let getFrequencyDistribution : FrequencyDistribution<Outcome>
+    
+    public init(_ frequencyDistribution : FrequencyDistribution<Outcome>) {
+        self.getFrequencyDistribution = frequencyDistribution
+    }
+    
+    public var description : String {
+        return "\(self.getFrequencyDistribution)"
+    }
+    
+    public static var arbitrary : Gen<FrequencyDistributionOf<Outcome>> {
+        return FrequencyDistributionOf.init <^> FrequencyDistribution<Outcome>.arbitrary
+    }
+    
+    public static func shrink(bl : FrequencyDistributionOf<Outcome>) -> [FrequencyDistributionOf<Outcome>] {
+        return FrequencyDistribution<Outcome>.shrink(bl.getFrequencyDistribution).map(FrequencyDistributionOf.init)
+    }
 }

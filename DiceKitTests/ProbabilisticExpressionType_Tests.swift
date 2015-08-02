@@ -21,13 +21,13 @@ extension ProbabilisticExpressionType_Tests {
     
     struct MockProbabilisticExpression: ProbabilisticExpressionType {
         
-        var probabilityMass: ProbabilityMass
+        var probabilityMass: ExpressionProbabilityMass
         
     }
     
     func test_equivalent_shouldUseApproximatelyEqualForProbabilityMass() {
         let probability = 0.5
-        let delta = ProbabilityMass.defaultProbabilityEqualityDelta
+        let delta = ProbabilityMassConfig.defaultProbabilityEqualityDelta
         let insideDeltaProbability = probability + delta/10
         let outsideDeltaProbability = probability + delta
         let x = MockProbabilisticExpression(probabilityMass: ProbabilityMass(FrequencyDistribution([1: probability, 2: 1.0-probability])))

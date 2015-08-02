@@ -28,7 +28,7 @@ extension NegationExpression: ExpressionType {
         return Result(base.evaluate())
     }
     
-    public var probabilityMass: ProbabilityMass {
+    public var probabilityMass: ExpressionProbabilityMass {
         return -base.probabilityMass
     }
     

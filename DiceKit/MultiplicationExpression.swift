@@ -37,7 +37,7 @@ extension MultiplicationExpression: ExpressionType {
         return Result(multiplierResult: muliplierResult, multiplicandResults: multiplicandResult)
     }
     
-    public var probabilityMass: ProbabilityMass {
+    public var probabilityMass: ExpressionProbabilityMass {
         return multiplier.probabilityMass * multiplicand.probabilityMass
     }
     
