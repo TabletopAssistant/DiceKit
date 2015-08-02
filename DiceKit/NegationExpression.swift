@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct NegationExpression<BaseExpression: ExpressionType where BaseExpression: Equatable>: Equatable {
+public struct NegationExpression<BaseExpression: protocol<ExpressionType, Equatable>>: Equatable {
 
     public let base: BaseExpression
     
@@ -38,6 +38,6 @@ public func == <E>(lhs: NegationExpression<E>, rhs: NegationExpression<E>) -> Bo
 
 // MARK: - Operators
 
-public prefix func - <E: ExpressionType where E: Equatable>(base: E) -> NegationExpression<E> {
+public prefix func - <E: protocol<ExpressionType, Equatable>>(base: E) -> NegationExpression<E> {
     return NegationExpression(base)
 }

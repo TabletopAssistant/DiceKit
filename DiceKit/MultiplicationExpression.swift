@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct MultiplicationExpression<LeftExpression: ExpressionType, RightExpression: ExpressionType where LeftExpression: Equatable, RightExpression: Equatable>: Equatable {
+public struct MultiplicationExpression<LeftExpression: protocol<ExpressionType, Equatable>, RightExpression: protocol<ExpressionType, Equatable>>: Equatable {
 
     public let multiplier: LeftExpression
     public let multiplicand: RightExpression
@@ -47,14 +47,14 @@ public func == <L, R>(lhs: MultiplicationExpression<L, R>, rhs: MultiplicationEx
 
 // MARK: - Operators
 
-public func * <L: ExpressionType, R: ExpressionType where L: Equatable, R: Equatable>(lhs: L, rhs: R)-> MultiplicationExpression<L, R> {
+public func * <L: protocol<ExpressionType, Equatable>, R: protocol<ExpressionType, Equatable>>(lhs: L, rhs: R)-> MultiplicationExpression<L, R> {
     return MultiplicationExpression(lhs, rhs)
 }
 
-public func * <R: ExpressionType where R: Equatable>(lhs: Int, rhs: R)-> MultiplicationExpression<Constant, R> {
+public func * <R: protocol<ExpressionType, Equatable>>(lhs: Int, rhs: R)-> MultiplicationExpression<Constant, R> {
     return MultiplicationExpression(Constant(lhs), rhs)
 }
 
-public func * <L: ExpressionType where L: Equatable>(lhs: L, rhs: Int)-> MultiplicationExpression<L, Constant> {
+public func * <L: protocol<ExpressionType, Equatable>>(lhs: L, rhs: Int)-> MultiplicationExpression<L, Constant> {
     return MultiplicationExpression(lhs, Constant(rhs))
 }
