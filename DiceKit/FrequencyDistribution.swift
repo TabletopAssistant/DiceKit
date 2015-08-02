@@ -136,6 +136,75 @@ extension FrequencyDistribution: CollectionType {
     // Protocol defaults cover implmentation after conforming to `Indexable`
 }
 
+// MARK: - OutcomeWithSuccessfulnessType
+
+extension FrequencyDistribution where OutcomeType: OutcomeWithSuccessfulnessType {
+
+    public subscript(outcomeWithSuccessfulness outcome: Outcome) -> Frequency? {
+        get {
+            switch outcome.successfulness {
+            case .Undetermined:
+                // Need to fetch all 3 types
+                let failOutcome: Outcome = Outcome(outcome.outcome, Successfulness.Fail)
+                let successOutcome: Outcome = Outcome(outcome.outcome, Successfulness.Success)
+                let failFrequency = frequenciesPerOutcome[failOutcome]
+                let undeterminedFrequency = frequenciesPerOutcome[outcome]
+                let successFrequency = frequenciesPerOutcome[successOutcome]
+                
+                switch (failFrequency, undeterminedFrequency, successFrequency) {
+                case (nil, nil, nil):
+                    return nil
+                default:
+                    return (failFrequency ?? 0.0) + (undeterminedFrequency ?? 0.0) + (successFrequency ?? 0.0)
+                }
+                
+            default:
+                // For fail and success, just only get that result
+                return frequenciesPerOutcome[outcome]
+            }
+        }
+    }
+    
+    public func valuesWithoutSuccessfulness() -> FrequencyDistribution<Int> {
+        var newFrequenciesPerOutcome = FrequencyDistribution<Int>.FrequenciesPerOutcome()
+        for (outcome, frequency) in frequenciesPerOutcome {
+            let normalizedOutcome = outcome.outcome
+            let exisitingFrequency = newFrequenciesPerOutcome[normalizedOutcome] ?? 0
+            let newFrequency = exisitingFrequency + frequency
+            newFrequenciesPerOutcome[normalizedOutcome] = newFrequency
+        }
+        
+        return FrequencyDistribution<Int>(newFrequenciesPerOutcome)
+    }
+    
+    public func successfulnessWithoutValues() -> FrequencyDistribution<Successfulness> {
+        var newFrequenciesPerOutcome = FrequencyDistribution<Successfulness>.FrequenciesPerOutcome()
+        for (outcome, frequency) in frequenciesPerOutcome {
+            let normalizedSuccessfulness = outcome.successfulness
+            let exisitingFrequency = newFrequenciesPerOutcome[normalizedSuccessfulness] ?? 0
+            let newFrequency = exisitingFrequency + frequency
+            newFrequenciesPerOutcome[normalizedSuccessfulness] = newFrequency
+        }
+        
+        return FrequencyDistribution<Successfulness>(newFrequenciesPerOutcome)
+    }
+    
+    public func mapSuccessfulness(@noescape transform: (Outcome) -> Successfulness) -> FrequencyDistribution {
+        return mapOutcomes { Outcome($0.outcome, transform($0)) }
+    }
+    
+    public func setSuccessfulness(successfulness: Successfulness, comparedWith x: FrequencyDistribution, @noescape passingComparison comparison: (Outcome, Outcome) -> Bool) -> FrequencyDistribution {
+        return x.frequenciesPerOutcome.reduce(.additiveIdentity) {
+            let (outcome, frequency) = $1
+            // Impose the successfulness if outcome passes the comparison
+            let mappedSuccessfulness = self.mapSuccessfulness { comparison($0, outcome) ? successfulness : $0.successfulness }
+            let addend = mappedSuccessfulness.scaleFrequencies(frequency)
+            return $0.add(addend)
+        }
+    }
+
+}
+
 // MARK: - Operations
 
 extension FrequencyDistribution {

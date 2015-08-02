@@ -172,6 +172,175 @@ extension ProbabilityMass_Tests {
     
 }
 
+// MARK: - OutcomeWithSuccessfulnessType
+extension ProbabilityMass_Tests {
+    
+    func test_subscript_outcomeWithSuccessfulness_shouldReturnDiscreteFrequencyForSuccessOrFail() {
+        typealias S = OutcomeWithSuccessfulness
+        
+        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            S(7, .Success): 3.0, S(7, .Fail): 2.0, S(7, .Undetermined): 1.0,
+            S(6, .Undetermined): 2.5,
+            S(5, .Fail): 1.5,
+            S(4, .Success): 1.0,
+        ]
+        let probMass = ProbabilityMass(FrequencyDistribution(frequenciesPerOutcome))
+        let desiredOutcome = S(7, .Fail)
+        let expectedFrequency = 2.0/11.0
+        
+        let probability = probMass[outcomeWithSuccessfulness: desiredOutcome]
+        
+        expect(probability) == expectedFrequency
+    }
+    
+    func test_subscript_outcomeWithSuccessfulness_shouldReturnSummedFrequencyForUndetermined() {
+        typealias S = OutcomeWithSuccessfulness
+        
+        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            S(7, .Success): 3.0, S(7, .Fail): 2.0, S(7, .Undetermined): 1.0,
+            S(6, .Undetermined): 2.5,
+            S(5, .Fail): 1.5,
+            S(4, .Success): 1.0,
+        ]
+        let probMass = ProbabilityMass(FrequencyDistribution(frequenciesPerOutcome))
+        let expectedProbability7 = 6.0/11.0
+        let expectedProbability5 = 1.5/11.0
+        let expectedProbability4 = 1.0/11.0
+        
+        let probability7 = probMass[outcomeWithSuccessfulness: S(7, .Undetermined)]
+        let probability5 = probMass[outcomeWithSuccessfulness: S(5, .Undetermined)]
+        let probability4 = probMass[outcomeWithSuccessfulness: S(4, .Undetermined)]
+        
+        expect(probability7) == expectedProbability7
+        expect(probability5) == expectedProbability5
+        expect(probability4) == expectedProbability4
+    }
+    
+    func test_subscript_outcomeWithSuccessfulness_shouldReturnNilForInvalidOutcome() {
+        typealias S = OutcomeWithSuccessfulness
+        
+        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            S(7, .Success): 3.0, S(7, .Fail): 2.0, S(7, .Undetermined): 1.0,
+            S(6, .Undetermined): 2.5,
+            S(5, .Fail): 1.5,
+            S(4, .Success): 1.0,
+        ]
+        let probMass = ProbabilityMass(FrequencyDistribution(frequenciesPerOutcome))
+        
+        let probability = probMass[outcomeWithSuccessfulness: S(77, .Undetermined)]
+        
+        expect(probability).to(beNil())
+    }
+    
+    func test_valuesWithoutSuccessfulness() {
+        typealias S = OutcomeWithSuccessfulness
+        
+        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            S(7, .Success): 3.0, S(7, .Fail): 2.0, S(7, .Undetermined): 1.0,
+            S(6, .Undetermined): 2.5,
+            S(5, .Fail): 1.5,
+            S(4, .Success): 1.0,
+        ]
+        let probMass = ProbabilityMass(FrequencyDistribution(frequenciesPerOutcome))
+        let expectedFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            7: 6.0,
+            6: 2.5,
+            5: 1.5,
+            4: 1.0,
+        ]
+        let expectedProbabilityMass = ProbabilityMass(FrequencyDistribution(expectedFrequenciesPerOutcome))
+        
+        let valuesWithoutSuccessfulness = probMass.valuesWithoutSuccessfulness()
+        
+        expect(valuesWithoutSuccessfulness) == expectedProbabilityMass
+    }
+    
+    func test_successfulnessWithoutValues() {
+        typealias S = OutcomeWithSuccessfulness
+        
+        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            S(7, .Success): 3.0,
+            S(7, .Fail): 2.0,
+            S(7, .Undetermined): 1.0,
+            S(6, .Undetermined): 2.5,
+            S(5, .Fail): 1.5,
+            S(4, .Success): 1.0,
+        ]
+        let probMass = ProbabilityMass(FrequencyDistribution(frequenciesPerOutcome))
+        let expectedFrequenciesPerOutcome: FrequencyDistribution<Successfulness>.FrequenciesPerOutcome = [
+            .Success: 4.0,
+            .Undetermined: 3.5,
+            .Fail: 3.5,
+        ]
+        let expectedProbabilityMass = ProbabilityMass(FrequencyDistribution(expectedFrequenciesPerOutcome))
+        
+        let successfulnessWithoutValues = probMass.successfulnessWithoutValues()
+        
+        expect(successfulnessWithoutValues) == expectedProbabilityMass
+    }
+    
+    func test_mapSuccessfulness() {
+        typealias S = OutcomeWithSuccessfulness
+        
+        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            S(7, .Success): 3.0,
+            S(7, .Fail): 2.0,
+            S(7, .Undetermined): 1.0,
+            S(6, .Undetermined): 2.5,
+            S(5, .Fail): 1.5,
+            S(4, .Success): 1.0,
+        ]
+        let probMass = ProbabilityMass(FrequencyDistribution(frequenciesPerOutcome))
+        let map = { (outcome: S) -> Successfulness in
+            // If odd outcome, then .Fail, otherwise .Success
+            outcome.outcome % 2 == 1 ? .Fail : .Success
+        }
+        let expectedFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            S(7, .Fail): 6.0,
+            S(6, .Success): 2.5,
+            S(5, .Fail): 1.5,
+            S(4, .Success): 1.0,
+        ]
+        let expectedProbabilityMass = ProbabilityMass(FrequencyDistribution(expectedFrequenciesPerOutcome))
+        
+        let mappedSuccessfulness = probMass.mapSuccessfulness(map)
+        
+        expect(mappedSuccessfulness) == expectedProbabilityMass
+    }
+    
+    func test_setSuccessfulness() {
+        typealias S = OutcomeWithSuccessfulness
+        
+        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            S(7, .Success): 3.0, S(7, .Fail): 2.0, S(7, .Undetermined): 1.0,
+            S(6, .Undetermined): 2.5,
+            S(5, .Fail): 1.5,
+            S(4, .Success): 1.0,
+        ]
+        let compareFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            S(1, .Success): 2.0,
+            S(2, .Fail): 0.5,
+        ]
+        let probMass = ProbabilityMass(FrequencyDistribution(frequenciesPerOutcome))
+        let compareProbMass = ProbabilityMass(FrequencyDistribution(compareFrequenciesPerOutcome))
+        let comparison = { (lhs: S, rhs: S) in
+            (lhs.outcome + rhs.outcome) % 2 == 0
+        }
+        let expectedFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            S(7, .Fail): 13.0, S(7, .Success): 1.5, S(7, .Undetermined): 0.5,
+            S(6, .Fail): 1.25, S(6, .Undetermined): 5.0,
+            S(5, .Fail): 3.75,
+            S(4, .Success): 2.0, S(4, .Fail): 0.5,
+        ]
+        let expectedProbabilityMass = ProbabilityMass(FrequencyDistribution(expectedFrequenciesPerOutcome))
+        
+        let setSuccessfulness = probMass.setSuccessfulness(.Fail, comparedWith: compareProbMass, passingComparison: comparison)
+        
+        expect(setSuccessfulness ≈ expectedProbabilityMass) == true
+    }
+    
+}
+
 // MARK: - Operations
 extension ProbabilityMass_Tests {
     
