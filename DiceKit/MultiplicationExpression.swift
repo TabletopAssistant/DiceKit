@@ -34,7 +34,7 @@ extension MultiplicationExpression: ExpressionType {
         let multiplicandResultCount = abs(muliplierValue)
         let multiplicandResult = (0..<multiplicandResultCount).map { _ in self.multiplicand.evaluate() }
         
-        return MultiplicationExpressionResult(multiplierResult: muliplierResult, multiplicandResults: multiplicandResult)
+        return Result(multiplierResult: muliplierResult, multiplicandResults: multiplicandResult)
     }
     
 }

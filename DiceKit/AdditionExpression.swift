@@ -30,7 +30,7 @@ extension AdditionExpression: ExpressionType {
         let leftResult = leftAddend.evaluate()
         let rightResult = rightAddend.evaluate()
         
-        return AdditionExpressionResult(leftResult, rightResult)
+        return Result(leftResult, rightResult)
     }
     
 }
