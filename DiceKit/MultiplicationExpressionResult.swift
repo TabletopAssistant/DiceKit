@@ -8,21 +8,11 @@
 
 import Foundation
 
-public struct MultiplicationExpressionResult<MultiplierResult: protocol<ExpressionResultType, Equatable>, MultiplicandResult: protocol<ExpressionResultType, Equatable>>: ExpressionResultType, Equatable {
+public struct MultiplicationExpressionResult<MultiplierResult: protocol<ExpressionResultType, Equatable>, MultiplicandResult: protocol<ExpressionResultType, Equatable>>: Equatable {
     
     public let multiplierResult: MultiplierResult
     public let multiplicandResults: [MultiplicandResult]
     public let negateMultiplicandResults: Bool
-    
-    public var value: Int {
-        let values = multiplicandResults.map { $0.value }
-        
-        if negateMultiplicandResults {
-            return values.reduce(0, combine: -)
-        } else {
-            return values.reduce(0, combine: +)
-        }
-    }
     
     public init(multiplierResult: MultiplierResult, multiplicandResults: [MultiplicandResult]) {
         assert(abs(multiplierResult.value) == multiplicandResults.count)
@@ -38,4 +28,20 @@ public struct MultiplicationExpressionResult<MultiplierResult: protocol<Expressi
 
 public func == <M, R>(lhs: MultiplicationExpressionResult<M,R>, rhs: MultiplicationExpressionResult<M,R>) -> Bool {
     return lhs.multiplierResult == rhs.multiplierResult && lhs.multiplicandResults == rhs.multiplicandResults
+}
+
+// MARK: - ExpressionResultType
+
+extension MultiplicationExpressionResult: ExpressionResultType {
+    
+    public var value: Int {
+        let values = multiplicandResults.map { $0.value }
+        
+        if negateMultiplicandResults {
+            return values.reduce(0, combine: -)
+        } else {
+            return values.reduce(0, combine: +)
+        }
+    }
+    
 }
