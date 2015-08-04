@@ -117,6 +117,22 @@ extension AdditionExpression_Tests {
         }
     }
     
+    func test_probabilityMass_shouldReturnCorrect() {
+        property("probability mass") <- forAll {
+            (a: Int, b: Int) in
+            
+            let a = c(a)
+            let b = c(b)
+            
+            let expectedProbMass = a.probabilityMass.and(b.probabilityMass)
+            let expression = AdditionExpression(a, b)
+            
+            let probMass = expression.probabilityMass
+            
+            return probMass == expectedProbMass
+        }
+    }
+    
 }
 
 // MARK: - Operators

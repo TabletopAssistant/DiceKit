@@ -8,14 +8,10 @@
 
 import Foundation
 
-public protocol ExpressionType {
+public protocol ExpressionType: ProbabilisticExpressionType {
     
     typealias Result : ExpressionResultType, Equatable
     
     func evaluate() -> Result
-    
-    // TODO: Introduce this bad boy someday
-//    /// Returns `true` if both `ExpressionType`s are algebraically equivalent.
-//    func equals(that: ExpressionType) -> Bool
     
 }

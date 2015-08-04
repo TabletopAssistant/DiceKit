@@ -93,6 +93,21 @@ extension NegationExpression_Tests {
         }
     }
     
+    func test_probabilityMass_shouldReturnCorrect() {
+        property("probability mass") <- forAll {
+            (a: Int) in
+            
+            let a = c(a)
+            
+            let expectedProbMass = a.probabilityMass.negate()
+            let expression = NegationExpression(a)
+            
+            let probMass = expression.probabilityMass
+            
+            return probMass == expectedProbMass
+        }
+    }
+    
 }
 
 // MARK: - Operators

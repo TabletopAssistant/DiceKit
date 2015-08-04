@@ -37,6 +37,10 @@ extension MultiplicationExpression: ExpressionType {
         return Result(multiplierResult: muliplierResult, multiplicandResults: multiplicandResult)
     }
     
+    public var probabilityMass: ProbabilityMass {
+        return multiplier.probabilityMass * multiplicand.probabilityMass
+    }
+    
 }
 
 // MARK: - Equatable

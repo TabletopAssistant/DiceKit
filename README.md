@@ -58,6 +58,27 @@ let result = expression.evaluate()
 let value = result.value
 ```
 
+### Probability
+
+```swift
+// With any expression...
+let expression = 2 * d(6)
+
+// you can get the probability mass
+let probabilityMass = expression.probabilityMass
+// [2: 0.0277777777777778,
+//  3: 0.0555555555555556,
+//  4: 0.0833333333333333,
+//  5: 0.111111111111111,
+//  6: 0.138888888888889,
+//  7: 0.166666666666667,
+//  8: 0.138888888888889,
+//  9: 0.111111111111111,
+//  10: 0.0833333333333333,
+//  11: 0.0555555555555556,
+//  12: 0.0277777777777778]
+```
+
 ### And More
 
 See the [Tome of Knowledge (playground)](TomeOfKnowledge.playground) for in-depth usage.

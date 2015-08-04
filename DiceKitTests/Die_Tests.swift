@@ -426,4 +426,41 @@ extension Die_Tests {
         expect(result.value) == stubbedRoll
     }
     
+    func test_probabilityMass_shouldReturnCorrect() {
+        property("probability mass") <- forAll {
+            (sides: Int) in
+            
+            // Arrange
+            let inverseSides = -sides
+            
+            let die = Die(sides: sides)
+            let inverseDie = Die(sides: inverseSides)
+            
+            // Act
+            let probMass = die.probabilityMass
+            let inverseProbMass = inverseDie.probabilityMass
+            
+            // Assert
+            guard sides != 0 else {
+                return probMass == ProbabilityMass.zero
+            }
+            
+            let outcomePerValue = 1.0/ProbabilityMass.Probability(abs(sides))
+            let range = sides < 0 ? sides...1 : 1...sides
+            let inverseRange = inverseSides < 0 ? inverseSides...1 : 1...inverseSides
+            
+            for value in range {
+                if probMass[value]! != outcomePerValue {
+                    return false
+                }
+            }
+            for value in inverseRange {
+                if inverseProbMass[value]! != outcomePerValue {
+                    return false
+                }
+            }
+            return true
+        }
+    }
+    
 }
