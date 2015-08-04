@@ -8,20 +8,20 @@
 
 public struct FrequencyDistributionIndex: ForwardIndexType {
     
-    typealias OrderedValues = [FrequencyDistribution.Outcome]
+    typealias OrderedOutcomes = [FrequencyDistribution.Outcome]
     
     let index: Int
-    let orderedOutcomes: OrderedValues
+    let orderedOutcomes: OrderedOutcomes
     
-    static func startIndex(orderedOutcomes: OrderedValues) -> FrequencyDistributionIndex {
+    static func startIndex(orderedOutcomes: OrderedOutcomes) -> FrequencyDistributionIndex {
         return FrequencyDistributionIndex(index: 0, orderedOutcomes: orderedOutcomes)
     }
     
-    static func endIndex(orderedOutcomes: OrderedValues) -> FrequencyDistributionIndex {
+    static func endIndex(orderedOutcomes: OrderedOutcomes) -> FrequencyDistributionIndex {
         return FrequencyDistributionIndex(index: orderedOutcomes.count, orderedOutcomes: orderedOutcomes)
     }
     
-    init(index: Int, orderedOutcomes: OrderedValues) {
+    init(index: Int, orderedOutcomes: OrderedOutcomes) {
         self.index = index
         self.orderedOutcomes = orderedOutcomes
     }
