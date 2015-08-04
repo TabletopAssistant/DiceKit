@@ -22,7 +22,7 @@ extension FrequencyDistributionIndex_Tests {
     func test_init_shouldSucceed() {
         // TODO: SwiftCheck
         let expectedIndex = 3
-        let expectedOrderedOutcomes = FrequencyDistributionIndex.OrderedValues([3, 6, 8, 9, 11, 12, 45])
+        let expectedOrderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes([3, 6, 8, 9, 11, 12, 45])
         
         let freqDistIndex = FrequencyDistributionIndex(index: expectedIndex, orderedOutcomes: expectedOrderedOutcomes)
         
@@ -45,7 +45,7 @@ extension FrequencyDistributionIndex_Tests {
     func test_startIndex_shouldBeSetupCorrectly() {
         // TODO: SwiftCheck
         let expectedIndex = 0
-        let expectedOrderedOutcomes = FrequencyDistributionIndex.OrderedValues([4, 6, 8, 10, 11, 12, 33, 43])
+        let expectedOrderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes([4, 6, 8, 10, 11, 12, 33, 43])
         
         let startIndex = FrequencyDistributionIndex.startIndex(expectedOrderedOutcomes)
         
@@ -55,7 +55,7 @@ extension FrequencyDistributionIndex_Tests {
     
     func test_endIndex_shouldBeSetupCorrectly() {
         // TODO: SwiftCheck
-        let expectedOrderedOutcomes = FrequencyDistributionIndex.OrderedValues([4, 6, 8, 10, 11, 14, 34])
+        let expectedOrderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes([4, 6, 8, 10, 11, 14, 34])
         let expectedIndex = expectedOrderedOutcomes.count
         
         let endIndex = FrequencyDistributionIndex.endIndex(expectedOrderedOutcomes)
@@ -67,7 +67,7 @@ extension FrequencyDistributionIndex_Tests {
     func test_value_shouldReturnValueForValidIndex() {
         // TODO: SwiftCheck
         let index = 2
-        let orderedOutcomes = FrequencyDistributionIndex.OrderedValues([3, 6, 8, 9, 11, 12, 45])
+        let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes([3, 6, 8, 9, 11, 12, 45])
         let freqDistIndex = FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes)
         let expectedValue = orderedOutcomes[index]
         
@@ -78,7 +78,7 @@ extension FrequencyDistributionIndex_Tests {
     
     func test_value_shouldReturnNilForInvalidIndex() {
         // TODO: SwiftCheck
-        let orderedOutcomes = FrequencyDistributionIndex.OrderedValues([3, 6, 8, 9, 11, 12, 45])
+        let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes([3, 6, 8, 9, 11, 12, 45])
         let index = orderedOutcomes.count
         let freqDistIndex = FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes)
         
@@ -89,7 +89,7 @@ extension FrequencyDistributionIndex_Tests {
     
     func test_successor_shouldReturnValidIndexWhenMoreRemain() {
         let index = 0
-        let orderedOutcomes = FrequencyDistributionIndex.OrderedValues([3, 6])
+        let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes([3, 6])
         let freqDistIndex = FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes)
         let expectedFreqDistIndex = FrequencyDistributionIndex(index: index + 1, orderedOutcomes: orderedOutcomes)
         
@@ -100,7 +100,7 @@ extension FrequencyDistributionIndex_Tests {
     
     func test_successor_shouldReturnEndIndexWhenNoMoreRemain() {
         let index = 1
-        let orderedOutcomes = FrequencyDistributionIndex.OrderedValues([3, 6])
+        let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes([3, 6])
         let freqDistIndex = FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes)
         let expectedFreqDistIndex = FrequencyDistributionIndex.endIndex(orderedOutcomes)
         
@@ -110,7 +110,7 @@ extension FrequencyDistributionIndex_Tests {
     }
     
     func test_successor_shouldReturnEndIndexWhenAtEndIndex() {
-        let orderedOutcomes = FrequencyDistributionIndex.OrderedValues([3, 6])
+        let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes([3, 6])
         let freqDistIndex = FrequencyDistributionIndex.endIndex(orderedOutcomes)
         let expectedFreqDistIndex = FrequencyDistributionIndex.endIndex(orderedOutcomes)
         
