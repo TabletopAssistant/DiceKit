@@ -103,6 +103,24 @@ extension FrequencyDistribution: CollectionType {
 
 extension FrequencyDistribution {
     
+    // MARK: Foundational Operations
+    
+    public func mapOutcomes(@noescape transform: (Outcome) -> Outcome) -> FrequencyDistribution {
+        let newFrequenciesPerOutcome = frequenciesPerOutcome.mapKeys {
+            (baseOutcome, _) in transform(baseOutcome)
+        }
+        
+        return FrequencyDistribution(newFrequenciesPerOutcome)
+    }
+    
+    public func mapFrequencies(@noescape transform: (Frequency) -> Frequency) -> FrequencyDistribution {
+        let newFrequenciesPerOutcome = frequenciesPerOutcome.mapValues {
+            (_, frequency) in transform(frequency)
+        }
+        
+        return FrequencyDistribution(newFrequenciesPerOutcome)
+    }
+    
     // MARK: Primitive Operations
     
     public subscript(outcome: Outcome) -> Frequency? {
@@ -128,36 +146,20 @@ extension FrequencyDistribution {
     }
     
     public func negateOutcomes() -> FrequencyDistribution {
-        let newFrequenciesPerOutcome = frequenciesPerOutcome.mapKeys {
-            (outcome, _) in -outcome
-        }
-        
-        return FrequencyDistribution(newFrequenciesPerOutcome)
+        return mapOutcomes { -$0 }
     }
     
     public func shiftOutcomes(outcome: Outcome) -> FrequencyDistribution {
-        let newFrequenciesPerOutcome = frequenciesPerOutcome.mapKeys {
-            (baseValue, _) in baseValue + outcome
-        }
-        
-        return FrequencyDistribution(newFrequenciesPerOutcome)
+        return mapOutcomes { $0 + outcome }
     }
     
     public func scaleFrequencies(scalar: Double) -> FrequencyDistribution {
-        let newFrequenciesPerOutcome = frequenciesPerOutcome.mapValues {
-            (_, outcome) in outcome * scalar
-        }
-        
-        return FrequencyDistribution(newFrequenciesPerOutcome)
+        return mapFrequencies { $0 * scalar }
     }
     
     public func normalizeFrequencies() -> FrequencyDistribution {
         let frequencies = totalFrequencies
-        let normalizedFrequenciesPerOutcome = frequenciesPerOutcome.mapValues {
-            (_, frequency) in frequency / frequencies
-        }
-        
-        return FrequencyDistribution(normalizedFrequenciesPerOutcome)
+        return mapFrequencies { $0 / frequencies }
     }
     
     // MARK: Advanced Operations
