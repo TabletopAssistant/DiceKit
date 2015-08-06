@@ -116,6 +116,19 @@ extension MultiplicationExpression_Tests {
             return testMultiplierResult && testMultiplicandResults
         }
     }
+    
+    func test_probabilityMass_shouldReturnCorrect() {
+        property("probability mass") <- forAll {
+            (a: Constant, b: Constant) in
+            
+            let expectedProbMass = a.probabilityMass.product(b.probabilityMass)
+            let expression = MultiplicationExpression(a, b)
+            
+            let probMass = expression.probabilityMass
+            
+            return probMass == expectedProbMass
+        }
+    }
 
 }
 
@@ -147,19 +160,6 @@ extension MultiplicationExpression_Tests {
             let expression = a * b
         
             return expression == expectedExpression
-        }
-    }
-    
-    func test_probabilityMass_shouldReturnCorrect() {
-        property("probability mass") <- forAll {
-            (a: Constant, b: Constant) in
-            
-            let expectedProbMass = a.probabilityMass.product(b.probabilityMass)
-            let expression = MultiplicationExpression(a, b)
-            
-            let probMass = expression.probabilityMass
-            
-            return probMass == expectedProbMass
         }
     }
     
