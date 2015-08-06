@@ -19,3 +19,14 @@ extension Constant: Arbitrary {
         return Constant.create <^> Int.arbitrary
     }
 }
+
+extension Die: Arbitrary {
+    
+    public static func create(x : Int) -> Die {
+        return Die(sides: x)
+    }
+    
+    public static var arbitrary : Gen<Die> {
+        return Die.create <^> Int.arbitrary
+    }
+}

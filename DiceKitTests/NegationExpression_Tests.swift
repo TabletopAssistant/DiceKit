@@ -94,9 +94,9 @@ extension NegationExpression_Tests {
     
     func test_operator_shouldWorkOnExpression() {
         property("-Expression should make correct NegationExpression") <- forAll {
-            (m: Int, n: Int, o: Int) in
+            (m: Constant, n: Constant, o: Die) in
             
-            let baseExpression = c(m) + c(n) * d(o)
+            let baseExpression = m + n * o
             let expectedExpression = NegationExpression(baseExpression)
             
             let expression = -baseExpression
