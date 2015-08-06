@@ -15,12 +15,6 @@ import DiceKit
 /// Tests the `Die` type
 class Die_Tests: XCTestCase {
     
-    #if arch(i386) || arch(arm) // 32-bit
-        typealias PositiveSidesType = UInt16
-    #else // 64-bit
-        typealias PositiveSidesType = UInt32
-    #endif
-    
     override func setUp() {
         Die.roller = Die.defaultRoller
     }
@@ -134,44 +128,38 @@ extension Die_Tests {
     
     func test_shouldBeReflexive() {
         property("reflexive") <- forAll {
-            (i: PositiveSidesType) in
+            (i: Int) in
             
-            let sides = Int(i)
-            
-            return EquatableTestUtilities.checkReflexive { Die(sides: sides) }
+            return EquatableTestUtilities.checkReflexive { Die(sides: i) }
         }
     }
     
     func test_shouldBeSymmetric() {
         property("symmetric") <- forAll {
-            (i: PositiveSidesType) in
+            (i: Int) in
             
-            let sides = Int(i)
-            
-            return EquatableTestUtilities.checkSymmetric { Die(sides: sides) }
+            return EquatableTestUtilities.checkSymmetric { Die(sides: i) }
         }
     }
     
     func test_shouldBeTransitive() {
         property("transitive") <- forAll {
-            (i: PositiveSidesType) in
+            (i: Int) in
             
-            let sides = Int(i)
-            
-            return EquatableTestUtilities.checkTransitive { Die(sides: sides) }
+            return EquatableTestUtilities.checkTransitive { Die(sides: i) }
         }
     }
     
     func test_shouldBeAbleToNotEquate() {
         property("non-equal") <- forAll {
-            (a: PositiveSidesType, b: PositiveSidesType) in
+            (a: Int, b: Int) in
             
-            guard a != b else { return true }
-            
-            return EquatableTestUtilities.checkNotEquate(
-                { Die(sides: Int(a)) },
-                { Die(sides: Int(b)) }
-            )
+            return (a != b) ==> {
+                EquatableTestUtilities.checkNotEquate(
+                    { Die(sides: a) },
+                    { Die(sides: b) }
+                )
+            }
         }
     }
     
@@ -259,55 +247,47 @@ extension Die_Tests {
     
     func common_RollerType_shouldReturnWithinPositiveRangeForSidesGreaterThan1(rollerType: Die.RollerType) {
         property("generates values within range of 1...sides") <- forAll {
-            (i: PositiveSidesType) in
+            (i: Int) in
             
-            guard i > 1 else { return true }
-            
-            let sides = Int(i)
-            
-            let result = rollerType(sides: sides)
-            
-            return result > 0 && result <= sides
+            return (i > 1) ==> {
+                let result = rollerType(sides: i)
+                
+                return result > 0 && result <= i
+            }
         }
     }
     
     func common_RollerType_shouldReturnWithinNegativeRangeForSidesLessThan0(rollerType: Die.RollerType) {
         property("generates values within range of sides..<0") <- forAll {
-            (i: PositiveSidesType) in
+            (i: Int) in
             
-            guard i > 1 else { return true }
-            
-            let sides = -Int(i)
-            
-            let result = rollerType(sides: sides)
-            
-            return result < 0 && result >= sides
+            return (i < -1) ==> {
+                let result = rollerType(sides: i)
+                
+                return result < 0 && result >= i
+            }
         }
     }
     
     func common_RollerType_shouldReturnWithinRangeForSides(rollerType: Die.RollerType) {
         property("generates values within range of -sides...sides") <- forAll {
-            (i: PositiveSidesType) in
+            (i: Int) in
             
-            let sides = Int(i)
+            let result = rollerType(sides: i)
             
-            let result = rollerType(sides: sides)
-            
-            return (-sides...sides).contains(result)
+            return (-i...i).contains(result)
         }
     }
     
     func common_RollerType_shouldReturn0ForSidesLessThan0(rollerType: Die.RollerType) {
         property("generates 0 for -sides") <- forAll {
-            (i: PositiveSidesType) in
+            (i: Int) in
             
-            guard i > 0 else { return true }
-            
-            let sides = -Int(i)
-            
-            let result = rollerType(sides: sides)
-            
-            return result == 0
+            return (i < 0) ==> {
+                let result = rollerType(sides: i)
+                
+                return result == 0
+            }
         }
     }
     

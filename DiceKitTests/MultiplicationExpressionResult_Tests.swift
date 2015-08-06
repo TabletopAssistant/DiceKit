@@ -68,15 +68,16 @@ extension MultiplicationExpressionResult_Tests {
         property("non-equal") <- forAll {
             (a: UInt, b: UInt, c: UInt, d: UInt) in
             
-            guard a != c else { return true }
-            
-            let xFixture = self.equatableFixture(a, b)
-            let yFixture = self.equatableFixture(c, d)
-            
-            return EquatableTestUtilities.checkNotEquate(
-                { MultiplicationExpressionResult(multiplierResult: xFixture.multiplierResult, multiplicandResults: xFixture.multiplicandResults) },
-                { MultiplicationExpressionResult(multiplierResult: yFixture.multiplierResult, multiplicandResults: yFixture.multiplicandResults) }
-            )
+            // Only check one set of parameters since not commutitive
+            return (a != c) ==> {
+                let xFixture = self.equatableFixture(a, b)
+                let yFixture = self.equatableFixture(c, d)
+                
+                return EquatableTestUtilities.checkNotEquate(
+                    { MultiplicationExpressionResult(multiplierResult: xFixture.multiplierResult, multiplicandResults: xFixture.multiplicandResults) },
+                    { MultiplicationExpressionResult(multiplierResult: yFixture.multiplierResult, multiplicandResults: yFixture.multiplicandResults) }
+                )
+            }
         }
     }
     

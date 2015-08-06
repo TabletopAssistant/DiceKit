@@ -49,12 +49,12 @@ extension AdditionExpression_Tests {
             (a: Constant, b: Constant, m: Constant, n: Constant) in
             
             // Check both cases since it's commutative
-            guard !(a == m && b == n || a == n && b == m) else { return true }
-            
-            return EquatableTestUtilities.checkNotEquate(
-                { AdditionExpression(a, b) },
-                { AdditionExpression(m, n) }
-            )
+            return !(a == m && b == n || a == n && b == m) ==> {
+                return EquatableTestUtilities.checkNotEquate(
+                    { AdditionExpression(a, b) },
+                    { AdditionExpression(m, n) }
+                )
+            }
         }
     }
     
@@ -62,12 +62,12 @@ extension AdditionExpression_Tests {
         property("commutative") <- forAll {
             (a: Constant, b: Constant) in
             
-            guard a != b else { return true }
-            
-            let x = AdditionExpression(a, b)
-            let y = AdditionExpression(b, a)
-            
-            return x == y
+            return (a != b) ==> {
+                let x = AdditionExpression(a, b)
+                let y = AdditionExpression(b, a)
+                
+                return x == y
+            }
         }
     }
     

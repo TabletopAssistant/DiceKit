@@ -48,13 +48,13 @@ extension MultiplicationExpression_Tests {
         property("non-equal") <- forAll {
             (a: Constant, b: Constant, m: Constant, n: Constant) in
             
-            // Check only this case since it's not commutative
-            guard !(a == m && b == n) else { return true }
-            
-            return EquatableTestUtilities.checkNotEquate(
-                { MultiplicationExpression(a, b) },
-                { MultiplicationExpression(m, n) }
-            )
+            // Only check one set of parameters since not commutitive
+            return (a != m || b != n) ==> {
+                EquatableTestUtilities.checkNotEquate(
+                    { MultiplicationExpression(a, b) },
+                    { MultiplicationExpression(m, n) }
+                )
+            }
         }
     }
     
@@ -62,12 +62,12 @@ extension MultiplicationExpression_Tests {
         property("anticommutative") <- forAll {
             (a: Constant, b: Constant) in
             
-            guard a != b else { return true }
-            
-            let x = MultiplicationExpression(a, b)
-            let y = MultiplicationExpression(b, a)
-            
-            return x != y
+            return (a != b) ==> {
+                let x = MultiplicationExpression(a, b)
+                let y = MultiplicationExpression(b, a)
+                
+                return x != y
+            }
         }
     }
 

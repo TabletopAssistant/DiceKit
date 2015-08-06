@@ -48,12 +48,12 @@ extension NegationExpression_Tests {
         property("non-equal") <- forAll {
             (a: Constant, b: Constant) in
             
-            guard a != b else { return true }
-            
-            return EquatableTestUtilities.checkNotEquate(
-                { NegationExpression(a) },
-                { NegationExpression(b) }
-            )
+            return (a != b) ==> {
+                EquatableTestUtilities.checkNotEquate(
+                    { NegationExpression(a) },
+                    { NegationExpression(b) }
+                )
+            }
         }
     }
     

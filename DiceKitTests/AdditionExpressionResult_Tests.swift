@@ -48,12 +48,12 @@ extension AdditionExpressionResult_Tests {
         property("non-equal") <- forAll {
             (a: Constant, b: Constant, m: Constant, n: Constant) in
             
-            guard !(a == m && b == n) && !(a == n && b == m) else { return true }
-            
-            return EquatableTestUtilities.checkNotEquate(
-                { AdditionExpressionResult(a, b) },
-                { AdditionExpressionResult(m, n) }
-            )
+            return (!(a == m && b == n) && !(a == n && b == m)) ==> {
+                EquatableTestUtilities.checkNotEquate(
+                    { AdditionExpressionResult(a, b) },
+                    { AdditionExpressionResult(m, n) }
+                )
+            }
         }
     }
     
