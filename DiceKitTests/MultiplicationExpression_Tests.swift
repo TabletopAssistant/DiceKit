@@ -22,10 +22,7 @@ extension MultiplicationExpression_Tests {
     
     func test_shouldBeReflexive() {
         property("reflexive") <- forAll {
-            (a: Int, b: Int) in
-            
-            let a = c(a)
-            let b = c(b)
+            (a: Constant, b: Constant) in
             
             return EquatableTestUtilities.checkReflexive { MultiplicationExpression(a, b) }
         }
@@ -33,10 +30,7 @@ extension MultiplicationExpression_Tests {
     
     func test_shouldBeSymmetric() {
         property("symmetric") <- forAll {
-            (a: Int, b: Int) in
-            
-            let a = c(a)
-            let b = c(b)
+            (a: Constant, b: Constant) in
             
             return EquatableTestUtilities.checkSymmetric { MultiplicationExpression(a, b) }
         }
@@ -44,10 +38,7 @@ extension MultiplicationExpression_Tests {
     
     func test_shouldBeTransitive() {
         property("transitive") <- forAll {
-            (a: Int, b: Int) in
-            
-            let a = c(a)
-            let b = c(b)
+            (a: Constant, b: Constant) in
             
             return EquatableTestUtilities.checkTransitive { MultiplicationExpression(a, b) }
         }
@@ -55,15 +46,10 @@ extension MultiplicationExpression_Tests {
     
     func test_shouldBeAbleToNotEquate() {
         property("non-equal") <- forAll {
-            (a: Int, b: Int, m: Int, n: Int) in
+            (a: Constant, b: Constant, m: Constant, n: Constant) in
             
             // Check only this case since it's not commutative
             guard !(a == m && b == n) else { return true }
-            
-            let a = c(a)
-            let b = c(b)
-            let m = c(m)
-            let n = c(n)
             
             return EquatableTestUtilities.checkNotEquate(
                 { MultiplicationExpression(a, b) },
@@ -74,12 +60,9 @@ extension MultiplicationExpression_Tests {
     
     func test_shouldBeAnticommutative() {
         property("anticommutative") <- forAll {
-            (a: Int, b: Int) in
+            (a: Constant, b: Constant) in
             
             guard a != b else { return true }
-            
-            let a = c(a)
-            let b = c(b)
             
             let x = MultiplicationExpression(a, b)
             let y = MultiplicationExpression(b, a)
@@ -167,10 +150,7 @@ extension MultiplicationExpression_Tests {
     
     func test_probabilityMass_shouldReturnCorrect() {
         property("probability mass") <- forAll {
-            (a: Int, b: Int) in
-            
-            let a = c(a)
-            let b = c(b)
+            (a: Constant, b: Constant) in
             
             let expectedProbMass = a.probabilityMass.product(b.probabilityMass)
             let expression = MultiplicationExpression(a, b)

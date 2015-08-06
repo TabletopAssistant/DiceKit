@@ -22,9 +22,7 @@ extension NegationExpression_Tests {
     
     func test_shouldBeReflexive() {
         property("reflexive") <- forAll {
-            (a: Int) in
-            
-            let a = c(a)
+            (a: Constant) in
             
             return EquatableTestUtilities.checkReflexive { NegationExpression(a) }
         }
@@ -32,9 +30,7 @@ extension NegationExpression_Tests {
     
     func test_shouldBeSymmetric() {
         property("symmetric") <- forAll {
-            (a: Int) in
-            
-            let a = c(a)
+            (a: Constant) in
             
             return EquatableTestUtilities.checkSymmetric { NegationExpression(a) }
         }
@@ -42,9 +38,7 @@ extension NegationExpression_Tests {
     
     func test_shouldBeTransitive() {
         property("transitive") <- forAll {
-            (a: Int) in
-            
-            let a = c(a)
+            (a: Constant) in
             
             return EquatableTestUtilities.checkTransitive { NegationExpression(a) }
         }
@@ -52,12 +46,9 @@ extension NegationExpression_Tests {
     
     func test_shouldBeAbleToNotEquate() {
         property("non-equal") <- forAll {
-            (a: Int, b: Int) in
+            (a: Constant, b: Constant) in
             
             guard a != b else { return true }
-            
-            let a = c(a)
-            let b = c(b)
             
             return EquatableTestUtilities.checkNotEquate(
                 { NegationExpression(a) },
@@ -73,9 +64,8 @@ extension NegationExpression_Tests {
     
     func test_evaluate_shouldCreateResultCorrectly() {
         property("create results") <- forAll {
-            (a: Int) in
+            (a: Constant) in
             
-            let a = c(a)
             let expression = NegationExpression(a)
             
             let result = expression.evaluate()
@@ -86,9 +76,7 @@ extension NegationExpression_Tests {
     
     func test_probabilityMass_shouldReturnCorrect() {
         property("probability mass") <- forAll {
-            (a: Int) in
-            
-            let a = c(a)
+            (a: Constant) in
             
             let expectedProbMass = a.probabilityMass.negate()
             let expression = NegationExpression(a)

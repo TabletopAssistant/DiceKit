@@ -22,10 +22,7 @@ extension AdditionExpressionResult_Tests {
     
     func test_shouldBeReflexive() {
         property("reflexive") <- forAll {
-            (a: Int16, b: Int16) in
-            
-            let a = c(Int(a))
-            let b = c(Int(b))
+            (a: Constant, b: Constant) in
             
             return EquatableTestUtilities.checkReflexive { AdditionExpressionResult(a, b) }
         }
@@ -33,10 +30,7 @@ extension AdditionExpressionResult_Tests {
     
     func test_shouldBeSymmetric() {
         property("symmetric") <- forAll {
-            (a: Int16, b: Int16) in
-            
-            let a = c(Int(a))
-            let b = c(Int(b))
+            (a: Constant, b: Constant) in
             
             return EquatableTestUtilities.checkSymmetric { AdditionExpressionResult(a, b) }
         }
@@ -44,10 +38,7 @@ extension AdditionExpressionResult_Tests {
     
     func test_shouldBeTransitive() {
         property("transitive") <- forAll {
-            (a: Int16, b: Int16) in
-            
-            let a = c(Int(a))
-            let b = c(Int(b))
+            (a: Constant, b: Constant) in
             
             return EquatableTestUtilities.checkTransitive { AdditionExpressionResult(a, b) }
         }
@@ -55,14 +46,9 @@ extension AdditionExpressionResult_Tests {
     
     func test_shouldBeAbleToNotEquate() {
         property("non-equal") <- forAll {
-            (a: Int16, b: Int16, m: Int16, n: Int16) in
+            (a: Constant, b: Constant, m: Constant, n: Constant) in
             
             guard !(a == m && b == n) && !(a == n && b == m) else { return true }
-            
-            let a = c(Int(a))
-            let b = c(Int(b))
-            let m = c(Int(m))
-            let n = c(Int(n))
             
             return EquatableTestUtilities.checkNotEquate(
                 { AdditionExpressionResult(a, b) },

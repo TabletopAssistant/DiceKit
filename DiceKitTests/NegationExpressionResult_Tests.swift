@@ -22,9 +22,7 @@ extension NegationExpressionResult_Tests {
     
     func test_shouldBeReflexive() {
         property("reflexive") <- forAll {
-            (a: Int) in
-            
-            let a = c(a)
+            (a: Constant) in
             
             return EquatableTestUtilities.checkReflexive { NegationExpressionResult(a) }
         }
@@ -32,9 +30,7 @@ extension NegationExpressionResult_Tests {
     
     func test_shouldBeSymmetric() {
         property("symmetric") <- forAll {
-            (a: Int) in
-            
-            let a = c(a)
+            (a: Constant) in
             
             return EquatableTestUtilities.checkSymmetric { NegationExpressionResult(a) }
         }
@@ -42,9 +38,7 @@ extension NegationExpressionResult_Tests {
     
     func test_shouldBeTransitive() {
         property("transitive") <- forAll {
-            (a: Int) in
-            
-            let a = c(a)
+            (a: Constant) in
             
             return EquatableTestUtilities.checkTransitive { NegationExpressionResult(a) }
         }
@@ -52,12 +46,9 @@ extension NegationExpressionResult_Tests {
     
     func test_shouldBeAbleToNotEquate() {
         property("non-equal") <- forAll {
-            (a: Int, b: Int) in
+            (a: Constant, b: Constant) in
             
             guard a != b else { return true }
-            
-            let a = c(a)
-            let b = c(b)
             
             return EquatableTestUtilities.checkNotEquate(
                 { NegationExpressionResult(a) },
@@ -73,10 +64,10 @@ extension NegationExpressionResult_Tests {
     
     func test_value_shouldNegateTheBaseResult() {
         property("negate the base result") <- forAll {
-            (a: Int) in
+            (a: Constant) in
             
-            let expectedValue = -a
-            let result = NegationExpressionResult(c(a))
+            let expectedValue = -a.value
+            let result = NegationExpressionResult(a)
             
             let value = result.value
             

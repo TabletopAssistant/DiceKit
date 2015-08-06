@@ -22,10 +22,7 @@ extension AdditionExpression_Tests {
     
     func test_shouldBeReflexive() {
         property("reflexive") <- forAll {
-            (a: Int, b: Int) in
-            
-            let a = c(a)
-            let b = c(b)
+            (a: Constant, b: Constant) in
             
             return EquatableTestUtilities.checkReflexive { AdditionExpression(a, b) }
         }
@@ -33,10 +30,7 @@ extension AdditionExpression_Tests {
     
     func test_shouldBeSymmetric() {
         property("symmetric") <- forAll {
-            (a: Int, b: Int) in
-            
-            let a = c(a)
-            let b = c(b)
+            (a: Constant, b: Constant) in
             
             return EquatableTestUtilities.checkSymmetric { AdditionExpression(a, b) }
         }
@@ -44,10 +38,7 @@ extension AdditionExpression_Tests {
     
     func test_shouldBeTransitive() {
         property("transitive") <- forAll {
-            (a: Int, b: Int) in
-            
-            let a = c(a)
-            let b = c(b)
+            (a: Constant, b: Constant) in
             
             return EquatableTestUtilities.checkTransitive { AdditionExpression(a, b) }
         }
@@ -55,15 +46,10 @@ extension AdditionExpression_Tests {
     
     func test_shouldBeAbleToNotEquate() {
         property("non-equal") <- forAll {
-            (a: Int, b: Int, m: Int, n: Int) in
+            (a: Constant, b: Constant, m: Constant, n: Constant) in
             
             // Check both cases since it's commutative
             guard !(a == m && b == n || a == n && b == m) else { return true }
-            
-            let a = c(a)
-            let b = c(b)
-            let m = c(m)
-            let n = c(n)
             
             return EquatableTestUtilities.checkNotEquate(
                 { AdditionExpression(a, b) },
@@ -74,12 +60,9 @@ extension AdditionExpression_Tests {
     
     func test_shouldBeCommutative() {
         property("commutative") <- forAll {
-            (a: Int, b: Int) in
+            (a: Constant, b: Constant) in
             
             guard a != b else { return true }
-            
-            let a = c(a)
-            let b = c(b)
             
             let x = AdditionExpression(a, b)
             let y = AdditionExpression(b, a)
@@ -95,10 +78,7 @@ extension AdditionExpression_Tests {
     
     func test_evaluate_shouldCreateResultCorrectly() {
         property("create results") <- forAll {
-            (a: Int, b: Int) in
-            
-            let a = c(a)
-            let b = c(b)
+            (a: Constant, b: Constant) in
             
             let expression = AdditionExpression(a, b)
             
@@ -110,10 +90,7 @@ extension AdditionExpression_Tests {
     
     func test_probabilityMass_shouldReturnCorrect() {
         property("probability mass") <- forAll {
-            (a: Int, b: Int) in
-            
-            let a = c(a)
-            let b = c(b)
+            (a: Constant, b: Constant) in
             
             let expectedProbMass = a.probabilityMass.and(b.probabilityMass)
             let expression = AdditionExpression(a, b)
