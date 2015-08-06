@@ -27,9 +27,7 @@ extension MultiplicationExpression_Tests {
             let a = c(a)
             let b = c(b)
             
-            let x = MultiplicationExpression(a, b)
-            
-            return x == x
+            return EquatableTestUtilities.checkReflexive { MultiplicationExpression(a, b) }
         }
     }
     
@@ -40,10 +38,7 @@ extension MultiplicationExpression_Tests {
             let a = c(a)
             let b = c(b)
             
-            let x = MultiplicationExpression(a, b)
-            let y = MultiplicationExpression(a, b)
-            
-            return x == y && y == x
+            return EquatableTestUtilities.checkSymmetric { MultiplicationExpression(a, b) }
         }
     }
     
@@ -54,11 +49,7 @@ extension MultiplicationExpression_Tests {
             let a = c(a)
             let b = c(b)
             
-            let x = MultiplicationExpression(a, b)
-            let y = MultiplicationExpression(a, b)
-            let z = MultiplicationExpression(a, b)
-            
-            return x == y && y == z && x == z
+            return EquatableTestUtilities.checkTransitive { MultiplicationExpression(a, b) }
         }
     }
     
@@ -74,10 +65,10 @@ extension MultiplicationExpression_Tests {
             let m = c(m)
             let n = c(n)
             
-            let x = MultiplicationExpression(a, b)
-            let y = MultiplicationExpression(m, n)
-            
-            return x != y
+            return EquatableTestUtilities.checkNotEquate(
+                { MultiplicationExpression(a, b) },
+                { MultiplicationExpression(m, n) }
+            )
         }
     }
     

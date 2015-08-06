@@ -26,9 +26,7 @@ extension NegationExpression_Tests {
             
             let a = c(a)
             
-            let x = NegationExpression(a)
-            
-            return x == x
+            return EquatableTestUtilities.checkReflexive { NegationExpression(a) }
         }
     }
     
@@ -38,10 +36,7 @@ extension NegationExpression_Tests {
             
             let a = c(a)
             
-            let x = NegationExpression(a)
-            let y = NegationExpression(a)
-            
-            return x == y && y == x
+            return EquatableTestUtilities.checkSymmetric { NegationExpression(a) }
         }
     }
     
@@ -51,11 +46,7 @@ extension NegationExpression_Tests {
             
             let a = c(a)
             
-            let x = NegationExpression(a)
-            let y = NegationExpression(a)
-            let z = NegationExpression(a)
-            
-            return x == y && y == z && x == z
+            return EquatableTestUtilities.checkTransitive { NegationExpression(a) }
         }
     }
     
@@ -68,10 +59,10 @@ extension NegationExpression_Tests {
             let a = c(a)
             let b = c(b)
             
-            let x = NegationExpression(a)
-            let y = NegationExpression(b)
-            
-            return x != y
+            return EquatableTestUtilities.checkNotEquate(
+                { NegationExpression(a) },
+                { NegationExpression(b) }
+            )
         }
     }
     

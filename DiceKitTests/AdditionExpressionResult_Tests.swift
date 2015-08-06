@@ -27,9 +27,7 @@ extension AdditionExpressionResult_Tests {
             let a = c(Int(a))
             let b = c(Int(b))
             
-            let x = AdditionExpressionResult(a, b)
-            
-            return x == x
+            return EquatableTestUtilities.checkReflexive { AdditionExpressionResult(a, b) }
         }
     }
     
@@ -40,10 +38,7 @@ extension AdditionExpressionResult_Tests {
             let a = c(Int(a))
             let b = c(Int(b))
             
-            let x = AdditionExpressionResult(a, b)
-            let y = AdditionExpressionResult(a, b)
-            
-            return x == y && y == x
+            return EquatableTestUtilities.checkSymmetric { AdditionExpressionResult(a, b) }
         }
     }
     
@@ -54,11 +49,7 @@ extension AdditionExpressionResult_Tests {
             let a = c(Int(a))
             let b = c(Int(b))
             
-            let x = AdditionExpressionResult(a, b)
-            let y = AdditionExpressionResult(a, b)
-            let z = AdditionExpressionResult(a, b)
-            
-            return x == y && y == z && x == z
+            return EquatableTestUtilities.checkTransitive { AdditionExpressionResult(a, b) }
         }
     }
     
@@ -73,10 +64,10 @@ extension AdditionExpressionResult_Tests {
             let m = c(Int(m))
             let n = c(Int(n))
             
-            let x = AdditionExpressionResult(a, b)
-            let y = AdditionExpressionResult(m, n)
-            
-            return x != y
+            return EquatableTestUtilities.checkNotEquate(
+                { AdditionExpressionResult(a, b) },
+                { AdditionExpressionResult(m, n) }
+            )
         }
     }
     

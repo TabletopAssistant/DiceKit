@@ -138,9 +138,7 @@ extension Die_Tests {
             
             let sides = Int(i)
             
-            let x = Die(sides: sides)
-            
-            return x == x
+            return EquatableTestUtilities.checkReflexive { Die(sides: sides) }
         }
     }
     
@@ -150,10 +148,7 @@ extension Die_Tests {
             
             let sides = Int(i)
             
-            let x = Die(sides: sides)
-            let y = Die(sides: sides)
-            
-            return x == y && y == x
+            return EquatableTestUtilities.checkSymmetric { Die(sides: sides) }
         }
     }
     
@@ -163,11 +158,7 @@ extension Die_Tests {
             
             let sides = Int(i)
             
-            let x = Die(sides: sides)
-            let y = Die(sides: sides)
-            let z = Die(sides: sides)
-            
-            return x == y && y == z && x == z
+            return EquatableTestUtilities.checkTransitive { Die(sides: sides) }
         }
     }
     
@@ -177,10 +168,10 @@ extension Die_Tests {
             
             guard a != b else { return true }
             
-            let x = Die(sides: Int(a))
-            let y = Die(sides: Int(b))
-            
-            return x != y
+            return EquatableTestUtilities.checkNotEquate(
+                { Die(sides: Int(a)) },
+                { Die(sides: Int(b)) }
+            )
         }
     }
     

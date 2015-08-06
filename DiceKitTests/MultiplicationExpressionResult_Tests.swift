@@ -34,9 +34,9 @@ extension MultiplicationExpressionResult_Tests {
             
             let fixture = self.equatableFixture(a, b)
             
-            let x = MultiplicationExpressionResult(multiplierResult: fixture.multiplierResult, multiplicandResults: fixture.multiplicandResults)
-            
-            return x == x
+            return EquatableTestUtilities.checkReflexive {
+                MultiplicationExpressionResult(multiplierResult: fixture.multiplierResult, multiplicandResults: fixture.multiplicandResults)
+            }
         }
     }
     
@@ -46,10 +46,9 @@ extension MultiplicationExpressionResult_Tests {
             
             let fixture = self.equatableFixture(a, b)
             
-            let x = MultiplicationExpressionResult(multiplierResult: fixture.multiplierResult, multiplicandResults: fixture.multiplicandResults)
-            let y = MultiplicationExpressionResult(multiplierResult: fixture.multiplierResult, multiplicandResults: fixture.multiplicandResults)
-            
-            return x == y && y == x
+            return EquatableTestUtilities.checkSymmetric {
+                MultiplicationExpressionResult(multiplierResult: fixture.multiplierResult, multiplicandResults: fixture.multiplicandResults)
+            }
         }
     }
     
@@ -59,11 +58,9 @@ extension MultiplicationExpressionResult_Tests {
             
             let fixture = self.equatableFixture(a, b)
             
-            let x = MultiplicationExpressionResult(multiplierResult: fixture.multiplierResult, multiplicandResults: fixture.multiplicandResults)
-            let y = MultiplicationExpressionResult(multiplierResult: fixture.multiplierResult, multiplicandResults: fixture.multiplicandResults)
-            let z = MultiplicationExpressionResult(multiplierResult: fixture.multiplierResult, multiplicandResults: fixture.multiplicandResults)
-            
-            return x == y && y == z && x == z
+            return EquatableTestUtilities.checkTransitive {
+                MultiplicationExpressionResult(multiplierResult: fixture.multiplierResult, multiplicandResults: fixture.multiplicandResults)
+            }
         }
     }
     
@@ -76,10 +73,10 @@ extension MultiplicationExpressionResult_Tests {
             let xFixture = self.equatableFixture(a, b)
             let yFixture = self.equatableFixture(c, d)
             
-            let x = MultiplicationExpressionResult(multiplierResult: xFixture.multiplierResult, multiplicandResults: xFixture.multiplicandResults)
-            let y = MultiplicationExpressionResult(multiplierResult: yFixture.multiplierResult, multiplicandResults: yFixture.multiplicandResults)
-            
-            return x != y
+            return EquatableTestUtilities.checkNotEquate(
+                { MultiplicationExpressionResult(multiplierResult: xFixture.multiplierResult, multiplicandResults: xFixture.multiplicandResults) },
+                { MultiplicationExpressionResult(multiplierResult: yFixture.multiplierResult, multiplicandResults: yFixture.multiplicandResults) }
+            )
         }
     }
     
