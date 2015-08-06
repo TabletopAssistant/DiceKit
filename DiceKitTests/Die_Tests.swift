@@ -273,9 +273,12 @@ extension Die_Tests {
         property("generates values within range of -sides...sides") <- forAll {
             (i: Int) in
             
-            let result = rollerType(sides: i)
-            
-            return (-i...i).contains(result)
+            // Int.min has one more value than Int.max, making this crash when negating it
+            return (i >= 0) ==> {
+                let result = rollerType(sides: i)
+                
+                return (-i...i).contains(result)
+            }
         }
     }
     
@@ -369,7 +372,7 @@ extension Die_Tests {
     
     // MARK: - signedOpenRoller
     func test_RollerType_signedOpenRoller_shouldReturnWithinOpenRangeForSides() {
-        common_RollerType_shouldReturnWithinPositiveRangeForSidesGreaterThan1(Die.signedClosedRoller)
+        common_RollerType_shouldReturnWithinRangeForSides(Die.signedOpenRoller)
     }
     
     func test_RollerType_signedOpenRoller_shouldWorkForManySides() {
