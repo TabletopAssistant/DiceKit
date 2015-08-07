@@ -8,6 +8,7 @@
 
 import XCTest
 import Nimble
+import SwiftCheck
 
 import DiceKit
 
@@ -23,21 +24,27 @@ class ProbabilityMass_Tests: XCTestCase {
 extension ProbabilityMass_Tests {
     
     func test_init_shouldNormalizeFrequencyDistribution() {
-        let freqDist = FrequencyDistribution([1: 1.0, 2: 6.0, 6: 3.0])
-        let expectedFreqDist = freqDist.normalizeFrequencies()
-        
-        let probMass = ProbabilityMass(freqDist)
-        
-        expect(probMass.frequencyDistribution) == expectedFreqDist
+        property("init with frequency distribution") <- forAll {
+            (a: FrequencyDistribution) in
+            
+            let expectedFreqDist = a.normalizeFrequencies()
+            
+            let probMass = ProbabilityMass(a)
+            
+            return probMass.frequencyDistribution == expectedFreqDist
+        }
     }
     
     func test_init_shouldWorkWithConstant() {
-        let constant = 8
-        let expectedFreqDist = FrequencyDistribution([constant: 1.0])
+        property("init with constant") <- forAll {
+            (a: Int) in
         
-        let probMass = ProbabilityMass(constant)
-        
-        expect(probMass.frequencyDistribution) == expectedFreqDist
+            let expectedFreqDist = FrequencyDistribution([a: 1.0])
+            
+            let probMass = ProbabilityMass(a)
+            
+            return probMass.frequencyDistribution == expectedFreqDist
+        }
     }
     
 }
