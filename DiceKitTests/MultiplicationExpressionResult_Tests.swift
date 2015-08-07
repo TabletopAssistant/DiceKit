@@ -86,30 +86,38 @@ extension MultiplicationExpressionResult_Tests {
 // MARK: - ExpressionResultType
 extension MultiplicationExpressionResult_Tests {
     
-    // TODO: Make this a SwiftCheck test
     func test_value_shouldSumTheMultiplicandResultsForPositiveMultiplier() {
-        let multiplierResult = Int(arc4random_uniform(11)) // 0...10
-        let multiplicandCount = abs(multiplierResult)
-        let multiplicandResults = (0..<multiplicandCount).map { _ in c(Int(arc4random_uniform(100)) + 1) }
-        let expectedValue = multiplicandResults.reduce(0) { $0 + $1.value }
-        let result = MultiplicationExpressionResult(multiplierResult: c(multiplierResult), multiplicandResults: multiplicandResults)
-        
-        let value = result.value
-        
-        expect(value) == expectedValue
+        property("value with positive multiplier") <- forAll {
+            (a: ArrayOf<Constant>) in
+            
+            let a = a.getArray
+            
+            let multiplierResult = a.count
+            let multiplicandResults = a
+            let expectedValue = multiplicandResults.reduce(0) { $0 + $1.value }
+            let result = MultiplicationExpressionResult(multiplierResult: c(multiplierResult), multiplicandResults: multiplicandResults)
+            
+            let value = result.value
+            
+            return value == expectedValue
+        }
     }
     
-    // TODO: Make this a SwiftCheck test
     func test_value_shouldNegateTheMultiplicandResultsForNegativeMultiplier() {
-        let multiplierResult = -Int(arc4random_uniform(10)) - 1 // -1...10
-        let multiplicandCount = abs(multiplierResult)
-        let multiplicandResults = (0..<multiplicandCount).map { _ in c(Int(arc4random_uniform(100)) + 1) }
-        let expectedValue = multiplicandResults.reduce(0) { $0 - $1.value }
-        let result = MultiplicationExpressionResult(multiplierResult: c(multiplierResult), multiplicandResults: multiplicandResults)
+        property("value with positive multiplier") <- forAll {
+            (a: ArrayOf<Constant>) in
+            
+            let a = a.getArray
         
-        let value = result.value
-        
-        expect(value) == expectedValue
+            let multiplierResult = -a.count
+            let multiplicandResults = a
+            let expectedValue = multiplicandResults.reduce(0) { $0 - $1.value }
+            let result = MultiplicationExpressionResult(multiplierResult: c(multiplierResult), multiplicandResults: multiplicandResults)
+            
+            let value = result.value
+            
+            return value == expectedValue
+        }
     }
     
 }
