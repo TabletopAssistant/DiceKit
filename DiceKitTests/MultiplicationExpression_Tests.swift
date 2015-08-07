@@ -96,20 +96,25 @@ extension MultiplicationExpression_Tests {
         
     }
     
-    // TODO: Make a SwiftCheck
     func test_evaluate_shouldCreateResultCorrectly() {
-        let multiplicandResults: [Constant] = [8, 4, 2, -7, 1, 9, 3, 3, -3, 4, 5]
-        let expectedMultiplicandResults = multiplicandResults
-        let leftExpression = c(expectedMultiplicandResults.count)
-        let expectedMultiplierResult = leftExpression
-        let mockRightExpression = MockExpression()
-        mockRightExpression.stubResulter = { multiplicandResults[mockRightExpression.evaluateCalled] }
-        let expression = MultiplicationExpression(leftExpression, mockRightExpression)
+        property("evaluate") <- forAll {
+            (a: ArrayOf<Constant>) in
         
-        let result = expression.evaluate()
-        
-        expect(result.multiplierResult) == expectedMultiplierResult
-        expect(result.multiplicandResults) == expectedMultiplicandResults
+            let multiplicandResults = a.getArray
+            let expectedMultiplicandResults = multiplicandResults
+            let leftExpression = c(expectedMultiplicandResults.count)
+            let expectedMultiplierResult = leftExpression
+            let mockRightExpression = MockExpression()
+            mockRightExpression.stubResulter = { multiplicandResults[mockRightExpression.evaluateCalled] }
+            let expression = MultiplicationExpression(leftExpression, mockRightExpression)
+            
+            let result = expression.evaluate()
+            
+            let testMultiplierResult = result.multiplierResult == expectedMultiplierResult
+            let testMultiplicandResults = result.multiplicandResults == expectedMultiplicandResults
+            
+            return testMultiplierResult && testMultiplicandResults
+        }
     }
 
 }
