@@ -419,9 +419,14 @@ extension Die_Tests {
                 return probMass == ProbabilityMass.zero
             }
             
-            let outcomePerValue = 1.0/ProbabilityMass.Probability(abs(sides))
-            let range = sides < 0 ? sides...1 : 1...sides
-            let inverseRange = inverseSides < 0 ? inverseSides...1 : 1...inverseSides
+            typealias PM = ExpressionProbabilityMass
+            
+            let outcomePerValue = 1.0/PM.Probability(abs(sides))
+            let minAnchor = PM.Outcome(1)
+            let sidesAnchor = PM.Outcome(sides)
+            let inverseSidesAnchor = PM.Outcome(inverseSides)
+            let range = sides < 0 ? sidesAnchor...minAnchor : minAnchor...sidesAnchor
+            let inverseRange = inverseSides < 0 ? inverseSidesAnchor...minAnchor : minAnchor...inverseSidesAnchor
             
             for value in range {
                 if probMass[value]! != outcomePerValue {

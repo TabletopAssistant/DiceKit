@@ -109,17 +109,19 @@ extension Die: ExpressionType {
         return roll()
     }
     
-    public var probabilityMass: ProbabilityMass {
+    public var probabilityMass: ExpressionProbabilityMass {
         guard sides != 0 else {
             return ProbabilityMass.zero
         }
         
-        var frequenciesPerOutcome = FrequencyDistribution.FrequenciesPerOutcome()
-        let outcomePerValue = 1.0/ProbabilityMass.Probability(abs(sides))
-        let range = sides < 0 ? sides...1 : 1...sides
+        var frequenciesPerOutcome = FrequencyDistribution<ExpressionProbabilityMass.Outcome>.FrequenciesPerOutcome()
+        let frequencyPerOutcome = 1.0/ExpressionProbabilityMass.Probability(abs(sides))
+        let minAnchor = ExpressionProbabilityMass.Outcome(1)
+        let sidesAnchor = ExpressionProbabilityMass.Outcome(sides)
+        let range = sides < 0 ? sidesAnchor...minAnchor : minAnchor...sidesAnchor
         
         for value in range {
-            frequenciesPerOutcome[value] = outcomePerValue
+            frequenciesPerOutcome[value] = frequencyPerOutcome
         }
         
         return ProbabilityMass(FrequencyDistribution(frequenciesPerOutcome), normalize: false)

@@ -8,14 +8,31 @@
 
 import Foundation
 
-public struct FrequencyDistribution: Equatable {
+public protocol FrequencyDistributionValueType: IntegerArithmeticType, SignedNumberType, ForwardIndexType, Hashable {
     
-    public typealias Outcome = Int
+    static var multiplicativeIdentity: Self { get }
+    
+}
+
+extension Int: FrequencyDistributionValueType {
+    
+    public static let multiplicativeIdentity: Int = 1
+    
+}
+
+public struct FrequencyDistribution<OutcomeType: FrequencyDistributionValueType>: Equatable {
+    
+    public typealias Outcome = OutcomeType
     public typealias Frequency = Double
     public typealias FrequenciesPerOutcome = [Outcome: Frequency]
     
-    public static let additiveIdentity = FrequencyDistribution([:])
-    public static let multiplicativeIdentity = FrequencyDistribution([1:1.0])
+    // TODO: Change to stored properties when allowed by Swift
+    public static var additiveIdentity: FrequencyDistribution {
+        return FrequencyDistribution(FrequenciesPerOutcome())
+    }
+    public static var multiplicativeIdentity: FrequencyDistribution {
+        return FrequencyDistribution([Outcome.multiplicativeIdentity: 1.0])
+    }
     
     public let frequenciesPerOutcome: FrequenciesPerOutcome
     private let orderedOutcomes: [Outcome]
@@ -55,7 +72,7 @@ extension FrequencyDistribution: CustomStringConvertible {
 
 // MARK: - Equatable
 
-public func == (lhs: FrequencyDistribution, rhs: FrequencyDistribution) -> Bool {
+public func == <V>(lhs: FrequencyDistribution<V>, rhs: FrequencyDistribution<V>) -> Bool {
     return lhs.frequenciesPerOutcome == rhs.frequenciesPerOutcome
 }
 
@@ -63,8 +80,8 @@ public func == (lhs: FrequencyDistribution, rhs: FrequencyDistribution) -> Bool 
 
 extension FrequencyDistribution: Indexable {
     
-    public typealias Index = FrequencyDistributionIndex
-    public typealias _Element = (Outcome, Frequency)
+    public typealias Index = FrequencyDistributionIndex<Outcome>
+    public typealias _Element = (Outcome, Frequency) // This is needed to prevent ambigious Indexable conformance...
     
     /// Returns the `Index` for the given value, or `nil` if the value is not
     /// present in the frequency distribution.
@@ -85,7 +102,7 @@ extension FrequencyDistribution: Indexable {
         return FrequencyDistributionIndex.endIndex(orderedOutcomes)
     }
     
-    public subscript(index: Index) -> _Element {
+    public subscript(index: Index) -> (Outcome, Frequency) {
         let outcome = index.value!
         let frequency = frequenciesPerOutcome[outcome]!
         return (outcome, frequency)
@@ -195,13 +212,13 @@ extension FrequencyDistribution {
     
     /// This is a special case of `power(x: FrequencyDistribution)`,
     /// for when `x` is `FrequencyDistribution([x: 1])`.
-    public func power(x: Int) -> FrequencyDistribution {
+    public func power(x: Outcome) -> FrequencyDistribution {
         guard x != 0 else { return .multiplicativeIdentity }
         
         // Crappy implementation. Currently O(n). Can be O(log(n)).
         // TODO: Handle negative properly
         var freqDist = self
-        for _ in 1..<abs(x) {
+        for _ in Outcome.multiplicativeIdentity..<abs(x) {
             freqDist = freqDist.multiply(self)
         }
         

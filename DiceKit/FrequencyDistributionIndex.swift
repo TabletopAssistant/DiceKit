@@ -6,9 +6,9 @@
 //  Copyright © 2015 Brentley Jones. All rights reserved.
 //
 
-public struct FrequencyDistributionIndex: ForwardIndexType {
+public struct FrequencyDistributionIndex<Outcome: FrequencyDistributionValueType>: ForwardIndexType {
     
-    typealias OrderedOutcomes = [FrequencyDistribution.Outcome]
+    typealias OrderedOutcomes = [Outcome]
     
     let index: Int
     let orderedOutcomes: OrderedOutcomes
@@ -26,7 +26,7 @@ public struct FrequencyDistributionIndex: ForwardIndexType {
         self.orderedOutcomes = orderedOutcomes
     }
     
-    var value: FrequencyDistribution.Outcome? {
+    var value: Outcome? {
         guard index >= 0 && index < orderedOutcomes.count else {
             return nil
         }
@@ -47,6 +47,6 @@ public struct FrequencyDistributionIndex: ForwardIndexType {
 
 // MARK: - Equatable
 
-public func == (lhs: FrequencyDistributionIndex, rhs: FrequencyDistributionIndex) -> Bool {
+public func == <V>(lhs: FrequencyDistributionIndex<V>, rhs: FrequencyDistributionIndex<V>) -> Bool {
     return lhs.index == rhs.index && lhs.orderedOutcomes == rhs.orderedOutcomes
 }

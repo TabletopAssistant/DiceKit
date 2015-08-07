@@ -8,27 +8,33 @@
 
 import Foundation
 
-public struct ProbabilityMass: ApproximatelyEquatable {
+public struct ProbabilityMassConfig {
     
-    public typealias Outcome = FrequencyDistribution.Outcome
+    public static let defaultProbabilityEqualityDelta: ProbabilityMass.Probability = 1e-16 // This is for 64-bit. What should 32-bit be?
+    public static var probabilityEqualityDelta: ProbabilityMass.Probability = defaultProbabilityEqualityDelta
+    
+}
+
+public struct ProbabilityMass<OutcomeType: FrequencyDistributionValueType>: ApproximatelyEquatable {
+    
+    public typealias Outcome = OutcomeType
     public typealias Probability = Double
     
-    public static let defaultProbabilityEqualityDelta = 1e-16 // This is for 64-bit. What should 32-bit be?
-    public static var probabilityEqualityDelta = defaultProbabilityEqualityDelta
+    public static var zero: ProbabilityMass {
+        return ProbabilityMass(FrequencyDistribution.additiveIdentity)
+    }
     
-    public static let zero = ProbabilityMass(FrequencyDistribution.additiveIdentity)
+    public let frequencyDistribution: FrequencyDistribution<Outcome>
     
-    public let frequencyDistribution: FrequencyDistribution
-    
-    internal init(_ frequencyDistribution: FrequencyDistribution, normalize: Bool) {
+    internal init(_ frequencyDistribution: FrequencyDistribution<Outcome>, normalize: Bool) {
         self.frequencyDistribution = normalize ? frequencyDistribution.normalizeFrequencies() : frequencyDistribution
     }
     
-    public init(_ frequencyDistribution: FrequencyDistribution) {
+    public init(_ frequencyDistribution: FrequencyDistribution<Outcome>) {
         self.init(frequencyDistribution, normalize: true)
     }
     
-    public init(_ constant: Int) {
+    public init(_ constant: Outcome) {
         self.init(FrequencyDistribution([constant : 1]), normalize: false)
     }
     
@@ -46,21 +52,21 @@ extension ProbabilityMass: CustomStringConvertible {
 
 // MARK: - Equatable
 
-public func == (lhs: ProbabilityMass, rhs: ProbabilityMass) -> Bool {
+public func == <V>(lhs: ProbabilityMass<V>, rhs: ProbabilityMass<V>) -> Bool {
     return lhs.frequencyDistribution == rhs.frequencyDistribution
 }
 
 // MARK: - ApproximatelyEquatable
 
-public func ≈ (lhs: ProbabilityMass, rhs: ProbabilityMass) -> Bool {
-    return lhs.frequencyDistribution.approximatelyEqual(rhs.frequencyDistribution, delta: ProbabilityMass.probabilityEqualityDelta)
+public func ≈ <V>(lhs: ProbabilityMass<V>, rhs: ProbabilityMass<V>) -> Bool {
+    return lhs.frequencyDistribution.approximatelyEqual(rhs.frequencyDistribution, delta: ProbabilityMassConfig.probabilityEqualityDelta)
 }
 
 // MARK: - Indexable
 
 extension ProbabilityMass: Indexable {
     
-    public typealias Index = FrequencyDistributionIndex
+    public typealias Index = FrequencyDistribution<Outcome>.Index
     public typealias _Element = (Outcome, Probability)
     
     /// Returns the `Index` for the given value, or `nil` if the value is not
@@ -127,7 +133,7 @@ extension ProbabilityMass {
 
 // MARK: - Operators
 
-public prefix func - (x: ProbabilityMass) -> ProbabilityMass {
+public prefix func - <V>(x: ProbabilityMass<V>) -> ProbabilityMass<V> {
     return x.negate()
 }
 
@@ -137,14 +143,14 @@ infix operator ^^ {
     precedence 110
 }
 
-public func ^^ (lhs: ProbabilityMass, rhs: ProbabilityMass) -> ProbabilityMass {
+public func ^^ <V>(lhs: ProbabilityMass<V>, rhs: ProbabilityMass<V>) -> ProbabilityMass<V> {
     return lhs.xor(rhs)
 }
 
-public func && (lhs: ProbabilityMass, rhs: ProbabilityMass) -> ProbabilityMass {
+public func && <V>(lhs: ProbabilityMass<V>, rhs: ProbabilityMass<V>) -> ProbabilityMass<V> {
     return lhs.and(rhs)
 }
 
-public func * (lhs: ProbabilityMass, rhs: ProbabilityMass) -> ProbabilityMass {
+public func * <V>(lhs: ProbabilityMass<V>, rhs: ProbabilityMass<V>) -> ProbabilityMass<V> {
     return lhs.product(rhs)
 }

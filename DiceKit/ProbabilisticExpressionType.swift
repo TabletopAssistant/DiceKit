@@ -8,9 +8,11 @@
 
 import Foundation
 
+public typealias ExpressionProbabilityMass = ProbabilityMass<Int>
+
 public protocol ProbabilisticExpressionType {
     
-    var probabilityMass: ProbabilityMass { get }
+    var probabilityMass: ExpressionProbabilityMass { get }
     
     /// Returns `true` if both `ProbabilisticExpressionType`s have approximately
     /// same chance for each respective outcome.
