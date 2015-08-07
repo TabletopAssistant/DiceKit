@@ -28,15 +28,19 @@ extension FrequencyDistributionIndex_Tests {
             
             let a = a.getSet
             
-            let expectedIndex = Int(arc4random_uniform(UInt32(a.count)))
-            let expectedOrderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
-            
-            let freqDistIndex = FrequencyDistributionIndex(index: expectedIndex, orderedOutcomes: expectedOrderedOutcomes)
-            
-            let testIndex = freqDistIndex.index == expectedIndex
-            let testOrderedOutcomes = freqDistIndex.orderedOutcomes == expectedOrderedOutcomes
-            
-            return testIndex && testOrderedOutcomes
+            return forAll(a.arbitraryIndex) {
+                (index) in
+                
+                let expectedIndex = index
+                let expectedOrderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
+                
+                let freqDistIndex = FrequencyDistributionIndex(index: expectedIndex, orderedOutcomes: expectedOrderedOutcomes)
+                
+                let testIndex = freqDistIndex.index == expectedIndex
+                let testOrderedOutcomes = freqDistIndex.orderedOutcomes == expectedOrderedOutcomes
+                
+                return testIndex && testOrderedOutcomes
+            }
         }
     }
     
@@ -51,10 +55,13 @@ extension FrequencyDistributionIndex_Tests {
             
             let a = a.getSet
             
-            let index = Int(arc4random_uniform(UInt32(a.count)))
-            let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
-            
-            return EquatableTestUtilities.checkReflexive { FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes) }
+            return forAll(a.arbitraryIndex) {
+                (index) in
+                
+                let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
+                
+                return EquatableTestUtilities.checkReflexive { FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes) }
+            }
         }
     }
     
@@ -64,10 +71,13 @@ extension FrequencyDistributionIndex_Tests {
             
             let a = a.getSet
             
-            let index = Int(arc4random_uniform(UInt32(a.count)))
-            let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
-            
-            return EquatableTestUtilities.checkSymmetric { FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes) }
+            return forAll(a.arbitraryIndex) {
+                (index) in
+                
+                let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
+                
+                return EquatableTestUtilities.checkSymmetric { FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes) }
+            }
         }
     }
     
@@ -77,10 +87,13 @@ extension FrequencyDistributionIndex_Tests {
             
             let a = a.getSet
             
-            let index = Int(arc4random_uniform(UInt32(a.count)))
-            let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
-            
-            return EquatableTestUtilities.checkTransitive { FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes) }
+            return forAll(a.arbitraryIndex) {
+                (index) in
+                
+                let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
+                
+                return EquatableTestUtilities.checkTransitive { FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes) }
+            }
         }
     }
     
@@ -92,15 +105,19 @@ extension FrequencyDistributionIndex_Tests {
             let b = b.getSet
             
             return (a != b) ==> {
-                let aIndex = Int(arc4random_uniform(UInt32(a.count)))
-                let aOrderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
-                let bIndex = Int(arc4random_uniform(UInt32(b.count)))
-                let bOrderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(b)
+                // I know, it's ugly. The only way I could get it to compile though.
+                // Hopefully we can cleqan it up someday.
+                forAll(a.arbitraryIndex) { (aIndex) in forAll(b.arbitraryIndex) {
+                    (bIndex) in
                 
-                return EquatableTestUtilities.checkNotEquate(
-                    { FrequencyDistributionIndex(index: aIndex, orderedOutcomes: aOrderedOutcomes) },
-                    { FrequencyDistributionIndex(index: bIndex, orderedOutcomes: bOrderedOutcomes) }
-                )
+                    let aOrderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
+                    let bOrderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(b)
+                    
+                    return EquatableTestUtilities.checkNotEquate(
+                        { FrequencyDistributionIndex(index: aIndex, orderedOutcomes: aOrderedOutcomes) },
+                        { FrequencyDistributionIndex(index: bIndex, orderedOutcomes: bOrderedOutcomes) }
+                    )
+                }}
             }
         }
     }
@@ -153,14 +170,17 @@ extension FrequencyDistributionIndex_Tests {
             let a = a.getSet
             
             return (a.count > 0) ==> {
-                let index = Int(arc4random_uniform(UInt32(a.count)))
-                let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
-                let freqDistIndex = FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes)
-                let expectedValue = orderedOutcomes[index]
+                return forAll(a.arbitraryIndex) {
+                    (index) in
                 
-                let value = freqDistIndex.value
-                
-                return value == expectedValue
+                    let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
+                    let freqDistIndex = FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes)
+                    let expectedValue = orderedOutcomes[index]
+                    
+                    let value = freqDistIndex.value
+                    
+                    return value == expectedValue
+                }
             }
         }
     }

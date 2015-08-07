@@ -9,6 +9,15 @@
 import SwiftCheck
 import DiceKit
 
+public extension CollectionType where Index.Distance: protocol<Arbitrary, IntegerType> {
+    
+    /// Generates an arbitrary index within 0..<count
+    public var arbitraryIndex : Gen<Index.Distance> {
+        return Index.Distance.arbitrary.resize(Int(self.count.toIntMax())).suchThat { $0 >= 0 }
+    }
+    
+}
+
 extension Constant: Arbitrary {
     
     public static func create(x : Int) -> Constant {
