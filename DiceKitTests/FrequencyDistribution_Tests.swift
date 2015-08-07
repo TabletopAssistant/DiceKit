@@ -8,11 +8,14 @@
 
 import XCTest
 import Nimble
+import SwiftCheck
 
 import DiceKit
 
 /// Tests the `FrequencyDistribution` type
 class FrequencyDistribution_Tests: XCTestCase {
+    
+    typealias SwiftCheckFrequenciesPerOutcome = DictionaryOf<FrequencyDistribution.Outcome, FrequencyDistribution.Frequency>
 
 }
 
@@ -20,12 +23,15 @@ class FrequencyDistribution_Tests: XCTestCase {
 extension FrequencyDistribution_Tests {
     
     func test_init_shouldSucceedWithFrequenciesPerOutcome() {
-        // TODO: SwiftCheck
-        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [1:1, 2:1, 3:4, 4:1]
-        
-        let freqDist = FrequencyDistribution(frequenciesPerOutcome)
-        
-        expect(freqDist.frequenciesPerOutcome) == frequenciesPerOutcome
+        property("init") <- forAll {
+            (a: SwiftCheckFrequenciesPerOutcome) in
+            
+            let a = a.getDictionary
+            
+            let freqDist = FrequencyDistribution(a)
+            
+            return freqDist.frequenciesPerOutcome == a
+        }
     }
     
 }
