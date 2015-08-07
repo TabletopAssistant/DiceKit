@@ -30,3 +30,15 @@ extension Die: Arbitrary {
         return Die.create <^> Int.arbitrary
     }
 }
+
+extension FrequencyDistribution: Arbitrary {
+    
+    public static func create(x : FrequenciesPerOutcome) -> FrequencyDistribution {
+        return FrequencyDistribution(x)
+    }
+    
+    public static var arbitrary : Gen<FrequencyDistribution> {
+        return FrequencyDistribution.create <^> Dictionary<Outcome, Frequency>.arbitrary
+    }
+    
+}
