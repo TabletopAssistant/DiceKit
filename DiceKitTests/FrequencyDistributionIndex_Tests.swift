@@ -45,7 +45,65 @@ extension FrequencyDistributionIndex_Tests {
 // MARK: - Equatable
 extension FrequencyDistributionIndex_Tests {
     
-    // TODO: Equatable
+    func test_shouldBeReflexive() {
+        property("reflexive") <- forAll {
+            (a: SwiftCheckOrderedOutcome) in
+            
+            let a = a.getSet
+            
+            let index = Int(arc4random_uniform(UInt32(a.count)))
+            let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
+            
+            return EquatableTestUtilities.checkReflexive { FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes) }
+        }
+    }
+    
+    func test_shouldBeSymmetric() {
+        property("symmetric") <- forAll {
+            (a: SwiftCheckOrderedOutcome) in
+            
+            let a = a.getSet
+            
+            let index = Int(arc4random_uniform(UInt32(a.count)))
+            let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
+            
+            return EquatableTestUtilities.checkSymmetric { FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes) }
+        }
+    }
+    
+    func test_shouldBeTransitive() {
+        property("transitive") <- forAll {
+            (a: SwiftCheckOrderedOutcome) in
+            
+            let a = a.getSet
+            
+            let index = Int(arc4random_uniform(UInt32(a.count)))
+            let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
+            
+            return EquatableTestUtilities.checkTransitive { FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes) }
+        }
+    }
+    
+    func test_shouldBeAbleToNotEquate() {
+        property("non-equal") <- forAll {
+            (a: SwiftCheckOrderedOutcome, b: SwiftCheckOrderedOutcome) in
+            
+            let a = a.getSet
+            let b = b.getSet
+            
+            return (a != b) ==> {
+                let aIndex = Int(arc4random_uniform(UInt32(a.count)))
+                let aOrderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
+                let bIndex = Int(arc4random_uniform(UInt32(b.count)))
+                let bOrderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(b)
+                
+                return EquatableTestUtilities.checkNotEquate(
+                    { FrequencyDistributionIndex(index: aIndex, orderedOutcomes: aOrderedOutcomes) },
+                    { FrequencyDistributionIndex(index: bIndex, orderedOutcomes: bOrderedOutcomes) }
+                )
+            }
+        }
+    }
     
 }
 

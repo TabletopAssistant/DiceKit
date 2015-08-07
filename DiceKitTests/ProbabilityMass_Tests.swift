@@ -52,7 +52,42 @@ extension ProbabilityMass_Tests {
 // MARK: - Equatable
 extension ProbabilityMass_Tests {
     
-    // TODO: Equatable
+    func test_shouldBeReflexive() {
+        property("reflexive") <- forAll {
+            (a: FrequencyDistribution) in
+            
+            return EquatableTestUtilities.checkReflexive { ProbabilityMass(a) }
+        }
+    }
+    
+    func test_shouldBeSymmetric() {
+        property("symmetric") <- forAll {
+            (a: FrequencyDistribution) in
+            
+            return EquatableTestUtilities.checkSymmetric { ProbabilityMass(a) }
+        }
+    }
+    
+    func test_shouldBeTransitive() {
+        property("transitive") <- forAll {
+            (a: FrequencyDistribution) in
+            
+            return EquatableTestUtilities.checkTransitive { ProbabilityMass(a) }
+        }
+    }
+    
+    func test_shouldBeAbleToNotEquate() {
+        property("non-equal") <- forAll {
+            (a: FrequencyDistribution, b: FrequencyDistribution) in
+            
+            return !(a.normalizeFrequencies().approximatelyEqual(b.normalizeFrequencies(), delta: ProbabilityMass.defaultProbabilityEqualityDelta) ) ==> {
+                return EquatableTestUtilities.checkNotEquate(
+                    { ProbabilityMass(a) },
+                    { ProbabilityMass(b) }
+                )
+            }
+        }
+    }
     
 }
 

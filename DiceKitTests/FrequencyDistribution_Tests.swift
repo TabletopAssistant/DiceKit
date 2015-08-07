@@ -39,7 +39,51 @@ extension FrequencyDistribution_Tests {
 // MARK: - Equatable
 extension FrequencyDistribution_Tests {
     
-    // TODO: Equatable
+    func test_shouldBeReflexive() {
+        property("reflexive") <- forAll {
+            (a: SwiftCheckFrequenciesPerOutcome) in
+            
+            let a = a.getDictionary
+            
+            return EquatableTestUtilities.checkReflexive { FrequencyDistribution(a) }
+        }
+    }
+    
+    func test_shouldBeSymmetric() {
+        property("symmetric") <- forAll {
+            (a: SwiftCheckFrequenciesPerOutcome) in
+            
+            let a = a.getDictionary
+            
+            return EquatableTestUtilities.checkSymmetric { FrequencyDistribution(a) }
+        }
+    }
+    
+    func test_shouldBeTransitive() {
+        property("transitive") <- forAll {
+            (a: SwiftCheckFrequenciesPerOutcome) in
+            
+            let a = a.getDictionary
+            
+            return EquatableTestUtilities.checkTransitive { FrequencyDistribution(a) }
+        }
+    }
+    
+    func test_shouldBeAbleToNotEquate() {
+        property("non-equal") <- forAll {
+            (a: SwiftCheckFrequenciesPerOutcome, b: SwiftCheckFrequenciesPerOutcome) in
+            
+            let a = a.getDictionary
+            let b = b.getDictionary
+            
+            return (a != b) ==> {
+                return EquatableTestUtilities.checkNotEquate(
+                    { FrequencyDistribution(a) },
+                    { FrequencyDistribution(b) }
+                )
+            }
+        }
+    }
     
 }
 

@@ -135,7 +135,10 @@ extension FrequencyDistribution {
         }
         
         for (outcome, frequency) in frequenciesPerOutcome {
-            let otherFrequency = x.frequenciesPerOutcome[outcome]!
+            guard let otherFrequency = x.frequenciesPerOutcome[outcome] else {
+                return false
+            }
+            
             let diff = abs(frequency - otherFrequency)
             if diff > delta {
                 return false
