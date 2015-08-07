@@ -22,56 +22,38 @@ extension NegationExpressionResult_Tests {
     
     func test_shouldBeReflexive() {
         property("reflexive") <- forAll {
-            (a: Int) in
+            (a: Constant) in
             
-            let a = c(a)
-            
-            let x = NegationExpressionResult(a)
-            
-            return x == x
+            return EquatableTestUtilities.checkReflexive { NegationExpressionResult(a) }
         }
     }
     
     func test_shouldBeSymmetric() {
         property("symmetric") <- forAll {
-            (a: Int) in
+            (a: Constant) in
             
-            let a = c(a)
-            
-            let x = NegationExpressionResult(a)
-            let y = NegationExpressionResult(a)
-            
-            return x == y && y == x
+            return EquatableTestUtilities.checkSymmetric { NegationExpressionResult(a) }
         }
     }
     
     func test_shouldBeTransitive() {
         property("transitive") <- forAll {
-            (a: Int) in
+            (a: Constant) in
             
-            let a = c(a)
-            
-            let x = NegationExpressionResult(a)
-            let y = NegationExpressionResult(a)
-            let z = NegationExpressionResult(a)
-            
-            return x == y && y == z && x == z
+            return EquatableTestUtilities.checkTransitive { NegationExpressionResult(a) }
         }
     }
     
     func test_shouldBeAbleToNotEquate() {
         property("non-equal") <- forAll {
-            (a: Int, b: Int) in
+            (a: Constant, b: Constant) in
             
-            guard a != b else { return true }
-            
-            let a = c(a)
-            let b = c(b)
-            
-            let x = NegationExpressionResult(a)
-            let y = NegationExpressionResult(b)
-            
-            return x != y
+            return (a != b) ==> {
+                EquatableTestUtilities.checkNotEquate(
+                    { NegationExpressionResult(a) },
+                    { NegationExpressionResult(b) }
+                )
+            }
         }
     }
     
@@ -82,10 +64,10 @@ extension NegationExpressionResult_Tests {
     
     func test_value_shouldNegateTheBaseResult() {
         property("negate the base result") <- forAll {
-            (a: Int) in
+            (a: Constant) in
             
-            let expectedValue = -a
-            let result = NegationExpressionResult(c(a))
+            let expectedValue = -a.value
+            let result = NegationExpressionResult(a)
             
             let value = result.value
             

@@ -8,11 +8,14 @@
 
 import XCTest
 import Nimble
+import SwiftCheck
 
 @testable import DiceKit
 
 /// Tests the `FrequencyDistributionIndex` type
 class FrequencyDistributionIndex_Tests: XCTestCase {
+    
+    typealias SwiftCheckOrderedOutcome = SetOf<FrequencyDistribution.Outcome>
     
 }
 
@@ -20,14 +23,25 @@ class FrequencyDistributionIndex_Tests: XCTestCase {
 extension FrequencyDistributionIndex_Tests {
     
     func test_init_shouldSucceed() {
-        // TODO: SwiftCheck
-        let expectedIndex = 3
-        let expectedOrderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes([3, 6, 8, 9, 11, 12, 45])
-        
-        let freqDistIndex = FrequencyDistributionIndex(index: expectedIndex, orderedOutcomes: expectedOrderedOutcomes)
-        
-        expect(freqDistIndex.index) == expectedIndex
-        expect(freqDistIndex.orderedOutcomes) == expectedOrderedOutcomes
+        property("init") <- forAll {
+            (a: SwiftCheckOrderedOutcome) in
+            
+            let a = a.getSet
+            
+            return forAll(a.arbitraryIndex) {
+                (index) in
+                
+                let expectedIndex = index
+                let expectedOrderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
+                
+                let freqDistIndex = FrequencyDistributionIndex(index: expectedIndex, orderedOutcomes: expectedOrderedOutcomes)
+                
+                let testIndex = freqDistIndex.index == expectedIndex
+                let testOrderedOutcomes = freqDistIndex.orderedOutcomes == expectedOrderedOutcomes
+                
+                return testIndex && testOrderedOutcomes
+            }
+        }
     }
     
 }
@@ -35,7 +49,78 @@ extension FrequencyDistributionIndex_Tests {
 // MARK: - Equatable
 extension FrequencyDistributionIndex_Tests {
     
-    // TODO: Equatable
+    func test_shouldBeReflexive() {
+        property("reflexive") <- forAll {
+            (a: SwiftCheckOrderedOutcome) in
+            
+            let a = a.getSet
+            
+            return forAll(a.arbitraryIndex) {
+                (index) in
+                
+                let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
+                
+                return EquatableTestUtilities.checkReflexive { FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes) }
+            }
+        }
+    }
+    
+    func test_shouldBeSymmetric() {
+        property("symmetric") <- forAll {
+            (a: SwiftCheckOrderedOutcome) in
+            
+            let a = a.getSet
+            
+            return forAll(a.arbitraryIndex) {
+                (index) in
+                
+                let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
+                
+                return EquatableTestUtilities.checkSymmetric { FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes) }
+            }
+        }
+    }
+    
+    func test_shouldBeTransitive() {
+        property("transitive") <- forAll {
+            (a: SwiftCheckOrderedOutcome) in
+            
+            let a = a.getSet
+            
+            return forAll(a.arbitraryIndex) {
+                (index) in
+                
+                let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
+                
+                return EquatableTestUtilities.checkTransitive { FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes) }
+            }
+        }
+    }
+    
+    func test_shouldBeAbleToNotEquate() {
+        property("non-equal") <- forAll {
+            (a: SwiftCheckOrderedOutcome, b: SwiftCheckOrderedOutcome) in
+            
+            let a = a.getSet
+            let b = b.getSet
+            
+            return (a != b) ==> {
+                // I know, it's ugly. The only way I could get it to compile though.
+                // Hopefully we can cleqan it up someday.
+                forAll(a.arbitraryIndex) { (aIndex) in forAll(b.arbitraryIndex) {
+                    (bIndex) in
+                
+                    let aOrderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
+                    let bOrderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(b)
+                    
+                    return EquatableTestUtilities.checkNotEquate(
+                        { FrequencyDistributionIndex(index: aIndex, orderedOutcomes: aOrderedOutcomes) },
+                        { FrequencyDistributionIndex(index: bIndex, orderedOutcomes: bOrderedOutcomes) }
+                    )
+                }}
+            }
+        }
+    }
     
 }
 
@@ -43,48 +128,77 @@ extension FrequencyDistributionIndex_Tests {
 extension FrequencyDistributionIndex_Tests {
     
     func test_startIndex_shouldBeSetupCorrectly() {
-        // TODO: SwiftCheck
-        let expectedIndex = 0
-        let expectedOrderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes([4, 6, 8, 10, 11, 12, 33, 43])
-        
-        let startIndex = FrequencyDistributionIndex.startIndex(expectedOrderedOutcomes)
-        
-        expect(startIndex.index) == expectedIndex
-        expect(startIndex.orderedOutcomes) == expectedOrderedOutcomes
+        property("startIndex") <- forAll {
+            (a: SetOf<FrequencyDistribution.Outcome>) in
+            
+            let a = a.getSet
+            
+            let expectedIndex = 0
+            let expectedOrderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
+            
+            let startIndex = FrequencyDistributionIndex.startIndex(expectedOrderedOutcomes)
+            
+            let testIndex = startIndex.index == expectedIndex
+            let testOrderedOutcomes = startIndex.orderedOutcomes == expectedOrderedOutcomes
+            
+            return testIndex && testOrderedOutcomes
+        }
     }
     
     func test_endIndex_shouldBeSetupCorrectly() {
-        // TODO: SwiftCheck
-        let expectedOrderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes([4, 6, 8, 10, 11, 14, 34])
-        let expectedIndex = expectedOrderedOutcomes.count
+        property("endIndex") <- forAll {
+            (a: SetOf<FrequencyDistribution.Outcome>) in
+            
+            let a = a.getSet
+            
+            let expectedOrderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
+            let expectedIndex = expectedOrderedOutcomes.count
         
-        let endIndex = FrequencyDistributionIndex.endIndex(expectedOrderedOutcomes)
-        
-        expect(endIndex.index) == expectedIndex
-        expect(endIndex.orderedOutcomes) == expectedOrderedOutcomes
+            let endIndex = FrequencyDistributionIndex.endIndex(expectedOrderedOutcomes)
+            
+            let testIndex = endIndex.index == expectedIndex
+            let testOrderedOutcomes = endIndex.orderedOutcomes == expectedOrderedOutcomes
+            
+            return testIndex && testOrderedOutcomes
+        }
     }
     
     func test_value_shouldReturnValueForValidIndex() {
-        // TODO: SwiftCheck
-        let index = 2
-        let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes([3, 6, 8, 9, 11, 12, 45])
-        let freqDistIndex = FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes)
-        let expectedValue = orderedOutcomes[index]
-        
-        let value = freqDistIndex.value
-        
-        expect(value) == expectedValue
+        property("value with valid index") <- forAll {
+            (a: SetOf<FrequencyDistribution.Outcome>) in
+            
+            let a = a.getSet
+            
+            return (a.count > 0) ==> {
+                return forAll(a.arbitraryIndex) {
+                    (index) in
+                
+                    let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
+                    let freqDistIndex = FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes)
+                    let expectedValue = orderedOutcomes[index]
+                    
+                    let value = freqDistIndex.value
+                    
+                    return value == expectedValue
+                }
+            }
+        }
     }
     
     func test_value_shouldReturnNilForInvalidIndex() {
-        // TODO: SwiftCheck
-        let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes([3, 6, 8, 9, 11, 12, 45])
-        let index = orderedOutcomes.count
-        let freqDistIndex = FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes)
+        property("value with invalid index") <- forAll {
+            (a: SetOf<FrequencyDistribution.Outcome>) in
+            
+            let a = a.getSet
+            
+            let orderedOutcomes = FrequencyDistributionIndex.OrderedOutcomes(a)
+            let index = orderedOutcomes.count
+            let freqDistIndex = FrequencyDistributionIndex(index: index, orderedOutcomes: orderedOutcomes)
+            
+            let value = freqDistIndex.value
         
-        let value = freqDistIndex.value
-        
-        expect(value).to(beNil())
+            return value == nil
+        }
     }
     
     func test_successor_shouldReturnValidIndexWhenMoreRemain() {

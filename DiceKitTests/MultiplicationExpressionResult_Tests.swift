@@ -34,9 +34,9 @@ extension MultiplicationExpressionResult_Tests {
             
             let fixture = self.equatableFixture(a, b)
             
-            let x = MultiplicationExpressionResult(multiplierResult: fixture.multiplierResult, multiplicandResults: fixture.multiplicandResults)
-            
-            return x == x
+            return EquatableTestUtilities.checkReflexive {
+                MultiplicationExpressionResult(multiplierResult: fixture.multiplierResult, multiplicandResults: fixture.multiplicandResults)
+            }
         }
     }
     
@@ -46,10 +46,9 @@ extension MultiplicationExpressionResult_Tests {
             
             let fixture = self.equatableFixture(a, b)
             
-            let x = MultiplicationExpressionResult(multiplierResult: fixture.multiplierResult, multiplicandResults: fixture.multiplicandResults)
-            let y = MultiplicationExpressionResult(multiplierResult: fixture.multiplierResult, multiplicandResults: fixture.multiplicandResults)
-            
-            return x == y && y == x
+            return EquatableTestUtilities.checkSymmetric {
+                MultiplicationExpressionResult(multiplierResult: fixture.multiplierResult, multiplicandResults: fixture.multiplicandResults)
+            }
         }
     }
     
@@ -59,11 +58,9 @@ extension MultiplicationExpressionResult_Tests {
             
             let fixture = self.equatableFixture(a, b)
             
-            let x = MultiplicationExpressionResult(multiplierResult: fixture.multiplierResult, multiplicandResults: fixture.multiplicandResults)
-            let y = MultiplicationExpressionResult(multiplierResult: fixture.multiplierResult, multiplicandResults: fixture.multiplicandResults)
-            let z = MultiplicationExpressionResult(multiplierResult: fixture.multiplierResult, multiplicandResults: fixture.multiplicandResults)
-            
-            return x == y && y == z && x == z
+            return EquatableTestUtilities.checkTransitive {
+                MultiplicationExpressionResult(multiplierResult: fixture.multiplierResult, multiplicandResults: fixture.multiplicandResults)
+            }
         }
     }
     
@@ -71,15 +68,16 @@ extension MultiplicationExpressionResult_Tests {
         property("non-equal") <- forAll {
             (a: UInt, b: UInt, c: UInt, d: UInt) in
             
-            guard a != c else { return true }
-            
-            let xFixture = self.equatableFixture(a, b)
-            let yFixture = self.equatableFixture(c, d)
-            
-            let x = MultiplicationExpressionResult(multiplierResult: xFixture.multiplierResult, multiplicandResults: xFixture.multiplicandResults)
-            let y = MultiplicationExpressionResult(multiplierResult: yFixture.multiplierResult, multiplicandResults: yFixture.multiplicandResults)
-            
-            return x != y
+            // Only check one set of parameters since not commutitive
+            return (a != c) ==> {
+                let xFixture = self.equatableFixture(a, b)
+                let yFixture = self.equatableFixture(c, d)
+                
+                return EquatableTestUtilities.checkNotEquate(
+                    { MultiplicationExpressionResult(multiplierResult: xFixture.multiplierResult, multiplicandResults: xFixture.multiplicandResults) },
+                    { MultiplicationExpressionResult(multiplierResult: yFixture.multiplierResult, multiplicandResults: yFixture.multiplicandResults) }
+                )
+            }
         }
     }
     
@@ -88,30 +86,38 @@ extension MultiplicationExpressionResult_Tests {
 // MARK: - ExpressionResultType
 extension MultiplicationExpressionResult_Tests {
     
-    // TODO: Make this a SwiftCheck test
     func test_value_shouldSumTheMultiplicandResultsForPositiveMultiplier() {
-        let multiplierResult = Int(arc4random_uniform(11)) // 0...10
-        let multiplicandCount = abs(multiplierResult)
-        let multiplicandResults = (0..<multiplicandCount).map { _ in c(Int(arc4random_uniform(100)) + 1) }
-        let expectedValue = multiplicandResults.reduce(0) { $0 + $1.value }
-        let result = MultiplicationExpressionResult(multiplierResult: c(multiplierResult), multiplicandResults: multiplicandResults)
-        
-        let value = result.value
-        
-        expect(value) == expectedValue
+        property("value with positive multiplier") <- forAll {
+            (a: ArrayOf<Constant>) in
+            
+            let a = a.getArray
+            
+            let multiplierResult = a.count
+            let multiplicandResults = a
+            let expectedValue = multiplicandResults.reduce(0) { $0 + $1.value }
+            let result = MultiplicationExpressionResult(multiplierResult: c(multiplierResult), multiplicandResults: multiplicandResults)
+            
+            let value = result.value
+            
+            return value == expectedValue
+        }
     }
     
-    // TODO: Make this a SwiftCheck test
     func test_value_shouldNegateTheMultiplicandResultsForNegativeMultiplier() {
-        let multiplierResult = -Int(arc4random_uniform(10)) - 1 // -1...10
-        let multiplicandCount = abs(multiplierResult)
-        let multiplicandResults = (0..<multiplicandCount).map { _ in c(Int(arc4random_uniform(100)) + 1) }
-        let expectedValue = multiplicandResults.reduce(0) { $0 - $1.value }
-        let result = MultiplicationExpressionResult(multiplierResult: c(multiplierResult), multiplicandResults: multiplicandResults)
+        property("value with positive multiplier") <- forAll {
+            (a: ArrayOf<Constant>) in
+            
+            let a = a.getArray
         
-        let value = result.value
-        
-        expect(value) == expectedValue
+            let multiplierResult = -a.count
+            let multiplicandResults = a
+            let expectedValue = multiplicandResults.reduce(0) { $0 - $1.value }
+            let result = MultiplicationExpressionResult(multiplierResult: c(multiplierResult), multiplicandResults: multiplicandResults)
+            
+            let value = result.value
+            
+            return value == expectedValue
+        }
     }
     
 }

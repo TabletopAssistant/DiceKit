@@ -22,56 +22,38 @@ extension NegationExpression_Tests {
     
     func test_shouldBeReflexive() {
         property("reflexive") <- forAll {
-            (a: Int) in
+            (a: Constant) in
             
-            let a = c(a)
-            
-            let x = NegationExpression(a)
-            
-            return x == x
+            return EquatableTestUtilities.checkReflexive { NegationExpression(a) }
         }
     }
     
     func test_shouldBeSymmetric() {
         property("symmetric") <- forAll {
-            (a: Int) in
+            (a: Constant) in
             
-            let a = c(a)
-            
-            let x = NegationExpression(a)
-            let y = NegationExpression(a)
-            
-            return x == y && y == x
+            return EquatableTestUtilities.checkSymmetric { NegationExpression(a) }
         }
     }
     
     func test_shouldBeTransitive() {
         property("transitive") <- forAll {
-            (a: Int) in
+            (a: Constant) in
             
-            let a = c(a)
-            
-            let x = NegationExpression(a)
-            let y = NegationExpression(a)
-            let z = NegationExpression(a)
-            
-            return x == y && y == z && x == z
+            return EquatableTestUtilities.checkTransitive { NegationExpression(a) }
         }
     }
     
     func test_shouldBeAbleToNotEquate() {
         property("non-equal") <- forAll {
-            (a: Int, b: Int) in
+            (a: Constant, b: Constant) in
             
-            guard a != b else { return true }
-            
-            let a = c(a)
-            let b = c(b)
-            
-            let x = NegationExpression(a)
-            let y = NegationExpression(b)
-            
-            return x != y
+            return (a != b) ==> {
+                EquatableTestUtilities.checkNotEquate(
+                    { NegationExpression(a) },
+                    { NegationExpression(b) }
+                )
+            }
         }
     }
     
@@ -82,9 +64,8 @@ extension NegationExpression_Tests {
     
     func test_evaluate_shouldCreateResultCorrectly() {
         property("create results") <- forAll {
-            (a: Int) in
+            (a: Constant) in
             
-            let a = c(a)
             let expression = NegationExpression(a)
             
             let result = expression.evaluate()
@@ -95,9 +76,7 @@ extension NegationExpression_Tests {
     
     func test_probabilityMass_shouldReturnCorrect() {
         property("probability mass") <- forAll {
-            (a: Int) in
-            
-            let a = c(a)
+            (a: Constant) in
             
             let expectedProbMass = a.probabilityMass.negate()
             let expression = NegationExpression(a)
@@ -115,9 +94,9 @@ extension NegationExpression_Tests {
     
     func test_operator_shouldWorkOnExpression() {
         property("-Expression should make correct NegationExpression") <- forAll {
-            (m: Int, n: Int, o: Int) in
+            (m: Constant, n: Constant, o: Die) in
             
-            let baseExpression = c(m) + c(n) * d(o)
+            let baseExpression = m + n * o
             let expectedExpression = NegationExpression(baseExpression)
             
             let expression = -baseExpression

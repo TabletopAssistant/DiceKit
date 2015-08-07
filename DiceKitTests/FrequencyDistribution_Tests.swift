@@ -8,11 +8,14 @@
 
 import XCTest
 import Nimble
+import SwiftCheck
 
 import DiceKit
 
 /// Tests the `FrequencyDistribution` type
 class FrequencyDistribution_Tests: XCTestCase {
+    
+    typealias SwiftCheckFrequenciesPerOutcome = DictionaryOf<FrequencyDistribution.Outcome, FrequencyDistribution.Frequency>
 
 }
 
@@ -20,12 +23,15 @@ class FrequencyDistribution_Tests: XCTestCase {
 extension FrequencyDistribution_Tests {
     
     func test_init_shouldSucceedWithFrequenciesPerOutcome() {
-        // TODO: SwiftCheck
-        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [1:1, 2:1, 3:4, 4:1]
-        
-        let freqDist = FrequencyDistribution(frequenciesPerOutcome)
-        
-        expect(freqDist.frequenciesPerOutcome) == frequenciesPerOutcome
+        property("init") <- forAll {
+            (a: SwiftCheckFrequenciesPerOutcome) in
+            
+            let a = a.getDictionary
+            
+            let freqDist = FrequencyDistribution(a)
+            
+            return freqDist.frequenciesPerOutcome == a
+        }
     }
     
 }
@@ -33,7 +39,51 @@ extension FrequencyDistribution_Tests {
 // MARK: - Equatable
 extension FrequencyDistribution_Tests {
     
-    // TODO: Equatable
+    func test_shouldBeReflexive() {
+        property("reflexive") <- forAll {
+            (a: SwiftCheckFrequenciesPerOutcome) in
+            
+            let a = a.getDictionary
+            
+            return EquatableTestUtilities.checkReflexive { FrequencyDistribution(a) }
+        }
+    }
+    
+    func test_shouldBeSymmetric() {
+        property("symmetric") <- forAll {
+            (a: SwiftCheckFrequenciesPerOutcome) in
+            
+            let a = a.getDictionary
+            
+            return EquatableTestUtilities.checkSymmetric { FrequencyDistribution(a) }
+        }
+    }
+    
+    func test_shouldBeTransitive() {
+        property("transitive") <- forAll {
+            (a: SwiftCheckFrequenciesPerOutcome) in
+            
+            let a = a.getDictionary
+            
+            return EquatableTestUtilities.checkTransitive { FrequencyDistribution(a) }
+        }
+    }
+    
+    func test_shouldBeAbleToNotEquate() {
+        property("non-equal") <- forAll {
+            (a: SwiftCheckFrequenciesPerOutcome, b: SwiftCheckFrequenciesPerOutcome) in
+            
+            let a = a.getDictionary
+            let b = b.getDictionary
+            
+            return (a != b) ==> {
+                return EquatableTestUtilities.checkNotEquate(
+                    { FrequencyDistribution(a) },
+                    { FrequencyDistribution(b) }
+                )
+            }
+        }
+    }
     
 }
 

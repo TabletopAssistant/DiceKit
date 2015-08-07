@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		531084C01B5AF993008DD696 /* MultiplicationExpressionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531084BF1B5AF993008DD696 /* MultiplicationExpressionResult.swift */; };
 		531084C31B5B0761008DD696 /* Die.Roll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531084C11B5B0102008DD696 /* Die.Roll.swift */; };
+		531E4F5F1B73F5E20073F01A /* EquatableTestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531E4F5E1B73F5E20073F01A /* EquatableTestUtilities.swift */; };
+		531E4F611B7400270073F01A /* Arbitrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531E4F601B7400270073F01A /* Arbitrary.swift */; };
 		533D0C771B6419F8003A7D32 /* FrequencyDistribution_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533D0C761B6419F8003A7D32 /* FrequencyDistribution_Tests.swift */; };
 		533D0C7B1B6423FA003A7D32 /* ProbabilityMass_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533D0C7A1B6423FA003A7D32 /* ProbabilityMass_Tests.swift */; };
 		533D0C7D1B643F6C003A7D32 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533D0C7C1B643F6C003A7D32 /* Constant.swift */; };
@@ -75,6 +77,8 @@
 		531084BD1B5AF859008DD696 /* ExpressionResultType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpressionResultType.swift; sourceTree = "<group>"; };
 		531084BF1B5AF993008DD696 /* MultiplicationExpressionResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplicationExpressionResult.swift; sourceTree = "<group>"; };
 		531084C11B5B0102008DD696 /* Die.Roll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Die.Roll.swift; sourceTree = "<group>"; };
+		531E4F5E1B73F5E20073F01A /* EquatableTestUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquatableTestUtilities.swift; sourceTree = "<group>"; };
+		531E4F601B7400270073F01A /* Arbitrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arbitrary.swift; sourceTree = "<group>"; };
 		533D0C761B6419F8003A7D32 /* FrequencyDistribution_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequencyDistribution_Tests.swift; sourceTree = "<group>"; };
 		533D0C7A1B6423FA003A7D32 /* ProbabilityMass_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProbabilityMass_Tests.swift; sourceTree = "<group>"; };
 		533D0C7C1B643F6C003A7D32 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
@@ -208,8 +212,10 @@
 				53D05ECF1B532208007CE7FC /* Supporting Files */,
 				539D56871B5B6D4A00AC6A37 /* AdditionExpression_Tests.swift */,
 				539D56891B5B6D6A00AC6A37 /* AdditionExpressionResult_Tests.swift */,
+				531E4F601B7400270073F01A /* Arbitrary.swift */,
 				533F880D1B52B988003838C8 /* Die_Tests.swift */,
 				53D1EC7F1B63DF0C00433D2C /* Dictionary+Functions_Tests.swift */,
+				531E4F5E1B73F5E20073F01A /* EquatableTestUtilities.swift */,
 				533D0C761B6419F8003A7D32 /* FrequencyDistribution_Tests.swift */,
 				539EAC661B6EF76A0097C116 /* FrequencyDistributionIndex_Tests.swift */,
 				53D05EEB1B546C73007CE7FC /* Int+Random_Tests.swift */,
@@ -388,6 +394,7 @@
 			files = (
 				539D56841B5B6D1A00AC6A37 /* NegationExpression_Tests.swift in Sources */,
 				53FA0EAE1B657A3600C8D3B5 /* ProbabilisticExpressionType_Tests.swift in Sources */,
+				531E4F611B7400270073F01A /* Arbitrary.swift in Sources */,
 				533EB1EE1B5B293000B3F8A1 /* MultiplicationExpressionResult_Tests.swift in Sources */,
 				53CFC3111B5AE4A0009C6C8F /* MultiplicationExpression_Tests.swift in Sources */,
 				53D05EEC1B546C73007CE7FC /* Int+Random_Tests.swift in Sources */,
@@ -397,6 +404,7 @@
 				539D56861B5B6D2B00AC6A37 /* NegationExpressionResult_Tests.swift in Sources */,
 				539D56881B5B6D4A00AC6A37 /* AdditionExpression_Tests.swift in Sources */,
 				539EAC671B6EF76A0097C116 /* FrequencyDistributionIndex_Tests.swift in Sources */,
+				531E4F5F1B73F5E20073F01A /* EquatableTestUtilities.swift in Sources */,
 				533D0C7B1B6423FA003A7D32 /* ProbabilityMass_Tests.swift in Sources */,
 				53D1EC801B63DF0C00433D2C /* Dictionary+Functions_Tests.swift in Sources */,
 			);

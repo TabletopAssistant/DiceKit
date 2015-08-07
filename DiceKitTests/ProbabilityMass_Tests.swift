@@ -8,6 +8,7 @@
 
 import XCTest
 import Nimble
+import SwiftCheck
 
 import DiceKit
 
@@ -23,21 +24,27 @@ class ProbabilityMass_Tests: XCTestCase {
 extension ProbabilityMass_Tests {
     
     func test_init_shouldNormalizeFrequencyDistribution() {
-        let freqDist = FrequencyDistribution([1: 1.0, 2: 6.0, 6: 3.0])
-        let expectedFreqDist = freqDist.normalizeFrequencies()
-        
-        let probMass = ProbabilityMass(freqDist)
-        
-        expect(probMass.frequencyDistribution) == expectedFreqDist
+        property("init with frequency distribution") <- forAll {
+            (a: FrequencyDistribution) in
+            
+            let expectedFreqDist = a.normalizeFrequencies()
+            
+            let probMass = ProbabilityMass(a)
+            
+            return probMass.frequencyDistribution == expectedFreqDist
+        }
     }
     
     func test_init_shouldWorkWithConstant() {
-        let constant = 8
-        let expectedFreqDist = FrequencyDistribution([constant: 1.0])
+        property("init with constant") <- forAll {
+            (a: Int) in
         
-        let probMass = ProbabilityMass(constant)
-        
-        expect(probMass.frequencyDistribution) == expectedFreqDist
+            let expectedFreqDist = FrequencyDistribution([a: 1.0])
+            
+            let probMass = ProbabilityMass(a)
+            
+            return probMass.frequencyDistribution == expectedFreqDist
+        }
     }
     
 }
@@ -45,7 +52,42 @@ extension ProbabilityMass_Tests {
 // MARK: - Equatable
 extension ProbabilityMass_Tests {
     
-    // TODO: Equatable
+    func test_shouldBeReflexive() {
+        property("reflexive") <- forAll {
+            (a: FrequencyDistribution) in
+            
+            return EquatableTestUtilities.checkReflexive { ProbabilityMass(a) }
+        }
+    }
+    
+    func test_shouldBeSymmetric() {
+        property("symmetric") <- forAll {
+            (a: FrequencyDistribution) in
+            
+            return EquatableTestUtilities.checkSymmetric { ProbabilityMass(a) }
+        }
+    }
+    
+    func test_shouldBeTransitive() {
+        property("transitive") <- forAll {
+            (a: FrequencyDistribution) in
+            
+            return EquatableTestUtilities.checkTransitive { ProbabilityMass(a) }
+        }
+    }
+    
+    func test_shouldBeAbleToNotEquate() {
+        property("non-equal") <- forAll {
+            (a: FrequencyDistribution, b: FrequencyDistribution) in
+            
+            return !(a.normalizeFrequencies().approximatelyEqual(b.normalizeFrequencies(), delta: ProbabilityMass.defaultProbabilityEqualityDelta) ) ==> {
+                return EquatableTestUtilities.checkNotEquate(
+                    { ProbabilityMass(a) },
+                    { ProbabilityMass(b) }
+                )
+            }
+        }
+    }
     
 }
 

@@ -32,13 +32,13 @@ class Int_Random_Tests: XCTestCase {
         property("random(lower:upper:) generates values for all valid inputs") <- forAll {
             (a: UInt64, b: UInt64) in
             
-            guard a != b else { return true }
-            
-            let lower = min(a, b)
-            let upper = max(a, b)
-            _ = UInt64.random(lower: lower, upper: upper)
-            
-            return true
+            return (a != b) ==> {
+                let lower = min(a, b)
+                let upper = max(a, b)
+                _ = UInt64.random(lower: lower, upper: upper)
+                
+                return true
+            }
         }
     }
     
@@ -50,13 +50,13 @@ class Int_Random_Tests: XCTestCase {
         property("random(lower:upper:) generates values for all valid inputs") <- forAll {
             (a: Int64, b: Int64) in
             
-            guard a != b else { return true }
-            
-            let lower = min(a, b)
-            let upper = max(a, b)
-            _ = Int64.random(lower: lower, upper: upper)
-            
-            return true
+            return (a != b) ==> {
+                let lower = min(a, b)
+                let upper = max(a, b)
+                _ = Int64.random(lower: lower, upper: upper)
+                
+                return true
+            }
         }
     }
     
@@ -68,13 +68,13 @@ class Int_Random_Tests: XCTestCase {
         property("random(lower:upper:) generates values for all valid inputs") <- forAll {
             (a: UInt32, b: UInt32) in
             
-            guard a != b else { return true }
-            
-            let lower = min(a, b)
-            let upper = max(a, b)
-            _ = UInt32.random(lower: lower, upper: upper)
-            
-            return true
+            return (a != b) ==> {
+                let lower = min(a, b)
+                let upper = max(a, b)
+                _ = UInt32.random(lower: lower, upper: upper)
+                
+                return true
+            }
         }
     }
     
@@ -86,13 +86,13 @@ class Int_Random_Tests: XCTestCase {
         property("random(lower:upper:) generates values for all valid inputs") <- forAll {
             (a: Int32, b: Int32) in
             
-            guard a != b else { return true }
-            
-            let lower = min(a, b)
-            let upper = max(a, b)
-            _ = Int32.random(lower: lower, upper: upper)
-            
-            return true
+            return (a != b) ==> {
+                let lower = min(a, b)
+                let upper = max(a, b)
+                _ = Int32.random(lower: lower, upper: upper)
+                
+                return true
+            }
         }
     }
     
@@ -104,13 +104,13 @@ class Int_Random_Tests: XCTestCase {
         property("random(lower:upper:) generates values for all valid inputs") <- forAll {
             (a: UInt, b: UInt) in
             
-            guard a != b else { return true }
-            
-            let lower = min(a, b)
-            let upper = max(a, b)
-            _ = UInt.random(lower: lower, upper: upper)
-            
-            return true
+            return (a != b) ==> {
+                let lower = min(a, b)
+                let upper = max(a, b)
+                _ = UInt.random(lower: lower, upper: upper)
+                
+                return true
+            }
         }
     }
     
@@ -122,13 +122,13 @@ class Int_Random_Tests: XCTestCase {
         property("random(lower:upper:) generates values for all valid inputs") <- forAll {
             (a: Int, b: Int) in
             
-            guard a != b else { return true }
-            
-            let lower = min(a, b)
-            let upper = max(a, b)
-            _ = Int.random(lower: lower, upper: upper)
-            
-            return true
+            return (a != b) ==> {
+                let lower = min(a, b)
+                let upper = max(a, b)
+                _ = Int.random(lower: lower, upper: upper)
+                
+                return true
+            }
         }
     }
     
