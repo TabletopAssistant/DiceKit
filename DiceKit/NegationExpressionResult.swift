@@ -10,10 +10,10 @@ import Foundation
 
 public struct NegationExpressionResult<BaseResult: protocol<ExpressionResultType, Equatable>>: Equatable {
     
-    public let baseResult: BaseResult
+    public let base: BaseResult
     
-    public init(_ baseResult: BaseResult) {
-        self.baseResult = baseResult
+    public init(_ base: BaseResult) {
+        self.base = base
     }
     
 }
@@ -21,7 +21,7 @@ public struct NegationExpressionResult<BaseResult: protocol<ExpressionResultType
 // MARK: - Equatable
 
 public func == <B>(lhs: NegationExpressionResult<B>, rhs: NegationExpressionResult<B>) -> Bool {
-    return lhs.baseResult == rhs.baseResult
+    return lhs.base == rhs.base
 }
 
 // MARK: - ExpressionResultType
@@ -29,7 +29,7 @@ public func == <B>(lhs: NegationExpressionResult<B>, rhs: NegationExpressionResu
 extension NegationExpressionResult: ExpressionResultType {
     
     public var value: Int {
-        return -baseResult.value
+        return -base.value
     }
     
 }
