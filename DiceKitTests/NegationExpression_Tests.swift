@@ -70,7 +70,7 @@ extension NegationExpression_Tests {
             
             let result = expression.evaluate()
             
-            return result.baseResult == a
+            return result.base == a
         }
     }
     
