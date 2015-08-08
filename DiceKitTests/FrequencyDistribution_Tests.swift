@@ -132,6 +132,49 @@ extension FrequencyDistribution_Tests {
     
 }
 
+// MARK: - Foundational Operations
+extension FrequencyDistribution_Tests {
+    
+    func test_mapOutcomes() {
+        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            7: 3.0,
+            6: 2.5,
+            5: 1.5,
+            4: 1.0,
+        ]
+        let freqDist = FrequencyDistribution(frequenciesPerOutcome)
+        let expectedFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            3: 5.5,
+            2: 2.5,
+        ] // /2
+        
+        let mappedOutcomes = freqDist.mapOutcomes { $0 / 2 }
+        
+        expect(mappedOutcomes.frequenciesPerOutcome) == expectedFrequenciesPerOutcome
+    }
+    
+    func test_mapFrequencies() {
+        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            7: 3.0,
+            6: 2.5,
+            5: 1.5,
+            4: 1.0,
+        ]
+        let freqDist = FrequencyDistribution(frequenciesPerOutcome)
+        let expectedFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            7: 6.0,
+            6: 5.0,
+            5: 3.0,
+            4: 2.0,
+        ] // *2
+        
+        let mappedFrequencies = freqDist.mapFrequencies { $0 * 2 }
+        
+        expect(mappedFrequencies.frequenciesPerOutcome) == expectedFrequenciesPerOutcome
+    }
+    
+}
+
 // MARK: - Primitive Operations
 extension FrequencyDistribution_Tests {
     
