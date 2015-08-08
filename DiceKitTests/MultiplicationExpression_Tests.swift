@@ -76,26 +76,6 @@ extension MultiplicationExpression_Tests {
 // MARK: - ExpressionType
 extension MultiplicationExpression_Tests {
     
-    class MockExpression: ExpressionType, Equatable {
-        
-        typealias Result = Constant
-        
-        var evaluateCalled = 0
-        var stubResulter: () -> Result = { 0 }
-        var stubProbabilityMass = ExpressionProbabilityMass(0)
-        
-        func evaluate() -> Result {
-            let result = stubResulter()
-            ++evaluateCalled
-            return result
-        }
-        
-        var probabilityMass: ExpressionProbabilityMass {
-            return stubProbabilityMass
-        }
-        
-    }
-    
     func test_evaluate_shouldCreateResultCorrectly() {
         property("evaluate") <- forAll {
             (a: ArrayOf<Constant>) in
@@ -163,8 +143,4 @@ extension MultiplicationExpression_Tests {
         }
     }
     
-}
-
-func == (lhs: MultiplicationExpression_Tests.MockExpression, rhs: MultiplicationExpression_Tests.MockExpression) -> Bool {
-    return lhs === rhs
 }
