@@ -36,6 +36,27 @@ extension Die: Arbitrary {
     }
 }
 
+extension Die {
+    
+    /// Generates an arbitrary roll within sides
+    public var arbitraryRollValue : Gen<Int> {
+        guard sides != 0 else {
+            return Gen.pure(0)
+        }
+        
+        func createRollValue(i : Int) -> Int {
+            if sides < 0 {
+                return -abs(i) + 1
+            } else {
+                return abs(i) + 1
+            }
+        }
+        
+        return createRollValue <^> Int.arbitrary.resize(abs(self.sides))
+    }
+    
+}
+
 extension FrequencyDistribution where OutcomeType: Arbitrary {
     
     public static func create(x : FrequenciesPerOutcome) -> FrequencyDistribution {
