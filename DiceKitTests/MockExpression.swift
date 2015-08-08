@@ -28,8 +28,22 @@ class MockExpression: ExpressionType, Equatable {
     
 }
 
+class MockExpressionResult: ExpressionResultType, Equatable {
+    
+    var stubValue: Int = 0
+    
+    var value: Int {
+        return stubValue
+    }
+    
+}
+
 // MARK: - Equatable
 
 func == (lhs: MockExpression, rhs: MockExpression) -> Bool {
+    return lhs === rhs
+}
+
+func == (lhs: MockExpressionResult, rhs: MockExpressionResult) -> Bool {
     return lhs === rhs
 }
