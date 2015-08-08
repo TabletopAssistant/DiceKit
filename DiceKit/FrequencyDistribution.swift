@@ -123,7 +123,7 @@ extension FrequencyDistribution {
     // MARK: Foundational Operations
     
     public func mapOutcomes(@noescape transform: (Outcome) -> Outcome) -> FrequencyDistribution {
-        let newFrequenciesPerOutcome = frequenciesPerOutcome.mapKeys {
+        let newFrequenciesPerOutcome = frequenciesPerOutcome.mapKeys ({ $1 + $2 }) {
             (baseOutcome, _) in transform(baseOutcome)
         }
         
