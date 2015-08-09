@@ -75,7 +75,7 @@ extension FrequencyDistribution where OutcomeType: Arbitrary {
     
 }
 
-public struct FrequencyDistributionOf<Outcome : protocol<FrequencyDistributionValueType, Arbitrary>> : Arbitrary, CustomStringConvertible {
+public struct FrequencyDistributionOf<Outcome : protocol<FrequencyDistributionOutcomeType, Arbitrary>> : Arbitrary, CustomStringConvertible {
     public let getFrequencyDistribution : FrequencyDistribution<Outcome>
     
     public init(_ frequencyDistribution : FrequencyDistribution<Outcome>) {

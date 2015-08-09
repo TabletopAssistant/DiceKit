@@ -6,7 +6,7 @@
 //  Copyright © 2015 Brentley Jones. All rights reserved.
 //
 
-public struct FrequencyDistributionIndex<Outcome: FrequencyDistributionValueType>: ForwardIndexType {
+public struct FrequencyDistributionIndex<Outcome: FrequencyDistributionOutcomeType>: ForwardIndexType {
     
     typealias OrderedOutcomes = [Outcome]
     

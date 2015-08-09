@@ -8,19 +8,35 @@
 
 import Foundation
 
-public protocol FrequencyDistributionValueType: IntegerArithmeticType, SignedNumberType, ForwardIndexType, Hashable {
+public protocol FrequencyDistributionOutcomeType: InvertibleMultiplicativeType, Hashable {
     
-    static var multiplicativeIdentity: Self { get }
+    var multiplierEquivalent: Int { get }
     
 }
 
-extension Int: FrequencyDistributionValueType {
+extension Int: InvertibleMultiplicativeType, FrequencyDistributionOutcomeType {
     
+    public static let additiveIdentity: Int = 0
     public static let multiplicativeIdentity: Int = 1
     
+    public var multiplierEquivalent: Int {
+        return self
+    }
+    
 }
 
-public struct FrequencyDistribution<OutcomeType: FrequencyDistributionValueType>: Equatable {
+extension Double: InvertibleMultiplicativeType {
+    
+    public static let additiveIdentity: Double = 0.0
+    public static let multiplicativeIdentity: Double = 1.0
+    
+    public var multiplierEquivalent: Double {
+        return self
+    }
+    
+}
+
+public struct FrequencyDistribution<OutcomeType: FrequencyDistributionOutcomeType>: Equatable {
     
     public typealias Outcome = OutcomeType
     public typealias Frequency = Double
@@ -31,7 +47,7 @@ public struct FrequencyDistribution<OutcomeType: FrequencyDistributionValueType>
         return FrequencyDistribution(FrequenciesPerOutcome())
     }
     public static var multiplicativeIdentity: FrequencyDistribution {
-        return FrequencyDistribution([Outcome.multiplicativeIdentity: 1.0])
+        return FrequencyDistribution([Outcome.additiveIdentity: Frequency.multiplicativeIdentity])
     }
     
     public let frequenciesPerOutcome: FrequenciesPerOutcome
@@ -173,8 +189,8 @@ extension FrequencyDistribution {
         return mapOutcomes { $0 + outcome }
     }
     
-    public func scaleFrequencies(scalar: Double) -> FrequencyDistribution {
-        return mapFrequencies { $0 * scalar }
+    public func scaleFrequencies(frequency: Frequency) -> FrequencyDistribution {
+        return mapFrequencies { $0 * frequency }
     }
     
     public func normalizeFrequencies() -> FrequencyDistribution {
@@ -213,16 +229,20 @@ extension FrequencyDistribution {
     /// This is a special case of `power(x: FrequencyDistribution)`,
     /// for when `x` is `FrequencyDistribution([x: 1])`.
     public func power(x: Outcome) -> FrequencyDistribution {
-        guard x != 0 else { return .multiplicativeIdentity }
+        let power = x.multiplierEquivalent
+        guard power != 0 else { return .multiplicativeIdentity }
         
         // Crappy implementation. Currently O(n). Can be O(log(n)).
-        // TODO: Handle negative properly
         var freqDist = self
-        for _ in Outcome.multiplicativeIdentity..<abs(x) {
+        for _ in 1..<abs(power) {
             freqDist = freqDist.multiply(self)
         }
         
-        return freqDist
+//        if (power < 0) {
+//            return FrequencyDistribution.multiplicativeIdentity.divide(freqDist)
+//        } else {
+            return freqDist
+//        }
     }
     
     public func power(x: FrequencyDistribution) -> FrequencyDistribution {
