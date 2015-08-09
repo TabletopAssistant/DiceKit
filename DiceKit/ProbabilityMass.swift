@@ -15,7 +15,7 @@ public struct ProbabilityMassConfig {
     
 }
 
-public struct ProbabilityMass<OutcomeType: FrequencyDistributionValueType>: ApproximatelyEquatable {
+public struct ProbabilityMass<OutcomeType: FrequencyDistributionOutcomeType>: ApproximatelyEquatable {
     
     public typealias Outcome = OutcomeType
     public typealias Probability = Double

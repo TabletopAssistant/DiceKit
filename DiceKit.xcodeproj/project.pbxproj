@@ -18,6 +18,7 @@
 		533F88091B52B988003838C8 /* DiceKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 533F87FE1B52B988003838C8 /* DiceKit.framework */; };
 		533F880E1B52B988003838C8 /* Die_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533F880D1B52B988003838C8 /* Die_Tests.swift */; };
 		533F88191B52BC6F003838C8 /* DiceKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 533F88181B52BC6F003838C8 /* DiceKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		534900341B78172900FA2804 /* ArithmeticType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534900331B78172900FA2804 /* ArithmeticType.swift */; };
 		5379780B1B531B21005818EC /* Die.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5379780A1B531B21005818EC /* Die.swift */; };
 		538743871B5316BA00EB15C8 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 530FEDD11B530CAB00960BFD /* Nimble.framework */; };
 		538AD9651B75A66F001B5CB5 /* MockExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538AD9641B75A66F001B5CB5 /* MockExpression.swift */; };
@@ -92,6 +93,7 @@
 		533F880D1B52B988003838C8 /* Die_Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Die_Tests.swift; sourceTree = "<group>"; };
 		533F880F1B52B988003838C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		533F88181B52BC6F003838C8 /* DiceKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiceKit.h; sourceTree = "<group>"; };
+		534900331B78172900FA2804 /* ArithmeticType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArithmeticType.swift; sourceTree = "<group>"; };
 		5379780A1B531B21005818EC /* Die.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Die.swift; sourceTree = "<group>"; };
 		538AD9641B75A66F001B5CB5 /* MockExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockExpression.swift; sourceTree = "<group>"; };
 		538AD9681B7678B7001B5CB5 /* Die.Roll_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Die.Roll_Tests.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				539D567D1B5B66CF00AC6A37 /* AdditionExpression.swift */,
 				539D567F1B5B689600AC6A37 /* AdditionExpressionResult.swift */,
 				53D1EC7D1B63133E00433D2C /* ApproximatelyEquatable.swift */,
+				534900331B78172900FA2804 /* ArithmeticType.swift */,
 				533D0C7C1B643F6C003A7D32 /* Constant.swift */,
 				539D568B1B5C7B7700AC6A37 /* Dictionary+Functions.swift */,
 				5379780A1B531B21005818EC /* Die.swift */,
@@ -376,6 +379,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				534900341B78172900FA2804 /* ArithmeticType.swift in Sources */,
 				539D56821B5B69D700AC6A37 /* ExpressionResultType.swift in Sources */,
 				539D567E1B5B66CF00AC6A37 /* AdditionExpression.swift in Sources */,
 				53D1EC7C1B6312E100433D2C /* FrequencyDistribution.swift in Sources */,
