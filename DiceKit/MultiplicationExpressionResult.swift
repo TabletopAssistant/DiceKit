@@ -71,4 +71,9 @@ extension MultiplicationExpressionResult: ExpressionResultType {
         }
     }
     
+    public var successfulness: Successfulness {
+        let successfulnesses = multiplicandResults.map { $0.successfulness }
+        return Successfulness.combineSuccessfulnesses(successfulnesses)
+    }
+    
 }

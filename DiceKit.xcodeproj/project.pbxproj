@@ -36,6 +36,7 @@
 		539D568E1B5C7BDA00AC6A37 /* ProbabilityMass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539D568D1B5C7BDA00AC6A37 /* ProbabilityMass.swift */; };
 		539EAC5B1B6DB97C0097C116 /* FrequencyDistributionIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539EAC5A1B6DB97C0097C116 /* FrequencyDistributionIndex.swift */; };
 		539EAC5D1B6E967F0097C116 /* OutcomeWithSuccessfulness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539EAC5C1B6E967F0097C116 /* OutcomeWithSuccessfulness.swift */; };
+		539EAC631B6EC3310097C116 /* SuccessfulnessResultType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539EAC621B6EC3310097C116 /* SuccessfulnessResultType.swift */; };
 		539EAC651B6EDA630097C116 /* Successfulness.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539EAC641B6EDA630097C116 /* Successfulness.swift */; };
 		539EAC671B6EF76A0097C116 /* FrequencyDistributionIndex_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 539EAC661B6EF76A0097C116 /* FrequencyDistributionIndex_Tests.swift */; };
 		53BA535A1B76D90400F0944C /* Successfulness_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53BA53591B76D90400F0944C /* Successfulness_Tests.swift */; };
@@ -125,6 +126,7 @@
 		539D568D1B5C7BDA00AC6A37 /* ProbabilityMass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProbabilityMass.swift; sourceTree = "<group>"; };
 		539EAC5A1B6DB97C0097C116 /* FrequencyDistributionIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequencyDistributionIndex.swift; sourceTree = "<group>"; };
 		539EAC5C1B6E967F0097C116 /* OutcomeWithSuccessfulness.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutcomeWithSuccessfulness.swift; sourceTree = "<group>"; };
+		539EAC621B6EC3310097C116 /* SuccessfulnessResultType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuccessfulnessResultType.swift; sourceTree = "<group>"; };
 		539EAC641B6EDA630097C116 /* Successfulness.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Successfulness.swift; sourceTree = "<group>"; };
 		539EAC661B6EF76A0097C116 /* FrequencyDistributionIndex_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequencyDistributionIndex_Tests.swift; sourceTree = "<group>"; };
 		53BA53591B76D90400F0944C /* Successfulness_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Successfulness_Tests.swift; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 				6E9F18911B7FCD5400AB8893 /* MaximizationExpression.swift */,
 				6E9F189B1B7FDFF900AB8893 /* MaximizationExpressionResult.swift */,
 				539EAC641B6EDA630097C116 /* Successfulness.swift */,
+				539EAC621B6EC3310097C116 /* SuccessfulnessResultType.swift */,
 			);
 			path = DiceKit;
 			sourceTree = "<group>";
@@ -430,6 +433,7 @@
 				534900341B78172900FA2804 /* ArithmeticType.swift in Sources */,
 				6E9F18921B7FCD5400AB8893 /* MaximizationExpression.swift in Sources */,
 				539D56821B5B69D700AC6A37 /* ExpressionResultType.swift in Sources */,
+				539EAC631B6EC3310097C116 /* SuccessfulnessResultType.swift in Sources */,
 				539D567E1B5B66CF00AC6A37 /* AdditionExpression.swift in Sources */,
 				53D1EC7C1B6312E100433D2C /* FrequencyDistribution.swift in Sources */,
 				539EAC5D1B6E967F0097C116 /* OutcomeWithSuccessfulness.swift in Sources */,

@@ -31,9 +31,14 @@ class MockExpression: ExpressionType, Equatable {
 class MockExpressionResult: ExpressionResultType, Equatable {
     
     var stubValue: Int = 0
+    var stubSuccessfulness: Successfulness = .Undetermined
     
     var value: Int {
         return stubValue
+    }
+    
+    var successfulness: Successfulness {
+        return stubSuccessfulness
     }
     
 }

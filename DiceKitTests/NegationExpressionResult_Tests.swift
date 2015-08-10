@@ -75,6 +75,23 @@ extension NegationExpressionResult_Tests {
         }
     }
     
+    func test_successfulness_shouldPassThroughBaseResult() {
+        let possibleSuccessfulnesses: [Successfulness] = [.Undetermined, .Success, .Fail]
+        // TODO: Change to `forEach` in Beta 5
+        possibleSuccessfulnesses.map {
+            (successfulness: Successfulness) -> Void in
+            
+            let expectedSuccessfulness = successfulness
+            let mockExpressionResult = MockExpressionResult()
+            mockExpressionResult.stubSuccessfulness = expectedSuccessfulness
+            let result = NegationExpressionResult(mockExpressionResult)
+            
+            let successfulness = result.successfulness
+            
+            expect(successfulness) == expectedSuccessfulness
+        }
+    }
+    
 }
 
 // MARK: - CustomDebugStringConvertible

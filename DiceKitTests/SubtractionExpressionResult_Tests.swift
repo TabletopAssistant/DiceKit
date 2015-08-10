@@ -94,6 +94,29 @@ extension SubtractionExpressionResult_Tests {
             return value == expectedValue
         }
     }
+
+    func test_successfulness_shouldSubtractSuccessfulnesses() {
+        let possibleSuccessfulessnesses: [Successfulness] = [.Undetermined, .Success, .Fail]
+        for lhsSuccessfulness in possibleSuccessfulessnesses {
+            for rhsSuccessfulness in possibleSuccessfulessnesses {
+                // Arrange
+                let expectedSuccessfulness = lhsSuccessfulness - rhsSuccessfulness // Tested already, so can use
+
+                let lhsMock = MockExpressionResult()
+                lhsMock.stubSuccessfulness = lhsSuccessfulness
+                let rhsMock = MockExpressionResult()
+                rhsMock.stubSuccessfulness = rhsSuccessfulness
+
+                let result = SubtractionExpressionResult(lhsMock, rhsMock)
+
+                // Act
+                let successfulness = result.successfulness
+
+                // Assert
+                expect(successfulness) == expectedSuccessfulness
+            }
+        }
+    }
     
 }
 

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol ExpressionResultType {
+public protocol ExpressionResultType: SuccessfulnessResultType {
     
     var value: Int { get }
     

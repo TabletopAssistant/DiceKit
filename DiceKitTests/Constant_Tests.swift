@@ -82,3 +82,14 @@ extension Constant_Tests {
     }
     
 }
+
+// MARK: - ExpressionResultType
+extension Constant_Tests {
+    
+    func test_successfulness_shouldBeUndetermined() {
+        let constant = c(84)
+        
+        expect(constant.successfulness) == Successfulness.Undetermined
+    }
+    
+}

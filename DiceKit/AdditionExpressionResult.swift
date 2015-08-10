@@ -54,4 +54,8 @@ extension AdditionExpressionResult: ExpressionResultType {
         return leftAddendResult.value + rightAddendResult.value
     }
     
+    public var successfulness: Successfulness {
+        return leftAddendResult.successfulness + rightAddendResult.successfulness
+    }
+    
 }

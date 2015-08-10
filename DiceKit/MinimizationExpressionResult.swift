@@ -10,9 +10,9 @@ import Foundation
 
 public struct MinimizationExpressionResult<MinimizationExpressionResult: protocol<ExpressionResultType, Equatable>>: Equatable {
     
-    public let minimizationExpressionResult: Int
+    public let minimizationExpressionResult: ExpressionProbabilityMass.Outcome
     
-    public init(_ minimizationExpressionResult: Int) {
+    public init(_ minimizationExpressionResult: ExpressionProbabilityMass.Outcome) {
         self.minimizationExpressionResult = minimizationExpressionResult
     }
     
@@ -50,6 +50,10 @@ extension MinimizationExpressionResult: ExpressionResultType {
     
     public var value: Int {
         return minimizationExpressionResult
+    }
+
+    public var successfulness: Successfulness {
+        return .Undetermined
     }
     
 }
