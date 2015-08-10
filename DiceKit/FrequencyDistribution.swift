@@ -198,6 +198,11 @@ extension FrequencyDistribution {
         return mapFrequencies { $0 / frequencies }
     }
     
+    public func removeZeroes(delta: Frequency) -> FrequencyDistribution {
+        let newFrequenciesPerOutcome = frequenciesPerOutcome.filterValues( {$0 > delta})
+        return FrequencyDistribution(newFrequenciesPerOutcome)
+    }
+    
     // MARK: Advanced Operations
     
     public func add(x: FrequencyDistribution) -> FrequencyDistribution {
@@ -213,6 +218,17 @@ extension FrequencyDistribution {
     
     // TODO: public func subtract(x: FrequencyDistribution) -> FrequencyDistribution
     // Probably needed to support divide
+    public func subtract(x: FrequencyDistribution) -> FrequencyDistribution {
+        var newFrequenciesPerOutcome = frequenciesPerOutcome
+        for (outcome, frequency) in x.frequenciesPerOutcome {
+            let exisitingFrequency = newFrequenciesPerOutcome[outcome] ?? 0
+            let newFrequency = exisitingFrequency - frequency
+            newFrequenciesPerOutcome[outcome] = newFrequency
+        }
+        
+        let delta: Double = ProbabilityMassConfig.probabilityEqualityDelta
+        return FrequencyDistribution(newFrequenciesPerOutcome).removeZeroes(delta)
+    }
     
     public func multiply(x: FrequencyDistribution) -> FrequencyDistribution {
         return frequenciesPerOutcome.reduce(.additiveIdentity) {

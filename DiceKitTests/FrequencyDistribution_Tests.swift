@@ -281,6 +281,15 @@ extension FrequencyDistribution_Tests {
         expect(normalized.frequenciesPerOutcome) == expectedFrequenciesPerOutcome
     }
     
+    func test_removeZeroes() {
+        let delta: Double = ProbabilityMassConfig.probabilityEqualityDelta
+        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [1:1.0, 2:0.0, 3:100.0, 4:(delta * 0.9)]
+        let expectedFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [1:1.0, 3:100.0]
+        
+        let result = FrequencyDistribution(frequenciesPerOutcome).removeZeroes(delta)
+        
+        expect(result.frequenciesPerOutcome) == expectedFrequenciesPerOutcome
+    }
 }
 
 // MARK: - Advanced Operations
@@ -299,6 +308,18 @@ extension FrequencyDistribution_Tests {
         expect(z.frequenciesPerOutcome) == expectedFrequenciesPerOutcome
     }
     
+    func test_subtract() {
+        let xFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [1:1.0, 2:1.0, 3:4.0, 4:1.0]
+        let yFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [4:6.0, 7:1.0, 8:0.5, 22:3.0]
+        let x = FrequencyDistribution(xFrequenciesPerOutcome)
+        let y = FrequencyDistribution(yFrequenciesPerOutcome)
+        let z = x.add(y)
+        
+        // x + y - y = x
+        let result = z.subtract(y)
+        
+        expect(result.frequenciesPerOutcome) == x.frequenciesPerOutcome
+    }
     func test_multiply() {
         // TODO: SwiftCheck
         /*

@@ -68,4 +68,12 @@ class Dictionary_Functions_Tests: XCTestCase {
         expect(mapped) == expected
     }
 
+    func test_filterValues() {
+        let original = [1: 1, 2: 4, 3: 9, 4: 16]
+        let expected = [1: 1, 2: 4]
+        
+        let filtered = original.filterValues({$0 < 5})
+        
+        expect(filtered) == expected
+    }
 }
