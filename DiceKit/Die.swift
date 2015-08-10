@@ -116,12 +116,11 @@ extension Die: ExpressionType {
         
         var frequenciesPerOutcome = FrequencyDistribution<ExpressionProbabilityMass.Outcome>.FrequenciesPerOutcome()
         let frequencyPerOutcome = 1.0/ExpressionProbabilityMass.Probability(abs(sides))
-        let minAnchor = ExpressionProbabilityMass.Outcome(1)
-        let sidesAnchor = ExpressionProbabilityMass.Outcome(sides)
-        let range = sides < 0 ? sidesAnchor...minAnchor : minAnchor...sidesAnchor
+        let range = sides < 0 ? sides...1 : 1...sides
         
         for value in range {
-            frequenciesPerOutcome[value] = frequencyPerOutcome
+            let outcome = ExpressionProbabilityMass.Outcome(value)
+            frequenciesPerOutcome[outcome] = frequencyPerOutcome
         }
         
         return ProbabilityMass(FrequencyDistribution(frequenciesPerOutcome), normalize: false)
