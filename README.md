@@ -26,7 +26,7 @@ DiceKit is a Swift framework for expressing and evaluating [dice notation][Dice 
 
 ## Requirements
 
-- iOS 7.0+ / Mac OS X 10.9+ / watchOS 2.0+
+- iOS 8.0+ / Mac OS X 10.9+ / watchOS 2.0+
 - Xcode 7 Beta 3 (Swift 2.0)
 
 ## Usage
