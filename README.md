@@ -17,7 +17,7 @@ DiceKit is a Swift framework for expressing and evaluating [dice notation][Dice 
 - [x] Roll dice with arbitrary number of sides (e.g., `d2`, `d7`, `d6538`)
 - [x] Evaluate simple dice expressions, including addition, multiplication, and negation operations (e.g. `2d20 + 6(1d5 + 8)`)
 - [ ] Evaluate complicated dice expressions, including division, dropping dice, and exploding dice – [#27](https://github.com/TabletopAssistant/DiceKit/issues/27), [#28](https://github.com/TabletopAssistant/DiceKit/issues/28), [#33](https://github.com/TabletopAssistant/DiceKit/issues/33)
-- [ ] Determine the probability distribution of an expression – [#58](https://github.com/TabletopAssistant/DiceKit/issues/58)
+- [x] Determine the probability distribution of an expression
 - [ ] Determine if an expression result meets success criteria  – [#59](https://github.com/TabletopAssistant/DiceKit/issues/59)
 - [ ] Determine the probability distribution of meeting a success criteria (e.g. chance of rolling higher than 16 on `1d20 + 8`, but a natural `1` being an auto failure and a natural `20` being an auto success) – [#4](https://github.com/TabletopAssistant/DiceKit/issues/4)
 - [ ] Parse expressions from strings – [#8](https://github.com/TabletopAssistant/DiceKit/issues/8)
