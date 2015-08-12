@@ -44,16 +44,16 @@ let value = result.value
 
 // The rolls are `Die.Roll` instead of just a value
 // They store which die the value is associated with
-let rollWasFromD11 = roll.die == d(11) // true
+let rollWasFromD11 = result.die == d(11) // true
 ```
 
 ### Expressions
 
 ```swift
-// 2d20 + 8
+// Create expressions such as `2d20 + 8`
 let expression = 2 * d(20) + 8
 
-// Result
+// Evaluate to get results
 let result = expression.evaluate()
 let value = result.value
 ```
