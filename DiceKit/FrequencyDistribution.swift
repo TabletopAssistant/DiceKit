@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol FrequencyDistributionOutcomeType: InvertibleMultiplicativeType, Hashable {
+public protocol FrequencyDistributionOutcomeType: InvertibleMultiplicativeType, ForwardIndexType, Hashable {
     
     var multiplierEquivalent: Int { get }
     
@@ -198,8 +198,8 @@ extension FrequencyDistribution {
         return mapFrequencies { $0 / frequencies }
     }
     
-    public func removeZeroes(delta: Frequency) -> FrequencyDistribution {
-        let newFrequenciesPerOutcome = frequenciesPerOutcome.filterValues( {$0 > delta})
+    public func filterZeroFrequencies(delta: Frequency) -> FrequencyDistribution {
+        let newFrequenciesPerOutcome = frequenciesPerOutcome.filterValues {abs($0) > delta}
         return FrequencyDistribution(newFrequenciesPerOutcome)
     }
     
@@ -216,8 +216,6 @@ extension FrequencyDistribution {
         return FrequencyDistribution(newFrequenciesPerOutcome)
     }
     
-    // TODO: public func subtract(x: FrequencyDistribution) -> FrequencyDistribution
-    // Probably needed to support divide
     public func subtract(x: FrequencyDistribution) -> FrequencyDistribution {
         var newFrequenciesPerOutcome = frequenciesPerOutcome
         for (outcome, frequency) in x.frequenciesPerOutcome {
@@ -227,7 +225,7 @@ extension FrequencyDistribution {
         }
         
         let delta: Double = ProbabilityMassConfig.probabilityEqualityDelta
-        return FrequencyDistribution(newFrequenciesPerOutcome).removeZeroes(delta)
+        return FrequencyDistribution(newFrequenciesPerOutcome).filterZeroFrequencies(delta)
     }
     
     public func multiply(x: FrequencyDistribution) -> FrequencyDistribution {
@@ -238,9 +236,24 @@ extension FrequencyDistribution {
         }
     }
     
-    // TODO: public func divide(x: FrequencyDistribution) -> FrequencyDistribution
-    // Needed to support power(-n)
-    
+    public func divide(y: FrequencyDistribution) -> FrequencyDistribution {
+        guard let initialK = orderedOutcomes.first, lastK = orderedOutcomes.last else {
+            return .additiveIdentity
+        }
+        guard let firstY = y.orderedOutcomes.first, lastY = y.orderedOutcomes.last, firstYFrequency = y[firstY] where firstYFrequency != 0.0 else {
+            fatalError("Divide by zero! :(")
+        }
+        var xFrequencies: FrequenciesPerOutcome = [:]
+        var p: Frequency
+        for k:Outcome in initialK...(lastK + lastY) {
+            p = 0.0
+            for (n, frequency) in xFrequencies {
+                p += frequency * (y[k - n] ?? 0)
+            }
+            xFrequencies[k - firstY] = ((frequenciesPerOutcome[k] ?? 0) - p) / firstYFrequency
+        }
+        return FrequencyDistribution(xFrequencies).filterZeroFrequencies(1e-16)
+    }
     
     /// This is a special case of `power(x: FrequencyDistribution)`,
     /// for when `x` is `FrequencyDistribution([x: 1])`.

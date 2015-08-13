@@ -281,12 +281,12 @@ extension FrequencyDistribution_Tests {
         expect(normalized.frequenciesPerOutcome) == expectedFrequenciesPerOutcome
     }
     
-    func test_removeZeroes() {
+    func test_filterZeroFrequencies() {
         let delta: Double = ProbabilityMassConfig.probabilityEqualityDelta
-        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [1:1.0, 2:0.0, 3:100.0, 4:(delta * 0.9)]
-        let expectedFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [1:1.0, 3:100.0]
+        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [1:1.0, 2:0.0, 3:100.0, 4:(delta * 0.9), 5: -42.0]
+        let expectedFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [1:1.0, 3:100.0, 5: -42.0]
         
-        let result = FrequencyDistribution(frequenciesPerOutcome).removeZeroes(delta)
+        let result = FrequencyDistribution(frequenciesPerOutcome).filterZeroFrequencies(delta)
         
         expect(result.frequenciesPerOutcome) == expectedFrequenciesPerOutcome
     }
@@ -348,6 +348,19 @@ extension FrequencyDistribution_Tests {
         expect(z) == expected
     }
     
+    func test_divide() {
+        //Does the reverse of multiply
+        let xFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [1:3.0, 2:2.0, 6:1.0]
+        let yFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [2:2.0, 3:2.0, 7:1.0]
+        let zFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [3:6.0, 4:10.0, 5:4.0, 8:5.0, 9:4.0, 13:1.0]
+        let z = FrequencyDistribution(zFrequenciesPerOutcome)
+        let y = FrequencyDistribution(yFrequenciesPerOutcome)
+        let expected = FrequencyDistribution(xFrequenciesPerOutcome)
+        
+        let x = z.divide(y)
+        
+        expect(x) == expected
+    }
     func test_power_shouldReturnMultiplicativeIdentityFor0() {
         let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [2:2.0, 3:2.0, 6:1.0]
         let expected = FrequencyDistribution<Int>.multiplicativeIdentity
