@@ -106,3 +106,32 @@ extension NegationExpression_Tests {
     }
     
 }
+
+
+// MARK: - CustomDebugStringConvertible
+extension NegationExpression_Tests {
+    
+    func test_CustomDebugStringConvertible() {
+        let expression = -(d(8))
+        let expected = "-Die(8)"
+        
+        let result = String(reflecting: expression)
+        
+        expect(result) == expected
+    }
+    
+}
+
+// MARK: - CustomStringConvertible
+extension NegationExpression_Tests {
+    
+    func test_CustomStringConvertible() {
+        let expression = -(d(8))
+        let expected = "-d8"
+        
+        let result = String(expression)
+        
+        expect(result) == expected
+    }
+    
+}

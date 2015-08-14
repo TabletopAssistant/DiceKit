@@ -30,6 +30,28 @@ extension Die.Roll: ExpressionResultType {
     // Already conforms because of `value`
 }
 
+// MARK: - CustomStringConvertible
+
+extension Die.Roll: CustomStringConvertible {
+    
+    public var description: String {
+        get {
+            return "\(value)|\(die.sides)"
+        }
+    }
+    
+}
+
+// MARK: - CustomDebugStringConvertible
+
+extension Die.Roll: CustomDebugStringConvertible {
+    
+    public var debugDescription: String {
+        return "\(String(reflecting: die)).Roll(\(value))"
+    }
+    
+}
+
 // MARK: - Equatable
 
 public func == (lhs: Die.Roll, rhs: Die.Roll) -> Bool {

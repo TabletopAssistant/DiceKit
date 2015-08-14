@@ -33,6 +33,11 @@ let d4Value = d4Result.value
 d6Result.die == d6
 d4Result.die == Die(sides: 4)
 
+//: If you really want flexibility in the way dice work, you can assign new rollers to the `Die.roller` property. Rollers define the range of outcomes that a die can have. When you roll a die, the result is made by passing that die's `sides` property to the roller. The default is `signedClosedRoller`, which can have a positive or negative number of sides. Another available roller is `unsignedRoller`, which will cause the dice to return 0 when sides <= 0.
+Die.roller = Die.unsignedRoller
+let unsignedDie = d(-10)
+let unsignedResult = unsignedDie.roll()
+let unsignedValue = unsignedResult.value
 
 //: Now that we have a grasp on single dice, let's explore [expressions](Expressions), which allows for combining dice and constants with various operations such as multiplication and addition.
 //:

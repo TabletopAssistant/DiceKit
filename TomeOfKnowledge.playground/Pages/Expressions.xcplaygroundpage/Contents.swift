@@ -2,8 +2,6 @@
 //:
 //: Similar to programming expressions you can create expressions in DiceKit that represent the combination of other expressions. Anything that conforms to `ExpressionResultType` is an expression, which means that `Die` and `Int` are also expressions (which is useful, otherwise they would be pretty worthless).
 //:
-//: > **Note:**
-//: > Expressions are currently a little rough around the edges. In the 0.2 release we plan on cleaning them up.
 import DiceKit
 
 //: Let's start with creating an expression that represents `2d20+8`:

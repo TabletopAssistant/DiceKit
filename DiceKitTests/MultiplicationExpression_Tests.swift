@@ -144,3 +144,31 @@ extension MultiplicationExpression_Tests {
     }
     
 }
+
+// MARK: - CustomDebugStringConvertible
+extension MultiplicationExpression_Tests {
+    
+    func test_CustomDebugStringConvertible() {
+        let expression = 2 * d(10)
+        let expected = "(Constant(2) * Die(10))"
+        
+        let result = String(reflecting: expression)
+        
+        expect(result) == expected
+    }
+    
+}
+
+// MARK: - CustomStringConvertible
+extension MultiplicationExpression_Tests {
+    
+    func test_CustomStringConvertible() {
+        let expression = 2 * d(10)
+        let expected = "2d10"
+        
+        let result = String(expression)
+        
+        expect(result) == expected
+    }
+    
+}

@@ -16,6 +16,10 @@
   [Brentley Jones](https://github.com/brentleyjones)
   [#83](https://github.com/TabletopAssistant/DiceKit/pull/83)
 
+- :mag: Add `CustomStringLiteral` and `CustomDebugStringLiteral` conformance to base types.  
+  [Jonathan Hoffman](https://github.com/JonathanHoffman)
+  [#55](https://github.com/TabletopAssistant/DiceKit/pull/55)
+
 ## 0.1: It Starts with a Single Die (2015-07-25)
 
 - :game_die: Support rolling individual dice.  

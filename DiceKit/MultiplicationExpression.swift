@@ -43,6 +43,32 @@ extension MultiplicationExpression: ExpressionType {
     
 }
 
+// MARK: - CustomStringConvertible
+
+extension MultiplicationExpression: CustomStringConvertible {
+    
+    public var description: String {
+        if multiplier is Constant && multiplicand is Die {
+            return "\(multiplier)\(multiplicand)"
+        } else if multiplicand is Die {
+            return "(\(multiplier))\(multiplicand)"
+        } else {
+            return "(\(multiplier) * \(multiplicand))"
+        }
+    }
+    
+}
+
+// MARK: - CustomDebugStringConvertible
+
+extension MultiplicationExpression: CustomDebugStringConvertible {
+    
+    public var debugDescription: String {
+        return "(\(String(reflecting: multiplier)) * \(String(reflecting: multiplicand)))"
+    }
+    
+}
+
 // MARK: - Equatable
 
 public func == <L, R>(lhs: MultiplicationExpression<L, R>, rhs: MultiplicationExpression<L, R>) -> Bool {

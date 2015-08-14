@@ -34,6 +34,26 @@ extension NegationExpression: ExpressionType {
     
 }
 
+// MARK: - CustomStringConvertible
+
+extension NegationExpression: CustomStringConvertible {
+    
+    public var description: String {
+        return "-\(base)"
+    }
+    
+}
+
+// MARK: - CustomDebugStringConvertible
+
+extension NegationExpression: CustomDebugStringConvertible {
+    
+    public var debugDescription: String {
+        return "-\(String(reflecting: base))"
+    }
+    
+}
+
 // MARK: - Equatable
 
 public func == <E>(lhs: NegationExpression<E>, rhs: NegationExpression<E>) -> Bool {
