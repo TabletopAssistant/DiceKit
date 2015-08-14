@@ -72,11 +72,35 @@ extension Dictionary {
         return newDictionary
     }
     
-    func filterValues(@noescape includeElement: Value -> Bool) -> [Key:Value] {
-        var newDictionary: [Key:Value] = [:]
+    func filterValues(@noescape includeElement: Value -> Bool) -> [Key: Value] {
+        var newDictionary: [Key: Value] = [:]
         
         for (key, value) in self {
             if includeElement(value) {
+                newDictionary[key] = value
+            }
+        }
+        
+        return newDictionary
+    }
+    
+    func filterKeys(@noescape includeElement: Key -> Bool) -> [Key: Value] {
+        var newDictionary: [Key: Value] = [:]
+        
+        for (key, value) in self {
+            if includeElement(key) {
+                newDictionary[key] = value
+            }
+        }
+        
+        return newDictionary
+    }
+    
+    func filter(@noescape includeElement: (Key, Value) -> Bool) -> [Key: Value] {
+        var newDictionary: [Key: Value] = [:]
+        
+        for (key, value) in self {
+            if includeElement(key, value) {
                 newDictionary[key] = value
             }
         }
