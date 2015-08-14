@@ -123,6 +123,12 @@ extension ProbabilityMass {
         return ProbabilityMass(freqDist, normalize: true)
     }
     
+    public func not(x: ProbabilityMass) -> ProbabilityMass {
+        let freqDist = frequencyDistribution.divide(x.frequencyDistribution)
+        
+        return ProbabilityMass(freqDist, normalize: true)
+    }
+    
     public func product(x: ProbabilityMass) -> ProbabilityMass {
         let freqDist = frequencyDistribution.power(x.frequencyDistribution)
         
@@ -149,6 +155,16 @@ public func ^^ <V>(lhs: ProbabilityMass<V>, rhs: ProbabilityMass<V>) -> Probabil
 
 public func && <V>(lhs: ProbabilityMass<V>, rhs: ProbabilityMass<V>) -> ProbabilityMass<V> {
     return lhs.and(rhs)
+}
+
+// Not operator
+infix operator !&& {
+    associativity left
+    precedence 140
+}
+
+public func !&& <V>(lhs: ProbabilityMass<V>, rhs: ProbabilityMass<V>) -> ProbabilityMass<V> {
+    return lhs.not(rhs)
 }
 
 public func * <V>(lhs: ProbabilityMass<V>, rhs: ProbabilityMass<V>) -> ProbabilityMass<V> {
