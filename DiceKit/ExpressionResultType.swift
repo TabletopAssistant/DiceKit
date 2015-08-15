@@ -13,3 +13,9 @@ public protocol ExpressionResultType {
     var value: Int { get }
     
 }
+
+// MARK: - Comparable
+
+public func < <R: ExpressionResultType>(lhs: R, rhs: R) -> Bool {
+    return lhs.value < rhs.value
+}

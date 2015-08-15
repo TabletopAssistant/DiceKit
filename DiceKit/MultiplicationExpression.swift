@@ -22,7 +22,7 @@ public struct MultiplicationExpression<LeftExpression: protocol<ExpressionType, 
 
 // MARK: - ExpressionType
 
-extension MultiplicationExpression: ExpressionType {
+extension MultiplicationExpression: ExpressionType, ExpressionCollectionProducer {
     
     public typealias Result = MultiplicationExpressionResult<LeftExpression.Result, RightExpression.Result>
     

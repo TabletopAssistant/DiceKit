@@ -21,8 +21,8 @@ extension Dictionary {
     }
     
     /// - Warning: If two keys are mapped to the same key, the last one evaluated will be used. Use conflictTransform variant to provide a different behavior.
-    func mapKeys(@noescape transform: (Key, Value) -> Key) -> [Key:Value] {
-        var newDictionary: [Key:Value] = [:]
+    func mapKeys<NewKey>(@noescape transform: (Key, Value) -> NewKey) -> [NewKey:Value] {
+        var newDictionary: [NewKey:Value] = [:]
         
         for (key, value) in self {
             let newKey = transform(key, value)
@@ -32,8 +32,8 @@ extension Dictionary {
         return newDictionary
     }
     
-    func mapKeys(@noescape conflictTransform: (Key, Value, Value) -> Value, @noescape transform: (Key, Value) -> Key) -> [Key:Value] {
-        var newDictionary: [Key:Value] = [:]
+    func mapKeys<NewKey>(@noescape conflictTransform: (NewKey, Value, Value) -> Value, @noescape transform: (Key, Value) -> NewKey) -> [NewKey:Value] {
+        var newDictionary: [NewKey:Value] = [:]
         
         for (key, var value) in self {
             let newKey = transform(key, value)
@@ -47,8 +47,8 @@ extension Dictionary {
     }
     
     /// - Warning: If two keys are mapped to the same key, the last one evaluated will be used. Use conflictTransform variant to provide a different behavior.
-    func map(@noescape transform: (Key, Value) -> (Key, Value)) -> [Key:Value] {
-        var newDictionary: [Key:Value] = [:]
+    func map<NewKey>(@noescape transform: (Key, Value) -> (NewKey, Value)) -> [NewKey:Value] {
+        var newDictionary: [NewKey:Value] = [:]
         
         for (key, value) in self {
             let (newKey, newValue) = transform(key, value)
@@ -58,8 +58,8 @@ extension Dictionary {
         return newDictionary
     }
     
-    func map(@noescape conflictTransform: (Key, Value, Value) -> Value, @noescape transform: (Key, Value) -> (Key, Value)) -> [Key:Value] {
-        var newDictionary: [Key:Value] = [:]
+    func map<NewKey>(@noescape conflictTransform: (NewKey, Value, Value) -> Value, @noescape transform: (Key, Value) -> (NewKey, Value)) -> [NewKey:Value] {
+        var newDictionary: [NewKey:Value] = [:]
         
         for (key, value) in self {
             var (newKey, newValue) = transform(key, value)

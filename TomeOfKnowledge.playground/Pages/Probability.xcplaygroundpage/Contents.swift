@@ -33,4 +33,103 @@ for (value, probability) in awesomeExpressionProbailityMass {
 }
 
 
+
+
+
+
+
+var lastTimestamp = NSDate()
+
+
+// DL(1d7 + 1d7 + 1d7 + 1d7)
+var slowBiggerDLFrequenciesPerOutcome = FrequencyDistribution<Int>.FrequenciesPerOutcome()
+for i in 1...7 {
+    for j in 1...7 {
+        for k in 1...7 {
+            for l in 1...7 {
+                let remainingAfterDropped = OrderedArray([i, j, k, l]).array.suffixFrom(1)
+                let summedAfterDropped = remainingAfterDropped.reduce(0, combine: +)
+                let existingFrequency = slowBiggerDLFrequenciesPerOutcome[summedAfterDropped] ?? 0
+                slowBiggerDLFrequenciesPerOutcome[summedAfterDropped] = 1 + existingFrequency
+            }
+        }
+    }
+}
+
+let slowBiggerDLFreqDist = FrequencyDistribution(slowBiggerDLFrequenciesPerOutcome).normalizeFrequencies()
+
+print("Time: \(NSDate().timeIntervalSinceDate(lastTimestamp))")
+//print("Slow:   \(slowBiggerDLFreqDist)")
+
+
+typealias DL1 = DropLowest
+
+let d2DL1FreqDist = FrequencyDistribution<DL1>([1: 1.0, 2: 1.0])
+let d3DL1FreqDist = FrequencyDistribution<DL1>([1: 1.0, 2: 1.0, 3: 1.0])
+let d4DL1FreqDist = FrequencyDistribution<DL1>([1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0])
+let d5DL1FreqDist = FrequencyDistribution<DL1>([1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 1.0])
+let d6DL1FreqDist = FrequencyDistribution<DL1>([1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 1.0, 6: 1.0])
+let d7DL1FreqDist = FrequencyDistribution<DL1>([1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 1.0, 6: 1.0, 7: 1.0])
+
+lastTimestamp = NSDate()
+
+let intermediateFasterBiggerDL1FreqDist = d7DL1FreqDist.multiply(d7DL1FreqDist).multiply(d7DL1FreqDist).multiply(d7DL1FreqDist)
+
+let fasterBiggerDL1FreqDist = intermediateFasterBiggerDL1FreqDist.normalizeFrequencies().mapOutcomes {
+    $0.totalEquivalent
+}
+
+print("Drop 1 Time: \(NSDate().timeIntervalSinceDate(lastTimestamp))")
+
+fasterBiggerDL1FreqDist.approximatelyEqual(slowBiggerDLFreqDist, delta: ProbabilityMassConfig.defaultProbabilityEqualityDelta)
+
+
+
+typealias DL2 = DropLowest2
+
+let d2DL2FreqDist = FrequencyDistribution<DL2>([1: 1.0, 2: 1.0])
+let d3DL2FreqDist = FrequencyDistribution<DL2>([1: 1.0, 2: 1.0, 3: 1.0])
+let d4DL2FreqDist = FrequencyDistribution<DL2>([1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0])
+let d5DL2FreqDist = FrequencyDistribution<DL2>([1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 1.0])
+let d6DL2FreqDist = FrequencyDistribution<DL2>([1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 1.0, 6: 1.0])
+let d7DL2FreqDist = FrequencyDistribution<DL2>([1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 1.0, 6: 1.0, 7: 1.0])
+
+lastTimestamp = NSDate()
+
+let intermediateFasterBiggerDL2FreqDist = d7DL2FreqDist.multiply(d7DL2FreqDist).multiply(d7DL2FreqDist).multiply(d7DL2FreqDist)
+
+let fasterBiggerDL2FreqDist = intermediateFasterBiggerDL2FreqDist.normalizeFrequencies().mapOutcomes {
+    $0.totalEquivalent
+}
+
+print("Drop n Time: \(NSDate().timeIntervalSinceDate(lastTimestamp))")
+
+fasterBiggerDL2FreqDist.approximatelyEqual(slowBiggerDLFreqDist, delta: ProbabilityMassConfig.defaultProbabilityEqualityDelta)
+
+
+
+
+let d3FreqDist = FrequencyDistribution<Int>([1: 1.0, 2: 1.0, 3: 1.0])
+let d4FreqDist = FrequencyDistribution<Int>([1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0])
+let d5FreqDist = FrequencyDistribution<Int>([1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 1.0])
+let d6FreqDist = FrequencyDistribution<Int>([1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 1.0, 6: 1.0])
+let d7FreqDist = FrequencyDistribution<Int>([1: 1.0, 2: 1.0, 3: 1.0, 4: 1.0, 5: 1.0, 6: 1.0, 7: 1.0])
+
+
+lastTimestamp = NSDate()
+
+let normalFaster = d7FreqDist.multiply(d7FreqDist).multiply(d7FreqDist).multiply(d7FreqDist)
+
+print("Add    Time: \(NSDate().timeIntervalSinceDate(lastTimestamp))")
+//print("Normal: \(fasterBiggerDLFreqDist)")
+
+
+let mappedNormalFaster = normalFaster.mapOutcomes {
+    $0
+}
+
+
+print("Interm 1: \(intermediateFasterBiggerDL1FreqDist)")
+print("Interm 2: \(intermediateFasterBiggerDL2FreqDist)")
+
 //: [Previous](@previous)

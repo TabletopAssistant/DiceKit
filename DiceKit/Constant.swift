@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Constant: Equatable {
+public struct Constant: Equatable, Comparable {
     
     public let value: Int
     

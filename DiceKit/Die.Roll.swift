@@ -11,7 +11,7 @@ import Foundation
 extension Die {
 
     /// The result of rolling a `Die`.
-    public struct Roll: Equatable {
+    public struct Roll: Equatable, Comparable {
         
         public let die: Die
         public let value: Int

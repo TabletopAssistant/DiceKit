@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		531084C01B5AF993008DD696 /* MultiplicationExpressionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531084BF1B5AF993008DD696 /* MultiplicationExpressionResult.swift */; };
 		531084C31B5B0761008DD696 /* Die.Roll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531084C11B5B0102008DD696 /* Die.Roll.swift */; };
+		531691E31B7C22ED00D1B069 /* ChooseExpressionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531691E21B7C22ED00D1B069 /* ChooseExpressionResult.swift */; };
+		531691E51B7C2F5500D1B069 /* ChooseExpressionResult_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531691E41B7C2F5500D1B069 /* ChooseExpressionResult_Tests.swift */; };
+		531691E71B7C350700D1B069 /* ExpressionResultCollectionProducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531691E61B7C350700D1B069 /* ExpressionResultCollectionProducer.swift */; };
+		531691E91B7C389F00D1B069 /* ChooseExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531691E81B7C389F00D1B069 /* ChooseExpression.swift */; };
 		531E4F5F1B73F5E20073F01A /* EquatableTestUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531E4F5E1B73F5E20073F01A /* EquatableTestUtilities.swift */; };
 		531E4F611B7400270073F01A /* Arbitrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 531E4F601B7400270073F01A /* Arbitrary.swift */; };
 		533D0C771B6419F8003A7D32 /* FrequencyDistribution_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533D0C761B6419F8003A7D32 /* FrequencyDistribution_Tests.swift */; };
@@ -19,6 +23,7 @@
 		533F880E1B52B988003838C8 /* Die_Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533F880D1B52B988003838C8 /* Die_Tests.swift */; };
 		533F88191B52BC6F003838C8 /* DiceKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 533F88181B52BC6F003838C8 /* DiceKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		534900341B78172900FA2804 /* ArithmeticType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 534900331B78172900FA2804 /* ArithmeticType.swift */; };
+		53544D611B7F98C500139A79 /* OrderedArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53544D601B7F98C500139A79 /* OrderedArray.swift */; };
 		5379780B1B531B21005818EC /* Die.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5379780A1B531B21005818EC /* Die.swift */; };
 		538743871B5316BA00EB15C8 /* Nimble.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 530FEDD11B530CAB00960BFD /* Nimble.framework */; };
 		538AD9651B75A66F001B5CB5 /* MockExpression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 538AD9641B75A66F001B5CB5 /* MockExpression.swift */; };
@@ -81,6 +86,10 @@
 		531084BD1B5AF859008DD696 /* ExpressionResultType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpressionResultType.swift; sourceTree = "<group>"; };
 		531084BF1B5AF993008DD696 /* MultiplicationExpressionResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplicationExpressionResult.swift; sourceTree = "<group>"; };
 		531084C11B5B0102008DD696 /* Die.Roll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Die.Roll.swift; sourceTree = "<group>"; };
+		531691E21B7C22ED00D1B069 /* ChooseExpressionResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseExpressionResult.swift; sourceTree = "<group>"; };
+		531691E41B7C2F5500D1B069 /* ChooseExpressionResult_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseExpressionResult_Tests.swift; sourceTree = "<group>"; };
+		531691E61B7C350700D1B069 /* ExpressionResultCollectionProducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExpressionResultCollectionProducer.swift; sourceTree = "<group>"; };
+		531691E81B7C389F00D1B069 /* ChooseExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseExpression.swift; sourceTree = "<group>"; };
 		531E4F5E1B73F5E20073F01A /* EquatableTestUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EquatableTestUtilities.swift; sourceTree = "<group>"; };
 		531E4F601B7400270073F01A /* Arbitrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Arbitrary.swift; sourceTree = "<group>"; };
 		533D0C761B6419F8003A7D32 /* FrequencyDistribution_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequencyDistribution_Tests.swift; sourceTree = "<group>"; };
@@ -94,6 +103,7 @@
 		533F880F1B52B988003838C8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		533F88181B52BC6F003838C8 /* DiceKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiceKit.h; sourceTree = "<group>"; };
 		534900331B78172900FA2804 /* ArithmeticType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArithmeticType.swift; sourceTree = "<group>"; };
+		53544D601B7F98C500139A79 /* OrderedArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedArray.swift; sourceTree = "<group>"; };
 		5379780A1B531B21005818EC /* Die.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Die.swift; sourceTree = "<group>"; };
 		538AD9641B75A66F001B5CB5 /* MockExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockExpression.swift; sourceTree = "<group>"; };
 		538AD9681B7678B7001B5CB5 /* Die.Roll_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Die.Roll_Tests.swift; sourceTree = "<group>"; };
@@ -196,11 +206,14 @@
 				539D567F1B5B689600AC6A37 /* AdditionExpressionResult.swift */,
 				53D1EC7D1B63133E00433D2C /* ApproximatelyEquatable.swift */,
 				534900331B78172900FA2804 /* ArithmeticType.swift */,
+				531691E81B7C389F00D1B069 /* ChooseExpression.swift */,
+				531691E21B7C22ED00D1B069 /* ChooseExpressionResult.swift */,
 				533D0C7C1B643F6C003A7D32 /* Constant.swift */,
 				539D568B1B5C7B7700AC6A37 /* Dictionary+Functions.swift */,
 				5379780A1B531B21005818EC /* Die.swift */,
 				531084C11B5B0102008DD696 /* Die.Roll.swift */,
 				53CFC30C1B5AD3BF009C6C8F /* ExpressionType.swift */,
+				531691E61B7C350700D1B069 /* ExpressionResultCollectionProducer.swift */,
 				531084BD1B5AF859008DD696 /* ExpressionResultType.swift */,
 				53D1EC7B1B6312E100433D2C /* FrequencyDistribution.swift */,
 				539EAC5A1B6DB97C0097C116 /* FrequencyDistributionIndex.swift */,
@@ -209,6 +222,7 @@
 				531084BF1B5AF993008DD696 /* MultiplicationExpressionResult.swift */,
 				53ECD0E11B5B498A002D859F /* NegationExpression.swift */,
 				53ECD0E31B5B5185002D859F /* NegationExpressionResult.swift */,
+				53544D601B7F98C500139A79 /* OrderedArray.swift */,
 				53FA0EAB1B6579F300C8D3B5 /* ProbabilisticExpressionType.swift */,
 				539D568D1B5C7BDA00AC6A37 /* ProbabilityMass.swift */,
 			);
@@ -222,6 +236,7 @@
 				539D56871B5B6D4A00AC6A37 /* AdditionExpression_Tests.swift */,
 				539D56891B5B6D6A00AC6A37 /* AdditionExpressionResult_Tests.swift */,
 				531E4F601B7400270073F01A /* Arbitrary.swift */,
+				531691E41B7C2F5500D1B069 /* ChooseExpressionResult_Tests.swift */,
 				538AD96A1B768931001B5CB5 /* Constant_Tests.swift */,
 				533F880D1B52B988003838C8 /* Die_Tests.swift */,
 				538AD9681B7678B7001B5CB5 /* Die.Roll_Tests.swift */,
@@ -381,9 +396,13 @@
 			files = (
 				534900341B78172900FA2804 /* ArithmeticType.swift in Sources */,
 				539D56821B5B69D700AC6A37 /* ExpressionResultType.swift in Sources */,
+				531691E31B7C22ED00D1B069 /* ChooseExpressionResult.swift in Sources */,
+				531691E71B7C350700D1B069 /* ExpressionResultCollectionProducer.swift in Sources */,
 				539D567E1B5B66CF00AC6A37 /* AdditionExpression.swift in Sources */,
 				53D1EC7C1B6312E100433D2C /* FrequencyDistribution.swift in Sources */,
+				531691E91B7C389F00D1B069 /* ChooseExpression.swift in Sources */,
 				53FA0EAC1B6579F300C8D3B5 /* ProbabilisticExpressionType.swift in Sources */,
+				53544D611B7F98C500139A79 /* OrderedArray.swift in Sources */,
 				531084C01B5AF993008DD696 /* MultiplicationExpressionResult.swift in Sources */,
 				539D568C1B5C7B7700AC6A37 /* Dictionary+Functions.swift in Sources */,
 				53D1EC7E1B63133E00433D2C /* ApproximatelyEquatable.swift in Sources */,
@@ -422,6 +441,7 @@
 				538AD9651B75A66F001B5CB5 /* MockExpression.swift in Sources */,
 				531E4F5F1B73F5E20073F01A /* EquatableTestUtilities.swift in Sources */,
 				533D0C7B1B6423FA003A7D32 /* ProbabilityMass_Tests.swift in Sources */,
+				531691E51B7C2F5500D1B069 /* ChooseExpressionResult_Tests.swift in Sources */,
 				53D1EC801B63DF0C00433D2C /* Dictionary+Functions_Tests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

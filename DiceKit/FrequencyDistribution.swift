@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol FrequencyDistributionOutcomeType: InvertibleMultiplicativeType, Hashable {
+public protocol FrequencyDistributionOutcomeType: InvertibleAdditiveType, Hashable {
     
     var multiplierEquivalent: Int { get }
     
@@ -62,7 +62,7 @@ public struct FrequencyDistribution<OutcomeType: FrequencyDistributionOutcomeTyp
     
     public init(_ frequenciesPerOutcome: FrequenciesPerOutcome) {
         self.frequenciesPerOutcome = frequenciesPerOutcome
-        self.orderedOutcomes = frequenciesPerOutcome.map { $0.0 }.sort()
+        self.orderedOutcomes = []//frequenciesPerOutcome.map { $0.0 }.sort()
     }
     
 }
@@ -138,12 +138,12 @@ extension FrequencyDistribution {
     
     // MARK: Foundational Operations
     
-    public func mapOutcomes(@noescape transform: (Outcome) -> Outcome) -> FrequencyDistribution {
+    public func mapOutcomes<T>(@noescape transform: (Outcome) -> FrequencyDistribution<T>.Outcome) -> FrequencyDistribution<T> {
         let newFrequenciesPerOutcome = frequenciesPerOutcome.mapKeys ({ $1 + $2 }) {
             (baseOutcome, _) in transform(baseOutcome)
         }
         
-        return FrequencyDistribution(newFrequenciesPerOutcome)
+        return FrequencyDistribution<T>(newFrequenciesPerOutcome)
     }
     
     public func mapFrequencies(@noescape transform: (Frequency) -> Frequency) -> FrequencyDistribution {

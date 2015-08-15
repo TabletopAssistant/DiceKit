@@ -18,5 +18,11 @@ let result = expression.evaluate()
 let value = result.value
 
 
+
+let fourD6DropLowest = ChooseExpression(4 * d(6), .Drop, .Lowest, 1)
+let fourD6DropLowestResult = fourD6DropLowest.evaluate()
+let baseResult = fourD6DropLowestResult.base.resultCollection
+let droppedResult = fourD6DropLowestResult.resultCollection
+
 //: [Previous](@previous)
 //: [Next](@next)

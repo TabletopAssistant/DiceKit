@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct MultiplicationExpressionResult<MultiplierResult: protocol<ExpressionResultType, Equatable>, MultiplicandResult: protocol<ExpressionResultType, Equatable>>: Equatable {
+public struct MultiplicationExpressionResult<MultiplierResult: protocol<ExpressionResultType, Equatable>, MultiplicandResult: protocol<ExpressionResultType, Equatable, Comparable>>: Equatable, Comparable {
     
     public let multiplierResult: MultiplierResult
     public let multiplicandResults: [MultiplicandResult]
@@ -71,4 +71,14 @@ extension MultiplicationExpressionResult: ExpressionResultType {
         }
     }
     
+}
+
+// MARK: - ExpressionResultCollectionProducer
+
+extension MultiplicationExpressionResult: ExpressionResultCollectionProducer {
+    
+    public var resultCollection: [MultiplicandResult] {
+        // TODO: Handle negateMultiplicandResults
+        return multiplicandResults
+    }
 }

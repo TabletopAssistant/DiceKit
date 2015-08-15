@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct AdditionExpressionResult<LeftAddendResult: protocol<ExpressionResultType, Equatable>, RightAddendResult: protocol<ExpressionResultType, Equatable>>: Equatable {
+public struct AdditionExpressionResult<LeftAddendResult: protocol<ExpressionResultType, Equatable>, RightAddendResult: protocol<ExpressionResultType, Equatable>>: Equatable, Comparable {
     
     public let leftAddendResult: LeftAddendResult
     public let rightAddendResult: RightAddendResult
