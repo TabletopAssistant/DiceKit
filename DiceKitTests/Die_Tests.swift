@@ -418,7 +418,7 @@ extension Die_Tests {
             typealias PM = ExpressionProbabilityMass
             
             let outcomePerValue = 1.0/PM.Probability(abs(sides))
-            let range = sides < 0 ? sides...1 : 1...sides
+            let range = sides < 0 ? sides...(-1) : 1...sides
             
             for value in range {
                 let outcome = ExpressionProbabilityMass.Outcome(value)
@@ -477,6 +477,18 @@ extension Die_Tests {
         let result = String(roll)
         
         expect(result) == expected
+    }
+    
+}
+
+//MARK: - ProbabilityMass for negative sided die
+extension Die_Tests {
+    
+    func test_die_negativeSidedProbabilityMass() {
+        let die = d(-2)
+        let expectedProbabilityMass = ProbabilityMass(FrequencyDistribution([-2: 0.5, -1: 0.5]))
+        
+        expect(die.probabilityMass) == expectedProbabilityMass
     }
     
 }
