@@ -116,9 +116,8 @@ for up to date installation instructions.
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING) for more details. Thank you, [contributors]!
+See [CONTRIBUTING.md](CONTRIBUTING.md) for more details. Thank you, [contributors]!
 
-[CONTRIBUTING]: CONTRIBUTING.md
 [contributors]: https://github.com/TabletopAssistant/DiceKit/graphs/contributors
 
 This project adheres to the [Open Code of Conduct][code-of-conduct]. By participating, you are expected to honor this code.
