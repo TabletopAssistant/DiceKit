@@ -60,9 +60,13 @@ public struct FrequencyDistribution<OutcomeType: FrequencyDistributionOutcomeTyp
         }
     }
     
+    internal init(_ frequenciesPerOutcome: FrequenciesPerOutcome, delta: Double) {
+        self.frequenciesPerOutcome = frequenciesPerOutcome.filterValues { abs($0) > delta }
+        self.orderedOutcomes = self.frequenciesPerOutcome.map { $0.0 }.sort()
+    }
+    
     public init(_ frequenciesPerOutcome: FrequenciesPerOutcome) {
-        self.frequenciesPerOutcome = frequenciesPerOutcome
-        self.orderedOutcomes = frequenciesPerOutcome.map { $0.0 }.sort()
+        self.init(frequenciesPerOutcome, delta: 0.0)
     }
     
 }
@@ -199,8 +203,8 @@ extension FrequencyDistribution {
     }
     
     public func filterZeroFrequencies(delta: Frequency) -> FrequencyDistribution {
-        let newFrequenciesPerOutcome = frequenciesPerOutcome.filterValues {abs($0) > delta}
-        return FrequencyDistribution(newFrequenciesPerOutcome)
+        let newFrequenciesPerOutcome = frequenciesPerOutcome
+        return FrequencyDistribution(newFrequenciesPerOutcome, delta: delta)
     }
     
     // MARK: Advanced Operations
@@ -224,8 +228,7 @@ extension FrequencyDistribution {
             newFrequenciesPerOutcome[outcome] = newFrequency
         }
         
-        let delta: Double = ProbabilityMassConfig.probabilityEqualityDelta
-        return FrequencyDistribution(newFrequenciesPerOutcome).filterZeroFrequencies(delta)
+        return FrequencyDistribution(newFrequenciesPerOutcome)
     }
     
     public func multiply(x: FrequencyDistribution) -> FrequencyDistribution {
@@ -241,18 +244,20 @@ extension FrequencyDistribution {
             return .additiveIdentity
         }
         guard let firstY = y.orderedOutcomes.first, lastY = y.orderedOutcomes.last, firstYFrequency = y[firstY] where firstYFrequency != 0.0 else {
-            fatalError("Divide by zero! :(")
+            fatalError("Invalid divide operation. The divisor expression must not be empty, and its first frequency must not be zero.")
         }
+        
         var xFrequencies: FrequenciesPerOutcome = [:]
-        var p: Frequency
-        for k:Outcome in initialK...(lastK + lastY) {
-            p = 0.0
+        for k in initialK...(lastK + lastY) {
+            var p: Frequency = 0.0
             for (n, frequency) in xFrequencies {
                 p += frequency * (y[k - n] ?? 0)
             }
             xFrequencies[k - firstY] = ((frequenciesPerOutcome[k] ?? 0) - p) / firstYFrequency
         }
-        return FrequencyDistribution(xFrequencies).filterZeroFrequencies(1e-16)
+        
+        let delta = ProbabilityMassConfig.probabilityEqualityDelta
+        return FrequencyDistribution(xFrequencies).filterZeroFrequencies(delta)
     }
     
     /// This is a special case of `power(x: FrequencyDistribution)`,

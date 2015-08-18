@@ -34,6 +34,14 @@ extension FrequencyDistribution_Tests {
         }
     }
     
+    func test_init_shouldFilterZeroFrequencies() {
+        let inputFrequenciesPerOutcome = [1: 1.0, 2: 0.0, 3: 1.23]
+        let expected = [1: 1.0, 3: 1.23]
+        
+        let result = FrequencyDistribution(inputFrequenciesPerOutcome).frequenciesPerOutcome
+        
+        expect(result) == expected
+    }
 }
 
 // MARK: - Equatable
@@ -191,8 +199,8 @@ extension FrequencyDistribution_Tests {
     }
     
     func test_approximatelyEqual_shouldNotEqualForDifferentNumberOfValues() {
-        let delta = 1e-16 // 64-bit. What about 32-bit?
-        let outcome = 0.0
+        let delta = 2e-15 // 64-bit. What about 32-bit?
+        let outcome = 1.0
         let x = FrequencyDistribution([1: outcome])
         let y = FrequencyDistribution([1: outcome, 2: outcome])
         
@@ -202,9 +210,9 @@ extension FrequencyDistribution_Tests {
     }
     
     func test_approximatelyEqual_shouldEqualForSame() {
-        let delta = 1e-16 // 64-bit. What about 32-bit?
-        let xOutcome = 0.0
-        let yOutcome = 0.0
+        let delta = 2e-15 // 64-bit. What about 32-bit?
+        let xOutcome = 1.0
+        let yOutcome = 1.0
         let x = FrequencyDistribution([1: xOutcome])
         let y = FrequencyDistribution([1: yOutcome])
         
@@ -214,9 +222,9 @@ extension FrequencyDistribution_Tests {
     }
     
     func test_approximatelyEqual_shouldEqualWithinDelta() {
-        let delta = 1e-16 // 64-bit. What about 32-bit?
-        let xOutcome = 0.0
-        let yOutcome = 0.0 + delta - delta/10
+        let delta = 2e-15 // 64-bit. What about 32-bit?
+        let xOutcome = 1.0
+        let yOutcome = 1.0 + delta - delta/10
         let x = FrequencyDistribution([1: xOutcome])
         let y = FrequencyDistribution([1: yOutcome])
         
@@ -226,9 +234,9 @@ extension FrequencyDistribution_Tests {
     }
     
     func test_approximatelyEqual_shouldNotEqualOutsideDelta() {
-        let delta = 1e-16 // 64-bit. What about 32-bit?
-        let xOutcome = 0.0
-        let yOutcome = 0.0 + delta + delta/10
+        let delta = 2e-15 // 64-bit. What about 32-bit?
+        let xOutcome = 1.0
+        let yOutcome = 1.0 + delta + delta/10
         let x = FrequencyDistribution([1: xOutcome])
         let y = FrequencyDistribution([1: yOutcome])
         
