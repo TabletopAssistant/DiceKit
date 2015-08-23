@@ -8,14 +8,14 @@ DiceKit
 [![Latest release](https://img.shields.io/github/release/tabletopassistant/dicekit.svg)](https://github.com/TabletopAssistant/DiceKit/releases)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage)
 
-DiceKit is a Swift framework for expressing and evaluating [dice notation][Dice Notation] (e.g., `d20`, `4d6+4`, `3d8×10+2`), which is commonly used in tabletop role-playing games.
+DiceKit is a Swift framework for expressing and evaluating [dice notation][Dice Notation] (e.g., `d20`, `4d6-4`, `3d8×10+2`), which is commonly used in tabletop role-playing games.
 
 [Dice Notation]: https://en.wikipedia.org/wiki/Dice_notation
 
 ## Features
 
 - [x] Roll dice with arbitrary number of sides (e.g., `d2`, `d7`, `d6538`)
-- [x] Evaluate simple dice expressions, including addition, multiplication, and negation operations (e.g. `2d20 + 6(1d5 + 8)`)
+- [x] Evaluate simple dice expressions, including addition, subtraction, multiplication, and negation operations (e.g. `2d20 + 6(1d5 + 8)`)
 - [ ] Evaluate complicated dice expressions, including division, dropping dice, and exploding dice – [#27](https://github.com/TabletopAssistant/DiceKit/issues/27), [#28](https://github.com/TabletopAssistant/DiceKit/issues/28), [#33](https://github.com/TabletopAssistant/DiceKit/issues/33)
 - [x] Determine the probability distribution of an expression
 - [ ] Determine if an expression result meets success criteria  – [#59](https://github.com/TabletopAssistant/DiceKit/issues/59)

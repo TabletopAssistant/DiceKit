@@ -36,6 +36,9 @@ let oneD2d3result = oneD2d3.evaluate()
 let value = oneD2d3result.value
 
 //: Try making more expressions in this playground. There is no limitation on what expression types you can put together to make a new expression. If your expression gets too complicated to easily tell its type, use the `dump()` function to investigate it in the console window.
+let whatIsThisExpression = d3 * (d(20) - 2)
+dump(whatIsThisExpression) //Check out the debug area for a handy expression tree! :)
+
 
 //: [Previous](@previous)
 //: [Next](@next)
