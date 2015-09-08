@@ -1,4 +1,4 @@
 github "mrackwitz/xcconfigs" "bd51f1f617d688f4a00f1ea9d6b1e87a24104592"
 #github "Quick/Quick" ~> 0.5.0
-github "Quick/Nimble" "v2.0.0-rc.2"
+github "Quick/Nimble" "v2.0.0-rc.3"
 github "typelift/SwiftCheck" "swift-develop"
