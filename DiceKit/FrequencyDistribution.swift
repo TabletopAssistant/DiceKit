@@ -78,7 +78,7 @@ extension FrequencyDistribution: CustomStringConvertible {
         let stringifiedFrequenciesPerOutcome: [String] = sortedFrequenciesPerOutcome.map {
             "\($0.0): \($0.1)"
         }
-        let innerDesc = ", ".join(stringifiedFrequenciesPerOutcome)
+        let innerDesc = stringifiedFrequenciesPerOutcome.joinWithSeparator(", ")
         let desc = "[\(innerDesc)]"
         
         return desc

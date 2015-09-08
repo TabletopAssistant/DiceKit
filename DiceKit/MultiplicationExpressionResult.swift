@@ -31,7 +31,7 @@ extension MultiplicationExpressionResult: CustomStringConvertible {
     public var description: String {
         let multiplicandResultsSign = negateMultiplicandResults ? "-" : ""
         let multiplicandStrings = multiplicandResults.map { String($0) }
-        let multiplicandResultsDescription = " + ".join(multiplicandStrings)
+        let multiplicandResultsDescription = multiplicandStrings.joinWithSeparator(" + ")
         return "((\(multiplierResult)) *> \(multiplicandResultsSign)(\(multiplicandResultsDescription)))"
     }
     
@@ -45,7 +45,7 @@ extension MultiplicationExpressionResult: CustomDebugStringConvertible {
         let multiplicandResultsSign = negateMultiplicandResults ? "-" : ""
         let multiplierResultDebugString = String(reflecting: multiplierResult)
         let multiplicandDebugStrings = multiplicandResults.map { String(reflecting: $0) }
-        let multiplicandResultsDebugDescription = " + ".join(multiplicandDebugStrings)
+        let multiplicandResultsDebugDescription = multiplicandDebugStrings.joinWithSeparator(" + ")
         return "((\(multiplierResultDebugString)) *> \(multiplicandResultsSign)(\(multiplicandResultsDebugDescription)))"
     }
     
