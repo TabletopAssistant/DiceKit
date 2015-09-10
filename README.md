@@ -4,7 +4,7 @@ DiceKit
 =======
 
 [![Build Status](https://www.bitrise.io/app/bba3ae57e91a2417.svg?token=xykKCgO1PqORibgpZeeYrw&branch=master)](https://www.bitrise.io/app/bba3ae57e91a2417)
-![Supported platforms](https://img.shields.io/badge/platforms-iOS%20%2B%20OS%20X%20%2B%20watchOS-blue.svg)
+![Supported platforms](https://img.shields.io/badge/platforms-iOS%20%2B%20OS%20X%20%2B%20tvOS%20%2B%20watchOS-blue.svg)
 [![Latest release](https://img.shields.io/github/release/tabletopassistant/dicekit.svg)](https://github.com/TabletopAssistant/DiceKit/releases)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage)
 
@@ -26,8 +26,8 @@ DiceKit is a Swift framework for expressing and evaluating [dice notation][Dice 
 
 ## Requirements
 
-- iOS 8.0+ / Mac OS X 10.9+ / watchOS 2.0+
-- Xcode 7 Beta 3 (Swift 2.0)
+- iOS 8.0+ / Mac OS X 10.9+ / tvOS 9.0+ / watchOS 2.0+
+- Xcode 7
 
 ## Usage
 
