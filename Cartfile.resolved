@@ -1,3 +1,3 @@
-github "Quick/Nimble" "v2.0.0-rc.3"
-github "typelift/SwiftCheck" "20cfac2d6a5edbee3f1c00a366614bab8b023977"
-github "mrackwitz/xcconfigs" "bd51f1f617d688f4a00f1ea9d6b1e87a24104592"
+github "Quick/Nimble" "91f3921fbfdae1b02def17b27267a13f4606ec03"
+github "typelift/SwiftCheck" "34fb2a936adcc8b83d7ffcee8b71f8505981502b"
+github "brentleyjones/xcconfigs-1" "8be6a52d52c420df6d70d0e9cdda016dbd5fd270"
