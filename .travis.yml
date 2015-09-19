@@ -2,7 +2,7 @@ language: objective-c
 osx_image: xcode7
 
 git:
-  submodules: false
+    submodules: false
 
 before_install:
     - git submodule update --init --recursive
@@ -13,6 +13,12 @@ script:
     - set -o pipefail && xcodebuild -workspace DiceKit.xcworkspace -scheme DiceKit -sdk watchsimulator analyze | xcpretty -c
 
 notifications:
-  email:
-    on_success: change
-    on_failure: change
+    email:
+        on_success: change
+        on_failure: change
+    slack:
+        on_success: change
+        on_failure: change
+        on_start: always
+        rooms:
+            - secure: "vaBbWfpfuC4h3Dw7xBEkg4CI1G+J994qJluDxDRuM3Mqzm9Ef1/HDMdlLJbBfEdEt6mCdnwxiCDh2CMpLNhd4eM8yIKfSg91HnI/N9vM3owv/l8hwaZhOzScP87Kzd+1XdBNCUlCBfg6XjyWO9GSZ0NoCS3vkXJPFyZ3A+ceMFIXZ/WH7j/HmU/7/Bko2kmSWuW5R0LlwK3VxYKkOOoVCWOse3VfgKZjsyPVm+UKVZbgxMz03VgPTFoXMLLn3S6eTF6+M8yze2RYzfYK8e2lbQKcOCGDgj8B7IhyRswwLfs3/Bb9XHqhxN6DpdXosVt7IiktFtTXYC7enPhRWrDv3jDPRwXaAXFVwUPX7m4NQX+qF4kpzQvTh2Ud8MLbIA5Z02v5oAgjR5itvcICyfeYDAwz0pC5rvl7h3UZDH6z29H7jHkGllLDb6pL7V4MgKUI4JA7RpvVPYrsSFO2voY8WK5bQ43UpRhj55EQmX2Anpyb4dafjAh47gOBerkAw5hyo9gvlmt7mHiArbB+UiQzKuCPhL9IubgnIXRAB7CEKB3W2qkPG7hjBxe/OnClrWUDZGnR8oeEcJSokjc06P6KHr1hMXHOFBSuK5DGryi5mxhMUncM5VZTM2GQzJmxryhFwG0lIeXjcryvr0tqSvMwKsONGdcPDtKNlVldy09fVn4="
