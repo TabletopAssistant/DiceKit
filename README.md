@@ -3,7 +3,7 @@
 DiceKit
 =======
 
-[![Build Status](https://www.bitrise.io/app/bba3ae57e91a2417.svg?token=xykKCgO1PqORibgpZeeYrw&branch=master)](https://www.bitrise.io/app/bba3ae57e91a2417)
+[![Build Status](https://travis-ci.org/TabletopAssistant/DiceKit.svg)](https://travis-ci.org/TabletopAssistant/DiceKit)
 ![Supported platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20OS%20X%20%7C%20tvOS%20%7C%20watchOS-blue.svg)
 [![Latest release](https://img.shields.io/github/release/tabletopassistant/dicekit.svg)](https://github.com/TabletopAssistant/DiceKit/releases)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage)
