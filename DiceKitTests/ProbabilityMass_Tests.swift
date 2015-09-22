@@ -217,6 +217,16 @@ extension ProbabilityMass_Tests {
         expect(probMass.frequencyDistribution) == expectedFreqDist
     }
     
+    func test_not_shouldDivideFrequencyDistributions() {
+        let x = operationFixture1
+        let y = operationFixture2
+        let z = x.and(y)
+        
+        let probMass = z.not(y)
+        
+        expect(probMass) == x
+    }
+    
     func test_product_shouldPowerFrequerncyDistributions() {
         let x = operationFixture1
         let y = operationFixture1
@@ -257,6 +267,16 @@ extension ProbabilityMass_Tests {
         let expectedProbMass = x.and(y)
         
         let probMass = x && y
+        
+        expect(probMass) == expectedProbMass
+    }
+    
+    func test_notOperator_callsNot() {
+        let x = operationFixture1
+        let y = operationFixture2
+        let expectedProbMass = x.not(y)
+        
+        let probMass = x !&& y
         
         expect(probMass) == expectedProbMass
     }

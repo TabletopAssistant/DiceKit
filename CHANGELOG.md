@@ -20,6 +20,9 @@
   [Jonathan Hoffman](https://github.com/JonathanHoffman)
   [#55](https://github.com/TabletopAssistant/DiceKit/pull/55)
 
+- :game_die: Add support for subtraction of expressions (e.g. `d20 - 5`)  
+  [Jonathan Hoffman](https://github.com/JonathanHoffman) [#80](https://github.com/TabletopAssistant/DiceKit/pull/80)
+
 ## 0.1: It Starts with a Single Die (2015-07-25)
 
 - :game_die: Support rolling individual dice.  

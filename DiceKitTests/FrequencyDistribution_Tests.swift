@@ -34,6 +34,14 @@ extension FrequencyDistribution_Tests {
         }
     }
     
+    func test_init_shouldFilterZeroFrequencies() {
+        let inputFrequenciesPerOutcome = [1: 1.0, 2: 0.0, 3: 1.23]
+        let expected = [1: 1.0, 3: 1.23]
+        
+        let result = FrequencyDistribution(inputFrequenciesPerOutcome).frequenciesPerOutcome
+        
+        expect(result) == expected
+    }
 }
 
 // MARK: - Equatable
@@ -191,8 +199,8 @@ extension FrequencyDistribution_Tests {
     }
     
     func test_approximatelyEqual_shouldNotEqualForDifferentNumberOfValues() {
-        let delta = 1e-16 // 64-bit. What about 32-bit?
-        let outcome = 0.0
+        let delta = 2e-15 // 64-bit. What about 32-bit?
+        let outcome = 1.0
         let x = FrequencyDistribution([1: outcome])
         let y = FrequencyDistribution([1: outcome, 2: outcome])
         
@@ -202,9 +210,9 @@ extension FrequencyDistribution_Tests {
     }
     
     func test_approximatelyEqual_shouldEqualForSame() {
-        let delta = 1e-16 // 64-bit. What about 32-bit?
-        let xOutcome = 0.0
-        let yOutcome = 0.0
+        let delta = 2e-15 // 64-bit. What about 32-bit?
+        let xOutcome = 1.0
+        let yOutcome = 1.0
         let x = FrequencyDistribution([1: xOutcome])
         let y = FrequencyDistribution([1: yOutcome])
         
@@ -214,9 +222,9 @@ extension FrequencyDistribution_Tests {
     }
     
     func test_approximatelyEqual_shouldEqualWithinDelta() {
-        let delta = 1e-16 // 64-bit. What about 32-bit?
-        let xOutcome = 0.0
-        let yOutcome = 0.0 + delta - delta/10
+        let delta = 2e-15 // 64-bit. What about 32-bit?
+        let xOutcome = 1.0
+        let yOutcome = 1.0 + delta - delta/10
         let x = FrequencyDistribution([1: xOutcome])
         let y = FrequencyDistribution([1: yOutcome])
         
@@ -226,9 +234,9 @@ extension FrequencyDistribution_Tests {
     }
     
     func test_approximatelyEqual_shouldNotEqualOutsideDelta() {
-        let delta = 1e-16 // 64-bit. What about 32-bit?
-        let xOutcome = 0.0
-        let yOutcome = 0.0 + delta + delta/10
+        let delta = 2e-15 // 64-bit. What about 32-bit?
+        let xOutcome = 1.0
+        let yOutcome = 1.0 + delta + delta/10
         let x = FrequencyDistribution([1: xOutcome])
         let y = FrequencyDistribution([1: yOutcome])
         
@@ -281,6 +289,15 @@ extension FrequencyDistribution_Tests {
         expect(normalized.frequenciesPerOutcome) == expectedFrequenciesPerOutcome
     }
     
+    func test_filterZeroFrequencies() {
+        let delta: Double = ProbabilityMassConfig.probabilityEqualityDelta
+        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [1:1.0, 2:0.0, 3:100.0, 4:(delta * 0.9), 5: -42.0]
+        let expectedFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [1:1.0, 3:100.0, 5: -42.0]
+        
+        let result = FrequencyDistribution(frequenciesPerOutcome).filterZeroFrequencies(delta)
+        
+        expect(result.frequenciesPerOutcome) == expectedFrequenciesPerOutcome
+    }
 }
 
 // MARK: - Advanced Operations
@@ -299,6 +316,18 @@ extension FrequencyDistribution_Tests {
         expect(z.frequenciesPerOutcome) == expectedFrequenciesPerOutcome
     }
     
+    func test_subtract() {
+        let xFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [1:1.0, 2:1.0, 3:4.0, 4:1.0]
+        let yFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [4:6.0, 7:1.0, 8:0.5, 22:3.0]
+        let x = FrequencyDistribution(xFrequenciesPerOutcome)
+        let y = FrequencyDistribution(yFrequenciesPerOutcome)
+        let z = x.add(y)
+        
+        // x + y - y = x
+        let result = z.subtract(y)
+        
+        expect(result.frequenciesPerOutcome) == x.frequenciesPerOutcome
+    }
     func test_multiply() {
         // TODO: SwiftCheck
         /*
@@ -327,6 +356,19 @@ extension FrequencyDistribution_Tests {
         expect(z) == expected
     }
     
+    func test_divide() {
+        //Does the reverse of multiply
+        let xFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [1:3.0, 2:2.0, 6:1.0]
+        let yFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [2:2.0, 3:2.0, 7:1.0]
+        let zFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [3:6.0, 4:10.0, 5:4.0, 8:5.0, 9:4.0, 13:1.0]
+        let z = FrequencyDistribution(zFrequenciesPerOutcome)
+        let y = FrequencyDistribution(yFrequenciesPerOutcome)
+        let expected = FrequencyDistribution(xFrequenciesPerOutcome)
+        
+        let x = z.divide(y)
+        
+        expect(x) == expected
+    }
     func test_power_shouldReturnMultiplicativeIdentityFor0() {
         let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [2:2.0, 3:2.0, 6:1.0]
         let expected = FrequencyDistribution<Int>.multiplicativeIdentity
