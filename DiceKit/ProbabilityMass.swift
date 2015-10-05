@@ -135,6 +135,14 @@ extension ProbabilityMass {
         return ProbabilityMass(freqDist, normalize: true)
     }
     
+    public func minimumOutcome() -> Outcome? {
+        return frequencyDistribution.minimumOutcome()
+    }
+    
+    public func maximumOutcome() -> Outcome? {
+        return frequencyDistribution.maximumOutcome()
+    }
+    
 }
 
 // MARK: - Operators

@@ -202,6 +202,14 @@ extension FrequencyDistribution {
         return mapFrequencies { $0 / frequencies }
     }
     
+    public func minimumOutcome() -> Outcome? {
+        return orderedOutcomes.first
+    }
+    
+    public func maximumOutcome() -> Outcome? {
+        return orderedOutcomes.last
+    }
+
     public func filterZeroFrequencies(delta: Frequency) -> FrequencyDistribution {
         let newFrequenciesPerOutcome = frequenciesPerOutcome
         return FrequencyDistribution(newFrequenciesPerOutcome, delta: delta)

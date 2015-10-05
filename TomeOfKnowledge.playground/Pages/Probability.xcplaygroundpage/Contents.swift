@@ -23,6 +23,11 @@ for (value, probability) in threeD6ProbabilityMass {
     probability
 }
 
+//: Also, probabilityMass has minimumOutcome/maximumOutcome to calculate the lowest and highest possible outcome from a given expression.
+let expression = d(2) * d(8) + 3
+let max = expression.probabilityMass.maximumOutcome()
+let min = expression.probabilityMass.minimumOutcome()
+
 //: Finally, let's really test the system with an odd expression, like `(1d3)d6`. That expression means 1/3 of the time we have `1d6`, `2d6`, or `3d6`. With an equal chance of each one it will be like the frequencies of each are "added" together:
 let awesomeExpression = d(3) * d(6)
 let awesomeExpressionProbailityMass = awesomeExpression.probabilityMass

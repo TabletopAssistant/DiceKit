@@ -19,6 +19,7 @@ class ProbabilityMass_Tests: XCTestCase {
     
     let operationFixture1 = ProbabilityMass(FrequencyDistribution([1: 2.0, 4: 3.0, 11: 1.0]))
     let operationFixture2 = ProbabilityMass(FrequencyDistribution([1: 1.5, 2: 7.0]))
+    let operationFixture3 = ProbabilityMass(FrequencyDistribution([1: 6]))
 
 }
 
@@ -235,6 +236,33 @@ extension ProbabilityMass_Tests {
         let probMass = x.product(y)
         
         expect(probMass.frequencyDistribution) == expectedFreqDist
+    }
+    
+    func test_minimumOutcome_shouldReturnMinimumOutcomeWithOutcomes() {
+        let x = operationFixture1
+        let expectedMinimumOutcome = 1
+        
+        let min = x.minimumOutcome()
+        
+        expect(min) == expectedMinimumOutcome
+    }
+    
+    func test_maximumOutcome_shouldReturnMaximumOutcomeWithOutcomes() {
+        let x = operationFixture1
+        let expectedMaximumOutcome = 11
+        
+        let max = x.maximumOutcome()
+        
+        expect(max) == expectedMaximumOutcome
+    }
+    
+    func test_singleOutcomeDistribution_shouldHaveEqualMinimumMaximumOutcomes() {
+        let x = operationFixture3
+        
+        let min = x.minimumOutcome()
+        let max = x.maximumOutcome()
+        
+        expect(min) == max
     }
     
 }
