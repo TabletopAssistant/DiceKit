@@ -16,6 +16,10 @@ import DiceKit
 class FrequencyDistribution_Tests: XCTestCase {
     
     typealias SwiftCheckFrequenciesPerOutcome = DictionaryOf<FrequencyDistribution<Int>.Outcome, FrequencyDistribution<Int>.Frequency>
+    
+    let operationFixture1 = FrequencyDistribution([1: 2.0, 4: 3.0, 11: 1.0])
+    let operationFixture2 = FrequencyDistribution([1: 1.5, 2: 7.0])
+    let operationFixture3 = FrequencyDistribution([1: 6])
 
 }
 
@@ -287,6 +291,33 @@ extension FrequencyDistribution_Tests {
         let normalized = freqDist.normalizeFrequencies()
         
         expect(normalized.frequenciesPerOutcome) == expectedFrequenciesPerOutcome
+    }
+    
+    func test_minimumOutcome_shouldReturnMinimumOutcomeWithOutcomes() {
+        let x = operationFixture1
+        let expectedMinimumOutcome = 1
+        
+        let min = x.minimumOutcome()
+        
+        expect(min) == expectedMinimumOutcome
+    }
+    
+    func test_maximumOutcome_shouldReturnMaximumOutcomeWithOutcomes() {
+        let x = operationFixture1
+        let expectedMaximumOutcome = 11
+        
+        let max = x.maximumOutcome()
+        
+        expect(max) == expectedMaximumOutcome
+    }
+    
+    func test_singleOutcomeDistribution_shouldHaveEqualMinimumMaximumOutcomes() {
+        let x = operationFixture3
+        
+        let min = x.minimumOutcome()
+        let max = x.maximumOutcome()
+        
+        expect(min) == max
     }
     
     func test_filterZeroFrequencies() {
