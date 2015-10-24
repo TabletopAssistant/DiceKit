@@ -1,4 +1,4 @@
-## Master
+## 0.2: Dice All the Way Down (2015-10-24)
 
 - :game_die: Add type for constants.  
   [Brentley Jones](https://github.com/brentleyjones)
