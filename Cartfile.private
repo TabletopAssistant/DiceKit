@@ -1,3 +1,3 @@
 github "brentleyjones/xcconfigs-1" "tvOS"
-github "Quick/Nimble" "master"
-github "typelift/SwiftCheck" "master"
+github "Quick/Nimble" ~> 2.0.0
+github "typelift/SwiftCheck" ~> 0.3.2
