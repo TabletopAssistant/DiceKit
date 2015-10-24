@@ -1,3 +1,6 @@
+## Master
+
+
 ## 0.2: Dice All the Way Down (2015-10-24)
 
 - :game_die: Add type for constants.  
@@ -20,8 +23,9 @@
   [Jonathan Hoffman](https://github.com/JonathanHoffman)
   [#55](https://github.com/TabletopAssistant/DiceKit/pull/55)
 
-- :game_die: Add support for subtraction of expressions (e.g. `d20 - 5`)  
-  [Jonathan Hoffman](https://github.com/JonathanHoffman) [#80](https://github.com/TabletopAssistant/DiceKit/pull/80)
+- :game_die: Add support for subtraction of expressions (e.g. `d20 - 5`).  
+  [Jonathan Hoffman](https://github.com/JonathanHoffman)
+  [#80](https://github.com/TabletopAssistant/DiceKit/pull/80)
 
 - :game_die: Add min/max operations.
   [Logan Johnson](https://github.com/loganjohnson)
