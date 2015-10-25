@@ -71,10 +71,10 @@ public func - <L: protocol<ExpressionType, Equatable>, R: protocol<ExpressionTyp
     return SubtractionExpression(lhs, rhs)
 }
 
-public func - <R: protocol<ExpressionType, Equatable>>(lhs: Int, rhs: R) -> SubtractionExpression<Constant, R> {
+public func - <R: protocol<ExpressionType, Equatable>>(lhs: ExpressionResultValue, rhs: R) -> SubtractionExpression<Constant, R> {
     return SubtractionExpression(Constant(lhs), rhs)
 }
 
-public func - <L: protocol<ExpressionType, Equatable>>(lhs: L, rhs: Int) -> SubtractionExpression<L, Constant> {
+public func - <L: protocol<ExpressionType, Equatable>>(lhs: L, rhs: ExpressionResultValue) -> SubtractionExpression<L, Constant> {
     return SubtractionExpression(lhs, Constant(rhs))
 }

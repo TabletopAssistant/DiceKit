@@ -85,10 +85,10 @@ public func + <L: protocol<ExpressionType, Equatable>, R: protocol<ExpressionTyp
     return AdditionExpression(lhs, rhs)
 }
 
-public func + <R: protocol<ExpressionType, Equatable>>(lhs: Int, rhs: R) -> AdditionExpression<Constant, R> {
+public func + <R: protocol<ExpressionType, Equatable>>(lhs: ExpressionResultValue, rhs: R) -> AdditionExpression<Constant, R> {
     return AdditionExpression(Constant(lhs), rhs)
 }
 
-public func + <L: protocol<ExpressionType, Equatable>>(lhs: L, rhs: Int) -> AdditionExpression<L, Constant> {
+public func + <L: protocol<ExpressionType, Equatable>>(lhs: L, rhs: ExpressionResultValue) -> AdditionExpression<L, Constant> {
     return AdditionExpression(lhs, Constant(rhs))
 }

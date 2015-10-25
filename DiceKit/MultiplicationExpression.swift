@@ -28,10 +28,10 @@ extension MultiplicationExpression: ExpressionType {
     
     public func evaluate() -> Result {
         let muliplierResult = multiplier.evaluate()
-        let muliplierValue = muliplierResult.value
+        let muliplierValue = muliplierResult.resultValue
         
         // Negation is handled in the result
-        let multiplicandResultCount = abs(muliplierValue)
+        let multiplicandResultCount = abs(muliplierValue.multiplierEquivalent)
         let multiplicandResult = (0..<multiplicandResultCount).map { _ in self.multiplicand.evaluate() }
         
         return Result(multiplierResult: muliplierResult, multiplicandResults: multiplicandResult)
@@ -81,10 +81,10 @@ public func * <L: protocol<ExpressionType, Equatable>, R: protocol<ExpressionTyp
     return MultiplicationExpression(lhs, rhs)
 }
 
-public func * <R: protocol<ExpressionType, Equatable>>(lhs: Int, rhs: R)-> MultiplicationExpression<Constant, R> {
+public func * <R: protocol<ExpressionType, Equatable>>(lhs: ExpressionResultValue, rhs: R)-> MultiplicationExpression<Constant, R> {
     return MultiplicationExpression(Constant(lhs), rhs)
 }
 
-public func * <L: protocol<ExpressionType, Equatable>>(lhs: L, rhs: Int)-> MultiplicationExpression<L, Constant> {
+public func * <L: protocol<ExpressionType, Equatable>>(lhs: L, rhs: ExpressionResultValue)-> MultiplicationExpression<L, Constant> {
     return MultiplicationExpression(lhs, Constant(rhs))
 }

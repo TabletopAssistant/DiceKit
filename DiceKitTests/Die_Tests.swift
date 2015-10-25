@@ -104,10 +104,10 @@ extension Die_Tests {
     /// Tests the convenience function d(sides)
     func test_d_shouldReturnDie() {
         property("Returns correct die") <- forAll {
-            (a: Int) in
+            (a: ExpressionResultValue) in
             
             let dieFunction = d(a)
-            let dieInit = Die(sides: a)
+            let dieInit = Die(sides: a.multiplierEquivalent)
             
             return dieFunction == dieInit
         }
@@ -421,7 +421,7 @@ extension Die_Tests {
             let range = sides < 0 ? sides...(-1) : 1...sides
             
             for value in range {
-                let outcome = ExpressionProbabilityMass.Outcome(value)
+                let outcome = ExpressionProbabilityMass.Outcome(integerLiteral: value)
                 if probMass[outcome] != outcomePerValue {
                     return false
                 }

@@ -50,8 +50,8 @@ public func == <L, R>(lhs: AdditionExpressionResult<L,R>, rhs: AdditionExpressio
 
 extension AdditionExpressionResult: ExpressionResultType {
     
-    public var value: Int {
-        return leftAddendResult.value + rightAddendResult.value
+    public var resultValue: ExpressionResultValue {
+        return leftAddendResult.resultValue + rightAddendResult.resultValue
     }
     
 }

@@ -26,28 +26,28 @@ extension MaximizationExpressionResult_Tests {
         let expression = MaximizationExpression(d(0))
         let result = expression.evaluate()
         
-        expect(result.value) == 0
+        expect(result.resultValue) == 0
     }
     
     func test_and_shouldReturnMaximumForSingleDie() {
         let expression = MaximizationExpression(d(8))
         let result = expression.evaluate()
         
-        expect(result.value) == 8
+        expect(result.resultValue) == 8
     }
     
     func test_and_shouldReturnMaximumForAddition() {
         let expression = MaximizationExpression(d(8) + 4)
         let result = expression.evaluate()
         
-        expect(result.value) == 12
+        expect(result.resultValue) == 12
     }
     
     func test_and_shouldReturnMaximumForMultiply() {
         let expression = MaximizationExpression(d(8) * 4)
         let result = expression.evaluate()
         
-        expect(result.value) == 32
+        expect(result.resultValue) == 32
     }
     
 }

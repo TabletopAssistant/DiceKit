@@ -33,7 +33,7 @@ let twoD20result = twoD20.evaluate()
 let oneD2d3result = oneD2d3.evaluate()
 
 //: The result of the expression is always the sum of the rightmost term.
-let value = oneD2d3result.value
+let value = oneD2d3result.resultValue
 
 //: Try making more expressions in this playground. There is no limitation on what expression types you can put together to make a new expression. If your expression gets too complicated to easily tell its type, use the `dump()` function to investigate it in the console window.
 let whatIsThisExpression = d3 * (d(20) - 2)

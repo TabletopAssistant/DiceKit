@@ -48,8 +48,8 @@ public func == <B>(lhs: NegationExpressionResult<B>, rhs: NegationExpressionResu
 
 extension NegationExpressionResult: ExpressionResultType {
     
-    public var value: Int {
-        return -base.value
+    public var resultValue: ExpressionResultValue {
+        return -base.resultValue
     }
     
 }

@@ -21,7 +21,7 @@ public extension CollectionType where Index.Distance: protocol<Arbitrary, Intege
 extension Constant: Arbitrary {
     
     public static func create(x : Int) -> Constant {
-        return Constant(x)
+        return Constant(integerLiteral: x)
     }
     
     public static var arbitrary : Gen<Constant> {

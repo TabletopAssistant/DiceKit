@@ -66,10 +66,10 @@ extension NegationExpressionResult_Tests {
         property("negate the base result") <- forAll {
             (a: Constant) in
             
-            let expectedValue = -a.value
+            let expectedValue = -a.resultValue
             let result = NegationExpressionResult(a)
             
-            let value = result.value
+            let value = result.resultValue
             
             return value == expectedValue
         }

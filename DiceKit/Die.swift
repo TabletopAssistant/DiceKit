@@ -37,8 +37,8 @@ public struct Die: Equatable {
 
 // MARK: - Convenience Initialization Functions
 
-public func d(sides: Int) -> Die {
-    return Die(sides: sides)
+public func d(sides: ExpressionResultValue) -> Die {
+    return Die(sides: sides.multiplierEquivalent)
 }
 
 public func d() -> Die {
@@ -119,7 +119,7 @@ extension Die: ExpressionType {
         let range = sides < 0 ? sides...(-1) : 1...sides
         
         for value in range {
-            let outcome = ExpressionProbabilityMass.Outcome(value)
+            let outcome = ExpressionProbabilityMass.Outcome(integerLiteral: value)
             frequenciesPerOutcome[outcome] = frequencyPerOutcome
         }
         

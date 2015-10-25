@@ -82,7 +82,7 @@ extension MultiplicationExpression_Tests {
         
             let multiplicandResults = a.getArray
             let expectedMultiplicandResults = multiplicandResults
-            let leftExpression = c(expectedMultiplicandResults.count)
+            let leftExpression = c(ExpressionResultValue(integerLiteral: expectedMultiplicandResults.count))
             let expectedMultiplierResult = leftExpression
             let mockRightExpression = MockExpression()
             mockRightExpression.stubResulter = { multiplicandResults[mockRightExpression.evaluateCalled] }
@@ -116,8 +116,8 @@ extension MultiplicationExpression_Tests {
 extension MultiplicationExpression_Tests {
     
     func test_operator_shouldWorkWithIntAndExpression() {
-        property("Int * Expression and Expression * Int returns correct MultiplicationExpression") <- forAll {
-            (a: Int, die: Die) in
+        property("ExpressionResultValue * Expression and Expression * ExpressionResultValue returns correct MultiplicationExpression") <- forAll {
+            (a: ExpressionResultValue, die: Die) in
             
             let expectedExpression1 = MultiplicationExpression(c(a), die)
             let expectedExpression2 = MultiplicationExpression(die, c(a))

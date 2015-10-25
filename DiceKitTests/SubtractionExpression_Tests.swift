@@ -111,7 +111,7 @@ extension SubtractionExpression_Tests {
     
     func test_operator_shouldWorkWithIntAndExpression() {
         property("Int - Expression and Expression - Int returns correct SubtractionExpression") <- forAll {
-            (a: Int, b: Int) in
+            (a: ExpressionResultValue, b: ExpressionResultValue) in
             
             let die = d(b)
             let expectedExpression1 = SubtractionExpression(c(a), die)
@@ -129,7 +129,7 @@ extension SubtractionExpression_Tests {
     
     func test_operator_shouldWorkWithExpressionAndExpression() {
         property("Expression - Expression returns correct SubtractionExpresson") <- forAll {
-            (a: Int, b: Int) in
+            (a: ExpressionResultValue, b: ExpressionResultValue) in
             
             let leftDie = d(a)
             let rightDie = d(b)

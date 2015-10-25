@@ -30,9 +30,9 @@ class MockExpression: ExpressionType, Equatable {
 
 class MockExpressionResult: ExpressionResultType, Equatable {
     
-    var stubValue: Int = 0
+    var stubValue: ExpressionResultValue = 0
     
-    var value: Int {
+    var resultValue: ExpressionResultValue {
         return stubValue
     }
     
