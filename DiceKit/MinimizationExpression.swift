@@ -8,12 +8,12 @@
 
 import Foundation
 
-public struct MinimizationExpression<Expression: protocol<ExpressionType, Equatable>>: Equatable {
+public struct MinimizationExpression<BaseExpression: protocol<ExpressionType, Equatable>>: Equatable {
     
-    public let expression: Expression
+    public let base: BaseExpression
     
-    public init(_ expression: Expression) {
-        self.expression = expression
+    public init(_ base: BaseExpression) {
+        self.base = base
     }
     
 }
@@ -22,17 +22,18 @@ public struct MinimizationExpression<Expression: protocol<ExpressionType, Equata
 
 extension MinimizationExpression: ExpressionType {
     
-    public typealias Result = MinimizationExpressionResult<Expression.Result>
+    public typealias Result = MinimizationExpressionResult<BaseExpression.Result>
     
     public func evaluate() -> Result {
-        guard let minOutcome = expression.probabilityMass.minimumOutcome() else {
+        guard let minOutcome = base.probabilityMass.minimumOutcome() else {
             return Result(0)
         }
+        
         return Result(minOutcome)
     }
     
     public var probabilityMass: ExpressionProbabilityMass {
-        if let minimumOutcome = expression.probabilityMass.minimumOutcome() {
+        if let minimumOutcome = base.probabilityMass.minimumOutcome() {
             return ProbabilityMass(minimumOutcome)
         }
         
@@ -46,7 +47,7 @@ extension MinimizationExpression: ExpressionType {
 extension MinimizationExpression: CustomStringConvertible {
     
     public var description: String {
-        return "min(\(expression))"
+        return "min(\(base))"
     }
     
 }
@@ -56,7 +57,7 @@ extension MinimizationExpression: CustomStringConvertible {
 extension MinimizationExpression: CustomDebugStringConvertible {
     
     public var debugDescription: String {
-        return "min(\(String(reflecting: expression)))"
+        return "min(\(String(reflecting: base)))"
     }
     
 }
@@ -64,6 +65,6 @@ extension MinimizationExpression: CustomDebugStringConvertible {
 // MARK: - Equatable
 
 public func == <E>(lhs: MinimizationExpression<E>, rhs: MinimizationExpression<E>) -> Bool {
-    return lhs.expression == rhs.expression
+    return lhs.base == rhs.base
 }
 
