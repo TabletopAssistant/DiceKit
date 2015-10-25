@@ -10,9 +10,9 @@ import Foundation
 
 public struct MaximizationExpressionResult<MaximizationExpressionResult: protocol<ExpressionResultType, Equatable>>: Equatable {
     
-    public let maximizationExpressionResult: Int
+    public let maximizationExpressionResult: ExpressionProbabilityMass.Outcome
     
-    public init(_ maximizationExpressionResult: Int) {
+    public init(_ maximizationExpressionResult: ExpressionProbabilityMass.Outcome) {
         self.maximizationExpressionResult = maximizationExpressionResult
     }
     
@@ -49,7 +49,11 @@ public func == <L>(lhs: MaximizationExpressionResult<L>, rhs: MaximizationExpres
 extension MaximizationExpressionResult: ExpressionResultType {
     
     public var value: Int {
-        return maximizationExpressionResult
+        return maximizationExpressionResult.outcome
+    }
+
+    public var successfulness: Successfulness {
+        return maximizationExpressionResult.successfulness
     }
     
 }

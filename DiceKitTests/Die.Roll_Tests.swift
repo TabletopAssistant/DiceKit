@@ -95,3 +95,17 @@ extension Die_Roll_Tests {
     }
     
 }
+
+// MARK: - ExpressionResultType
+extension Die_Roll_Tests {
+    
+    func test_successfulness_shouldBeUndetermined() {
+        let expectedSuccessfulness = Successfulness.Undetermined
+        let dieRoll = Die.arbitrary.generate.evaluate()
+        
+        let successfulness = dieRoll.successfulness
+        
+        expect(successfulness) == expectedSuccessfulness
+    }
+    
+}

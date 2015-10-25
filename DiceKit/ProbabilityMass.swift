@@ -95,6 +95,36 @@ extension ProbabilityMass: CollectionType {
     // Protocol defaults cover implmentation after conforming to `Indexable`
 }
 
+// MARK: - OutcomeWithSuccessfulnessType
+
+extension ProbabilityMass where OutcomeType: OutcomeWithSuccessfulnessType {
+    
+    public subscript(outcomeWithSuccessfulness outcome: Outcome) -> Probability? {
+        get {
+            return frequencyDistribution[outcomeWithSuccessfulness: outcome]
+        }
+    }
+    
+    public func valuesWithoutSuccessfulness() -> ProbabilityMass<Int> {
+        return ProbabilityMass<Int>(frequencyDistribution.valuesWithoutSuccessfulness(), normalize: false)
+    }
+    
+    public func successfulnessWithoutValues() -> ProbabilityMass<Successfulness> {
+        return ProbabilityMass<Successfulness>(frequencyDistribution.successfulnessWithoutValues())
+    }
+    
+    public func mapSuccessfulness(@noescape transform: (Outcome) -> Successfulness) -> ProbabilityMass {
+        let freqDist = frequencyDistribution.mapSuccessfulness(transform)
+        return ProbabilityMass(freqDist, normalize: false)
+    }
+    
+    public func setSuccessfulness(successfulness: Successfulness, comparedWith x: ProbabilityMass, @noescape passingComparison comparison: (Outcome, Outcome) -> Bool) -> ProbabilityMass {
+        let freqDist = frequencyDistribution.setSuccessfulness(successfulness, comparedWith: x.frequencyDistribution, passingComparison: comparison)
+        return ProbabilityMass(freqDist, normalize: false)
+    }
+    
+}
+
 // MARK: - Operations
 
 extension ProbabilityMass {

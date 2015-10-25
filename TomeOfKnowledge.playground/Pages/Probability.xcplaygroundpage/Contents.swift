@@ -38,4 +38,40 @@ for (value, probability) in awesomeExpressionProbailityMass {
 }
 
 
+
+
+let successfulD6 = ProbabilityMass<OutcomeWithSuccessfulness>(FrequencyDistribution([1: 1, 2: 1, 3: 1, 4: 1, 5: 1, OutcomeWithSuccessfulness(6, .Success): 1]))
+for (value, probability) in successfulD6 {
+    value.successfulness
+    value
+    probability
+}
+
+let failureD6 = ProbabilityMass<OutcomeWithSuccessfulness>(FrequencyDistribution([OutcomeWithSuccessfulness(1, .Fail): 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1]))
+for (value, probability) in failureD6 {
+    value.successfulness
+    value
+    probability
+}
+
+let mixedSuccessD6 = successfulD6 && failureD6
+for (value, probability) in mixedSuccessD6 {
+    value.successfulness
+    value
+    probability
+}
+
+let prob = mixedSuccessD6[outcomeWithSuccessfulness: OutcomeWithSuccessfulness(4)]
+
+for (value, probability) in mixedSuccessD6.valuesWithoutSuccessfulness() {
+    value
+    probability
+}
+
+for (successfulness, probability) in mixedSuccessD6.successfulnessWithoutValues() {
+    successfulness
+    probability
+}
+
+
 //: [Previous](@previous)

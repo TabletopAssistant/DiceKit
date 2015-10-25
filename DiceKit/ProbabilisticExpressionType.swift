@@ -8,7 +8,7 @@
 
 import Foundation
 
-public typealias ExpressionProbabilityMass = ProbabilityMass<Int>
+public typealias ExpressionProbabilityMass = ProbabilityMass<OutcomeWithSuccessfulness>
 
 public protocol ProbabilisticExpressionType {
     

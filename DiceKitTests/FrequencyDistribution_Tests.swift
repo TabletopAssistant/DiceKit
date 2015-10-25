@@ -133,13 +133,177 @@ extension FrequencyDistribution_Tests {
     }
     
     func test_indexForOutcome_shouldReturnNilForInvalidOutcome() {
-        
         let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [1:1, 2:1, 3:4, 5:1]
         let freqDist = FrequencyDistribution(frequenciesPerOutcome)
         
         let index = freqDist.indexForOutcome(77)
         
         expect(index).to(beNil())
+    }
+    
+}
+
+// MARK: - OutcomeWithSuccessfulnessType
+extension FrequencyDistribution_Tests {
+    
+    func test_subscript_outcomeWithSuccessfulness_shouldReturnDiscreteFrequencyForSuccessOrFail() {
+        typealias S = OutcomeWithSuccessfulness
+        
+        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            S(7, .Success): 3.0, S(7, .Fail): 2.0, S(7, .Undetermined): 1.0,
+            S(6, .Undetermined): 2.5,
+            S(5, .Fail): 1.5,
+            S(4, .Success): 1.0,
+        ]
+        let freqDist = FrequencyDistribution(frequenciesPerOutcome)
+        let desiredOutcome = S(7, .Fail)
+        let expectedFrequency = frequenciesPerOutcome[desiredOutcome]!
+        
+        let frequency = freqDist[outcomeWithSuccessfulness: desiredOutcome]
+        
+        expect(frequency) == expectedFrequency
+    }
+    
+    func test_subscript_outcomeWithSuccessfulness_shouldReturnSummedFrequencyForUndetermined() {
+        typealias S = OutcomeWithSuccessfulness
+        
+        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            S(7, .Success): 3.0, S(7, .Fail): 2.0, S(7, .Undetermined): 1.0,
+            S(6, .Undetermined): 2.5,
+            S(5, .Fail): 1.5,
+            S(4, .Success): 1.0,
+        ]
+        let freqDist = FrequencyDistribution(frequenciesPerOutcome)
+        let expectedFrequency7 = 6.0
+        let expectedFrequency5 = 1.5
+        let expectedFrequency4 = 1.0
+        
+        let frequency7 = freqDist[outcomeWithSuccessfulness: S(7, .Undetermined)]
+        let frequency5 = freqDist[outcomeWithSuccessfulness: S(5, .Undetermined)]
+        let frequency4 = freqDist[outcomeWithSuccessfulness: S(4, .Undetermined)]
+        
+        expect(frequency7) == expectedFrequency7
+        expect(frequency5) == expectedFrequency5
+        expect(frequency4) == expectedFrequency4
+    }
+    
+    func test_subscript_outcomeWithSuccessfulness_shouldReturnNilForInvalidOutcome() {
+        typealias S = OutcomeWithSuccessfulness
+        
+        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            S(7, .Success): 3.0, S(7, .Fail): 2.0, S(7, .Undetermined): 1.0,
+            S(6, .Undetermined): 2.5,
+            S(5, .Fail): 1.5,
+            S(4, .Success): 1.0,
+        ]
+        let freqDist = FrequencyDistribution(frequenciesPerOutcome)
+        
+        let frequency = freqDist[outcomeWithSuccessfulness: S(77, .Undetermined)]
+        
+        expect(frequency).to(beNil())
+    }
+    
+    func test_valuesWithoutSuccessfulness() {
+        typealias S = OutcomeWithSuccessfulness
+        
+        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            S(7, .Success): 3.0, S(7, .Fail): 2.0, S(7, .Undetermined): 1.0,
+            S(6, .Undetermined): 2.5,
+            S(5, .Fail): 1.5,
+            S(4, .Success): 1.0,
+        ]
+        let freqDist = FrequencyDistribution(frequenciesPerOutcome)
+        let expectedFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            7: 6.0,
+            6: 2.5,
+            5: 1.5,
+            4: 1.0,
+        ]
+        
+        let valuesWithoutSuccessfulness = freqDist.valuesWithoutSuccessfulness()
+        
+        expect(valuesWithoutSuccessfulness.frequenciesPerOutcome) == expectedFrequenciesPerOutcome
+    }
+    
+    func test_successfulnessWithoutValues() {
+        typealias S = OutcomeWithSuccessfulness
+        
+        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            S(7, .Success): 3.0,
+            S(7, .Fail): 2.0,
+            S(7, .Undetermined): 1.0,
+            S(6, .Undetermined): 2.5,
+            S(5, .Fail): 1.5,
+            S(4, .Success): 1.0,
+        ]
+        let freqDist = FrequencyDistribution(frequenciesPerOutcome)
+        let expectedFrequenciesPerOutcome: FrequencyDistribution<Successfulness>.FrequenciesPerOutcome = [
+            .Success: 4.0,
+            .Undetermined: 3.5,
+            .Fail: 3.5,
+        ]
+        
+        let successfulnessWithoutValues = freqDist.successfulnessWithoutValues()
+        
+        expect(successfulnessWithoutValues.frequenciesPerOutcome) == expectedFrequenciesPerOutcome
+    }
+    
+    func test_mapSuccessfulness() {
+        typealias S = OutcomeWithSuccessfulness
+        
+        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            S(7, .Success): 3.0,
+            S(7, .Fail): 2.0,
+            S(7, .Undetermined): 1.0,
+            S(6, .Undetermined): 2.5,
+            S(5, .Fail): 1.5,
+            S(4, .Success): 1.0,
+        ]
+        let freqDist = FrequencyDistribution(frequenciesPerOutcome)
+        let map = { (outcome: S) -> Successfulness in
+            // If odd outcome, then .Fail, otherwise .Success
+            outcome.outcome % 2 == 1 ? .Fail : .Success
+        }
+        let expectedFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            S(7, .Fail): 6.0,
+            S(6, .Success): 2.5,
+            S(5, .Fail): 1.5,
+            S(4, .Success): 1.0,
+        ]
+        
+        let mappedSuccessfulness = freqDist.mapSuccessfulness(map)
+        
+        expect(mappedSuccessfulness.frequenciesPerOutcome) == expectedFrequenciesPerOutcome
+    }
+    
+    func test_setSuccessfulness() {
+        typealias S = OutcomeWithSuccessfulness
+        
+        let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            S(7, .Success): 3.0, S(7, .Fail): 2.0, S(7, .Undetermined): 1.0,
+            S(6, .Undetermined): 2.5,
+            S(5, .Fail): 1.5,
+            S(4, .Success): 1.0,
+        ]
+        let compareFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            S(1, .Success): 2.0,
+            S(2, .Fail): 0.5,
+        ]
+        let freqDist = FrequencyDistribution(frequenciesPerOutcome)
+        let compareFreqDist = FrequencyDistribution(compareFrequenciesPerOutcome)
+        let comparison = { (lhs: S, rhs: S) in
+            (lhs.outcome + rhs.outcome) % 2 == 0
+        }
+        let expectedFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [
+            S(7, .Fail): 13.0, S(7, .Success): 1.5, S(7, .Undetermined): 0.5,
+            S(6, .Fail): 1.25, S(6, .Undetermined): 5.0,
+            S(5, .Fail): 3.75,
+            S(4, .Success): 2.0, S(4, .Fail): 0.5,
+        ]
+        
+        let setSuccessfulness = freqDist.setSuccessfulness(.Fail, comparedWith: compareFreqDist, passingComparison: comparison)
+        
+        expect(setSuccessfulness.frequenciesPerOutcome) == expectedFrequenciesPerOutcome
     }
     
 }
@@ -347,6 +511,27 @@ extension FrequencyDistribution_Tests {
         expect(z.frequenciesPerOutcome) == expectedFrequenciesPerOutcome
     }
     
+    func test_addSuccessfulness() {
+        /*
+        S F  +    U F
+        1 4     0.5 1
+        
+        S   U F
+        1 0.5 5
+        */
+        typealias S = Successfulness
+        
+        let xFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [S.Success: 1.0, S.Fail: 4.0]
+        let yFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [S.Undetermined: 0.5, S.Fail: 1.0]
+        let expectedFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [S.Success: 1.0, S.Undetermined: 0.5, S.Fail: 5.0]
+        let x = FrequencyDistribution(xFrequenciesPerOutcome)
+        let y = FrequencyDistribution(yFrequenciesPerOutcome)
+        
+        let z = x.add(y)
+        
+        expect(z.frequenciesPerOutcome) == expectedFrequenciesPerOutcome
+    }
+    
     func test_subtract() {
         let xFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [1:1.0, 2:1.0, 3:4.0, 4:1.0]
         let yFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [4:6.0, 7:1.0, 8:0.5, 22:3.0]
@@ -359,6 +544,30 @@ extension FrequencyDistribution_Tests {
         
         expect(result.frequenciesPerOutcome) == x.frequenciesPerOutcome
     }
+
+    func test_subtractSuccessfulness() {
+        // Successfulness is different from normal types. So subtraction isn't always the opposite of addition.
+        // This is because 1 + 1 = 1, and reversing that, 1 - 1 = 0, not 1.
+        /*
+        S F  -    U F
+        1 4     0.5 1
+
+        S   U  F
+        1 -0.5 3
+        */
+        typealias S = Successfulness
+
+        let xFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [S.Success: 1.0, S.Fail: 4.0]
+        let yFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [S.Undetermined: 0.5, S.Fail: 1.0]
+        let expectedFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [S.Success: 1.0, S.Undetermined: -0.5, S.Fail: 3.0]
+        let x = FrequencyDistribution(xFrequenciesPerOutcome)
+        let y = FrequencyDistribution(yFrequenciesPerOutcome)
+
+        let z = x.subtract(y)
+
+        expect(z.frequenciesPerOutcome) == expectedFrequenciesPerOutcome
+    }
+
     func test_multiply() {
         // TODO: SwiftCheck
         /*
@@ -387,6 +596,52 @@ extension FrequencyDistribution_Tests {
         expect(z) == expected
     }
     
+    func test_multiplySuccessfulness() {
+        /*
+        S F  *    S F
+        1 4     0.5 1
+        
+          S U F
+        0.5 3 4
+        */
+        typealias S = Successfulness
+        
+        let xFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [S.Success: 1.0, S.Fail: 4.0]
+        let yFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [S.Success: 0.5, S.Fail: 1.0]
+        let expectedFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [S.Success: 0.5, S.Undetermined: 3.0, S.Fail: 4.0]
+        let x = FrequencyDistribution(xFrequenciesPerOutcome)
+        let y = FrequencyDistribution(yFrequenciesPerOutcome)
+        let expected = FrequencyDistribution(expectedFrequenciesPerOutcome)
+        
+        let z = x.multiply(y)
+        
+        expect(z) == expected
+    }
+    
+    func test_multiply_shouldNotChangeWithMultiplicativeIdentity() {
+        let xFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [1: 1.0, 2: 4.0]
+        let expectedFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = xFrequenciesPerOutcome
+        let x = FrequencyDistribution(xFrequenciesPerOutcome)
+        let y = FrequencyDistribution<Int>.multiplicativeIdentity
+        
+        let z = x.multiply(y)
+        
+        expect(z.frequenciesPerOutcome) == expectedFrequenciesPerOutcome
+    }
+    
+    func test_multiplySuccessfulness_shouldNotChangeWithMultiplicativeIdentity() {
+        typealias S = Successfulness
+        
+        let xFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [S.Success: 1.0, S.Fail: 4.0]
+        let expectedFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = xFrequenciesPerOutcome
+        let x = FrequencyDistribution(xFrequenciesPerOutcome)
+        let y = FrequencyDistribution<S>.multiplicativeIdentity
+        
+        let z = x.multiply(y)
+        
+        expect(z.frequenciesPerOutcome) == expectedFrequenciesPerOutcome
+    }
+    
     func test_divide() {
         //Does the reverse of multiply
         let xFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [1:3.0, 2:2.0, 6:1.0]
@@ -400,6 +655,31 @@ extension FrequencyDistribution_Tests {
         
         expect(x) == expected
     }
+
+    func test_divideSuccessfulness() {
+        // Successfulness is different from normal types. So division isn't always the opposite of multiplication.
+        // This is because 1 + 1 = 1, and reversing that, 1 - 1 = 0, not 1.
+        /*
+        S F  /    S F
+        1 4     0.5 1
+
+         S U F
+        -1 3 4
+        */
+        typealias S = Successfulness
+
+        let xFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [S.Success: 1.0, S.Fail: 4.0]
+        let yFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [S.Success: 0.5, S.Fail: 1.0]
+        let expectedFrequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [S.Success: -1.0, S.Undetermined: 4.0]
+        let x = FrequencyDistribution(xFrequenciesPerOutcome)
+        let y = FrequencyDistribution(yFrequenciesPerOutcome)
+        let expected = FrequencyDistribution(expectedFrequenciesPerOutcome)
+
+        let z = x.divide(y)
+
+        expect(z) == expected
+    }
+
     func test_power_shouldReturnMultiplicativeIdentityFor0() {
         let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [2:2.0, 3:2.0, 6:1.0]
         let expected = FrequencyDistribution<Int>.multiplicativeIdentity
@@ -410,12 +690,12 @@ extension FrequencyDistribution_Tests {
         expect(freqDist) == expected
     }
     
-    func test_power_shouldReturnSelfFor1() {
+    func test_power_shouldReturnSelfForMultiplicativeIdentity() {
         let frequenciesPerOutcome: FrequencyDistribution.FrequenciesPerOutcome = [2:2.0, 3:2.0, 6:1.0]
         let x = FrequencyDistribution(frequenciesPerOutcome)
         let expected = x
         
-        let freqDist = x.power(1)
+        let freqDist = x.power(Int.multiplicativeIdentity)
         
         expect(freqDist) == expected
     }

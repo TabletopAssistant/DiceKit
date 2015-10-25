@@ -120,6 +120,32 @@ extension MultiplicationExpressionResult_Tests {
         }
     }
     
+    func test_successfulness_shouldCombineSuccessfulnesses() {
+        property("combine successfulness") <- forAll {
+            (sign: Bool, a: ArrayOf<Successfulness>) in
+            
+            let a = a.getArray
+            
+            // Arrange
+            let expectedSuccessfulness = Successfulness.combineSuccessfulnesses(a) // Tested already, so can use
+            
+            let multiplierResult = (sign ? 1 : -1) * a.count
+            let mockResults: [MockExpressionResult] = a.map {
+                let mockResult = MockExpressionResult()
+                mockResult.stubSuccessfulness = $0
+                return mockResult
+            }
+            
+            let result = MultiplicationExpressionResult(multiplierResult: c(multiplierResult), multiplicandResults: mockResults)
+            
+            // Act
+            let successfulness = result.successfulness
+            
+            // Assert
+            return successfulness == expectedSuccessfulness
+        }
+    }
+    
 }
 
 // MARK: - CustomDebugStringConvertible

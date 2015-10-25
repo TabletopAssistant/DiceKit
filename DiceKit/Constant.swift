@@ -12,6 +12,8 @@ public struct Constant: Equatable {
     
     public let value: Int
     
+    public let successfulness = Successfulness.Undetermined
+    
     public init(_ value: Int) {
         self.value = value
     }
@@ -82,5 +84,5 @@ extension Constant: ExpressionType {
 // MARK: - ExpressionResultType
 
 extension Constant: ExpressionResultType {
-     // Already conforms because of `value`
+     // Already conforms because of `value` and `successful`
 }

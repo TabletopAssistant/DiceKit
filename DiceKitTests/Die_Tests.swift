@@ -486,7 +486,7 @@ extension Die_Tests {
     
     func test_die_negativeSidedProbabilityMass() {
         let die = d(-2)
-        let expectedProbabilityMass = ProbabilityMass(FrequencyDistribution([-2: 0.5, -1: 0.5]))
+        let expectedProbabilityMass = ExpressionProbabilityMass(FrequencyDistribution([-2: 0.5, -1: 0.5]))
         
         expect(die.probabilityMass) == expectedProbabilityMass
     }

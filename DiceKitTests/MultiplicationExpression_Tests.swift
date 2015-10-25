@@ -17,6 +17,13 @@ class MultiplicationExpression_Tests: XCTestCase {
     
 }
 
+// MARK: - Initialization
+extension MultiplicationExpression_Tests {
+    
+    // TODO: init
+    
+}
+
 // MARK: - Equatable
 extension MultiplicationExpression_Tests {
     

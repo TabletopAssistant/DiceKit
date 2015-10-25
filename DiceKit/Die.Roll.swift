@@ -16,6 +16,8 @@ extension Die {
         public let die: Die
         public let value: Int
         
+        public let successfulness = Successfulness.Undetermined
+        
         public init(die: Die, value: Int) {
             self.die = die
             self.value = value
@@ -27,7 +29,7 @@ extension Die {
 // MARK: - ExpressionResultType
 
 extension Die.Roll: ExpressionResultType {
-    // Already conforms because of `value`
+    // Already conforms because of `value` and `successful`
 }
 
 // MARK: - CustomStringConvertible

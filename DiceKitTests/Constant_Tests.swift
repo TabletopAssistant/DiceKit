@@ -81,4 +81,35 @@ extension Constant_Tests {
         }
     }
     
+//    func test_equatable() {
+//        property("equtatable") <- forAll {
+//            (a: Int, b: Int) in
+//            
+//            let reflexive = EquatableTestUtilities.checkReflexive { Constant(a) } <?> "reflexive"
+//            let symmetric = EquatableTestUtilities.checkSymmetric { Constant(a) } <?> "symmetric"
+//            let transitive = EquatableTestUtilities.checkTransitive { Constant(a) } <?> "transitive"
+//            let notEquate = (a != b) ==> {
+//                EquatableTestUtilities.checkNotEquate(
+//                    { Constant(a) },
+//                    { arc4random() % 2 == 1 ? Constant(b) : Constant(a) }
+//                )
+//            }() <?> "not-equate"
+//            
+//            return reflexive.whenFail { print("reflexive fail") } ^&&^ symmetric.whenFail { print("symmetric fail") } ^&&^ transitive.whenFail { print("transitive fail") } ^&&^ notEquate.withCallback(Callback.AfterFinalFailure(kind: .NotCounterexample, f: { (st, res) in
+//                print(res.stamp)
+//            }))
+//        }
+//    }
+    
+}
+
+// MARK: - ExpressionResultType
+extension Constant_Tests {
+    
+    func test_successfulness_shouldBeUndetermined() {
+        let constant = c(84)
+        
+        expect(constant.successfulness) == Successfulness.Undetermined
+    }
+    
 }

@@ -53,6 +53,10 @@ extension SubtractionExpressionResult: ExpressionResultType {
     public var value: Int {
         return minuendResult.value - subtrahendResult.value
     }
+
+    public var successfulness: Successfulness {
+        return minuendResult.successfulness - subtrahendResult.successfulness
+    }
     
 }
 

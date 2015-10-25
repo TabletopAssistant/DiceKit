@@ -52,4 +52,8 @@ extension NegationExpressionResult: ExpressionResultType {
         return -base.value
     }
     
+    public var successfulness: Successfulness {
+        return base.successfulness
+    }
+    
 }
