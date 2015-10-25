@@ -117,6 +117,34 @@ extension Successfulness: Arbitrary {
     
 }
 
+extension SuccessfulnessExpressionComparisonOperation: Arbitrary {
+    
+    public static func create(x : Int) -> SuccessfulnessExpressionComparisonOperation {
+        switch abs(x) % 6 {
+        case 0:
+            return .Equal
+        case 1:
+            return .NotEqual
+        case 2:
+            return .GreaterThan
+        case 3:
+            return .GreaterThanOrEqual
+        case 4:
+            return .LessThan
+        case 5:
+            return .LessThanOrEqual
+            
+        default: // Not possible
+            return .Equal
+        }
+    }
+    
+    public static var arbitrary : Gen<SuccessfulnessExpressionComparisonOperation> {
+        return SuccessfulnessExpressionComparisonOperation.create <^> Int.arbitrary.resize(6)
+    }
+    
+}
+
 extension OutcomeWithSuccessfulness: Arbitrary {
     
     public static func create(outcome : Int)(successfulness: Successfulness) -> OutcomeWithSuccessfulness {

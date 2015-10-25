@@ -49,11 +49,11 @@ public func == <L>(lhs: MaximizationExpressionResult<L>, rhs: MaximizationExpres
 extension MaximizationExpressionResult: ExpressionResultType {
     
     public var value: Int {
-        return maximizationExpressionResult
+        return maximizationExpressionResult.outcome
     }
 
     public var successfulness: Successfulness {
-        return .Undetermined
+        return maximizationExpressionResult.successfulness
     }
     
 }
