@@ -17,6 +17,13 @@ class AdditionExpression_Tests: XCTestCase {
     
 }
 
+// MARK: - Initialization
+extension AdditionExpression_Tests {
+    
+    // TODO: init
+    
+}
+
 // MARK: - Equatable
 extension AdditionExpression_Tests {
     

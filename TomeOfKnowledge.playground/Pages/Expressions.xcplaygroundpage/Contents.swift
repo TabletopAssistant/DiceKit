@@ -18,5 +18,22 @@ let result = expression.evaluate()
 let value = result.value
 
 
+
+let dndD20 = SuccessfulnessExpression(d(20), successComparison: (.Equal, c(20)), failComparison: (.Equal, c(1)))
+let attackExpression = dndD20 + 10
+let attackVersusACExpression = SuccessfulnessExpression(attackExpression, successComparison: (.LessThan, c(23)), failComparison: (.GreaterThanOrEqual, c(23)))
+
+for (outcome, probability) in attackVersusACExpression.probabilityMass {
+    outcome.outcome
+    probability
+    outcome.successfulness
+}
+
+for _ in 0..<40 {
+    let result = dndD20.evaluate()
+    result.value
+    result.successfulness
+}
+
 //: [Previous](@previous)
 //: [Next](@next)

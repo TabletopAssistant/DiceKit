@@ -17,6 +17,13 @@ class NegationExpression_Tests: XCTestCase {
     
 }
 
+// MARK: - Initialization
+extension NegationExpression_Tests {
+    
+    // TODO: init
+    
+}
+
 // MARK: - Equatable
 extension NegationExpression_Tests {
     
