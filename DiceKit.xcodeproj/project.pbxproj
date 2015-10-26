@@ -215,32 +215,31 @@
 			isa = PBXGroup;
 			children = (
 				5379780C1B531B2A005818EC /* Supporting Files */,
-				533F88181B52BC6F003838C8 /* DiceKit.h */,
 				539D567D1B5B66CF00AC6A37 /* AdditionExpression.swift */,
 				539D567F1B5B689600AC6A37 /* AdditionExpressionResult.swift */,
-				8B4C14011B7F8B47008AC355 /* SubtractionExpression.swift */,
-				8B4C14031B7FA8A2008AC355 /* SubtractionExpressionResult.swift */,
 				53D1EC7D1B63133E00433D2C /* ApproximatelyEquatable.swift */,
 				534900331B78172900FA2804 /* ArithmeticType.swift */,
 				533D0C7C1B643F6C003A7D32 /* Constant.swift */,
 				539D568B1B5C7B7700AC6A37 /* Dictionary+Functions.swift */,
-				5379780A1B531B21005818EC /* Die.swift */,
 				531084C11B5B0102008DD696 /* Die.Roll.swift */,
-				53CFC30C1B5AD3BF009C6C8F /* ExpressionType.swift */,
+				5379780A1B531B21005818EC /* Die.swift */,
 				531084BD1B5AF859008DD696 /* ExpressionResultType.swift */,
+				53CFC30C1B5AD3BF009C6C8F /* ExpressionType.swift */,
 				53D1EC7B1B6312E100433D2C /* FrequencyDistribution.swift */,
 				539EAC5A1B6DB97C0097C116 /* FrequencyDistributionIndex.swift */,
 				53D05ED01B53417D007CE7FC /* Int+Random.swift */,
+				6E9F18911B7FCD5400AB8893 /* MaximizationExpression.swift */,
+				6E9F189B1B7FDFF900AB8893 /* MaximizationExpressionResult.swift */,
+				6E9F188F1B7FCD4400AB8893 /* MinimizationExpression.swift */,
+				6E9F18971B7FDF0D00AB8893 /* MinimizationExpressionResult.swift */,
 				53CFC30E1B5AD674009C6C8F /* MultiplicationExpression.swift */,
 				531084BF1B5AF993008DD696 /* MultiplicationExpressionResult.swift */,
 				53ECD0E11B5B498A002D859F /* NegationExpression.swift */,
 				53ECD0E31B5B5185002D859F /* NegationExpressionResult.swift */,
 				53FA0EAB1B6579F300C8D3B5 /* ProbabilisticExpressionType.swift */,
 				539D568D1B5C7BDA00AC6A37 /* ProbabilityMass.swift */,
-				6E9F188F1B7FCD4400AB8893 /* MinimizationExpression.swift */,
-				6E9F18971B7FDF0D00AB8893 /* MinimizationExpressionResult.swift */,
-				6E9F18911B7FCD5400AB8893 /* MaximizationExpression.swift */,
-				6E9F189B1B7FDFF900AB8893 /* MaximizationExpressionResult.swift */,
+				8B4C14011B7F8B47008AC355 /* SubtractionExpression.swift */,
+				8B4C14031B7FA8A2008AC355 /* SubtractionExpressionResult.swift */,
 			);
 			path = DiceKit;
 			sourceTree = "<group>";
@@ -253,26 +252,26 @@
 				539D56891B5B6D6A00AC6A37 /* AdditionExpressionResult_Tests.swift */,
 				531E4F601B7400270073F01A /* Arbitrary.swift */,
 				538AD96A1B768931001B5CB5 /* Constant_Tests.swift */,
+				53D1EC7F1B63DF0C00433D2C /* Dictionary+Functions_Tests.swift */,
 				533F880D1B52B988003838C8 /* Die_Tests.swift */,
 				538AD9681B7678B7001B5CB5 /* Die.Roll_Tests.swift */,
-				53D1EC7F1B63DF0C00433D2C /* Dictionary+Functions_Tests.swift */,
 				531E4F5E1B73F5E20073F01A /* EquatableTestUtilities.swift */,
 				533D0C761B6419F8003A7D32 /* FrequencyDistribution_Tests.swift */,
 				539EAC661B6EF76A0097C116 /* FrequencyDistributionIndex_Tests.swift */,
 				53D05EEB1B546C73007CE7FC /* Int+Random_Tests.swift */,
+				6E9F18951B7FD18600AB8893 /* MaximizationExpression_Tests.swift */,
+				6E0F58CA1B8D63910095087F /* MaximizationExpressionResult_Tests.swift */,
+				6E9F18931B7FD16100AB8893 /* MinimizationExpression_Tests.swift */,
+				6E0F58C81B8D63690095087F /* MinimizationExpressionResult_Tests.swift */,
 				538AD9641B75A66F001B5CB5 /* MockExpression.swift */,
 				53CFC3101B5AE4A0009C6C8F /* MultiplicationExpression_Tests.swift */,
 				533EB1ED1B5B293000B3F8A1 /* MultiplicationExpressionResult_Tests.swift */,
 				539D56831B5B6D1A00AC6A37 /* NegationExpression_Tests.swift */,
 				539D56851B5B6D2B00AC6A37 /* NegationExpressionResult_Tests.swift */,
-				8BFAA9F81B7ED8E800EF65AE /* SubtractionExpression_Tests.swift */,
-				8BFAA9FA1B7F708000EF65AE /* SubtractionExpressionResult_Tests.swift */,
 				53FA0EAD1B657A3600C8D3B5 /* ProbabilisticExpressionType_Tests.swift */,
 				533D0C7A1B6423FA003A7D32 /* ProbabilityMass_Tests.swift */,
-				6E9F18931B7FD16100AB8893 /* MinimizationExpression_Tests.swift */,
-				6E0F58C81B8D63690095087F /* MinimizationExpressionResult_Tests.swift */,
-				6E9F18951B7FD18600AB8893 /* MaximizationExpression_Tests.swift */,
-				6E0F58CA1B8D63910095087F /* MaximizationExpressionResult_Tests.swift */,
+				8BFAA9F81B7ED8E800EF65AE /* SubtractionExpression_Tests.swift */,
+				8BFAA9FA1B7F708000EF65AE /* SubtractionExpressionResult_Tests.swift */,
 			);
 			path = DiceKitTests;
 			sourceTree = "<group>";
@@ -293,6 +292,7 @@
 		5379780C1B531B2A005818EC /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				533F88181B52BC6F003838C8 /* DiceKit.h */,
 				533F88031B52B988003838C8 /* Info.plist */,
 			);
 			name = "Supporting Files";
