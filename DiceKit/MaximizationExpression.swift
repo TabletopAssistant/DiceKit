@@ -8,12 +8,12 @@
 
 import Foundation
 
-public struct MaximizationExpression<Expression: protocol<ExpressionType, Equatable>>: Equatable {
+public struct MaximizationExpression<BaseExpression: protocol<ExpressionType, Equatable>>: Equatable {
     
-    public let expression: Expression
+    public let base: BaseExpression
     
-    public init(_ expression: Expression) {
-        self.expression = expression
+    public init(_ base: BaseExpression) {
+        self.base = base
     }
     
 }
@@ -22,10 +22,10 @@ public struct MaximizationExpression<Expression: protocol<ExpressionType, Equata
 
 extension MaximizationExpression: ExpressionType {
     
-    public typealias Result = MaximizationExpressionResult<Expression.Result>
+    public typealias Result = MaximizationExpressionResult<BaseExpression.Result>
     
     public func evaluate() -> Result {
-        guard let maxOutcome = expression.probabilityMass.maximumOutcome() else {
+        guard let maxOutcome = base.probabilityMass.maximumOutcome() else {
             return Result(0)
         }
         
@@ -33,7 +33,7 @@ extension MaximizationExpression: ExpressionType {
     }
     
     public var probabilityMass: ExpressionProbabilityMass {
-        if let maximumOutcome = expression.probabilityMass.maximumOutcome() {
+        if let maximumOutcome = base.probabilityMass.maximumOutcome() {
             return ProbabilityMass(maximumOutcome)
         }
         
@@ -47,7 +47,7 @@ extension MaximizationExpression: ExpressionType {
 extension MaximizationExpression: CustomStringConvertible {
     
     public var description: String {
-        return "max(\(expression))"
+        return "max(\(base))"
     }
     
 }
@@ -57,7 +57,7 @@ extension MaximizationExpression: CustomStringConvertible {
 extension MaximizationExpression: CustomDebugStringConvertible {
     
     public var debugDescription: String {
-        return "max(\(String(reflecting: expression)))"
+        return "max(\(String(reflecting: base)))"
     }
     
 }
@@ -65,6 +65,6 @@ extension MaximizationExpression: CustomDebugStringConvertible {
 // MARK: - Equatable
 
 public func == <E>(lhs: MaximizationExpression<E>, rhs: MaximizationExpression<E>) -> Bool {
-    return lhs.expression == rhs.expression
+    return lhs.base == rhs.base
 }
 
