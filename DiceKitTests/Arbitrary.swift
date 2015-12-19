@@ -104,3 +104,25 @@ extension Successfulness: Arbitrary {
         return Successfulness.create <^> Int.arbitrary <*> Int.arbitrary
     }
 }
+
+// TODO: Replace this with the commented block once Swift generics are fixed (probably Swift 2)
+extension OutcomeWithSuccessfulness: Arbitrary {
+    static func create(x : Int)(y : Successfulness) -> OutcomeWithSuccessfulness {
+        let outcome = Outcome(integerLiteral: x)
+        return OutcomeWithSuccessfulness(outcome, successfulness: y)
+    }
+
+    public static var arbitrary : Gen<OutcomeWithSuccessfulness> {
+        return OutcomeWithSuccessfulness.create <^> Int.arbitrary <*> Successfulness.arbitrary
+    }
+}
+
+//extension OutcomeWithSuccessfulness: Arbitrary where Outcome: Arbitrary {
+//    static func create(x : Outcome)(y : Successfulness) -> OutcomeWithSuccessfulness {
+//        return OutcomeWithSuccessfulness(outcome: x, successfulness: y)
+//    }
+//
+//    public static var arbitrary : Gen<OutcomeWithSuccessfulness> {
+//        return OutcomeWithSuccessfulness.create <^> Outcome.arbitrary <*> Successfulness.arbitrary
+//    }
+//}

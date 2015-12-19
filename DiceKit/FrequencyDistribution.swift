@@ -13,6 +13,9 @@ public protocol FrequencyDistributionOutcomeType: InvertibleMultiplicativeType, 
     /// The number that will be used when determining how many times to perform another
     /// expression when multiplied by `self`.
     var multiplierEquivalent: Int { get }
+
+    // Force Int for IntegerLiteralType
+    init(integerLiteral: Int)
     
 }
 
