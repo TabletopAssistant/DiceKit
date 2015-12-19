@@ -95,3 +95,34 @@ extension Die_Roll_Tests {
     }
     
 }
+
+// MARK: - CustomDebugStringConvertible
+extension Die_Roll_Tests {
+
+    func test_customDebugStringConvertible() {
+        let die = d(4)
+        let roll = die.roll()
+        let expectedResult = "\(String(reflecting: d(4))).Roll(\(roll.value))"
+
+        let result = String(reflecting: roll)
+
+        expect(result) == expectedResult
+    }
+
+}
+
+//MARK: - CustomString Convertible
+extension Die_Roll_Tests {
+
+    func test_customStringConvertible() {
+        let die = d(6)
+        let roll = die.roll()
+        let val = roll.value
+        let expected = "\(val)|6"
+
+        let result = String(roll)
+
+        expect(result) == expected
+    }
+
+}
