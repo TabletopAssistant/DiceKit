@@ -94,3 +94,13 @@ public struct FrequencyDistributionOf<Outcome : protocol<FrequencyDistributionOu
         return FrequencyDistribution<Outcome>.shrink(bl.getFrequencyDistribution).map(FrequencyDistributionOf.init)
     }
 }
+
+extension Successfulness: Arbitrary {
+    public static func create(x : Int)(y : Int) -> Successfulness {
+        return Successfulness(successes: x, failures: y)
+    }
+
+    public static var arbitrary : Gen<Successfulness> {
+        return Successfulness.create <^> Int.arbitrary <*> Int.arbitrary
+    }
+}
