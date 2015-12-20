@@ -100,7 +100,7 @@ extension SubtractionExpressionResult_Tests {
 // MARK: - CustomDebugStringConvertible
 extension SubtractionExpressionResult_Tests {
     
-    func test_CustomDebuStringConvertible() {
+    func test_CustomDebugStringConvertible() {
         let expression = d(10) - 5
         let evaluation = expression.evaluate()
         let expected = "\(String(reflecting: Die.Roll(die: d(10), value: evaluation.minuendResult.value))) - \(String(reflecting: c(5)))"
