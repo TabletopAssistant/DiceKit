@@ -49,7 +49,7 @@ public struct FrequencyDistribution<OutcomeType: FrequencyDistributionOutcomeTyp
         return FrequencyDistribution(FrequenciesPerOutcome())
     }
     public static var multiplicativeIdentity: FrequencyDistribution {
-        return FrequencyDistribution([Outcome.additiveIdentity: Frequency.multiplicativeIdentity])
+        return FrequencyDistribution([.additiveIdentity: .multiplicativeIdentity])
     }
     
     public let frequenciesPerOutcome: FrequenciesPerOutcome
