@@ -10,6 +10,8 @@ import Foundation
 
 public protocol FrequencyDistributionOutcomeType: InvertibleMultiplicativeType, ForwardIndexType, Hashable {
     
+    /// The number that will be used when determining how many times to perform another
+    /// expression when multiplied by `self`.
     var multiplierEquivalent: Int { get }
     
 }
