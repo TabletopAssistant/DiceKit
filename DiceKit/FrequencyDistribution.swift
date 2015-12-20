@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol FrequencyDistributionOutcomeType: InvertibleMultiplicativeType, ForwardIndexType, Hashable {
+public protocol FrequencyDistributionOutcomeType: InvertibleMultiplicativeType, Hashable {
     
     /// The number that will be used when determining how many times to perform another
     /// expression when multiplied by `self`.
@@ -249,27 +249,6 @@ extension FrequencyDistribution {
         }
     }
     
-    public func divide(y: FrequencyDistribution) -> FrequencyDistribution {
-        guard let initialK = orderedOutcomes.first, lastK = orderedOutcomes.last else {
-            return .additiveIdentity
-        }
-        guard let firstY = y.orderedOutcomes.first, lastY = y.orderedOutcomes.last, firstYFrequency = y[firstY] where firstYFrequency != 0.0 else {
-            fatalError("Invalid divide operation. The divisor expression must not be empty, and its first frequency must not be zero.")
-        }
-        
-        var xFrequencies: FrequenciesPerOutcome = [:]
-        for k in initialK...(lastK + lastY) {
-            var p: Frequency = 0.0
-            for (n, frequency) in xFrequencies {
-                p += frequency * (y[k - n] ?? 0)
-            }
-            xFrequencies[k - firstY] = ((frequenciesPerOutcome[k] ?? 0) - p) / firstYFrequency
-        }
-        
-        let delta = ProbabilityMassConfig.probabilityEqualityDelta
-        return FrequencyDistribution(xFrequencies).filterZeroFrequencies(delta)
-    }
-    
     /// This is a special case of `power(x: FrequencyDistribution)`,
     /// for when `x` is `FrequencyDistribution([x: 1])`.
     public func power(x: Outcome) -> FrequencyDistribution {
@@ -297,4 +276,30 @@ extension FrequencyDistribution {
         }
     }
     
+}
+
+// TODO: Remove the need for ForwardIndexType
+extension FrequencyDistribution where OutcomeType: ForwardIndexType {
+
+    public func divide(y: FrequencyDistribution) -> FrequencyDistribution {
+        guard let initialK = orderedOutcomes.first, lastK = orderedOutcomes.last else {
+            return .additiveIdentity
+        }
+        guard let firstY = y.orderedOutcomes.first, lastY = y.orderedOutcomes.last, firstYFrequency = y[firstY] where firstYFrequency != 0.0 else {
+            fatalError("Invalid divide operation. The divisor expression must not be empty, and its first frequency must not be zero.")
+        }
+
+        var xFrequencies: FrequenciesPerOutcome = [:]
+        for k in initialK...(lastK + lastY) {
+            var p: Frequency = 0.0
+            for (n, frequency) in xFrequencies {
+                p += frequency * (y[k - n] ?? 0)
+            }
+            xFrequencies[k - firstY] = ((frequenciesPerOutcome[k] ?? 0) - p) / firstYFrequency
+        }
+
+        let delta = ProbabilityMassConfig.probabilityEqualityDelta
+        return FrequencyDistribution(xFrequencies).filterZeroFrequencies(delta)
+    }
+
 }

@@ -123,12 +123,6 @@ extension ProbabilityMass {
         return ProbabilityMass(freqDist, normalize: true)
     }
     
-    public func not(x: ProbabilityMass) -> ProbabilityMass {
-        let freqDist = frequencyDistribution.divide(x.frequencyDistribution)
-        
-        return ProbabilityMass(freqDist, normalize: true)
-    }
-    
     public func product(x: ProbabilityMass) -> ProbabilityMass {
         let freqDist = frequencyDistribution.power(x.frequencyDistribution)
         
@@ -141,6 +135,16 @@ extension ProbabilityMass {
     
     public func maximumOutcome() -> Outcome? {
         return frequencyDistribution.maximumOutcome()
+    }
+    
+}
+
+extension ProbabilityMass where OutcomeType: ForwardIndexType {
+
+    public func not(x: ProbabilityMass) -> ProbabilityMass {
+        let freqDist = frequencyDistribution.divide(x.frequencyDistribution)
+
+        return ProbabilityMass(freqDist, normalize: true)
     }
     
 }
@@ -171,7 +175,7 @@ infix operator !&& {
     precedence 140
 }
 
-public func !&& <V>(lhs: ProbabilityMass<V>, rhs: ProbabilityMass<V>) -> ProbabilityMass<V> {
+public func !&& <V: ForwardIndexType>(lhs: ProbabilityMass<V>, rhs: ProbabilityMass<V>) -> ProbabilityMass<V> {
     return lhs.not(rhs)
 }
 
