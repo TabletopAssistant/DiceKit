@@ -444,16 +444,6 @@ extension Die_Tests {
         expect(result) == expected
     }
     
-    func test_roll_customDebugStringConvertible() {
-        let die = d(4)
-        let roll = die.roll()
-        let expectedResult = "Die(4).Roll(\(roll.value))"
-        
-        let result = String(reflecting: roll)
-        
-        expect(result) == expectedResult
-    }
-    
 }
 
 //MARK: - CustomString Convertible
@@ -468,17 +458,6 @@ extension Die_Tests {
         expect(result) == expected
     }
     
-    func test_roll_customStringConvertible() {
-        let die = d(6)
-        let roll = die.roll()
-        let val = roll.value
-        let expected = "\(val)|6"
-        
-        let result = String(roll)
-        
-        expect(result) == expected
-    }
-    
 }
 
 //MARK: - ProbabilityMass for negative sided die
@@ -486,7 +465,7 @@ extension Die_Tests {
     
     func test_die_negativeSidedProbabilityMass() {
         let die = d(-2)
-        let expectedProbabilityMass = ProbabilityMass(FrequencyDistribution([-2: 0.5, -1: 0.5]))
+        let expectedProbabilityMass = ExpressionProbabilityMass(FrequencyDistribution([-2: 0.5, -1: 0.5]))
         
         expect(die.probabilityMass) == expectedProbabilityMass
     }

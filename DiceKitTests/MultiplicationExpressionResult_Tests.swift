@@ -128,7 +128,7 @@ extension MultiplicationExpressionResult_Tests {
     func test_CustomDebugStringConvertible() {
         let expression = 2 * d(10)
         let evaluation = expression.evaluate()
-        let expected = "((Constant(2)) *> (\(String(reflecting: evaluation.multiplicandResults[0])) + \(String(reflecting: evaluation.multiplicandResults[1]))))"
+        let expected = "((\(String(reflecting: c(2)))) *> (\(String(reflecting: evaluation.multiplicandResults[0])) + \(String(reflecting: evaluation.multiplicandResults[1]))))"
         
         let result = String(reflecting: evaluation)
         
@@ -143,7 +143,7 @@ extension MultiplicationExpressionResult_Tests {
     func test_CustomStringConvertible() {
         let expression = 2 * d(10)
         let evaluation = expression.evaluate()
-        let expected = "((2) *> (\(evaluation.multiplicandResults[0]) + \(evaluation.multiplicandResults[1])))"
+        let expected = "((\(c(2))) *> (\(evaluation.multiplicandResults[0]) + \(evaluation.multiplicandResults[1])))"
         
         let result = String(evaluation)
         

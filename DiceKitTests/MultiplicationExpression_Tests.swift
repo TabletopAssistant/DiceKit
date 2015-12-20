@@ -150,7 +150,7 @@ extension MultiplicationExpression_Tests {
     
     func test_CustomDebugStringConvertible() {
         let expression = 2 * d(10)
-        let expected = "(Constant(2) * Die(10))"
+        let expected = "(\(String(reflecting: c(2))) * \(String(reflecting: d(10))))"
         
         let result = String(reflecting: expression)
         
@@ -162,12 +162,30 @@ extension MultiplicationExpression_Tests {
 // MARK: - CustomStringConvertible
 extension MultiplicationExpression_Tests {
     
-    func test_CustomStringConvertible() {
+    func test_CustomStringConvertible_constantAndDie() {
         let expression = 2 * d(10)
-        let expected = "2d10"
+        let expected = "\(c(2))\(d(10))"
         
         let result = String(expression)
         
+        expect(result) == expected
+    }
+
+    func test_CustomStringConvertible_expressionAndDie() {
+        let expression = d(20) * d(8)
+        let expected = "(\(d(20)))\(d(8))"
+
+        let result = String(expression)
+
+        expect(result) == expected
+    }
+
+    func test_CustomStringConvertible_expressionAndExpression() {
+        let expression = c(12) * c(24)
+        let expected = "(\(c(12)) * \(c(24)))"
+
+        let result = String(expression)
+
         expect(result) == expected
     }
     

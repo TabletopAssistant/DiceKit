@@ -23,9 +23,10 @@ class MaximizationExpression_Tests: XCTestCase {
 extension MinimizationExpression_Tests {
     
     func test_MaximizationExpression_CustomDebugStringConvertible() {
-        let expression = MaximizationExpression(d(8) + 2)
+        let innerExpression = d(8) + 2
+        let expression = MaximizationExpression(innerExpression)
         
-        let expected = "max(Die(8) + Constant(2))"
+        let expected = "max(\(String(reflecting: innerExpression)))"
         
         let result = String(reflecting: expression)
         
@@ -38,8 +39,9 @@ extension MinimizationExpression_Tests {
 extension MinimizationExpression_Tests {
     
     func test_MaximizationExpression_CustomStringConvertible() {
-        let expression = MaximizationExpression(d(20) + d(4))
-        let expected = "max(d20 + d4)"
+        let innerExpression = d(20) + d(4)
+        let expression = MaximizationExpression(innerExpression)
+        let expected = "max(\(innerExpression))"
         
         let result = String(expression)
         

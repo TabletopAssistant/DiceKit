@@ -84,10 +84,10 @@ extension AdditionExpressionResult_Tests {
 // MARK: - CustomDebugStringConvertible
 extension AdditionExpressionResult_Tests {
     
-    func test_CustomDebuStringConvertible() {
+    func test_CustomDebugStringConvertible() {
         let expression = d(10) + 5
         let evaluation = expression.evaluate()
-        let expected = "Die(10).Roll(\(evaluation.leftAddendResult.value)) + Constant(5)"
+        let expected = "\(String(reflecting: Die.Roll(die: d(10), value: evaluation.leftAddendResult.value))) + \(String(reflecting: c(5)))"
         
         let result = String(reflecting: evaluation)
         
@@ -102,7 +102,7 @@ extension AdditionExpressionResult_Tests {
     func test_CustomStringConvertible() {
         let expression = d(10) + 5
         let evaluation = expression.evaluate()
-        let expected = "\(evaluation.leftAddendResult.value)|10 + 5"
+        let expected = "\(Die.Roll(die: d(10), value: evaluation.leftAddendResult.value)) + \(c(5))"
         
         let result = String(evaluation)
         
