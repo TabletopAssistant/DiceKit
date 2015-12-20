@@ -108,7 +108,7 @@ extension AdditionExpression_Tests {
     
     func test_operator_shouldWorkWithIntAndExpression() {
         property("Int + Expression and Expression + Int returns correct AdditionExpression") <- forAll {
-            (a: Int, b: Int) in
+            (a: ExpressionResultValue, b: ExpressionResultValue) in
             
             let die = d(b)
             let expectedExpression1 = AdditionExpression(c(a), die)
@@ -126,7 +126,7 @@ extension AdditionExpression_Tests {
     
     func test_operator_shouldWorkWithExpressionAndExpression() {
         property("Expression + Expression returns correct AdditionExpresson") <- forAll {
-            (a: Int, b: Int) in
+            (a: ExpressionResultValue, b: ExpressionResultValue) in
             
             let leftDie = d(a)
             let rightDie = d(b)

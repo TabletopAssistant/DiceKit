@@ -10,10 +10,10 @@ import Foundation
 
 public struct MinimizationExpressionResult<MinimizationExpressionResult: protocol<ExpressionResultType, Equatable>>: Equatable {
     
-    public let minimizationExpressionResult: Int
+    public let resultValue: ExpressionResultValue
     
-    public init(_ minimizationExpressionResult: Int) {
-        self.minimizationExpressionResult = minimizationExpressionResult
+    public init(_ resultValue: ExpressionResultValue) {
+        self.resultValue = resultValue
     }
     
 }
@@ -23,7 +23,7 @@ public struct MinimizationExpressionResult<MinimizationExpressionResult: protoco
 extension MinimizationExpressionResult: CustomStringConvertible {
     
     public var description: String {
-        return "\(minimizationExpressionResult)"
+        return "\(resultValue)"
     }
     
 }
@@ -33,7 +33,7 @@ extension MinimizationExpressionResult: CustomStringConvertible {
 extension MinimizationExpressionResult: CustomDebugStringConvertible {
     
     public var debugDescription: String {
-        return "\(String(reflecting: minimizationExpressionResult))"
+        return "\(String(reflecting: resultValue))"
     }
     
 }
@@ -41,15 +41,13 @@ extension MinimizationExpressionResult: CustomDebugStringConvertible {
 // MARK: - Equatable
 
 public func == <L>(lhs: MinimizationExpressionResult<L>, rhs: MinimizationExpressionResult<L>) -> Bool {
-    return lhs.value == rhs.value
+    return lhs.resultValue == rhs.resultValue
 }
 
 // MARK: - ExpressionResultType
 
 extension MinimizationExpressionResult: ExpressionResultType {
     
-    public var value: Int {
-        return minimizationExpressionResult
-    }
+    // Already conforms because of `resultValue`
     
 }

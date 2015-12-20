@@ -15,7 +15,7 @@ expression == expression2
 let result = expression.evaluate()
 
 //: Just like `Die.Roll` (because it's the `ExpressionResultType` for `Die`) the result is in the `value` property.
-let value = result.value
+let value = result.resultValue
 
 
 //: [Previous](@previous)

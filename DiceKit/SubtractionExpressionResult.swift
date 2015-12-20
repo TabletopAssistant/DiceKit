@@ -50,8 +50,8 @@ public func == <L, R>(lhs: SubtractionExpressionResult<L,R>, rhs: SubtractionExp
 
 extension SubtractionExpressionResult: ExpressionResultType {
     
-    public var value: Int {
-        return minuendResult.value - subtrahendResult.value
+    public var resultValue: ExpressionResultValue {
+        return minuendResult.resultValue - subtrahendResult.resultValue
     }
     
 }

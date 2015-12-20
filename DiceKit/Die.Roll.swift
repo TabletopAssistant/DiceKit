@@ -27,7 +27,10 @@ extension Die {
 // MARK: - ExpressionResultType
 
 extension Die.Roll: ExpressionResultType {
-    // Already conforms because of `value`
+
+    public var resultValue: ExpressionResultValue {
+        return ExpressionResultValue(integerLiteral: value)
+    }
 }
 
 // MARK: - CustomStringConvertible

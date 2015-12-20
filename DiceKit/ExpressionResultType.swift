@@ -10,6 +10,6 @@ import Foundation
 
 public protocol ExpressionResultType {
     
-    var value: Int { get }
+    var resultValue: ExpressionResultValue { get }
     
 }

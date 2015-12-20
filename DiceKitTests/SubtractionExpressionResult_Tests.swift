@@ -66,7 +66,7 @@ extension SubtractionExpressionResult_Tests {
                 let y = SubtractionExpression(b, a).evaluate()
                 
                 let testNoncommutative = x != y
-                let testAnticommutative = x.value == -y.value
+                let testAnticommutative = x.resultValue == -y.resultValue
                 
                 return testNoncommutative && testAnticommutative
             }
@@ -82,14 +82,14 @@ extension SubtractionExpressionResult_Tests {
         property("Subtract subtrahend from minuend") <- forAll {
             (a: Int16, b: Int16) in
             
-            let minuend = Int(a)
-            let subtrahend = Int(b)
+            let minuend = ExpressionResultValue(integerLiteral: Int(a))
+            let subtrahend = ExpressionResultValue(integerLiteral: Int(b))
             
             let expectedValue = minuend - subtrahend
             
             let result = SubtractionExpressionResult(c(minuend), c(subtrahend))
             
-            let value = result.value
+            let value = result.resultValue
             
             return value == expectedValue
         }

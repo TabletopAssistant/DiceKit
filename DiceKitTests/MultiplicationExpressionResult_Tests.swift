@@ -21,9 +21,11 @@ class MultiplicationExpressionResult_Tests: XCTestCase {
 extension MultiplicationExpressionResult_Tests {
     
     func equatableFixture(a: UInt, _ b: UInt) -> (multiplierResult: Constant, multiplicandResults: [Constant]) {
-        let multiplierResult = Int(a % 101)
+        let multiplierResult = ExpressionResultValue(integerLiteral: Int(a % 101))
         let multiplicandRange = UInt32(b % 101)
-        let multiplicandResults = (0..<multiplierResult).map { _ in c(Int(arc4random_uniform(multiplicandRange))) }
+        let multiplicandResults = (0..<multiplierResult.multiplierEquivalent).map { _ in
+            c(ExpressionResultValue(integerLiteral: Int(arc4random_uniform(multiplicandRange))))
+        }
         
         return (c(multiplierResult), multiplicandResults)
     }
@@ -92,29 +94,29 @@ extension MultiplicationExpressionResult_Tests {
             
             let a = a.getArray
             
-            let multiplierResult = a.count
+            let multiplierResult = ExpressionResultValue(integerLiteral: a.count)
             let multiplicandResults = a
-            let expectedValue = multiplicandResults.reduce(0) { $0 + $1.value }
+            let expectedValue = multiplicandResults.reduce(0) { $0 + $1.resultValue }
             let result = MultiplicationExpressionResult(multiplierResult: c(multiplierResult), multiplicandResults: multiplicandResults)
             
-            let value = result.value
+            let value = result.resultValue
             
             return value == expectedValue
         }
     }
     
     func test_value_shouldNegateTheMultiplicandResultsForNegativeMultiplier() {
-        property("value with positive multiplier") <- forAll {
+        property("value with negative multiplier") <- forAll {
             (a: ArrayOf<Constant>) in
             
             let a = a.getArray
         
-            let multiplierResult = -a.count
+            let multiplierResult = ExpressionResultValue(integerLiteral: -a.count)
             let multiplicandResults = a
-            let expectedValue = multiplicandResults.reduce(0) { $0 - $1.value }
+            let expectedValue = multiplicandResults.reduce(0) { $0 - $1.resultValue }
             let result = MultiplicationExpressionResult(multiplierResult: c(multiplierResult), multiplicandResults: multiplicandResults)
             
-            let value = result.value
+            let value = result.resultValue
             
             return value == expectedValue
         }

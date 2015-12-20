@@ -15,11 +15,11 @@ public struct MultiplicationExpressionResult<MultiplierResult: protocol<Expressi
     public let negateMultiplicandResults: Bool
     
     public init(multiplierResult: MultiplierResult, multiplicandResults: [MultiplicandResult]) {
-        assert(abs(multiplierResult.value) == multiplicandResults.count)
+        assert(abs(multiplierResult.resultValue.multiplierEquivalent) == multiplicandResults.count)
         
         self.multiplierResult = multiplierResult
         self.multiplicandResults = multiplicandResults
-        self.negateMultiplicandResults = multiplierResult.value < 0
+        self.negateMultiplicandResults = multiplierResult.resultValue < 0
     }
     
 }
@@ -61,8 +61,8 @@ public func == <M, R>(lhs: MultiplicationExpressionResult<M,R>, rhs: Multiplicat
 
 extension MultiplicationExpressionResult: ExpressionResultType {
     
-    public var value: Int {
-        let values = multiplicandResults.map { $0.value }
+    public var resultValue: ExpressionResultValue {
+        let values = multiplicandResults.map { $0.resultValue }
         
         if negateMultiplicandResults {
             return values.reduce(0, combine: -)

@@ -10,10 +10,10 @@ import Foundation
 
 public struct MaximizationExpressionResult<MaximizationExpressionResult: protocol<ExpressionResultType, Equatable>>: Equatable {
     
-    public let maximizationExpressionResult: Int
+    public let resultValue: ExpressionResultValue
     
-    public init(_ maximizationExpressionResult: Int) {
-        self.maximizationExpressionResult = maximizationExpressionResult
+    public init(_ resultValue: ExpressionResultValue) {
+        self.resultValue = resultValue
     }
     
 }
@@ -23,7 +23,7 @@ public struct MaximizationExpressionResult<MaximizationExpressionResult: protoco
 extension MaximizationExpressionResult: CustomStringConvertible {
     
     public var description: String {
-        return "\(maximizationExpressionResult)"
+        return "\(resultValue)"
     }
     
 }
@@ -33,7 +33,7 @@ extension MaximizationExpressionResult: CustomStringConvertible {
 extension MaximizationExpressionResult: CustomDebugStringConvertible {
     
     public var debugDescription: String {
-        return "\(String(reflecting: maximizationExpressionResult))"
+        return "\(String(reflecting: resultValue))"
     }
     
 }
@@ -41,15 +41,13 @@ extension MaximizationExpressionResult: CustomDebugStringConvertible {
 // MARK: - Equatable
 
 public func == <L>(lhs: MaximizationExpressionResult<L>, rhs: MaximizationExpressionResult<L>) -> Bool {
-    return lhs.value == rhs.value
+    return lhs.resultValue == rhs.resultValue
 }
 
 // MARK: - ExpressionResultType
 
 extension MaximizationExpressionResult: ExpressionResultType {
     
-    public var value: Int {
-        return maximizationExpressionResult
-    }
+    // Already conforms because of `resultValue`
     
 }

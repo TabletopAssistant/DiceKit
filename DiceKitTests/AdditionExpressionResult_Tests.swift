@@ -66,14 +66,14 @@ extension AdditionExpressionResult_Tests {
         property("add the addends") <- forAll {
             (a: Int16, b: Int16) in
             
-            let a = Int(a)
-            let b = Int(b)
+            let a = ExpressionResultValue(integerLiteral: Int(a))
+            let b = ExpressionResultValue(integerLiteral: Int(b))
             
             let expectedValue = a + b
             
             let result = AdditionExpressionResult(c(a), c(b))
             
-            let value = result.value
+            let value = result.resultValue
             
             return value == expectedValue
         }

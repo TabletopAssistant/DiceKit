@@ -21,7 +21,7 @@ extension Constant_Tests {
     
     func test_init() {
         property("init") <- forAll {
-            (i: Int) in
+            (i: ExpressionResultValue) in
             
             let expectedValue = i
             
@@ -46,7 +46,7 @@ extension Constant_Tests {
     
     func test_shouldBeReflexive() {
         property("reflexive") <- forAll {
-            (i: Int) in
+            (i: ExpressionResultValue) in
             
             return EquatableTestUtilities.checkReflexive { Constant(i) }
         }
@@ -54,7 +54,7 @@ extension Constant_Tests {
     
     func test_shouldBeSymmetric() {
         property("symmetric") <- forAll {
-            (i: Int) in
+            (i: ExpressionResultValue) in
             
             return EquatableTestUtilities.checkSymmetric { Constant(i) }
         }
@@ -62,7 +62,7 @@ extension Constant_Tests {
     
     func test_shouldBeTransitive() {
         property("transitive") <- forAll {
-            (i: Int) in
+            (i: ExpressionResultValue) in
             
             return EquatableTestUtilities.checkTransitive { Constant(i) }
         }
@@ -70,7 +70,7 @@ extension Constant_Tests {
     
     func test_shouldBeAbleToNotEquate() {
         property("non-equal") <- forAll {
-            (a: Int, b: Int) in
+            (a: ExpressionResultValue, b: ExpressionResultValue) in
             
             return (a != b) ==> {
                 EquatableTestUtilities.checkNotEquate(

@@ -9,6 +9,7 @@
 import Foundation
 
 public typealias ExpressionProbabilityMass = ProbabilityMass<Int>
+public typealias ExpressionResultValue = ExpressionProbabilityMass.Outcome
 
 public protocol ProbabilisticExpressionType {
     

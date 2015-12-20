@@ -10,9 +10,9 @@ import Foundation
 
 public struct Constant: Equatable {
     
-    public let value: Int
+    public let value: ExpressionResultValue
     
-    public init(_ value: Int) {
+    public init(_ value: ExpressionResultValue) {
         self.value = value
     }
     
@@ -20,7 +20,7 @@ public struct Constant: Equatable {
 
 // MARK: - Convenience Init
 
-public func c(value: Int) -> Constant {
+public func c(value: ExpressionResultValue) -> Constant {
     return Constant(value)
 }
 
@@ -57,7 +57,7 @@ extension Constant: IntegerLiteralConvertible {
     public typealias IntegerLiteralType = Int
     
     public init(integerLiteral value: IntegerLiteralType) {
-        self.value = value
+        self.value = ExpressionResultValue(integerLiteral: value)
     }
     
 }
@@ -73,7 +73,7 @@ extension Constant: ExpressionType {
     }
     
     public var probabilityMass: ExpressionProbabilityMass {
-        let probMassValue = ExpressionProbabilityMass.Outcome(value)
+        let probMassValue = value
         return ProbabilityMass(probMassValue)
     }
     
@@ -82,5 +82,9 @@ extension Constant: ExpressionType {
 // MARK: - ExpressionResultType
 
 extension Constant: ExpressionResultType {
-     // Already conforms because of `value`
+
+    public var resultValue: ExpressionResultValue {
+        return value
+    }
+
 }
