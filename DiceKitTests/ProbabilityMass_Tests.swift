@@ -172,7 +172,50 @@ extension ProbabilityMass_Tests {
     
 }
 
-// MARK: - Operations
+// MARK: - Foundational Operations
+extension ProbabilityMass_Tests {
+
+    func test_mapOutcomes() {
+        let freqDist = FrequencyDistribution([
+            7: 3.0,
+            6: 2.5,
+            5: 1.5,
+            4: 1.0,
+        ])
+        let probMass = ProbabilityMass(freqDist)
+        let expectedFreqDist = FrequencyDistribution([
+            3: 5.5/8.0,
+            2: 2.5/8.0,
+        ]) // /2
+
+        let mappedOutcomes = probMass.mapOutcomes { $0 / 2 }
+
+        expect(mappedOutcomes.frequencyDistribution) == expectedFreqDist
+    }
+
+    func test_mapProbabilities() {
+        let freqDist = FrequencyDistribution([
+            7: 3.0,
+            6: 2.5,
+            5: 1.5,
+            4: 1.0,
+        ])
+        let probMass = ProbabilityMass(freqDist)
+        let expectedFreqDist = FrequencyDistribution([
+            7: 3.0/8.0+2,
+            6: 2.5/8.0+2,
+            5: 1.5/8.0+2,
+            4: 1.0/8.0+2,
+        ]).normalizeFrequencies() // + 2
+
+        let mappedProbabilities = probMass.mapProbabilities { $0 + 2 }
+
+        expect(mappedProbabilities.frequencyDistribution) == expectedFreqDist
+    }
+
+}
+
+// MARK: - Primitive Operations
 extension ProbabilityMass_Tests {
     
     func test_subscript() {

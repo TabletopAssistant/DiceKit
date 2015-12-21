@@ -102,6 +102,18 @@ extension ProbabilityMass: CollectionType {
 // MARK: - Operations
 
 extension ProbabilityMass {
+
+    // MARK: Foundational Operations
+
+    public func mapOutcomes(@noescape transform: (Outcome) -> Outcome) -> ProbabilityMass {
+        return ProbabilityMass(frequencyDistribution.mapOutcomes(transform), normalize: false)
+    }
+
+    public func mapProbabilities(@noescape transform: (Probability) -> Probability) -> ProbabilityMass {
+        return ProbabilityMass(frequencyDistribution.mapFrequencies(transform), normalize: true)
+    }
+
+    // MARK: Primitive Operations
     
     public subscript(value: Outcome) -> Probability? {
         get {
