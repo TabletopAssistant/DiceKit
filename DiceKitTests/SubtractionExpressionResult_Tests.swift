@@ -112,7 +112,7 @@ extension SubtractionExpressionResult_Tests {
     
 }
 
-// Mark: - CustomStringConvertible
+// MARK: - CustomStringConvertible
 extension SubtractionExpressionResult_Tests {
     
     func test_CustomStringConvertible() {

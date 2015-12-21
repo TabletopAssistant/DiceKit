@@ -135,7 +135,7 @@ extension Die_Roll_Tests {
             (x: Int) in
 
             let result = Die.Roll(die: Die(sides: x), value: x)
-            let expectedValue = result.value
+            let expectedValue = ExpressionResultValue(integerLiteral: result.value)
 
             let value = result.resultValue
 
