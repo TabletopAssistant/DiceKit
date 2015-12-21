@@ -126,3 +126,21 @@ extension Die_Roll_Tests {
     }
 
 }
+
+// MARK: - ExpressionResultType
+extension Die_Roll_Tests {
+
+    func test_resultValue() {
+        property("resultValue") <- forAll {
+            (x: Int) in
+
+            let result = Die.Roll(die: Die(sides: x), value: x)
+            let expectedValue = result.value
+
+            let value = result.resultValue
+
+            return value == expectedValue
+        }
+    }
+
+}

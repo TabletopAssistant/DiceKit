@@ -82,3 +82,21 @@ extension Constant_Tests {
     }
     
 }
+
+// MARK: - ExpressionResultType
+extension Constant_Tests {
+
+    func test_resultValue() {
+        property("resultValue") <- forAll {
+            (x: ExpressionResultValue) in
+
+            let result = Constant(x)
+            let expectedValue = result.value
+
+            let value = result.resultValue
+
+            return value == expectedValue
+        }
+    }
+    
+}
