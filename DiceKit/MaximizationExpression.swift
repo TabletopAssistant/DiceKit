@@ -6,8 +6,6 @@
 //  Copyright © 2015 Brentley Jones. All rights reserved.
 //
 
-import Foundation
-
 public struct MaximizationExpression<BaseExpression: protocol<ExpressionType, Equatable>>: Equatable {
     
     public let base: BaseExpression
@@ -25,19 +23,15 @@ extension MaximizationExpression: ExpressionType {
     public typealias Result = MaximizationExpressionResult<BaseExpression.Result>
     
     public func evaluate() -> Result {
-        guard let maxOutcome = base.probabilityMass.maximumOutcome() else {
-            return Result(0)
-        }
-        
-        return Result(maxOutcome)
+        return Result(base.probabilityMass)
     }
     
     public var probabilityMass: ExpressionProbabilityMass {
-        if let maximumOutcome = base.probabilityMass.maximumOutcome() {
-            return ProbabilityMass(maximumOutcome)
+        guard let maximumOutcome = base.probabilityMass.maximumOutcome() else {
+            return ProbabilityMass(FrequencyDistribution.additiveIdentity)
         }
-        
-        return ProbabilityMass(FrequencyDistribution.additiveIdentity)
+
+        return ProbabilityMass(maximumOutcome)
     }
     
 }

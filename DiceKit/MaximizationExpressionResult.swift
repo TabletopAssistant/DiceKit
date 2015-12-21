@@ -6,16 +6,14 @@
 //  Copyright © 2015 Brentley Jones. All rights reserved.
 //
 
-import Foundation
+public struct MaximizationExpressionResult<BaseExpressionResult: protocol<ExpressionResultType, Equatable>>: Equatable {
 
-public struct MaximizationExpressionResult<MaximizationExpressionResult: protocol<ExpressionResultType, Equatable>>: Equatable {
+    // TODO: Have this type be based on BaseExpressionResult
+    public let baseProbabilityMass: ExpressionProbabilityMass
     
-    public let resultValue: ExpressionResultValue
-    
-    public init(_ resultValue: ExpressionResultValue) {
-        self.resultValue = resultValue
+    public init(_ baseProbabilityMass: ExpressionProbabilityMass) {
+        self.baseProbabilityMass = baseProbabilityMass
     }
-    
 }
 
 // MARK: - CustomStringConvertible
@@ -23,9 +21,9 @@ public struct MaximizationExpressionResult<MaximizationExpressionResult: protoco
 extension MaximizationExpressionResult: CustomStringConvertible {
     
     public var description: String {
-        return "\(resultValue)"
+        let stringlyArray = baseProbabilityMass.orderedOutcomes.map { String($0) }.joinWithSeparator(", ")
+        return "max([\(stringlyArray)])"
     }
-    
 }
 
 // MARK: - CustomDebugStringConvertible
@@ -33,21 +31,22 @@ extension MaximizationExpressionResult: CustomStringConvertible {
 extension MaximizationExpressionResult: CustomDebugStringConvertible {
     
     public var debugDescription: String {
-        return "\(String(reflecting: resultValue))"
+        let stringlyArray = baseProbabilityMass.orderedOutcomes.map { String(reflecting: $0) }.joinWithSeparator(", ")
+        return "max([\(stringlyArray)])"
     }
-    
 }
 
 // MARK: - Equatable
 
 public func == <L>(lhs: MaximizationExpressionResult<L>, rhs: MaximizationExpressionResult<L>) -> Bool {
-    return lhs.resultValue == rhs.resultValue
+    return lhs.baseProbabilityMass == rhs.baseProbabilityMass
 }
 
 // MARK: - ExpressionResultType
 
 extension MaximizationExpressionResult: ExpressionResultType {
-    
-    // Already conforms because of `resultValue`
-    
+
+    public var resultValue: ExpressionResultValue {
+        return baseProbabilityMass.maximumOutcome() ?? 0
+    }
 }
