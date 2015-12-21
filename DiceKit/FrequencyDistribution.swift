@@ -53,7 +53,8 @@ public struct FrequencyDistribution<OutcomeType: FrequencyDistributionOutcomeTyp
     }
     
     public let frequenciesPerOutcome: FrequenciesPerOutcome
-    private let orderedOutcomes: [Outcome]
+
+    let orderedOutcomes: [Outcome]
     
     internal init(_ frequenciesPerOutcome: FrequenciesPerOutcome, delta: Double) {
         self.frequenciesPerOutcome = frequenciesPerOutcome.filterValues { abs($0) > delta }
