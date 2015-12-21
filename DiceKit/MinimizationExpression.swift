@@ -6,8 +6,6 @@
 //  Copyright © 2015 Brentley Jones. All rights reserved.
 //
 
-import Foundation
-
 public struct MinimizationExpression<BaseExpression: protocol<ExpressionType, Equatable>>: Equatable {
     
     public let base: BaseExpression
@@ -15,7 +13,6 @@ public struct MinimizationExpression<BaseExpression: protocol<ExpressionType, Eq
     public init(_ base: BaseExpression) {
         self.base = base
     }
-    
 }
 
 // MARK: - ExpressionType
@@ -25,21 +22,16 @@ extension MinimizationExpression: ExpressionType {
     public typealias Result = MinimizationExpressionResult<BaseExpression.Result>
     
     public func evaluate() -> Result {
-        guard let minOutcome = base.probabilityMass.minimumOutcome() else {
-            return Result(0)
-        }
-        
-        return Result(minOutcome)
+        return Result(base.probabilityMass)
     }
     
     public var probabilityMass: ExpressionProbabilityMass {
-        if let minimumOutcome = base.probabilityMass.minimumOutcome() {
-            return ProbabilityMass(minimumOutcome)
+        guard let minimumOutcome = base.probabilityMass.minimumOutcome() else {
+            return ProbabilityMass(FrequencyDistribution.additiveIdentity)
         }
-        
-        return ProbabilityMass(FrequencyDistribution.additiveIdentity)
+
+        return ProbabilityMass(minimumOutcome)
     }
-    
 }
 
 // MARK: CustomStringConvertible
@@ -49,7 +41,6 @@ extension MinimizationExpression: CustomStringConvertible {
     public var description: String {
         return "min(\(base))"
     }
-    
 }
 
 // MARK: - CustomDebugStringConvertible
@@ -59,7 +50,6 @@ extension MinimizationExpression: CustomDebugStringConvertible {
     public var debugDescription: String {
         return "min(\(String(reflecting: base)))"
     }
-    
 }
 
 // MARK: - Equatable

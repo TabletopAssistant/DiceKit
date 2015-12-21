@@ -25,6 +25,10 @@ public struct ProbabilityMass<OutcomeType: FrequencyDistributionOutcomeType>: Ap
     }
     
     public let frequencyDistribution: FrequencyDistribution<Outcome>
+
+    var orderedOutcomes: [Outcome] {
+        return frequencyDistribution.orderedOutcomes
+    }
     
     internal init(_ frequencyDistribution: FrequencyDistribution<Outcome>, normalize: Bool) {
         self.frequencyDistribution = normalize ? frequencyDistribution.normalizeFrequencies() : frequencyDistribution

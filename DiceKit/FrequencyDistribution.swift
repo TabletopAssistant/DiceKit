@@ -53,14 +53,8 @@ public struct FrequencyDistribution<OutcomeType: FrequencyDistributionOutcomeTyp
     }
     
     public let frequenciesPerOutcome: FrequenciesPerOutcome
-    private let orderedOutcomes: [Outcome]
-    
-    public var totalFrequencies: Frequency {
-        return frequenciesPerOutcome.reduce(0) {
-            let (_, value) = $1
-            return $0 + value
-        }
-    }
+
+    let orderedOutcomes: [Outcome]
     
     internal init(_ frequenciesPerOutcome: FrequenciesPerOutcome, delta: Double) {
         self.frequenciesPerOutcome = frequenciesPerOutcome.filterValues { abs($0) > delta }
@@ -200,7 +194,10 @@ extension FrequencyDistribution {
     }
     
     public func normalizeFrequencies() -> FrequencyDistribution {
-        let frequencies = totalFrequencies
+        let frequencies: Frequency = frequenciesPerOutcome.reduce(0) {
+            let (_, value) = $1
+            return $0 + value
+        }
         return mapFrequencies { $0 / frequencies }
     }
     
