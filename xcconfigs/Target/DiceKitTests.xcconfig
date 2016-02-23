@@ -1,0 +1,16 @@
+//
+//  DiceKitTests.xcconfig
+//  DiceKit
+//
+//  Created by Brentley Jones on 7/12/15.
+//  Copyright © 2015 Brentley Jones. All rights reserved.
+//
+
+#include "../base/Target/Universal/Tests.Universal.xcconfig"
+
+// Packaging
+INFOPLIST_FILE = DiceKitTests/Info.plist
+
+PRODUCT_BUNDLE_IDENTIFIER = org.tabletopassistant.DiceKitTests
+
+PRODUCT_NAME = DiceKitTests

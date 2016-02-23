@@ -1,9 +1,9 @@
 //
-//  DiceKitTests.Debug.xcconfig
+//  Debug.xcconfig
 //  DiceKit
 //
 //  Created by Brentley Jones on 7/12/15.
 //  Copyright © 2015 Brentley Jones. All rights reserved.
 //
 
-#include "DiceKitTests.base.xcconfig"
+#include "../base/Project/Debug.xcconfig"
