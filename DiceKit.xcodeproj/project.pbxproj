@@ -110,6 +110,10 @@
 		538AD9641B75A66F001B5CB5 /* MockExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockExpression.swift; sourceTree = "<group>"; };
 		538AD9681B7678B7001B5CB5 /* Die.Roll_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Die.Roll_Tests.swift; sourceTree = "<group>"; };
 		538AD96A1B768931001B5CB5 /* Constant_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant_Tests.swift; sourceTree = "<group>"; };
+		5395EBC01C7C0A08009CC1EF /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		5395EBC11C7C0A08009CC1EF /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		5395EBC31C7C0A08009CC1EF /* DiceKit.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = DiceKit.xcconfig; sourceTree = "<group>"; };
+		5395EBC41C7C0A08009CC1EF /* DiceKitTests.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = DiceKitTests.xcconfig; sourceTree = "<group>"; };
 		539D567D1B5B66CF00AC6A37 /* AdditionExpression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionExpression.swift; sourceTree = "<group>"; };
 		539D567F1B5B689600AC6A37 /* AdditionExpressionResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AdditionExpressionResult.swift; sourceTree = "<group>"; };
 		539D56831B5B6D1A00AC6A37 /* NegationExpression_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NegationExpression_Tests.swift; sourceTree = "<group>"; };
@@ -125,12 +129,6 @@
 		53CFC3101B5AE4A0009C6C8F /* MultiplicationExpression_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiplicationExpression_Tests.swift; sourceTree = "<group>"; };
 		53D05ED01B53417D007CE7FC /* Int+Random.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Random.swift"; sourceTree = "<group>"; };
 		53D05EE11B535AD3007CE7FC /* SwiftCheck.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SwiftCheck.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		53D05EE51B53E5A7007CE7FC /* DiceKit.base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = DiceKit.base.xcconfig; sourceTree = "<group>"; };
-		53D05EE61B53E646007CE7FC /* DiceKit.Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = DiceKit.Debug.xcconfig; sourceTree = "<group>"; };
-		53D05EE71B53E66B007CE7FC /* DiceKit.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = DiceKit.Release.xcconfig; sourceTree = "<group>"; };
-		53D05EE81B53E6A0007CE7FC /* DiceKitTests.base.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = DiceKitTests.base.xcconfig; sourceTree = "<group>"; };
-		53D05EE91B53E6D3007CE7FC /* DiceKitTests.Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = DiceKitTests.Debug.xcconfig; sourceTree = "<group>"; };
-		53D05EEA1B53E6E2007CE7FC /* DiceKitTests.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = DiceKitTests.Release.xcconfig; sourceTree = "<group>"; };
 		53D05EEB1B546C73007CE7FC /* Int+Random_Tests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+Random_Tests.swift"; sourceTree = "<group>"; };
 		53D1EC7B1B6312E100433D2C /* FrequencyDistribution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequencyDistribution.swift; sourceTree = "<group>"; };
 		53D1EC7D1B63133E00433D2C /* ApproximatelyEquatable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApproximatelyEquatable.swift; sourceTree = "<group>"; };
@@ -279,12 +277,8 @@
 		533F881A1B5308BC003838C8 /* xcconfigs */ = {
 			isa = PBXGroup;
 			children = (
-				53D05EE51B53E5A7007CE7FC /* DiceKit.base.xcconfig */,
-				53D05EE61B53E646007CE7FC /* DiceKit.Debug.xcconfig */,
-				53D05EE71B53E66B007CE7FC /* DiceKit.Release.xcconfig */,
-				53D05EE81B53E6A0007CE7FC /* DiceKitTests.base.xcconfig */,
-				53D05EE91B53E6D3007CE7FC /* DiceKitTests.Debug.xcconfig */,
-				53D05EEA1B53E6E2007CE7FC /* DiceKitTests.Release.xcconfig */,
+				5395EBBF1C7C0A08009CC1EF /* Project */,
+				5395EBC21C7C0A08009CC1EF /* Target */,
 			);
 			path = xcconfigs;
 			sourceTree = "<group>";
@@ -296,6 +290,24 @@
 				533F88031B52B988003838C8 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5395EBBF1C7C0A08009CC1EF /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				5395EBC01C7C0A08009CC1EF /* Debug.xcconfig */,
+				5395EBC11C7C0A08009CC1EF /* Release.xcconfig */,
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
+		5395EBC21C7C0A08009CC1EF /* Target */ = {
+			isa = PBXGroup;
+			children = (
+				5395EBC31C7C0A08009CC1EF /* DiceKit.xcconfig */,
+				5395EBC41C7C0A08009CC1EF /* DiceKitTests.xcconfig */,
+			);
+			path = Target;
 			sourceTree = "<group>";
 		};
 		53D05ECF1B532208007CE7FC /* Supporting Files */ = {
@@ -487,19 +499,21 @@
 /* Begin XCBuildConfiguration section */
 		533F87F71B52B8B9003838C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5395EBC01C7C0A08009CC1EF /* Debug.xcconfig */;
 			buildSettings = {
 			};
 			name = Debug;
 		};
 		533F87F81B52B8B9003838C8 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5395EBC11C7C0A08009CC1EF /* Release.xcconfig */;
 			buildSettings = {
 			};
 			name = Release;
 		};
 		533F88111B52B988003838C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 53D05EE61B53E646007CE7FC /* DiceKit.Debug.xcconfig */;
+			baseConfigurationReference = 5395EBC31C7C0A08009CC1EF /* DiceKit.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -557,7 +571,7 @@
 		};
 		533F88121B52B988003838C8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 53D05EE71B53E66B007CE7FC /* DiceKit.Release.xcconfig */;
+			baseConfigurationReference = 5395EBC31C7C0A08009CC1EF /* DiceKit.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -607,7 +621,7 @@
 		};
 		533F88141B52B988003838C8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 53D05EE91B53E6D3007CE7FC /* DiceKitTests.Debug.xcconfig */;
+			baseConfigurationReference = 5395EBC41C7C0A08009CC1EF /* DiceKitTests.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -655,7 +669,7 @@
 		};
 		533F88151B52B988003838C8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 53D05EEA1B53E6E2007CE7FC /* DiceKitTests.Release.xcconfig */;
+			baseConfigurationReference = 5395EBC41C7C0A08009CC1EF /* DiceKitTests.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";

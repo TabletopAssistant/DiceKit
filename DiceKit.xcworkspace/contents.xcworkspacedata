@@ -13,17 +13,4 @@
    <FileRef
       location = "group:Carthage/Checkouts/SwiftCheck/SwiftCheck.xcodeproj">
    </FileRef>
-   <Group
-      location = "group:Carthage/Checkouts/xcconfigs"
-      name = "Universal Framework xcconfigs">
-      <FileRef
-         location = "group:UniversalFramework_Base.xcconfig">
-      </FileRef>
-      <FileRef
-         location = "group:UniversalFramework_Framework.xcconfig">
-      </FileRef>
-      <FileRef
-         location = "group:UniversalFramework_Test.xcconfig">
-      </FileRef>
-   </Group>
 </Workspace>

@@ -1,3 +1,3 @@
 github "Quick/Nimble" "v2.0.0"
 github "typelift/SwiftCheck" "v0.3.2"
-github "brentleyjones/xcconfigs-1" "8be6a52d52c420df6d70d0e9cdda016dbd5fd270"
+github "brentleyjones/xcconfigs" "v0.1"
