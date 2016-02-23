@@ -518,9 +518,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				INFOPLIST_FILE = DiceKit/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = org.tabletopassistant.DiceKit;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -533,9 +530,6 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
-				INFOPLIST_FILE = DiceKit/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = org.tabletopassistant.DiceKit;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
@@ -545,9 +539,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5395EBC41C7C0A08009CC1EF /* DiceKitTests.xcconfig */;
 			buildSettings = {
-				INFOPLIST_FILE = DiceKitTests/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = org.tabletopassistant.DiceKitTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
 		};
@@ -555,9 +546,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5395EBC41C7C0A08009CC1EF /* DiceKitTests.xcconfig */;
 			buildSettings = {
-				INFOPLIST_FILE = DiceKitTests/Info.plist;
-				PRODUCT_BUNDLE_IDENTIFIER = org.tabletopassistant.DiceKitTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
