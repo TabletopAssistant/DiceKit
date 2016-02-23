@@ -13,7 +13,7 @@ public extension CollectionType where Index.Distance: protocol<Arbitrary, Intege
     
     /// Generates an arbitrary index within 0..<count
     public var arbitraryIndex : Gen<Index.Distance> {
-        return Index.Distance.arbitrary.resize(Int(self.count.toIntMax())).suchThat { $0 >= 0 }
+        return Index.Distance.arbitrary.resize(max(0, Int(self.count.toIntMax()) - 1)).suchThat { $0 >= 0 }
     }
     
 }
