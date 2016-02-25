@@ -7,6 +7,7 @@ DiceKit
 ![Supported platforms](https://img.shields.io/badge/platforms-iOS%20%7C%20OS%20X%20%7C%20tvOS%20%7C%20watchOS-blue.svg)
 [![Latest release](https://img.shields.io/github/release/tabletopassistant/dicekit.svg)](https://github.com/TabletopAssistant/DiceKit/releases)
 [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg)](https://github.com/Carthage/Carthage)
+[![Slack Status](https://tabletopassistant-slackin.herokuapp.com/badge.svg)](https://tabletopassistant-slackin.herokuapp.com)
 
 DiceKit is a Swift framework for expressing and evaluating [dice notation][Dice Notation] (e.g., `d20`, `4d6-4`, `3d8×10+2`), which is commonly used in tabletop role-playing games.
 
