@@ -513,6 +513,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5395EBC01C7C0A08009CC1EF /* Debug.xcconfig */;
 			buildSettings = {
+				ENABLE_TESTABILITY = YES;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
