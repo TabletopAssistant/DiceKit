@@ -18,7 +18,7 @@ class MockExpression: ExpressionType, Equatable {
     
     func evaluate() -> Result {
         let result = stubResulter()
-        ++evaluateCalled
+        evaluateCalled += 1
         return result
     }
     
