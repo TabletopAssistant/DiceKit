@@ -10,7 +10,7 @@ import Foundation
 
 public protocol ExpressionType: ProbabilisticExpressionType {
     
-    typealias Result : ExpressionResultType, Equatable
+    associatedtype Result : ExpressionResultType, Equatable
     
     func evaluate() -> Result
     
