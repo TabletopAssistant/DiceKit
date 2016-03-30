@@ -172,7 +172,7 @@ extension Die_Tests {
         var rollerCalledCount = 0
         let stubResult = 3
         Die.roller = { sides in
-            ++rollerCalledCount
+            rollerCalledCount += 1
             return stubResult
         }
         let die = Die(sides: 6)
@@ -200,7 +200,7 @@ extension Die_Tests {
     func test_roll_shouldCallRollerOnlyOnceForEachCall() {
         var rollerCalledCount: UInt32 = 0
         Die.roller = { sides in
-            ++rollerCalledCount
+            rollerCalledCount += 1
             return 0
         }
         let die = Die(sides: 3)
@@ -389,7 +389,7 @@ extension Die_Tests {
         let stubbedRoll = 4
         var rollerCalledCount = 0
         Die.roller = { sides in
-            ++rollerCalledCount
+            rollerCalledCount += 1
             return stubbedRoll
         }
         let die = Die()
