@@ -13,6 +13,9 @@ public protocol FrequencyDistributionOutcomeType: InvertibleMultiplicativeType, 
     /// The number that will be used when determining how many times to perform another
     /// expression when multiplied by `self`.
     var multiplierEquivalent: Int { get }
+
+    // Force Int for IntegerLiteralType
+    init(integerLiteral: Int)
     
 }
 
@@ -49,7 +52,7 @@ public struct FrequencyDistribution<OutcomeType: FrequencyDistributionOutcomeTyp
         return FrequencyDistribution(FrequenciesPerOutcome())
     }
     public static var multiplicativeIdentity: FrequencyDistribution {
-        return FrequencyDistribution([Outcome.additiveIdentity: Frequency.multiplicativeIdentity])
+        return FrequencyDistribution([.additiveIdentity: .multiplicativeIdentity])
     }
     
     public let frequenciesPerOutcome: FrequenciesPerOutcome
